@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bfp0qfjxvgdby"]
+
+[ext_resource type="Script" uid="uid://b6kpaxi6vlg2m" path="res://scenes/asteroid/asteroid.gd" id="1_phgi8"]
+
+[node name="Asteroid" type="CharacterBody2D" unique_id=842080069]
+script = ExtResource("1_phgi8")
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="." unique_id=1453659312]
+polygon = PackedVector2Array(0, 0, 10, 0, 2, 3)

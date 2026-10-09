@@ -2,17 +2,18 @@ extends CharacterBody2D
 
 
 const accel: float = 150.0
-var maxSpeed: float = 500
+var maxSpeed: float = INF
 const rotSpeed: float = 10
 
 @export var playerSize: Vector2 = Vector2(15, 30)
 
 var polygon: PackedVector2Array
+var viewportSize: Vector2 
 
 func _ready() -> void:
 	# Temp
 	position = get_viewport_rect().size / 2
-	
+	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
 
 func _physics_process(delta: float) -> void:
@@ -23,12 +24,24 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity += transform.x * direction * accel * delta
 		velocity.limit_length(maxSpeed)
-	#else:
-		#velocity += velocity.move_toward(Vector2.ZERO, SPEED)
+
 	
 	rotation += rotDir * rotSpeed * delta
 
 	move_and_slide()
+	
+	# Makes sure the player doens't get outside the window
+	if position.x > viewportSize.x:
+		position.x = 0 
+	
+	if position.x < 0:
+		position.x = viewportSize.x
+		
+	if position.y > viewportSize.y:
+		position.y = 0
+		
+	if position.y < 0:
+		position.y = viewportSize.y
 
 func _draw() -> void:
 	draw_colored_polygon(polygon, Color.BLACK)
