@@ -4,6 +4,7 @@
 
 [node name="Player" type="CharacterBody2D" unique_id=2088811554]
 script = ExtResource("1_8afob")
+playerSize = Vector2(20, 30)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]
 polygon = PackedVector2Array(11, 0, -11, 0, 0, -40)

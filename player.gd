@@ -1,13 +1,19 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const accel: float = 150.0
+var maxSpeed: float = 500
 const rotSpeed: float = 10
+
+@export var playerSize: Vector2 = Vector2(15, 30)
 
 var polygon: PackedVector2Array
 
 func _ready() -> void:
-	polygon = create_centered_triangle(20, 40)
+	# Temp
+	position = get_viewport_rect().size / 2
+	
+	polygon = create_centered_triangle(playerSize.x, playerSize.y)
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -15,10 +21,10 @@ func _physics_process(delta: float) -> void:
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
 	if direction:
-		#velocity = Vector2(cos(rotation), sin(rotation)) * direction * SPEED
-		velocity = transform.x * direction * SPEED
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		velocity += transform.x * direction * accel * delta
+		velocity.limit_length(maxSpeed)
+	#else:
+		#velocity += velocity.move_toward(Vector2.ZERO, SPEED)
 	
 	rotation += rotDir * rotSpeed * delta
 
