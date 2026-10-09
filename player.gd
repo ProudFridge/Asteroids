@@ -5,13 +5,16 @@ const accel: float = 150.0
 var maxSpeed: float = INF
 const rotSpeed: float = 10
 
-@export var playerSize: Vector2 = Vector2(15, 30)
-
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
 
+@onready var thruster_particles: CPUParticles2D = $ThrusterParticles
+@export var playerSize: Vector2 = Vector2(15, 30)
+
 func _ready() -> void:
 	# Temp
+	thruster_particles.position.y = 0
+	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2
 	position = get_viewport_rect().size / 2
 	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
@@ -22,9 +25,11 @@ func _physics_process(delta: float) -> void:
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
 	if direction:
+		thruster_particles.emitting = true
 		velocity += transform.x * direction * accel * delta
 		velocity.limit_length(maxSpeed)
-
+	else:
+		thruster_particles.emitting = false
 	
 	rotation += rotDir * rotSpeed * delta
 
