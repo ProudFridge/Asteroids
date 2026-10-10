@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Asteroid
 
 const SPEED: float = 300.0
@@ -8,18 +8,18 @@ const SPEED: float = 300.0
 @onready var polygon_2d: Polygon2D = $Polygon2D
 
 var polygon: PackedVector2Array = []
-var boundingBox: Vector2 = Vector2(25,25)
+var boundingBox: Vector2 = Vector2(60,60)
 
 func _ready() -> void:
-	polygon = generate_convex_polygon(4, boundingBox)
+	polygon = generate_convex_polygon(6, boundingBox)
+	#polygon_2d.uv = get_uv(Vector2(128, 128))
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
+	
+	# Initial movement
+	angular_velocity = 1
 
-func _physics_process(delta: float) -> void:
-	#velocity = Vector2(100,100)
-	rotation += rotationSpeed * delta
-	move_and_slide()
-
+	
 func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
 	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.BLACK, false, 5)
@@ -112,7 +112,23 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		points[i] -= center
 		
 	return points
+
+## Gets the uv points for each vertex of the Polygon2D: does not work right now
+func get_uv(textureSize: Vector2) -> PackedVector2Array:
+	var smallestBounds: Vector2 = Vector2(INF, INF)
+	var highestBounds: Vector2 = Vector2(-INF, -INF)
+	for v: Vector2 in polygon:
+		smallestBounds.x = min(smallestBounds.x, v.x)
+		smallestBounds.y = min(smallestBounds.y, v.y)
+		highestBounds.x = max(highestBounds.x, v.x)
+		highestBounds.y = max(highestBounds.y, v.y)
 	
+	var uvPoints: PackedVector2Array = []
+	for v: Vector2 in polygon:
+		uvPoints.append(Vector2(remap(v.x, 0, textureSize.x, 0, 1), remap(v.y, 0, textureSize.y, 0, 1)))
+	print(uvPoints)
+	return uvPoints
+
 func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():
 		return true

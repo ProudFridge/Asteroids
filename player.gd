@@ -9,6 +9,7 @@ var polygon: PackedVector2Array
 var viewportSize: Vector2 
 
 @onready var thruster_particles: CPUParticles2D = $ThrusterParticles
+@onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
 
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 	position = get_viewport_rect().size / 2
 	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
+	collision_polygon_2d.polygon = polygon
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.

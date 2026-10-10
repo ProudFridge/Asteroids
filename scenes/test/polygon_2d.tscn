@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cp5a7w0aqcoye"]
+
+[ext_resource type="Texture2D" uid="uid://de3tm6jamsipo" path="res://icon.svg" id="1_o0xmk"]
+
+[node name="Polygon2D" type="Polygon2D" unique_id=1627486076]
+texture = ExtResource("1_o0xmk")
+polygon = PackedVector2Array(-1, 8, 97, 147, 300, 93, 260, 2, 134.69261, -50.864944)
+uv = PackedVector2Array(0, 0, 0, 128, 128, 128, 128, 0, 0.5, 128)
