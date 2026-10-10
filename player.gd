@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const accel: float = 150.0
+const accel: float = 5.0
 var maxSpeed: float = INF
 const rotSpeed: float = 10
 
@@ -21,12 +21,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("backwards", "forwards")
+	var direction : float = Input.get_axis("backwards", "forwards")
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
 	if direction:
 		thruster_particles.emitting = true
-		velocity += transform.x * direction * accel * delta
+		velocity += transform.x * direction * accel
 		velocity.limit_length(maxSpeed)
 	else:
 		thruster_particles.emitting = false

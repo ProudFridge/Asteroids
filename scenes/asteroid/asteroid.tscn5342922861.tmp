@@ -7,7 +7,3 @@ script = ExtResource("1_phgi8")
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="." unique_id=1453659312]
 polygon = PackedVector2Array(0, 0, 10, 0, 2, 3)
-disabled = true
-
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=250673396]
-color = Color(1, 0.49, 0.49, 1)
