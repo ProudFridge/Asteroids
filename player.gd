@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const accel: float = 5.0
 var maxSpeed: float = INF
-const rotSpeed: float = 10
+var rotSpeed: float = 5 # rad/s
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 

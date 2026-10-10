@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Asteroid
 
 const SPEED: float = 300.0
+@export var rotationSpeed: float = 1
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
 @onready var polygon_2d: Polygon2D = $Polygon2D
@@ -10,14 +11,17 @@ const SPEED: float = 300.0
 var polygon: PackedVector2Array = []
 
 func _ready() -> void:
-	polygon = generate_convex_polygon(5, Vector2(50,50))
+	polygon = generate_convex_polygon(10, Vector2(50,50))
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
 
 func _physics_process(delta: float) -> void:
 	#velocity = Vector2(100,100)
-	rotation += delta * 10
+	rotation += rotationSpeed * delta
 	move_and_slide()
+
+func _draw() -> void:
+	draw_polyline(polygon, Color.BLACK, 10)
 
 ## Generates a convex polygon with n vertices
 ## taken from https://web.archive.org/web/20260416133431/https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
@@ -95,9 +99,17 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		nextPoint += vectors[i]
 	
 	# Shift points
-	for i: int in range(points.size()):
-		points[i] = points[i] + boundingBox / 2
+	var smallestPointValues: Vector2 = Vector2(INF, INF)
+	for v: Vector2 in points:
+		if v.x < smallestPointValues.x:
+			smallestPointValues.x = v.x
+		if v.y < smallestPointValues.y:
+			smallestPointValues.y = v.y
 	
+	for i: int in range(points.size()):
+		points[i] -= smallestPointValues
+		points[i] -= boundingBox / 2
+		
 	return points
 
 func sort_by_angle(a: Vector2, b: Vector2) -> bool:
