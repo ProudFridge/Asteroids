@@ -1,4 +1,3 @@
-@tool
 extends CharacterBody2D
 class_name Asteroid
 
@@ -9,9 +8,10 @@ const SPEED: float = 300.0
 @onready var polygon_2d: Polygon2D = $Polygon2D
 
 var polygon: PackedVector2Array = []
+var boundingBox: Vector2 = Vector2(25,25)
 
 func _ready() -> void:
-	polygon = generate_convex_polygon(10, Vector2(50,50))
+	polygon = generate_convex_polygon(4, boundingBox)
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
 
@@ -21,11 +21,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _draw() -> void:
-	draw_polyline(polygon, Color.BLACK, 10)
-
+	# TODO: come back, polygon is supposed to fit inside the bounding box
+	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.BLACK, false, 5)
+	pass
+	
 ## Generates a convex polygon with n vertices
 ## taken from https://web.archive.org/web/20260416133431/https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
 func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array:
+	boundingBox = boundingBox
+	
 	# Generate two lists of n random integers
 	var xCoords: Array[float] = []
 	var yCoords: Array[float] = []
@@ -98,20 +102,17 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		points.append(nextPoint)
 		nextPoint += vectors[i]
 	
-	# Shift points
-	var smallestPointValues: Vector2 = Vector2(INF, INF)
+	# Center the polygon around (0,0)
+	var center: Vector2 = Vector2.ZERO
 	for v: Vector2 in points:
-		if v.x < smallestPointValues.x:
-			smallestPointValues.x = v.x
-		if v.y < smallestPointValues.y:
-			smallestPointValues.y = v.y
+		center += v
+	center = center / points.size()
 	
 	for i: int in range(points.size()):
-		points[i] -= smallestPointValues
-		points[i] -= boundingBox / 2
+		points[i] -= center
 		
 	return points
-
+	
 func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():
 		return true
