@@ -12,19 +12,24 @@ var polygon: PackedVector2Array = []
 var boundingBox: Vector2 = Vector2(60,60)
 
 func _ready() -> void:
-	polygon = generate_convex_polygon(6, boundingBox)
+	polygon = generate_convex_polygon(5, boundingBox)
 	#polygon_2d.uv = get_uv(Vector2(128, 128))
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
+	var triangles: Array[Polygon2D] = shatter()
 	
+	for t: Polygon2D in triangles:
+		add_child(t)
 	# Initial movement
+	
 	angular_velocity = 1
-
+	
 	
 func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
 	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.BLACK, false, 5)
 	pass
+
 
 # TODO: maybe replace with a component and create a die() function
 func take_damage(damage: float) -> void:
@@ -32,6 +37,22 @@ func take_damage(damage: float) -> void:
 	if health <= 0:
 		queue_free()
 	modulate = Color.RED
+
+
+## Shatters the polygon into multiple triangles
+func shatter() -> Array[Polygon2D]:
+	var delaunay: PackedInt32Array = Geometry2D.triangulate_delaunay(polygon)
+	var triangles: Array[Polygon2D] = []
+	
+	if !delaunay.is_empty():
+		for i: int in range(0, delaunay.size(), 3):
+			var triangle: Polygon2D = Polygon2D.new()
+			triangle.polygon = PackedVector2Array([polygon[delaunay[i + 2]], polygon[delaunay[i + 1]], polygon[delaunay[i]]])
+			triangle.color = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1), 1)
+			triangles.append(triangle)
+			
+	return triangles
+
 
 ## Generates a convex polygon with n vertices
 ## taken from https://web.archive.org/web/20260416133431/https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
@@ -120,22 +141,6 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		points[i] -= center
 		
 	return points
-
-## Gets the uv points for each vertex of the Polygon2D: does not work right now
-func get_uv(textureSize: Vector2) -> PackedVector2Array:
-	var smallestBounds: Vector2 = Vector2(INF, INF)
-	var highestBounds: Vector2 = Vector2(-INF, -INF)
-	for v: Vector2 in polygon:
-		smallestBounds.x = min(smallestBounds.x, v.x)
-		smallestBounds.y = min(smallestBounds.y, v.y)
-		highestBounds.x = max(highestBounds.x, v.x)
-		highestBounds.y = max(highestBounds.y, v.y)
-	
-	var uvPoints: PackedVector2Array = []
-	for v: Vector2 in polygon:
-		uvPoints.append(Vector2(remap(v.x, 0, textureSize.x, 0, 1), remap(v.y, 0, textureSize.y, 0, 1)))
-	print(uvPoints)
-	return uvPoints
 
 func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():
