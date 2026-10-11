@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c1nqdkbt0ygnc"]
+
+[ext_resource type="Script" uid="uid://cyxx1ng4fcbxf" path="res://scenes/asteroid_shard.gd" id="1_7m2x1"]
+
+[node name="AsteroidShard" type="RigidBody2D" unique_id=1299285981]
+collision_layer = 3
+gravity_scale = 0.0
+linear_damp_mode = 1
+script = ExtResource("1_7m2x1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1492812384]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1946237867]

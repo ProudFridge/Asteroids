@@ -10,13 +10,15 @@ var health: float = 100
 
 var polygon: PackedVector2Array = []
 var boundingBox: Vector2 = Vector2(60,60)
+var center: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	polygon = generate_convex_polygon(5, boundingBox)
+	center = get_center()
 	#polygon_2d.uv = get_uv(Vector2(128, 128))
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
-	var triangles: Array[Polygon2D] = shatter()
+	var triangles: Array[Polygon2D] = shatter(false)
 	
 	for t: Polygon2D in triangles:
 		add_child(t)
@@ -35,22 +37,49 @@ func _draw() -> void:
 func take_damage(damage: float) -> void:
 	health = health - damage
 	if health <= 0:
+		shatter(true)
 		queue_free()
 	modulate = Color.RED
 
 
+func get_center() -> Vector2:
+	var center: Vector2 = Vector2.ZERO
+	for v: Vector2 in polygon:
+		center += v
+	center /= polygon.size()
+	return center
+
+
 ## Shatters the polygon into multiple triangles
-func shatter() -> Array[Polygon2D]:
+func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = Vector2(1,1)) -> Array[Polygon2D]:
 	var delaunay: PackedInt32Array = Geometry2D.triangulate_delaunay(polygon)
 	var triangles: Array[Polygon2D] = []
 	
 	if !delaunay.is_empty():
 		for i: int in range(0, delaunay.size(), 3):
 			var triangle: Polygon2D = Polygon2D.new()
-			triangle.polygon = PackedVector2Array([polygon[delaunay[i + 2]], polygon[delaunay[i + 1]], polygon[delaunay[i]]])
+			triangle.polygon = PackedVector2Array([polygon[delaunay[i]], polygon[delaunay[i + 1]], polygon[delaunay[i + 2]]])
 			triangle.color = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1), 1)
 			triangles.append(triangle)
+	
+	# Instance all shards	
+	if instanceShards:
+		var asteroidShard: Resource = preload("res://scenes/asteroid_shard.tscn")
+		for t: Polygon2D in triangles:
+			var shardInstance: AsteroidShard = asteroidShard.instantiate()
+			shardInstance.set_polygon(t.polygon)
 			
+			# Find center
+			var shardCenter: Vector2 = Vector2.ZERO
+			for p: Vector2 in t.polygon:
+				shardCenter += p
+			shardCenter /= t.polygon.size()
+			
+			shardInstance.position = shardCenter + position
+			shardInstance.linear_velocity = shatterVelocityMultiplier * (shardCenter - center)
+			
+			get_tree().root.add_child(shardInstance)
+		
 	return triangles
 
 
@@ -132,13 +161,13 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		nextPoint += vectors[i]
 	
 	# Center the polygon around (0,0)
-	var center: Vector2 = Vector2.ZERO
+	var c: Vector2 = Vector2.ZERO
 	for v: Vector2 in points:
-		center += v
-	center = center / points.size()
+		c += v
+	c = c / points.size()
 	
 	for i: int in range(points.size()):
-		points[i] -= center
+		points[i] -= c
 		
 	return points
 

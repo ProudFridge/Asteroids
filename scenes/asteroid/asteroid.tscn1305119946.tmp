@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bfp0qfjxvgdby"]
+
+[ext_resource type="Script" uid="uid://b6kpaxi6vlg2m" path="res://scenes/asteroid/asteroid.gd" id="1_phgi8"]
+
+[node name="Asteroid" type="RigidBody2D" unique_id=2077462969]
+rotation = 1.655021
+scale = Vector2(0.99985087, 0.99985087)
+collision_layer = 3
+gravity_scale = 0.0
+angular_damp_mode = 1
+script = ExtResource("1_phgi8")
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="." unique_id=1453659312]
+polygon = PackedVector2Array(-17.146702, 68.913185, -25, 32.59938, -21.820084, 20.603691, -14.533133, -6.636444, 28.958542, -18.681778, 75.912766, -25, 92.94916, -17.786934, 81.8334, 18.836231, 47.294914, 58.380966, 33.11772, 65.097595)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=250673396]
+z_index = -1
+color = Color(0.1785, 0.179025, 0.21, 1)
