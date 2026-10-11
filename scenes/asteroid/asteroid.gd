@@ -31,6 +31,7 @@ func take_damage(damage: float) -> void:
 	health = health - damage
 	if health <= 0:
 		queue_free()
+	modulate = Color.RED
 
 ## Generates a convex polygon with n vertices
 ## taken from https://web.archive.org/web/20260416133431/https://cglab.ca/~sander/misc/ConvexGeneration/convex.html

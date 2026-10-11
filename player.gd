@@ -4,13 +4,18 @@ class_name Player
 const accel: float = 5.0
 var maxSpeed: float = INF
 var rotSpeed: float = 5 # rad/s
+# TODO: change to health later, faster asteroids deal more damage
+var lives: int = 3
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
 
+@onready var damage_timer: Timer = $DamageTimer
 @onready var thruster_particles: CPUParticles2D = $ThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
+
+signal died()
 
 func _ready() -> void:
 	# Temp
@@ -35,8 +40,17 @@ func _physics_process(delta: float) -> void:
 	
 	rotation += rotDir * rotSpeed * delta
 
-	move_and_slide()
+	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
 	
+	if collision:
+		var body: Node = collision.get_collider()
+		if body is Asteroid and damage_timer.is_stopped():
+			lives -= 1
+			if lives <= 0:
+				died.emit()
+				die()
+			damage_timer.start()
+		
 	# Makes sure the player doens't get outside the window
 	if position.x > viewportSize.x:
 		position.x = 0 
@@ -49,6 +63,10 @@ func _physics_process(delta: float) -> void:
 		
 	if position.y < 0:
 		position.y = viewportSize.y
+
+func die() -> void:
+	died.emit()
+	queue_free()
 
 func _draw() -> void:
 	draw_colored_polygon(polygon, Color.BLACK)

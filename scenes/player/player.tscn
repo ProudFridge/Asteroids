@@ -3,15 +3,6 @@
 [ext_resource type="Script" uid="uid://c22t4omm5wesk" path="res://player.gd" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bvpns05ap0kn7" path="res://scenes/shoot_component/shoot_component.gd" id="2_dovo2"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2m7xh"]
-particle_flag_disable_z = true
-angle_min = -19.99999
-angle_max = 20.000011
-direction = Vector3(0, 1, 0)
-spread = 4.765
-initial_velocity_min = 69.89
-initial_velocity_max = 129.03
-
 [sub_resource type="Curve" id="Curve_8afob"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -28,11 +19,6 @@ playerSize = Vector2(20, 30)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]
 polygon = PackedVector2Array(0, 0, 0, 0.6, 0, 1)
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=242029630]
-visible = false
-amount = 80
-process_material = SubResource("ParticleProcessMaterial_2m7xh")
 
 [node name="ThrusterParticles" type="CPUParticles2D" parent="." unique_id=1390780388]
 emitting = false
@@ -54,3 +40,6 @@ color_initial_ramp = SubResource("Gradient_lvxji")
 script = ExtResource("2_dovo2")
 shooter = NodePath("..")
 metadata/_custom_type_script = "uid://bvpns05ap0kn7"
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=1806139019]
+one_shot = true
