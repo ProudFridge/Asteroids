@@ -11,8 +11,3 @@ func _ready() -> void:
 		asteroid.position.y = randf_range(0, get_viewport().get_visible_rect().size.y)
 		
 		add_child(asteroid)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

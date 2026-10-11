@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name Asteroid
 
 const SPEED: float = 300.0
+var health: float = 100
 @export var rotationSpeed: float = 1
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
@@ -24,7 +25,13 @@ func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
 	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.BLACK, false, 5)
 	pass
-	
+
+# TODO: maybe replace with a component and create a die() function
+func take_damage(damage: float) -> void:
+	health = health - damage
+	if health <= 0:
+		queue_free()
+
 ## Generates a convex polygon with n vertices
 ## taken from https://web.archive.org/web/20260416133431/https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
 func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array:

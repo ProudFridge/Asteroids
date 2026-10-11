@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://kqd6jamelr3f"]
+
+[ext_resource type="Script" uid="uid://bvpns05ap0kn7" path="res://scenes/shoot_component/shoot_component.gd" id="1_cmnxb"]
+
+[node name="ShootComponent" type="Node2D" unique_id=1246612854]
+script = ExtResource("1_cmnxb")

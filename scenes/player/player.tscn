@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://s0kngucv0cnl"]
 
 [ext_resource type="Script" uid="uid://c22t4omm5wesk" path="res://player.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://bvpns05ap0kn7" path="res://scenes/shoot_component/shoot_component.gd" id="2_dovo2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2m7xh"]
 particle_flag_disable_z = true
@@ -20,11 +21,13 @@ colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=2088811554]
 z_index = 1
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_8afob")
 playerSize = Vector2(20, 30)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]
-polygon = PackedVector2Array(11, 0, -11, 0, 0, -40)
+polygon = PackedVector2Array(0, 0, 0, 0.6, 0, 1)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=242029630]
 visible = false
@@ -46,3 +49,8 @@ linear_accel_max = -59.38
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_8afob")
 color_initial_ramp = SubResource("Gradient_lvxji")
+
+[node name="ShootComponent" type="Node2D" parent="." unique_id=596334675 node_paths=PackedStringArray("shooter")]
+script = ExtResource("2_dovo2")
+shooter = NodePath("..")
+metadata/_custom_type_script = "uid://bvpns05ap0kn7"

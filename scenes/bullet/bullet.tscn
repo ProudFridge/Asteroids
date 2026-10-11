@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c4bego3ny732p"]
+
+[ext_resource type="Script" uid="uid://d20fvly6qkabk" path="res://scenes/bullet/bullet.gd" id="1_7c8un"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m7xh"]
+size = Vector2(10, 2.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2m7xh"]
+
+[node name="Bullet" type="CharacterBody2D" unique_id=1057548200]
+script = ExtResource("1_7c8un")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650148437]
+shape = SubResource("RectangleShape2D_2m7xh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1325296715]
+scale = Vector2(10, 2.5)
+mesh = SubResource("QuadMesh_2m7xh")

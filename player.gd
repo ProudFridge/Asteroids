@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 
 const accel: float = 5.0
 var maxSpeed: float = INF
