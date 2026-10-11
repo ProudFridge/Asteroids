@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://s0kngucv0cnl" path="res://scenes/player/player.tscn" id="1_sul5r"]
 [ext_resource type="Script" uid="uid://5htph50fyjch" path="res://scenes/game/camera_2d.gd" id="2_7h61r"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
+
 [node name="Game" type="Node" unique_id=324886737]
 script = ExtResource("1_0sr1o")
 
@@ -11,3 +13,19 @@ script = ExtResource("1_0sr1o")
 script = ExtResource("2_7h61r")
 
 [node name="Player" parent="." unique_id=2088811554 instance=ExtResource("1_sul5r")]
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=469862239]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_0sr1o")

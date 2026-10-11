@@ -1,6 +1,7 @@
 extends Node
 
 const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
+@onready var player: Player = $Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,3 +12,8 @@ func _ready() -> void:
 		asteroid.position.y = randf_range(0, get_viewport().get_visible_rect().size.y)
 		
 		add_child(asteroid)
+		
+	player.died.connect(_on_player_died)
+
+func _on_player_died() -> void:
+	$GameOverLabel.visible = true

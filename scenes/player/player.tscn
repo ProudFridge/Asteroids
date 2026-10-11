@@ -17,6 +17,8 @@ collision_mask = 2
 script = ExtResource("1_8afob")
 playerSize = Vector2(20, 30)
 
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=954636106]
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]
 polygon = PackedVector2Array(0, 0, 0, 0.6, 0, 1)
 

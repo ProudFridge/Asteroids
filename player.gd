@@ -13,6 +13,7 @@ var viewportSize: Vector2
 @onready var damage_timer: Timer = $DamageTimer
 @onready var thruster_particles: CPUParticles2D = $ThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
+@onready var polygon_2d: Polygon2D = $Polygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
 
 signal died()
@@ -24,6 +25,7 @@ func _ready() -> void:
 	position = get_viewport_rect().size / 2
 	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
+	polygon_2d.polygon = polygon
 	collision_polygon_2d.polygon = polygon
 
 func _physics_process(delta: float) -> void:
@@ -67,9 +69,6 @@ func _physics_process(delta: float) -> void:
 func die() -> void:
 	died.emit()
 	queue_free()
-
-func _draw() -> void:
-	draw_colored_polygon(polygon, Color.BLACK)
 
 ## Creates a PackedVector2Array that contains the points for a traignle with its pivot at the center
 func create_centered_triangle(width: float, height: float) -> PackedVector2Array:

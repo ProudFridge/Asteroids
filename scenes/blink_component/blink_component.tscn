@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://diurg8pkxbobg"]
+
+[ext_resource type="Script" uid="uid://csfyhhjriu2q5" path="res://scenes/blink_component/blink_component.gd" id="1_q08pc"]
+
+[node name="BlinkComponent" type="Node2D" unique_id=820295814]
+script = ExtResource("1_q08pc")
+
+[node name="BlinkIntervalTimer" type="Timer" parent="." unique_id=981718780]
