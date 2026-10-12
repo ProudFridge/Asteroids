@@ -24,6 +24,5 @@ func _physics_process(delta: float) -> void:
 func _on_lifetime_timer_timeout() -> void:
 	disappear()
 
-
 func disappear() -> void:
 	queue_free()
