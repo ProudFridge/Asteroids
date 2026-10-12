@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://s0kngucv0cnl"]
 
 [ext_resource type="Script" uid="uid://c22t4omm5wesk" path="res://player.gd" id="1_8afob"]
-[ext_resource type="Script" uid="uid://bvpns05ap0kn7" path="res://scenes/shoot_component/shoot_component.gd" id="2_dovo2"]
 
 [sub_resource type="Curve" id="Curve_8afob"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -36,11 +35,6 @@ linear_accel_max = -59.38
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_8afob")
 color_initial_ramp = SubResource("Gradient_lvxji")
-
-[node name="ShootComponent" type="Node2D" parent="." unique_id=596334675 node_paths=PackedStringArray("shooter")]
-script = ExtResource("2_dovo2")
-shooter = NodePath("..")
-metadata/_custom_type_script = "uid://bvpns05ap0kn7"
 
 [node name="DamageTimer" type="Timer" parent="." unique_id=1806139019]
 one_shot = true

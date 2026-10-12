@@ -17,16 +17,16 @@ signal died
 func _ready() -> void:
 	polygon = generate_convex_polygon(5, boundingBox)
 	center = get_center()
-	#polygon_2d.uv = get_uv(Vector2(128, 128))
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
 	var triangles: Array[Polygon2D] = shatter(false)
 	
 	for t: Polygon2D in triangles:
 		add_child(t)
+		
 	# Initial movement
-	
-	angular_velocity = 1
+	angular_velocity = randf_range(-1, 1)
+	linear_velocity = (get_viewport_rect().size / 2 - position).normalized() * 10
 	
 func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
@@ -81,7 +81,8 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			shardInstance.position = shardCenter + position
 			shardInstance.linear_velocity = shatterVelocityMultiplier * (shardCenter - center)
 			
-			get_tree().root.add_child(shardInstance)
+			#get_tree().root.add_child(shardInstance)
+			get_parent().add_child(shardInstance)
 		
 	return triangles
 
