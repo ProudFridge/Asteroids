@@ -26,7 +26,6 @@ func _ready() -> void:
 	
 	angular_velocity = 1
 	
-	
 func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
 	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.BLACK, false, 5)
@@ -64,9 +63,10 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 	
 	# Instance all shards	
 	if instanceShards:
-		var asteroidShard: Resource = preload("res://scenes/asteroid_shard.tscn")
+		var asteroidShard: Resource = preload("res://scenes/asteroid_shard/asteroid_shard.tscn")
 		for t: Polygon2D in triangles:
 			var shardInstance: AsteroidShard = asteroidShard.instantiate()
+			#shardInstance.set_polygon(rotate_polygon(t.polygon))
 			shardInstance.set_polygon(t.polygon)
 			
 			# Find center
@@ -175,3 +175,9 @@ func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():
 		return true
 	return false
+
+func rotate_polygon(polygon: PackedVector2Array) -> PackedVector2Array:
+	var rotatedPoints: PackedVector2Array = []
+	for v: Vector2 in rotatedPoints:
+		rotatedPoints.append(v.rotated(rotation)) 
+	return rotatedPoints

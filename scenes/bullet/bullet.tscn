@@ -8,6 +8,7 @@ size = Vector2(10, 2.5)
 [sub_resource type="QuadMesh" id="QuadMesh_2m7xh"]
 
 [node name="Bullet" type="CharacterBody2D" unique_id=1057548200]
+collision_layer = 2
 script = ExtResource("1_7c8un")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=650148437]

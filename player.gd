@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 const accel: float = 5.0
-var maxSpeed: float = INF
+var maxSpeed: float = 400
 var rotSpeed: float = 5 # rad/s
 # TODO: change to health later, faster asteroids deal more damage
 var lives: int = 3
