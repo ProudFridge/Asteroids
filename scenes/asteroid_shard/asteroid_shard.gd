@@ -9,7 +9,7 @@ var polygon: PackedVector2Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	polygon_2d.polygon = scale_points(0.7)
+	polygon_2d.polygon = scale_points(1)
 	polygon_2d.color = Color.GRAY * Color(1,1,1,0.5)
 	collision_polygon_2d.polygon = polygon_2d.polygon
 	lifetime_timer.start()

@@ -12,7 +12,7 @@ signal asteroid_removed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	instantiate_asteroid_in_area(10, get_viewport().get_visible_rect().size, 10)
+	instantiate_asteroid_in_area(10, Vector2(get_window().size), 100)
 
 ## Instantiates asteroids in a specified area
 func instantiate_asteroid_in_area(asteroidNum: int, area: Vector2, exclusionZoneRadius: float) -> void:
@@ -20,16 +20,20 @@ func instantiate_asteroid_in_area(asteroidNum: int, area: Vector2, exclusionZone
 		var asteroid: Asteroid = ASTEROID.instantiate()
 		
 		# Todo: replace with actual scren size, maybe use a singleton to store the screen size
-		var position: Vector2 = Vector2.ZERO
-		#while position.distance_to(area / 2) > exclusionZoneRadius:
-			#print(area)
-		position.x = randf_range(0, area.x)
-		position.y = randf_range(0, area.y)
+		var position: Vector2 = Vector2(randf_range(0, area.x), randf_range(0, area.y))
+		
+		print(position.distance_to(area / 2))
+		while position.distance_to(area / 2) < exclusionZoneRadius:
+			position.x = randf_range(0, area.x)
+			position.y = randf_range(0, area.y)
 		
 		asteroid.position = position
-		
+		# Initial movement
+		asteroid.angular_velocity = randf_range(-1, 1)
+		asteroid.linear_velocity = (Vector2(get_window().size / 2) - position).normalized() * randf_range(10, 30)
 		# Remove asteroid from the instance array
 		asteroid.died.connect(_on_asteroid_death.bind(asteroid))
+		
 		
 		add_child(asteroid)
 		asteroid_added.emit()
