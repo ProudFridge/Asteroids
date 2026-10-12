@@ -61,7 +61,7 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 		for i: int in range(0, delaunay.size(), 3):
 			var triangle: Polygon2D = Polygon2D.new()
 			triangle.polygon = PackedVector2Array([polygon[delaunay[i]], polygon[delaunay[i + 1]], polygon[delaunay[i + 2]]])
-			triangle.color = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1), 1)
+			triangle.color = Color.from_hsv(0, 0, randf_range(0.2, 0.4), 1)
 			triangles.append(triangle)
 	
 	# Instance all shards	

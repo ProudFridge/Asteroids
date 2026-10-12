@@ -21,9 +21,11 @@ func instantiate_asteroid_in_area(asteroidNum: int, area: Vector2, exclusionZone
 		
 		# Todo: replace with actual scren size, maybe use a singleton to store the screen size
 		var position: Vector2 = Vector2.ZERO
-		#while position.distance_to(area / 2) < exclusionZoneRadius:
+		#while position.distance_to(area / 2) > exclusionZoneRadius:
+			#print(area)
 		position.x = randf_range(0, area.x)
 		position.y = randf_range(0, area.y)
+		
 		asteroid.position = position
 		
 		# Remove asteroid from the instance array
