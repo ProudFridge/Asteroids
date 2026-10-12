@@ -18,3 +18,8 @@ shape = SubResource("RectangleShape2D_2m7xh")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1325296715]
 scale = Vector2(10, 2.5)
 mesh = SubResource("QuadMesh_2m7xh")
+
+[node name="LifetimeTimer" type="Timer" parent="." unique_id=568520903]
+wait_time = 3.0
+one_shot = true
+autostart = true

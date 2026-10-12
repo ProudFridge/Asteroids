@@ -10,4 +10,5 @@ func _ready() -> void:
 
 
 func _on_asteroid_manager_asteroid_removed() -> void:
+	score += 10
 	text = "Score: " + str(score)

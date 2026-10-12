@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://yb8dwdqkpvd5" path="res://scenes/game/ui/lives_label.gd" id="6_5i0tg"]
 [ext_resource type="Script" uid="uid://bq0jrxq4w8tr7" path="res://scenes/game/ui/asteroid_count_label.gd" id="7_bdhmt"]
 [ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
+[ext_resource type="Script" uid="uid://brhsil1e8wm57" path="res://scenes/game/ui/you_won_label.gd" id="9_2a8rs"]
+[ext_resource type="Script" uid="uid://cnmj5fjbir2lx" path="res://scenes/game/ui/game_over_label.gd" id="9_4j704"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
 
@@ -34,6 +36,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=2144515775]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=213812162]
 custom_minimum_size = Vector2(320, 0)
@@ -110,7 +122,7 @@ grow_vertical = 2
 script = ExtResource("8_87uf6")
 asteroidManager = NodePath("../../../../../Managers/AsteroidManager")
 
-[node name="GameOverLabel" type="Label" parent="UI" unique_id=469862239]
+[node name="GameOverLabel" type="Label" parent="UI" unique_id=469862239 node_paths=PackedStringArray("gameManager")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -126,3 +138,23 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Game Over!"
 label_settings = SubResource("LabelSettings_0sr1o")
+script = ExtResource("9_4j704")
+gameManager = NodePath("../../Managers/GameManager")
+
+[node name="YouWonLabel" type="Label" parent="UI" unique_id=37234498 node_paths=PackedStringArray("gameManager")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You won!"
+script = ExtResource("9_2a8rs")
+gameManager = NodePath("../../Managers/GameManager")

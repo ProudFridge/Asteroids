@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Dev="*uid://cuk45t5ihah8"
 Global="*uid://b4b6j7xrtqeib"
+SwitcherSingleton="*uid://bkahmpa3ax8nu"
 
 [debug]
 
