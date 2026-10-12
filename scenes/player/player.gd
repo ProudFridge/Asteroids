@@ -56,18 +56,20 @@ func _physics_process(delta: float) -> void:
 				die()
 			damage_timer.start()
 		
-	# Makes sure the player doens't get outside the window
-	if position.x > viewportSize.x:
-		position.x = 0 
-	
-	if position.x < 0:
-		position.x = viewportSize.x
+		var collisionPosition: Vector2 = collision.get_position()
 		
-	if position.y > viewportSize.y:
-		position.y = 0
+		# Makes sure the player doens't get outside the window
+		if collisionPosition.x >= viewportSize.x:
+			position.x = 0 
 		
-	if position.y < 0:
-		position.y = viewportSize.y
+		if collisionPosition.x <= 0:
+			position.x = viewportSize.x
+			
+		if collisionPosition.y >= viewportSize.y:
+			position.y = 0
+			
+		if collisionPosition.y <= 0:
+			position.y = viewportSize.y
 
 
 func die() -> void:
