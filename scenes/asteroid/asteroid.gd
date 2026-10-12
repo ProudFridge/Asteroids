@@ -172,10 +172,12 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		
 	return points
 
+
 func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():
 		return true
 	return false
+
 
 func rotate_polygon(polygon: PackedVector2Array) -> PackedVector2Array:
 	var rotatedPoints: PackedVector2Array = []

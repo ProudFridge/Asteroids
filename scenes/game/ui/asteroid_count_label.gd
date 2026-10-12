@@ -7,5 +7,6 @@ func _ready() -> void:
 	text = "Asteroids: " + str(asteroidManager.asteroidInstances.size())
 	asteroidManager.asteroid_removed.connect(_on_asteroid_manager_asteroid_removed)
 
+
 func _on_asteroid_manager_asteroid_removed() -> void:
 	text = "Asteroids: " + str(asteroidManager.asteroidInstances.size())

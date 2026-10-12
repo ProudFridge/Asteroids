@@ -23,11 +23,12 @@ func _ready() -> void:
 	# Temp
 	thruster_particles.position.y = 0
 	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2
-	position = get_viewport_rect().size / 2
+	position = Global.windowSize / 2
 	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
 	polygon_2d.polygon = polygon
 	collision_polygon_2d.polygon = polygon
+
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -68,11 +69,13 @@ func _physics_process(delta: float) -> void:
 	if position.y < 0:
 		position.y = viewportSize.y
 
+
 func die() -> void:
 	died.emit()
 	queue_free()
 
-## Creates a PackedVector2Array that contains the points for a traignle with its pivot at the center
+
+## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center
 func create_centered_triangle(width: float, height: float) -> PackedVector2Array:
 	var polygon: PackedVector2Array = [
 		Vector2(-height / 2, -width / 2),

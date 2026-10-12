@@ -1,5 +1,6 @@
 extends Node2D
 class_name BlinkComponent
+## not working rn
 
 @onready var blink_interval_timer: Timer = $BlinkIntervalTimer
 
@@ -17,11 +18,13 @@ func _ready() -> void:
 	originalModulate = actor.modulate
 	blink_interval_timer.wait_time = blinkInterval
 	blink_interval_timer.timeout.connect(_on_blink_interval_timer_timeout)
-	
+
+
 func blink() -> void:
 	blink_interval_timer.start()
 	actor.self_modulate = color1
 	currentBlinks += 1
+
 
 func _on_blink_interval_timer_timeout() -> void:
 	if currentBlinks % 2 == 0:

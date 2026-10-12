@@ -15,8 +15,10 @@ func _ready() -> void:
 	lifetime_timer.start()
 	lifetime_timer.timeout.connect(_on_lifetimer_timer_timeout)
 
+
 func _process(delta: float) -> void:
 	polygon_2d.color.a = remap(lifetime_timer.time_left,0, lifetime_timer.wait_time, 0,1)
+
 
 func scale_points(scale: float) -> PackedVector2Array:
 	var scaledPolygon: PackedVector2Array = []
@@ -26,8 +28,10 @@ func scale_points(scale: float) -> PackedVector2Array:
 		
 	return scaledPolygon
 
+
 func set_polygon(points: PackedVector2Array) -> void:
 	polygon = points
+
 
 func _on_lifetimer_timer_timeout() -> void:
 	queue_free()

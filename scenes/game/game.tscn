@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dobdvgut8dbsl"]
 
-[ext_resource type="Script" uid="uid://cthkf4wvev651" path="res://scenes/game/game.gd" id="1_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://s0kngucv0cnl" path="res://scenes/player/player.tscn" id="1_sul5r"]
 [ext_resource type="Script" uid="uid://5htph50fyjch" path="res://scenes/game/camera_2d.gd" id="2_7h61r"]
 [ext_resource type="PackedScene" uid="uid://dh2eakv6ikta5" path="res://scenes/managers/asteroid_manager/asteroid_manager.tscn" id="4_kelw5"]
@@ -15,10 +14,11 @@
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
 
 [node name="Game" type="Node" unique_id=324886737]
-script = ExtResource("1_0sr1o")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=863287189]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=863287189 node_paths=PackedStringArray("player", "gameManager")]
 script = ExtResource("2_7h61r")
+player = NodePath("../Player")
+gameManager = NodePath("../Managers/GameManager")
 
 [node name="Player" parent="." unique_id=2088811554 instance=ExtResource("1_sul5r")]
 

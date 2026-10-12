@@ -13,5 +13,6 @@ func _ready() -> void:
 func _on_game_manager_lost() -> void:
 	visible = true
 
+
 func _on_restart_button_pressed() -> void:
 	SwitcherSingleton.goto_scene("res://scenes/game/game.tscn")

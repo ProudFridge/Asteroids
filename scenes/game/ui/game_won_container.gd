@@ -9,6 +9,7 @@ func _ready() -> void:
 	gameManager.won.connect(_on_game_manager_won)
 	restart_button.pressed.connect(_on_restart_button_pressed)
 
+
 func _on_game_manager_won() -> void:
 	visible = true
 
