@@ -8,6 +8,8 @@ func shoot() -> void:
 	var bulletInstance: Bullet = bullet.instantiate()
 	bulletInstance.rotation = shooter.rotation
 	bulletInstance.position = shooter.position
+	# make the bullets velocity realistic
+	#bulletInstance.velocity = bulletInstance.speed * Vector2.from_angle(shooter.rotation).normalized() + shooter.velocity
 	get_tree().root.add_child(bulletInstance)
 	
 func _input(event: InputEvent) -> void:

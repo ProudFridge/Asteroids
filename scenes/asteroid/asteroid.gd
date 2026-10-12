@@ -12,6 +12,8 @@ var polygon: PackedVector2Array = []
 var boundingBox: Vector2 = Vector2(60,60)
 var center: Vector2 = Vector2.ZERO
 
+signal died
+
 func _ready() -> void:
 	polygon = generate_convex_polygon(5, boundingBox)
 	center = get_center()
@@ -37,6 +39,7 @@ func take_damage(damage: float) -> void:
 	health = health - damage
 	if health <= 0:
 		shatter(true)
+		died.emit()
 		queue_free()
 	modulate = Color.RED
 

@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://cthkf4wvev651" path="res://scenes/game/game.gd" id="1_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://s0kngucv0cnl" path="res://scenes/player/player.tscn" id="1_sul5r"]
 [ext_resource type="Script" uid="uid://5htph50fyjch" path="res://scenes/game/camera_2d.gd" id="2_7h61r"]
+[ext_resource type="PackedScene" uid="uid://dh2eakv6ikta5" path="res://scenes/managers/asteroid_manager/asteroid_manager.tscn" id="4_kelw5"]
+[ext_resource type="PackedScene" uid="uid://dt5w32stiehqw" path="res://scenes/managers/game_manager/game_manager.tscn" id="5_lfrn8"]
+[ext_resource type="Script" uid="uid://yb8dwdqkpvd5" path="res://scenes/game/ui/lives_label.gd" id="6_5i0tg"]
+[ext_resource type="Script" uid="uid://bq0jrxq4w8tr7" path="res://scenes/game/ui/asteroid_count_label.gd" id="7_bdhmt"]
+[ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
 
@@ -14,8 +19,100 @@ script = ExtResource("2_7h61r")
 
 [node name="Player" parent="." unique_id=2088811554 instance=ExtResource("1_sul5r")]
 
-[node name="GameOverLabel" type="Label" parent="." unique_id=469862239]
+[node name="Managers" type="Node" parent="." unique_id=1491249176]
+
+[node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("4_kelw5")]
+
+[node name="GameManager" parent="Managers" unique_id=1113349235 node_paths=PackedStringArray("asteroidManager", "player") instance=ExtResource("5_lfrn8")]
+asteroidManager = NodePath("../AsteroidManager")
+player = NodePath("../../Player")
+
+[node name="UI" type="Control" parent="." unique_id=311688332]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=213812162]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer" unique_id=1303447050]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="UI/MarginContainer/HBoxContainer" unique_id=507421942]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LivesLabel" type="Label" parent="UI/MarginContainer/HBoxContainer/Panel" unique_id=474743535 node_paths=PackedStringArray("player")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_5i0tg")
+player = NodePath("../../../../../Player")
+
+[node name="Panel2" type="Panel" parent="UI/MarginContainer/HBoxContainer" unique_id=1979931798]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AsteroidCountLabel" type="Label" parent="UI/MarginContainer/HBoxContainer/Panel2" unique_id=1230718935 node_paths=PackedStringArray("asteroidManager")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_bdhmt")
+asteroidManager = NodePath("../../../../../Managers/AsteroidManager")
+
+[node name="Panel3" type="Panel" parent="UI/MarginContainer/HBoxContainer" unique_id=2049838663]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreLabel" type="Label" parent="UI/MarginContainer/HBoxContainer/Panel3" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_87uf6")
+asteroidManager = NodePath("../../../../../Managers/AsteroidManager")
+
+[node name="GameOverLabel" type="Label" parent="UI" unique_id=469862239]
 visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

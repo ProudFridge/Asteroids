@@ -1,11 +1,11 @@
 extends CharacterBody2D
 class_name Player
 
-const accel: float = 5.0
+const accel: float = 2.0
 var maxSpeed: float = 400
 var rotSpeed: float = 5 # rad/s
 # TODO: change to health later, faster asteroids deal more damage
-var lives: int = 3
+var lives: float = 3
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
@@ -17,6 +17,7 @@ var viewportSize: Vector2
 @export var playerSize: Vector2 = Vector2(15, 30)
 
 signal died()
+signal health_lost(currentHealth: float)
 
 func _ready() -> void:
 	# Temp
@@ -48,6 +49,7 @@ func _physics_process(delta: float) -> void:
 		var body: Node = collision.get_collider()
 		if body is Asteroid and damage_timer.is_stopped():
 			lives -= 1
+			health_lost.emit(lives)
 			if lives <= 0:
 				died.emit()
 				die()
