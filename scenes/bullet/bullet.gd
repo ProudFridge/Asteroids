@@ -22,7 +22,6 @@ func _physics_process(delta: float) -> void:
 		
 		var collisionPosition: Vector2 = collision.get_position()
 		
-		print(Global.windowSize.x)
 		# Makes sure the player doens't get outside the window
 		if collisionPosition.x >= Global.windowSize.x:
 			disappear()
