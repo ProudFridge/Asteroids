@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bk8je0hpsr607"]
+
+[ext_resource type="Script" uid="uid://bxr4xp2gk63a2" path="res://scenes/star/star.gd" id="1_3ji66"]
+
+[node name="Star" type="Polygon2D" unique_id=606344369]
+script = ExtResource("1_3ji66")

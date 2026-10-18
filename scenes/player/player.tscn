@@ -11,7 +11,7 @@ colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=2088811554]
 z_index = 1
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_8afob")
 playerSize = Vector2(20, 30)
 

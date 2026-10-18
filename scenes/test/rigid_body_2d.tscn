@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b15q5d5kng86w"]
+
+[ext_resource type="Script" uid="uid://dn4svuog0xgpa" path="res://scenes/test/rigid_body_2d.gd" id="1_oe32p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2m7xh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2m7xh"]
+radius = 18.1
+height = 80.2
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1385885980]
+gravity_scale = 0.0
+script = ExtResource("1_oe32p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1705225192]
+shape = SubResource("CircleShape2D_2m7xh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=599276306]
+mesh = SubResource("CapsuleMesh_2m7xh")

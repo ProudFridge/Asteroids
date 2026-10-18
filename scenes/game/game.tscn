@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
 [ext_resource type="Script" uid="uid://cee4rwhwt2xod" path="res://scenes/game/ui/game_won_container.gd" id="11_5jirj"]
 [ext_resource type="Script" uid="uid://dctwnixmnew4n" path="res://scenes/game/ui/game_over_container.gd" id="11_kp23o"]
+[ext_resource type="Script" uid="uid://cqsmjxsidqn44" path="res://scenes/game/border.gd" id="12_5jirj"]
+[ext_resource type="Script" uid="uid://dsufbmxiaogil" path="res://scenes/game/parallax_2d.gd" id="12_vaxfo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ohdgn"]
 
@@ -25,14 +27,18 @@
 [node name="Game" type="Node" unique_id=324886737]
 script = ExtResource("1_kp23o")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=863287189 node_paths=PackedStringArray("player", "gameManager")]
-script = ExtResource("2_7h61r")
-player = NodePath("../Player")
-gameManager = NodePath("../Managers/GameManager")
-
 [node name="Player" parent="." unique_id=2088811554 instance=ExtResource("1_sul5r")]
 
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=863287189 node_paths=PackedStringArray("player", "gameManager")]
+limit_enabled = false
+position_smoothing_enabled = true
+script = ExtResource("2_7h61r")
+player = NodePath("..")
+gameManager = NodePath("../../Managers/GameManager")
+
 [node name="Bounds" type="StaticBody2D" parent="." unique_id=335364591]
+collision_layer = 8
+collision_mask = 0
 
 [node name="Left" type="CollisionShape2D" parent="Bounds" unique_id=2103307325]
 shape = SubResource("WorldBoundaryShape2D_ohdgn")
@@ -206,3 +212,13 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 text = "Restart"
+
+[node name="StarsBackground" type="Parallax2D" parent="." unique_id=120381496]
+z_index = -10
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 8
+script = ExtResource("12_vaxfo")
+
+[node name="Border" type="Node2D" parent="." unique_id=1272152262]
+script = ExtResource("12_5jirj")

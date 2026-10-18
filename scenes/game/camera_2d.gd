@@ -4,5 +4,5 @@ extends Camera2D
 @export var gameManager: GameManager
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	position = Global.windowSize / 2
+#func _ready() -> void:
+	#position = Global.windowSize / 2
