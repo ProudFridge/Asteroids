@@ -4,7 +4,16 @@ class_name StarsManager
 var starAmount: int = 50 # star amount in a container with the size of repeat_size
 var repeatSize: Vector2 = Vector2(1024, 1024)
 var repeatTimes: int = 8
-
+# Array of main-sequence star colors taken from https://en.wikipedia.org/wiki/Stellar_classification
+var starColors: Array[Color] = [
+	Color("9bb0ff"),
+	Color("aabfff"),
+	Color("cad7ff"),
+	Color("f8f7ff"),
+	Color("fff4ea"),
+	Color("ffd2a1"),
+	Color("ffda9bff")]
+	#Color("ffcc6f")]
 
 func _ready() -> void:
 	# Create parallax layers
@@ -33,18 +42,20 @@ func _ready() -> void:
 	add_child(largeStars)
 	
 	# Add stars to each layer
-	for i: int in starAmount:
+	for i: int in starAmount * 5:
 		var star: Star = Star.new()
 		star.size = randf_range(1, 2)
 		star.cornerRatio = randf_range(0, 0.5)
 		star.position = Vector2(randf_range(0, repeatSize.x), randf_range(0, repeatSize.y))
+		star.color = generate_star_color()
 		smallStars.add_child(star)
 	
-	for i: int in starAmount:
+	for i: int in starAmount * 2:
 		var star: Star = Star.new()
 		star.size = randf_range(2, 3)
 		star.cornerRatio = randf_range(0, 0.5)
 		star.position = Vector2(randf_range(0, repeatSize.x), randf_range(0, repeatSize.y))
+		star.color = generate_star_color()
 		mediumStars.add_child(star)
 		
 	for i: int in starAmount:
@@ -52,4 +63,10 @@ func _ready() -> void:
 		star.size = randf_range(3, 5)
 		star.cornerRatio = randf_range(0, 0.5)
 		star.position = Vector2(randf_range(0, repeatSize.x), randf_range(0, repeatSize.y))
+		star.color = generate_star_color()
 		largeStars.add_child(star)
+
+func generate_star_color() -> Color:
+	var rand: int = randi_range(0, starColors.size() - 1)
+	
+	return starColors[rand]
