@@ -4,6 +4,7 @@ class_name Player
 const accel: float = 2.0
 var maxSpeed: float = 400
 var rotSpeed: float = 5 # rad/s
+var bounceDamp: float = 0.5
 # TODO: change to health later, faster asteroids deal more damage
 var lives: float = 3
 
@@ -57,6 +58,7 @@ func _physics_process(delta: float) -> void:
 				died.emit()
 				die()
 			damage_timer.start()
+			velocity = velocity.bounce(collision.get_normal()) * bounceDamp
 		
 		var collisionPosition: Vector2 = collision.get_position()
 		
