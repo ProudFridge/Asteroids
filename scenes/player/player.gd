@@ -14,6 +14,7 @@ var viewportSize: Vector2
 @onready var thruster_particles: CPUParticles2D = $ThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $Polygon2D
+@onready var thruster: Polygon2D = $Thruster
 @export var playerSize: Vector2 = Vector2(15, 30)
 
 signal died()
@@ -22,13 +23,14 @@ signal health_lost(currentHealth: float)
 func _ready() -> void:
 	# Temp
 	thruster_particles.position.y = 0
-	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2
+	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
 	position = Global.windowSize / 2
 	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
 	polygon_2d.polygon = polygon
 	collision_polygon_2d.polygon = polygon
-
+	thruster.rotate(PI / 2)
+	thruster.position = Vector2(-6 - playerSize.y / 2, 0)
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -68,7 +70,8 @@ func _physics_process(delta: float) -> void:
 		if collisionPosition.y >= viewportSize.y:
 			position.y = 0
 			
-		if collisionPosition.y <= 0:
+		# Won't work without the 1
+		if collisionPosition.y <= 1:
 			position.y = viewportSize.y
 
 

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://0cne814sqmk7"]
+
+[ext_resource type="Shader" uid="uid://basga426h0qqi" path="res://scenes/main_menu/button.gdshader" id="1_0ebjn"]
+[ext_resource type="PackedScene" uid="uid://dh2eakv6ikta5" path="res://scenes/managers/asteroid_manager/asteroid_manager.tscn" id="1_fsom3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fsom3"]
+shader = ExtResource("1_0ebjn")
+
+[node name="MainMenu" type="Control" unique_id=592040849]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2093858098]
+layer = -10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1154228223]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1073355614]
+material = SubResource("ShaderMaterial_fsom3")
+offset_left = 196.0
+offset_top = 284.0
+offset_right = 829.0
+offset_bottom = 419.0
+text = "test"
+
+[node name="Button2" type="Button" parent="CanvasLayer" unique_id=1197616001]
+offset_left = 191.0
+offset_top = 479.0
+offset_right = 824.0
+offset_bottom = 614.0
+text = "test"
+
+[node name="Managers" type="Node" parent="." unique_id=833144713]
+
+[node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("1_fsom3")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=995726105]
+anchor_mode = 0
+zoom = Vector2(2, 2)
