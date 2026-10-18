@@ -8,11 +8,11 @@
 [ext_resource type="Script" uid="uid://yb8dwdqkpvd5" path="res://scenes/game/ui/lives_label.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://dekcesve6rso2" path="res://scenes/managers/bullet_manager/bullet_manager.tscn" id="6_kp23o"]
 [ext_resource type="Script" uid="uid://bq0jrxq4w8tr7" path="res://scenes/game/ui/asteroid_count_label.gd" id="7_bdhmt"]
+[ext_resource type="PackedScene" uid="uid://bmaxqtsk2gwoh" path="res://scenes/managers/stars_manager/stars_manager.tscn" id="7_ftsea"]
 [ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
 [ext_resource type="Script" uid="uid://cee4rwhwt2xod" path="res://scenes/game/ui/game_won_container.gd" id="11_5jirj"]
 [ext_resource type="Script" uid="uid://dctwnixmnew4n" path="res://scenes/game/ui/game_over_container.gd" id="11_kp23o"]
 [ext_resource type="Script" uid="uid://cqsmjxsidqn44" path="res://scenes/game/border.gd" id="12_5jirj"]
-[ext_resource type="Script" uid="uid://dsufbmxiaogil" path="res://scenes/game/parallax_2d.gd" id="12_vaxfo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ohdgn"]
 
@@ -62,6 +62,8 @@ player = NodePath("../../Player")
 
 [node name="BulletManager" parent="Managers" unique_id=1104816647 node_paths=PackedStringArray("shooter") instance=ExtResource("6_kp23o")]
 shooter = NodePath("../../Player")
+
+[node name="StarsManager" parent="Managers" unique_id=210266538 instance=ExtResource("7_ftsea")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=137853518]
 layer = -10
@@ -212,13 +214,6 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 text = "Restart"
-
-[node name="StarsBackground" type="Parallax2D" parent="." unique_id=120381496]
-z_index = -10
-scroll_scale = Vector2(0.1, 0.1)
-repeat_size = Vector2(1024, 1024)
-repeat_times = 8
-script = ExtResource("12_vaxfo")
 
 [node name="Border" type="Node2D" parent="." unique_id=1272152262]
 script = ExtResource("12_5jirj")

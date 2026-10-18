@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bmaxqtsk2gwoh"]
+
+[ext_resource type="Script" uid="uid://3tmf8cqw22sj" path="res://scenes/managers/stars_manager/stars_manager.gd" id="1_ytf7w"]
+
+[node name="StarsManager" type="Node" unique_id=210266538]
+script = ExtResource("1_ytf7w")
