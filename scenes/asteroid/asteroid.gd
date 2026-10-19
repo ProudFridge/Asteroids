@@ -3,6 +3,7 @@ class_name Asteroid
 
 const SPEED: float = 300.0
 var health: float = 100
+var density: float = 0.001
 @export var rotationSpeed: float = 1
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
@@ -19,6 +20,9 @@ func _ready() -> void:
 	center = get_center()
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
+	mass = compute_area(polygon) * density
+	print(mass)
+	
 	var triangles: Array[Polygon2D] = shatter(false)
 	
 	for t: Polygon2D in triangles:
@@ -171,6 +175,17 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 		points[i] -= c
 		
 	return points
+
+## Computes the area of a polygon with the coordinates of its vertices
+func compute_area(polygon: PackedVector2Array) -> float:
+	var totalSum: float = 0
+	for i: int in polygon.size():
+		if i != polygon.size() - 1:
+			totalSum += polygon[i].x * polygon[i + 1].y - polygon[i].y * polygon[i + 1].x
+		else:
+			totalSum += polygon[i].x * polygon[0].y - polygon[i].y * polygon[0].x
+	
+	return abs(totalSum / 2)
 
 
 func sort_by_angle(a: Vector2, b: Vector2) -> bool:

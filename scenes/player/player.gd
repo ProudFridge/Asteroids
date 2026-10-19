@@ -1,7 +1,7 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Player
 
-const accel: float = 2.0
+const accel: float = 200.0
 var maxSpeed: float = 400
 var rotSpeed: float = 5 # rad/s
 var bounceDamp: float = 0.5
@@ -32,6 +32,26 @@ func _ready() -> void:
 	collision_polygon_2d.polygon = polygon
 	thruster.rotate(PI / 2)
 	thruster.position = Vector2(-6 - playerSize.y / 2, 0)
+	
+	self.body_entered.connect(_on_body_entered)
+
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
+	if collision:
+		var collisionPosition : Vector2 = collision.get_position()
+		
+		if collisionPosition.x >= viewportSize.x:
+			position.x = 0 
+	
+		if collisionPosition.x <= 0:
+			position.x = viewportSize.x
+		
+		if collisionPosition.y >= viewportSize.y:
+			position.y = 0
+			
+		# Won't work without the 1
+		if collisionPosition.y <= 1:
+			position.y = viewportSize.y
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -40,46 +60,33 @@ func _physics_process(delta: float) -> void:
 	
 	if direction:
 		thruster_particles.emitting = true
-		velocity += transform.x * direction * accel
-		velocity.limit_length(maxSpeed)
+		apply_central_force(direction * Vector2.from_angle(rotation) * accel)
 	else:
 		thruster_particles.emitting = false
-	
-	rotation += rotDir * rotSpeed * delta
-
-	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
-	
-	if collision:
-		var body: Node = collision.get_collider()
-		if body is Asteroid and damage_timer.is_stopped():
-			lives -= 1
-			health_lost.emit(lives)
-			if lives <= 0:
-				died.emit()
-				die()
-			damage_timer.start()
-			velocity = velocity.bounce(collision.get_normal()) * bounceDamp
-		
-		var collisionPosition: Vector2 = collision.get_position()
-		
-		# Makes sure the player doens't get outside the window
-		if collisionPosition.x >= viewportSize.x:
-			position.x = 0 
-		
-		if collisionPosition.x <= 0:
-			position.x = viewportSize.x
-			
-		if collisionPosition.y >= viewportSize.y:
-			position.y = 0
-			
-		# Won't work without the 1
-		if collisionPosition.y <= 1:
-			position.y = viewportSize.y
 
 
 func die() -> void:
 	died.emit()
 	queue_free()
+
+func _on_body_entered(body: Node) -> void:
+	if body is Asteroid and damage_timer.is_stopped():
+		lives -= 1
+		health_lost.emit(lives)
+		if lives <= 0:
+			died.emit()
+			die()
+		damage_timer.start()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("turn_left"):
+		angular_velocity = -rotSpeed
+	if event.is_action_pressed("turn_right"):
+		angular_velocity = rotSpeed
+		
+	if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
+		angular_velocity = 0
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center

@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c22t4omm5wesk" path="res://scenes/player/player.gd" id="1_8afob"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8afob"]
+bounce = 0.5
+
 [sub_resource type="Curve" id="Curve_8afob"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -9,9 +12,14 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_lvxji"]
 colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
 
-[node name="Player" type="CharacterBody2D" unique_id=2088811554]
+[node name="Player" type="RigidBody2D" unique_id=752532407]
 z_index = 1
 collision_mask = 11
+physics_material_override = SubResource("PhysicsMaterial_8afob")
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 3
+angular_damp_mode = 1
 script = ExtResource("1_8afob")
 playerSize = Vector2(20, 30)
 
