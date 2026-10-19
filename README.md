@@ -3,6 +3,7 @@ The project makes great use of the `RigidBody2D` nodes in Godot and the `Geometr
 
 ### How to run
 - You can play the game on the its itch page or download the executable from the releases tab
+  - (I recommend downloading the binaries from the releases page instead of playing the web version since it's a bit laggy.)
 
 ### Controls
 - W/S: thrust forwards/backwards
