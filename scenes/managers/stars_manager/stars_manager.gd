@@ -4,7 +4,7 @@ class_name StarsManager
 
 var starAmount: int = 60 # star amount in a container with the size of repeat_size
 var repeatSize: Vector2 = Vector2(1024, 1024)
-var repeatTimes: int = 5
+var repeatTimes: int = 3
 # Array of main-sequence star colors taken from https://en.wikipedia.org/wiki/Stellar_classification
 var starColors: Array[Color] = [
 	Color("9bb0ff"),

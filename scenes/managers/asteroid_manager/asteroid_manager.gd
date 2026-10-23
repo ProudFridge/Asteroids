@@ -29,7 +29,7 @@ func instantiate_asteroid_in_area(asteroidNum: int, area: Vector2, exclusionZone
 		
 		asteroid.position = position
 		asteroid.angular_velocity = randf_range(-1, 1)
-		asteroid.linear_velocity = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
+		asteroid.linear_velocity = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 300)
 		
 		add_child(asteroid)
 		asteroid_added.emit()

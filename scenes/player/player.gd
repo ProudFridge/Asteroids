@@ -78,7 +78,7 @@ func _on_body_entered(body: Node) -> void:
 			die()
 		damage_timer.start()
 
-
+# Rotate the rocket
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("turn_left"):
 		angular_velocity = -rotSpeed

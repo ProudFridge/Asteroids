@@ -22,19 +22,18 @@ func _physics_process(delta: float) -> void:
 		
 		var collisionPosition: Vector2 = collision.get_position()
 		
-		# Makes sure the player doens't get outside the window
-		#if collisionPosition.x >= Global.windowSize.x:
-			#disappear()
-		#
-		#if collisionPosition.x <= 0:
-			#disappear()
-			#
-		#if collisionPosition.y >= Global.windowSize.y:
-			#disappear()
-			#
-		## Won't work without the 1
-		#if collisionPosition.y <= 1:
-			#disappear()
+		if collisionPosition.x >= Global.windowSize.x:
+			disappear()
+		
+		if collisionPosition.x <= 0:
+			disappear()
+			
+		if collisionPosition.y >= Global.windowSize.y:
+			disappear()
+			
+		# Won't work without the 1
+		if collisionPosition.y <= 1:
+			disappear()
 
 
 func _on_lifetime_timer_timeout() -> void:
