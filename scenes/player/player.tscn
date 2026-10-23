@@ -49,4 +49,5 @@ scale_amount_curve = SubResource("Curve_8afob")
 color_initial_ramp = SubResource("Gradient_lvxji")
 
 [node name="DamageTimer" type="Timer" parent="." unique_id=1806139019]
+wait_time = 2.0
 one_shot = true

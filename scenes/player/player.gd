@@ -34,6 +34,7 @@ func _ready() -> void:
 	thruster.position = Vector2(-6 - playerSize.y / 2, 0)
 	
 	self.body_entered.connect(_on_body_entered)
+	damage_timer.timeout.connect(_on_damage_timer_timeout)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
@@ -50,7 +51,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			position.y = 0
 			
 		# Won't work without the 1
-		if collisionPosition.y <= 1:
+		print(collisionPosition.y)
+		if collisionPosition.y <= 0:
 			position.y = viewportSize.y
 
 func _physics_process(delta: float) -> void:
@@ -77,6 +79,14 @@ func _on_body_entered(body: Node) -> void:
 			died.emit()
 			die()
 		damage_timer.start()
+		
+		polygon_2d.self_modulate = Color.DARK_RED
+		thruster.self_modulate = Color.DARK_RED
+
+# Change the color of the player to indicate invincibility period
+func _on_damage_timer_timeout() -> void:
+	polygon_2d.self_modulate = Color.WHITE
+	thruster.self_modulate = Color.WHITE
 
 # Rotate the rocket
 func _input(event: InputEvent) -> void:

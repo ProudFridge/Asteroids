@@ -6,7 +6,7 @@ class_name BulletManager
 const BULLET: Resource = preload("uid://c4bego3ny732p")
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("space"):
 		var bulletInstance: Bullet = BULLET.instantiate()
 		bulletInstance.rotation = shooter.rotation
 		bulletInstance.position = shooter.position

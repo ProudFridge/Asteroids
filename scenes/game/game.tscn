@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cee4rwhwt2xod" path="res://scenes/game/ui/game_won_container.gd" id="11_5jirj"]
 [ext_resource type="Script" uid="uid://dctwnixmnew4n" path="res://scenes/game/ui/game_over_container.gd" id="11_kp23o"]
 [ext_resource type="Script" uid="uid://cqsmjxsidqn44" path="res://scenes/game/border.gd" id="12_5jirj"]
+[ext_resource type="Script" uid="uid://bfj3kk4w0o7o6" path="res://scenes/game/ui/game_start_label.gd" id="12_otnwt"]
 [ext_resource type="Script" uid="uid://b6ls8uptisac" path="res://scenes/game/ui/pause_menu/pause_menu.gd" id="12_vaxfo"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 
@@ -51,6 +52,7 @@ script = ExtResource("1_kp23o")
 [node name="Player" parent="." unique_id=2088811554 instance=ExtResource("1_sul5r")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=863287189]
+process_mode = 3
 zoom = Vector2(0.8, 0.8)
 limit_enabled = false
 position_smoothing_enabled = true
@@ -75,14 +77,14 @@ shape = SubResource("WorldBoundaryShape2D_anm2o")
 
 [node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("4_kelw5")]
 
-[node name="GameManager" parent="Managers" unique_id=1113349235 node_paths=PackedStringArray("asteroidManager", "player") instance=ExtResource("5_lfrn8")]
-asteroidManager = NodePath("../AsteroidManager")
-player = NodePath("../../Player")
-
 [node name="BulletManager" parent="Managers" unique_id=1104816647 node_paths=PackedStringArray("shooter") instance=ExtResource("6_kp23o")]
 shooter = NodePath("../../Player")
 
 [node name="StarsManager" parent="Managers" unique_id=210266538 instance=ExtResource("7_ftsea")]
+
+[node name="GameManager" parent="Managers" unique_id=1113349235 node_paths=PackedStringArray("asteroidManager", "player") instance=ExtResource("5_lfrn8")]
+asteroidManager = NodePath("../AsteroidManager")
+player = NodePath("../../Player")
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=137853518]
 layer = -1
@@ -277,6 +279,25 @@ text = "Quit to Main Menu"
 layout_mode = 2
 text = "Quit"
 script = ExtResource("13_ftsea")
+
+[node name="InstructionLayer" type="CanvasLayer" parent="." unique_id=784472411]
+
+[node name="GameStartLabel" type="Label" parent="InstructionLayer" unique_id=289557349]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = 54.5
+offset_right = 114.0
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press space to start the game"
+script = ExtResource("12_otnwt")
 
 [node name="Border" type="Node2D" parent="." unique_id=1272152262]
 script = ExtResource("12_5jirj")
