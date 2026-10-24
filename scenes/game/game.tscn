@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dobdvgut8dbsl"]
 
-[ext_resource type="Script" uid="uid://cthkf4wvev651" path="res://scenes/game/game.gd" id="1_kp23o"]
 [ext_resource type="PackedScene" uid="uid://s0kngucv0cnl" path="res://scenes/player/player.tscn" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://dh2eakv6ikta5" path="res://scenes/managers/asteroid_manager/asteroid_manager.tscn" id="4_kelw5"]
 [ext_resource type="PackedScene" uid="uid://dt5w32stiehqw" path="res://scenes/managers/game_manager/game_manager.tscn" id="5_lfrn8"]
 [ext_resource type="Script" uid="uid://yb8dwdqkpvd5" path="res://scenes/game/ui/lives_label.gd" id="6_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://dekcesve6rso2" path="res://scenes/managers/bullet_manager/bullet_manager.tscn" id="6_kp23o"]
+[ext_resource type="PackedScene" uid="uid://bhaj7fphtnb7u" path="res://scenes/managers/bounds_manager/bounds_manager.tscn" id="7_3xj4h"]
 [ext_resource type="Script" uid="uid://bq0jrxq4w8tr7" path="res://scenes/game/ui/asteroid_count_label.gd" id="7_bdhmt"]
 [ext_resource type="PackedScene" uid="uid://bmaxqtsk2gwoh" path="res://scenes/managers/stars_manager/stars_manager.tscn" id="7_ftsea"]
 [ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
@@ -15,14 +15,6 @@
 [ext_resource type="Script" uid="uid://bfj3kk4w0o7o6" path="res://scenes/game/ui/game_start_label.gd" id="12_otnwt"]
 [ext_resource type="Script" uid="uid://b6ls8uptisac" path="res://scenes/game/ui/pause_menu/pause_menu.gd" id="12_vaxfo"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ohdgn"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2tmx8"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yrxbg"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_anm2o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
 
@@ -47,7 +39,6 @@ expand_margin_bottom = 5.0
 [sub_resource type="Theme" id="Theme_2m7xh"]
 
 [node name="Game" type="Node" unique_id=324886737]
-script = ExtResource("1_kp23o")
 
 [node name="Player" parent="." unique_id=2088811554 instance=ExtResource("1_sul5r")]
 
@@ -56,22 +47,6 @@ process_mode = 3
 zoom = Vector2(0.8, 0.8)
 limit_enabled = false
 position_smoothing_enabled = true
-
-[node name="Bounds" type="StaticBody2D" parent="." unique_id=335364591]
-collision_layer = 8
-collision_mask = 0
-
-[node name="Left" type="CollisionShape2D" parent="Bounds" unique_id=2103307325]
-shape = SubResource("WorldBoundaryShape2D_ohdgn")
-
-[node name="Right" type="CollisionShape2D" parent="Bounds" unique_id=692631492]
-shape = SubResource("WorldBoundaryShape2D_2tmx8")
-
-[node name="Top" type="CollisionShape2D" parent="Bounds" unique_id=246738801]
-shape = SubResource("WorldBoundaryShape2D_yrxbg")
-
-[node name="Bottom" type="CollisionShape2D" parent="Bounds" unique_id=1946020008]
-shape = SubResource("WorldBoundaryShape2D_anm2o")
 
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 
@@ -85,6 +60,8 @@ shooter = NodePath("../../Player")
 [node name="GameManager" parent="Managers" unique_id=1113349235 node_paths=PackedStringArray("asteroidManager", "player") instance=ExtResource("5_lfrn8")]
 asteroidManager = NodePath("../AsteroidManager")
 player = NodePath("../../Player")
+
+[node name="BoundsManager" parent="Managers" unique_id=2007542974 instance=ExtResource("7_3xj4h")]
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=137853518]
 layer = -1
@@ -286,6 +263,7 @@ script = ExtResource("13_ftsea")
 
 [node name="GameStartLabel" type="Label" parent="InstructionLayer" unique_id=289557349 node_paths=PackedStringArray("gameManager")]
 process_mode = 2
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

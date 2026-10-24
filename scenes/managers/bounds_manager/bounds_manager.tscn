@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bhaj7fphtnb7u"]
+
+[ext_resource type="Script" uid="uid://cybjjrg00n4fp" path="res://scenes/managers/bounds_manager/bounds_manager.gd" id="1_5qiu0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2m7xh"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ohdgn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2tmx8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yrxbg"]
+
+[node name="BoundsManager" type="Node" unique_id=2007542974]
+script = ExtResource("1_5qiu0")
+
+[node name="Bounds" type="StaticBody2D" parent="." unique_id=134794853]
+
+[node name="Left" type="CollisionShape2D" parent="Bounds" unique_id=1748694179]
+shape = SubResource("WorldBoundaryShape2D_2m7xh")
+
+[node name="Right" type="CollisionShape2D" parent="Bounds" unique_id=818290772]
+shape = SubResource("WorldBoundaryShape2D_ohdgn")
+
+[node name="Top" type="CollisionShape2D" parent="Bounds" unique_id=898418990]
+shape = SubResource("WorldBoundaryShape2D_2tmx8")
+
+[node name="Bottom" type="CollisionShape2D" parent="Bounds" unique_id=888330866]
+shape = SubResource("WorldBoundaryShape2D_yrxbg")
