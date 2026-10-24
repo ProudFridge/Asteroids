@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 	pass
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, Global.windowSize), Color.AQUAMARINE, false)
+	draw_rect(Rect2(Vector2.ZERO, Global.windowSize), Color.WHITE_SMOKE, false)

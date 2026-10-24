@@ -12,6 +12,9 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_lvxji"]
 colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2m7xh"]
+radius = 265.0019
+
 [node name="Player" type="RigidBody2D" unique_id=752532407]
 z_index = 1
 collision_mask = 11
@@ -51,3 +54,10 @@ color_initial_ramp = SubResource("Gradient_lvxji")
 [node name="DamageTimer" type="Timer" parent="." unique_id=1806139019]
 wait_time = 2.0
 one_shot = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1005154710]
+gravity_space_override = 3
+gravity = 4096.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=183973814]
+shape = SubResource("CircleShape2D_2m7xh")

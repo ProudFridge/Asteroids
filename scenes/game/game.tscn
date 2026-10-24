@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cqsmjxsidqn44" path="res://scenes/game/border.gd" id="12_5jirj"]
 [ext_resource type="Script" uid="uid://bfj3kk4w0o7o6" path="res://scenes/game/ui/game_start_label.gd" id="12_otnwt"]
 [ext_resource type="Script" uid="uid://b6ls8uptisac" path="res://scenes/game/ui/pause_menu/pause_menu.gd" id="12_vaxfo"]
+[ext_resource type="Script" uid="uid://bdp8a8gne6npq" path="res://scenes/game/ui/pause_menu/restart_button.gd" id="13_3xj4h"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
@@ -44,9 +45,8 @@ expand_margin_bottom = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=863287189]
 process_mode = 3
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(0.5, 0.5)
 limit_enabled = false
-position_smoothing_enabled = true
 
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 
@@ -249,6 +249,7 @@ horizontal_alignment = 1
 [node name="RestartButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=198654607]
 layout_mode = 2
 text = "Restart"
+script = ExtResource("13_3xj4h")
 
 [node name="MainMenuButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=295130982]
 layout_mode = 2

@@ -5,7 +5,6 @@ class_name GameManager
 # Made create a node that searches for other nodes in the scene tree
 @export var asteroidManager: AsteroidManager # To detect when we won
 @export var player: Player # To detect when we lost
-@export var gameAreaSize: Vector2 = Vector2(500, 500)
 
 var isGameRunning: bool = false
 

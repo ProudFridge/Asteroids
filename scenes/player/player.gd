@@ -41,19 +41,20 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if collision:
 		var collisionPosition : Vector2 = collision.get_position()
 		
-		if collisionPosition.x >= viewportSize.x:
-			position.x = 0 
+		if collisionPosition.x >= Global.windowSize.x:
+			position.x = collisionPosition.x - position.x
 	
 		if collisionPosition.x <= 0:
-			position.x = viewportSize.x
+			position.x = Global.windowSize.x - (collisionPosition.x - position.x)
 		
-		if collisionPosition.y >= viewportSize.y:
-			position.y = 0
+		if collisionPosition.y >= Global.windowSize.y:
+			position.y = collisionPosition.y - position.y
 			
 		# Won't work without the 1
 		print(collisionPosition.y)
 		if collisionPosition.y <= 0:
-			position.y = viewportSize.y
+			position.y = Global.windowSize.y - (collisionPosition.y - position.y)
+
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
