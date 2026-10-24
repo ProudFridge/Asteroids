@@ -21,7 +21,6 @@ func _ready() -> void:
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
 	mass = compute_area(polygon) * density
-	print(mass)
 	
 	var triangles: Array[Polygon2D] = shatter(false)
 	

@@ -239,8 +239,9 @@ text = "Restart"
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=366481481]
 
-[node name="PauseMenu" type="PanelContainer" parent="PauseMenuLayer" unique_id=1343691578]
+[node name="PauseMenu" type="PanelContainer" parent="PauseMenuLayer" unique_id=1343691578 node_paths=PackedStringArray("gameManager")]
 process_mode = 3
+visible = false
 modulate = Color(1, 1, 1, 0.6313726)
 z_index = 30
 anchors_preset = 8
@@ -257,6 +258,7 @@ grow_vertical = 2
 theme = SubResource("Theme_5jirj")
 theme_override_styles/panel = SubResource("StyleBoxFlat_vaxfo")
 script = ExtResource("12_vaxfo")
+gameManager = NodePath("../../Managers/GameManager")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu" unique_id=1846872377]
 layout_mode = 2
@@ -282,9 +284,8 @@ script = ExtResource("13_ftsea")
 
 [node name="InstructionLayer" type="CanvasLayer" parent="." unique_id=784472411]
 
-[node name="GameStartLabel" type="Label" parent="InstructionLayer" unique_id=289557349]
+[node name="GameStartLabel" type="Label" parent="InstructionLayer" unique_id=289557349 node_paths=PackedStringArray("gameManager")]
 process_mode = 2
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -298,6 +299,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Press space to start the game"
 script = ExtResource("12_otnwt")
+gameManager = NodePath("../../Managers/GameManager")
 
 [node name="Border" type="Node2D" parent="." unique_id=1272152262]
 script = ExtResource("12_5jirj")
