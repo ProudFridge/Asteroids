@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" uid="uid://b6kpaxi6vlg2m" path="res://scenes/asteroid/asteroid.gd" id="1_phgi8"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3xj4h"]
+bounce = 0.2
+
 [node name="Asteroid" type="RigidBody2D" unique_id=2077462969]
 rotation = 1.655021
 scale = Vector2(0.99985087, 0.99985087)
 collision_layer = 2
 collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_3xj4h")
 gravity_scale = 0.0
 angular_damp_mode = 1
 script = ExtResource("1_phgi8")

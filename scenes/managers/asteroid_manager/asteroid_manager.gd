@@ -12,7 +12,7 @@ signal asteroid_removed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	instantiate_asteroid_in_area(100, Global.windowSize, 100)
+	instantiate_asteroid_in_area(100, Global.windowSize, 500)
 
 
 ## Instantiates asteroids in a specified area

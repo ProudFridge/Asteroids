@@ -8,6 +8,7 @@ class_name GameManager
 
 var isGameRunning: bool = false
 
+
 signal won
 signal lost
 

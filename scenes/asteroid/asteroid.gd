@@ -12,6 +12,7 @@ var density: float = 0.001
 var polygon: PackedVector2Array = []
 var boundingBox: Vector2 = Vector2(60,60)
 var center: Vector2 = Vector2.ZERO
+var hasShattered: bool = false
 
 signal died
 
@@ -37,8 +38,9 @@ func _draw() -> void:
 # TODO: maybe replace with a component and create a die() function
 func take_damage(damage: float) -> void:
 	health = health - damage
-	if health <= 0:
+	if health <= 0 && !hasShattered:
 		shatter(true)
+		hasShattered = true
 		died.emit()
 		queue_free()
 	modulate = Color.RED
