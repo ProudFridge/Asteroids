@@ -18,15 +18,22 @@ var boostRefill: float = 0.05
 var maxBoostSpeed: float = 800
 var isBoostActivated: bool = false
 
+var impulseMagnitude: float = 400
+var sideThrusterCooldown: float = 1
+
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
 
 @onready var damage_timer: Timer = $DamageTimer
 @onready var thruster_particles: CPUParticles2D = $ThrusterParticles
+@onready var right_thruster_particles: CPUParticles2D = $RightThrusterParticles
+@onready var left_thruster_particles: CPUParticles2D = $LeftThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $Polygon2D
 @onready var thruster: Polygon2D = $Thruster
 @export var playerSize: Vector2 = Vector2(15, 30)
+@onready var right_timer: Timer = $RightThrusterParticles/RightTimer
+@onready var left_timer: Timer = $LeftThrusterParticles/LeftTimer
 
 signal died()
 signal health_lost(currentHealth: float)
@@ -35,6 +42,10 @@ func _ready() -> void:
 	# Temp
 	thruster_particles.position.y = 0
 	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
+	
+	right_timer.wait_time = sideThrusterCooldown
+	left_timer.wait_time = sideThrusterCooldown
+	
 	position = Global.windowSize / 2
 	viewportSize = get_viewport_rect().size
 	polygon = create_centered_triangle(playerSize.x, playerSize.y)
@@ -130,6 +141,16 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
 		angular_velocity = 0
+		
+	if event.is_action_pressed("e") && right_timer.is_stopped():
+		apply_central_impulse(Vector2.from_angle(rotation + PI / 2) * impulseMagnitude)
+		right_thruster_particles.emitting = true
+		right_timer.start()
+	
+	if event.is_action_pressed("q") && left_timer.is_stopped():
+		apply_central_impulse(Vector2.from_angle(rotation - PI / 2) * impulseMagnitude)
+		left_thruster_particles.emitting = true
+		left_timer.start()
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center

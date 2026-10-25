@@ -4,7 +4,8 @@ extends Node
 
 func playSound(path: String, position: Vector2) -> void:
 	var audioStreamPlayer: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	audioStreamPlayer.stream = AudioStreamWAV.load_from_file(path, {"force/max_rate": true, "force/max_rate_hz": 11025})
+	#audioStreamPlayer.stream = AudioStreamWAV.load_from_file(path, {"force/max_rate": true, "force/max_rate_hz": 11025})
+	audioStreamPlayer.stream = AudioStreamWAV.load_from_file(path)
 	audioStreamPlayer.position = position
 	add_child(audioStreamPlayer)
 	

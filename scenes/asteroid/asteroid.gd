@@ -21,7 +21,10 @@ func _ready() -> void:
 	center = get_center()
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
-	mass = compute_area(polygon) * density
+	
+	var area: float = compute_area(polygon)
+	mass = area * density
+	health = area / 100
 	
 	var triangles: Array[Polygon2D] = shatter(false)
 	
