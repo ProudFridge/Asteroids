@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://7khd4cs5u826"]
+
+[ext_resource type="Theme" uid="uid://b4p0c3cc33cdp" path="res://themes/progress_bar/progress_bar.tres" id="1_1wslx"]
+[ext_resource type="Script" uid="uid://cke4hg22xeqs0" path="res://scenes/boost_bar/boost_bar.gd" id="2_wb7jx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2m7xh"]
+font_size = 23
+shadow_color = Color(0.51, 0.51, 0.51, 1)
+
+[node name="BoostBar" type="PanelContainer" unique_id=117183947]
+size_flags_horizontal = 3
+theme = ExtResource("1_1wslx")
+script = ExtResource("2_wb7jx")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=813750382]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=457152894]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=2002492614]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_1wslx")
+value = 59.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2005597733]
+layout_mode = 2
+theme = ExtResource("1_1wslx")
+text = "B"
+label_settings = SubResource("LabelSettings_2m7xh")
+horizontal_alignment = 1

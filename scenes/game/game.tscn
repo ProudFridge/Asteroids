@@ -19,15 +19,12 @@
 [ext_resource type="Script" uid="uid://bdp8a8gne6npq" path="res://scenes/game/ui/pause_menu/restart_button.gd" id="13_3xj4h"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 [ext_resource type="Theme" uid="uid://b4p0c3cc33cdp" path="res://themes/progress_bar/progress_bar.tres" id="14_10c2w"]
-[ext_resource type="Script" uid="uid://bhgo2dhpmsja0" path="res://scenes/game/ui/progress_bar.gd" id="15_pg2xm"]
+[ext_resource type="PackedScene" uid="uid://7khd4cs5u826" path="res://scenes/boost_bar/boost_bar.tscn" id="14_pg2xm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mikig"]
 bg_color = Color(0.23166987, 0.68188, 0.78311294, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_2m7xh"]
-font_size = 23
 
 [sub_resource type="Theme" id="Theme_5jirj"]
 
@@ -152,6 +149,7 @@ offset_bottom = 41.0
 grow_horizontal = 2
 
 [node name="BoostBar" type="ProgressBar" parent="Header/Header" unique_id=1686969542 node_paths=PackedStringArray("player", "gameManager")]
+visible = false
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_mikig")
@@ -234,40 +232,53 @@ asteroidManager = NodePath("../../../../../../Managers/AsteroidManager")
 [node name="PanelContainer" type="PanelContainer" parent="Header/Header/GameStats/HBoxContainer" unique_id=6768299]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Header" unique_id=526517208]
-offset_left = 22.0
-offset_top = 599.0
-offset_right = 53.0
-offset_bottom = 1059.0
+[node name="InfoContainer" type="MarginContainer" parent="Header" unique_id=933994829]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -573.0
+offset_right = 99.0
+grow_vertical = 0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Header/InfoContainer" unique_id=1076925939]
+layout_mode = 2
+
+[node name="BoostBar" parent="Header/InfoContainer/HBoxContainer" unique_id=117183947 node_paths=PackedStringArray("player", "gameManager") instance=ExtResource("14_pg2xm")]
+layout_mode = 2
+player = NodePath("../../../../Player")
+gameManager = NodePath("../../../../Managers/GameManager")
+
+[node name="PanelContainer" type="PanelContainer" parent="Header/InfoContainer/HBoxContainer" unique_id=1560178020]
+layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("14_10c2w")
 
-[node name="MarginContainer" type="MarginContainer" parent="Header/PanelContainer" unique_id=576456471]
+[node name="MarginContainer" type="MarginContainer" parent="Header/InfoContainer/HBoxContainer/PanelContainer" unique_id=579007382]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Header/PanelContainer/MarginContainer" unique_id=1076469493]
+[node name="VBoxContainer" type="VBoxContainer" parent="Header/InfoContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=220490245]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="ProgressBar" type="ProgressBar" parent="Header/PanelContainer/MarginContainer/VBoxContainer" unique_id=23566723 node_paths=PackedStringArray("player", "gameManager")]
+[node name="ProgressBar" type="ProgressBar" parent="Header/InfoContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1252292356]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("14_10c2w")
-value = 59.0
+value = 50.0
 fill_mode = 3
 show_percentage = false
-script = ExtResource("15_pg2xm")
-player = NodePath("../../../../../Player")
-gameManager = NodePath("../../../../../Managers/GameManager")
 
-[node name="Label" type="Label" parent="Header/PanelContainer/MarginContainer/VBoxContainer" unique_id=1631679448]
+[node name="Label" type="Label" parent="Header/InfoContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1162285643]
 layout_mode = 2
 theme = ExtResource("14_10c2w")
-text = "B"
-label_settings = SubResource("LabelSettings_2m7xh")
+text = "I"
 horizontal_alignment = 1
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=366481481]

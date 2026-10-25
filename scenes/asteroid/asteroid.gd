@@ -3,6 +3,7 @@ class_name Asteroid
 
 const SPEED: float = 300.0
 var health: float = 100
+var maxHealth: float = health
 var density: float = 0.001
 @export var rotationSpeed: float = 1
 
@@ -31,6 +32,7 @@ func _ready() -> void:
 	var area: float = compute_area(polygon)
 	mass = area * density
 	health = area / 100
+	maxHealth = health
 	
 	var triangles: Array[Polygon2D] = shatter(false)
 	
@@ -47,7 +49,7 @@ func take_damage(damage: float) -> void:
 	health = health - damage
 	if health <= 0:
 		die()
-	modulate = Color.DIM_GRAY
+	modulate = Color.from_hsv(0, 0, lerpf(0.2, 1, health / maxHealth))
 
 
 func die() -> void: 
