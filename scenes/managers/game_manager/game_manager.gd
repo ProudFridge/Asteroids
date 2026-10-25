@@ -10,6 +10,7 @@ var isGameRunning: bool = false
 
 signal won
 signal lost
+#signal boostIncreased(newBoostValue: float)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,12 +21,14 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 
-func _on_asteroid_manager_asteroid_removed() -> void:
+func _on_asteroid_manager_asteroid_removed(asteroid: Asteroid) -> void:
 	# Add boost to the player whenever they destroy an asteroid
 	if player.currentBoostValue + player.boostRefill <= player.boostTime:
 		player.currentBoostValue += player.boostRefill
+		#boostIncreased.emit(player.currentBoostValue)
 	else:
 		player.currentBoostValue = player.boostTime
+		#boostIncreased.emit(player.currentBoostValue)
 	
 	if asteroidManager.asteroidInstances.size() <= 0:
 		won.emit()

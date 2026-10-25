@@ -142,13 +142,14 @@ anchor_right = 1.0
 offset_bottom = 41.0
 grow_horizontal = 2
 
-[node name="BoostBar" type="ProgressBar" parent="Header/Header" unique_id=1686969542 node_paths=PackedStringArray("player")]
+[node name="BoostBar" type="ProgressBar" parent="Header/Header" unique_id=1686969542 node_paths=PackedStringArray("player", "gameManager")]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_mikig")
 show_percentage = false
 script = ExtResource("12_5v6r0")
 player = NodePath("../../../Player")
+gameManager = NodePath("../../../Managers/GameManager")
 
 [node name="GameStats" type="MarginContainer" parent="Header/Header" unique_id=213812162]
 custom_minimum_size = Vector2(320, 0)

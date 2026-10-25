@@ -9,6 +9,6 @@ func _ready() -> void:
 	asteroidManager.asteroid_removed.connect(_on_asteroid_manager_asteroid_removed)
 
 
-func _on_asteroid_manager_asteroid_removed() -> void:
-	score += 10
-	text = "Score: " + str(score)
+func _on_asteroid_manager_asteroid_removed(asteroid: Asteroid) -> void:
+	score += asteroid.mass
+	text = "Score: " + str(roundf(score))

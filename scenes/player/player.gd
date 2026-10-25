@@ -46,7 +46,7 @@ func _ready() -> void:
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
 
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
 	if collision:
 		var collisionPosition : Vector2 = collision.get_position()
@@ -75,11 +75,13 @@ func _physics_process(delta: float) -> void:
 	var direction : float = Input.get_axis("backwards", "forwards")
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
-	if direction && Input.is_action_pressed("shift"):
+	if direction && Input.is_action_pressed("shift") && currentBoostValue != 0:
 		isBoostActivated = true
 		if currentBoostValue > boostDepletion * delta:
 			currentAccel = boostAccel
 			currentBoostValue -= boostDepletion * delta
+		else:
+			currentBoostValue = 0
 	else:
 		isBoostActivated = false
 		currentAccel = accel
@@ -98,6 +100,7 @@ func die() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid and damage_timer.is_stopped():
 		lives -= 1
+		AudioSingleton.playSound("res://assets/sounds/hurt/hitHurt.wav", position)
 		health_lost.emit(lives)
 		if lives <= 0:
 			died.emit()

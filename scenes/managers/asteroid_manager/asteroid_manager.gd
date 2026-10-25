@@ -8,7 +8,7 @@ const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 var asteroidInstances: Array[Asteroid] = []
 
 signal asteroid_added
-signal asteroid_removed
+signal asteroid_removed(asteroid: Asteroid)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,4 +40,4 @@ func instantiate_asteroid_in_area(asteroidNum: int, area: Vector2, exclusionZone
 
 func _on_asteroid_death(asteroid: Asteroid) -> void:
 	asteroidInstances.erase(asteroid)
-	asteroid_removed.emit()
+	asteroid_removed.emit(asteroid)

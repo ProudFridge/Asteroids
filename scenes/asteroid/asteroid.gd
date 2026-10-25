@@ -28,31 +28,41 @@ func _ready() -> void:
 	for t: Polygon2D in triangles:
 		add_child(t)
 	
-	
 func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
 	draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.WHITE, false, 5)
-	pass
 
 
 # TODO: maybe replace with a component and create a die() function
 func take_damage(damage: float) -> void:
 	health = health - damage
-	if health <= 0 && !hasShattered:
+	if health <= 0:
+		die()
+	modulate = Color.DIM_GRAY
+
+
+func die() -> void: 
+	if !hasShattered:
 		shatter(true)
 		hasShattered = true
 		died.emit()
 		queue_free()
-	modulate = Color.RED
-
 
 func get_center() -> Vector2:
-	var center: Vector2 = Vector2.ZERO
+	var pCenter: Vector2 = Vector2.ZERO
 	for v: Vector2 in polygon:
-		center += v
-	center /= polygon.size()
-	return center
+		pCenter += v
+	pCenter /= polygon.size()
+	return pCenter
 
+#func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	#var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
+	#
+	#if collision:
+		#var body: Node = collision.get_collider()
+		#if body is Asteroid:
+			#AudioSingleton.playSound("res://assets/sounds/shoot/laserShoot1.wav", collision.get_position())
+	
 
 ## Shatters the polygon into multiple triangles
 func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = Vector2(1,1)) -> Array[Polygon2D]:
@@ -92,7 +102,7 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 ## Generates a convex polygon with n vertices
 ## taken from https://web.archive.org/web/20260416133431/https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
 func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array:
-	boundingBox = boundingBox
+	self.boundingBox = boundingBox
 	
 	# Generate two lists of n random integers
 	var xCoords: Array[float] = []

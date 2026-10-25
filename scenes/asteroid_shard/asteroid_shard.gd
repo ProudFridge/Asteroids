@@ -16,7 +16,7 @@ func _ready() -> void:
 	lifetime_timer.timeout.connect(_on_lifetimer_timer_timeout)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	polygon_2d.color.a = remap(lifetime_timer.time_left,0, lifetime_timer.wait_time, 0,1)
 
 

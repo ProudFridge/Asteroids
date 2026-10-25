@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bfp0qfjxvgdby"]
 
 [ext_resource type="Script" uid="uid://b6kpaxi6vlg2m" path="res://scenes/asteroid/asteroid.gd" id="1_phgi8"]
+[ext_resource type="AudioStream" uid="uid://dxbvgmrf4kfg7" path="res://assets/sounds/shoot/laserShoot.wav" id="2_j1t37"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3xj4h"]
 bounce = 0.2
@@ -21,3 +22,6 @@ polygon = PackedVector2Array(-17.146702, 68.913185, -25, 32.59938, -21.820084, 2
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=250673396]
 z_index = -1
 color = Color(0.1785, 0.179025, 0.21, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=281265299]
+stream = ExtResource("2_j1t37")
