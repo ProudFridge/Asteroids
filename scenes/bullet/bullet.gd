@@ -5,6 +5,7 @@ var damage: float = 50
 var speed: float = 500
 
 @onready var lifetime_timer: Timer = $LifetimeTimer
+const HIT_POPUP: Resource = preload("uid://bhd64dff6sk8k")
 
 func _ready() -> void:
 	velocity = speed * Vector2.from_angle(rotation) 
@@ -18,6 +19,9 @@ func _physics_process(delta: float) -> void:
 		var body: Node = collision.get_collider()
 		if body is Asteroid:
 			body.take_damage(damage)
+			
+			HitPopup.instantiagePopup(collision.get_position(), get_tree().root, str(int(damage)))
+			
 			disappear()
 		
 		var collisionPosition: Vector2 = collision.get_position()

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bhd64dff6sk8k"]
+
+[ext_resource type="Script" uid="uid://b4w6nvli4pnhb" path="res://scenes/hit_popup/hit_popup.gd" id="1_8hd5g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8hd5g"]
+font_size = 24
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HitPopup" type="Label" unique_id=1888073530]
+z_index = 30
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1"
+label_settings = SubResource("LabelSettings_8hd5g")
+script = ExtResource("1_8hd5g")
