@@ -12,7 +12,7 @@ var lives: float = 3
 var boostAccel: float = 1500
 var boostTime: float = 4
 var currentBoostValue: float = boostTime
-var boostDepletion: float = 2
+var boostDepletion: float = 3
 var boostRefill: float = 1
 
 var polygon: PackedVector2Array
@@ -58,8 +58,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			position.y = collisionPosition.y - position.y
 			
 		# Won't work without the 1
-		print(collisionPosition.y)
-		if collisionPosition.y <= 0:
+		if collisionPosition.y <= 1:
 			position.y = Global.windowSize.y - (collisionPosition.y - position.y)
 
 
@@ -69,13 +68,13 @@ func _physics_process(delta: float) -> void:
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
 	if direction && Input.is_action_pressed("shift"):
-		if currentBoostValue > 0:
+		if currentBoostValue > boostDepletion * delta:
 			currentAccel = boostAccel
 			currentBoostValue -= boostDepletion * delta
 	else:
 		currentAccel = accel
 	
-	if currentBoostValue < boostTime:
+	if currentBoostValue < boostTime :
 		currentBoostValue += boostRefill * delta
 		
 	if direction:
@@ -87,7 +86,7 @@ func _physics_process(delta: float) -> void:
 
 func die() -> void:
 	died.emit()
-	queue_free()
+	hide()
 
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid and damage_timer.is_stopped():

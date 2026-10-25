@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://inm8aiks5q84"]
+
+[ext_resource type="Shader" uid="uid://dgh6dj8qnk61w" path="res://scenes/test/parallax_test.gdshader" id="1_p5dn4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2m7xh"]
+shader = ExtResource("1_p5dn4")
+shader_parameter/textureSize = Vector2(512, 512)
+shader_parameter/starAmount = 10
+
+[node name="ParallaxTest" type="Node2D" unique_id=53822549]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=347008200]
+
+[node name="ColorRect" type="ColorRect" parent="Parallax2D" unique_id=1771426057]
+material = SubResource("ShaderMaterial_2m7xh")
+offset_right = 1916.0
+offset_bottom = 1072.0
+color = Color(1, 0.29000002, 0.29000002, 1)
