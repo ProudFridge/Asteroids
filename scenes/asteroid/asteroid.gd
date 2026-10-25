@@ -17,7 +17,13 @@ var hasShattered: bool = false
 signal died
 
 func _ready() -> void:
-	polygon = generate_convex_polygon(randi_range(5, 80), boundingBox)
+	var multiplier: float = 1
+	var rand: float = randf_range(0, 1)
+	if rand < 0.2:
+		multiplier = 3
+	elif rand >= 0.2 && rand < 0.3 :
+		multiplier = 6
+	polygon = generate_convex_polygon(randi_range(5, 8), boundingBox * multiplier)
 	center = get_center()
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
@@ -31,9 +37,9 @@ func _ready() -> void:
 	for t: Polygon2D in triangles:
 		add_child(t)
 	
-func _draw() -> void:
+#func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
-	draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.WHITE, false, 5)
+	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.WHITE, false, 5)
 
 
 # TODO: maybe replace with a component and create a die() function

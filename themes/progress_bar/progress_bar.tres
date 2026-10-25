@@ -1,0 +1,19 @@
+[gd_resource type="Theme" format=3 uid="uid://b4p0c3cc33cdp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg2xm"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vamm"]
+bg_color = Color(0.25929403, 0.25929356, 0.25929368, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrxbg"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anm2o"]
+bg_color = Color(0.09643205, 0.81310385, 0.90918404, 1)
+
+[resource]
+Label/styles/normal = SubResource("StyleBoxFlat_pg2xm")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_1vamm")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_yrxbg")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_anm2o")

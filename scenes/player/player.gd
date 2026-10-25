@@ -3,19 +3,19 @@ class_name Player
 
 const accel: float = 200.0
 var currentAccel: float = accel
-var maxSpeed: float = 400
+var maxSpeed: float = 800
 var rotSpeed: float = 5 # rad/s
 var bounceDamp: float = 0.5
 # TODO: change to health later, faster asteroids deal more damage
 var lives: float = 3
+var isAlive: bool = true
 
 var boostAccel: float = 1500
 var boostRotSpeed: float = 10
 var boostTime: float = 4
 var currentBoostValue: float = boostTime
 var boostDepletion: float = 3
-var boostRefill: float = 0.05
-var maxBoostSpeed: float = 800
+var boostRefill: float = 1
 var isBoostActivated: bool = false
 
 var impulseMagnitude: float = 400
@@ -75,10 +75,7 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 		if collisionPosition.y <= 1:
 			position.y = Global.windowSize.y - (collisionPosition.y - position.y)
 		
-	if isBoostActivated:
-		linear_velocity = linear_velocity.limit_length(maxBoostSpeed)
-	else:
-		linear_velocity = linear_velocity.limit_length(maxSpeed)
+	linear_velocity = linear_velocity.limit_length(maxSpeed)
 
 
 func _physics_process(delta: float) -> void:
@@ -106,10 +103,11 @@ func _physics_process(delta: float) -> void:
 
 func die() -> void:
 	died.emit()
+	isAlive = false
 	hide()
 
 func _on_body_entered(body: Node) -> void:
-	if body is Asteroid and damage_timer.is_stopped():
+	if body is Asteroid && damage_timer.is_stopped() && isAlive:
 		lives -= 1
 		AudioSingleton.playSound("res://assets/sounds/hurt/hitHurt.wav", position)
 		health_lost.emit(lives)

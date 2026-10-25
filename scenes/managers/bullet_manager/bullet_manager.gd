@@ -11,7 +11,7 @@ var bulletSpeed: float = 500
 const BULLET: Resource = preload("uid://c4bego3ny732p")
 
 func _physics_process(delta: float) -> void:
-	if  isCooldownDone && Input.is_action_pressed("space"):
+	if  isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
 		AudioSingleton.playSound("res://assets/sounds/shoot/laserShoot.wav", shooter.position)
 		_instantiate_bullet()
 		isCooldownDone = false
@@ -27,6 +27,6 @@ func _instantiate_bullet() -> void:
 		bulletInstance.position = shooter.position
 		bulletInstance.speed = bulletSpeed
 		# Make the bullets velocity realistic: makes it relative
-		#bulletInstance.velocity = bulletInstance.speed * Vector2.from_angle(shooter.rotation).normalized() + shooter.linear_velocity
+		bulletInstance.velocity = bulletInstance.speed * Vector2.from_angle(shooter.rotation).normalized() + shooter.linear_velocity
 		add_child(bulletInstance)
 	

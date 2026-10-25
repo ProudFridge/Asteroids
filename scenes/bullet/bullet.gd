@@ -20,10 +20,14 @@ func _physics_process(delta: float) -> void:
 		if body is Asteroid:
 			body.take_damage(damage)
 			
-			HitPopup.instantiagePopup(collision.get_position(), get_tree().root, str(int(damage)))
+			var popupValue: float = damage
+			if (body as Asteroid).health < damage:
+				popupValue = damage - (body as Asteroid).health
+			
+			HitPopup.instantiagePopup(collision.get_position(), get_tree().root, str(int(popupValue)))
 			
 			disappear()
-		
+			
 		var collisionPosition: Vector2 = collision.get_position()
 		
 		if collisionPosition.x >= Global.windowSize.x:
