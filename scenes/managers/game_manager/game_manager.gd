@@ -8,7 +8,6 @@ class_name GameManager
 
 var isGameRunning: bool = false
 
-
 signal won
 signal lost
 
@@ -22,6 +21,12 @@ func _ready() -> void:
 	
 
 func _on_asteroid_manager_asteroid_removed() -> void:
+	# Add boost to the player whenever they destroy an asteroid
+	if player.currentBoostValue + player.boostRefill <= player.boostTime:
+		player.currentBoostValue += player.boostRefill
+	else:
+		player.currentBoostValue = player.boostTime
+	
 	if asteroidManager.asteroidInstances.size() <= 0:
 		won.emit()
 

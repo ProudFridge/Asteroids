@@ -17,7 +17,7 @@ var hasShattered: bool = false
 signal died
 
 func _ready() -> void:
-	polygon = generate_convex_polygon(randi_range(5, 8), boundingBox)
+	polygon = generate_convex_polygon(randi_range(5, 80), boundingBox)
 	center = get_center()
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
@@ -31,7 +31,7 @@ func _ready() -> void:
 	
 func _draw() -> void:
 	# TODO: come back, polygon is supposed to fit inside the bounding box
-	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.BLACK, false, 5)
+	draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.WHITE, false, 5)
 	pass
 
 

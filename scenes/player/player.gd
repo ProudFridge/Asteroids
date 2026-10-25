@@ -10,10 +10,13 @@ var bounceDamp: float = 0.5
 var lives: float = 3
 
 var boostAccel: float = 1500
+var boostRotSpeed: float = 10
 var boostTime: float = 4
 var currentBoostValue: float = boostTime
 var boostDepletion: float = 3
-var boostRefill: float = 1
+var boostRefill: float = 0.05
+var maxBoostSpeed: float = 800
+var isBoostActivated: bool = false
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
@@ -60,6 +63,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		# Won't work without the 1
 		if collisionPosition.y <= 1:
 			position.y = Global.windowSize.y - (collisionPosition.y - position.y)
+		
+	if isBoostActivated:
+		linear_velocity = linear_velocity.limit_length(maxBoostSpeed)
+	else:
+		linear_velocity = linear_velocity.limit_length(maxSpeed)
 
 
 func _physics_process(delta: float) -> void:
@@ -68,14 +76,13 @@ func _physics_process(delta: float) -> void:
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
 	if direction && Input.is_action_pressed("shift"):
+		isBoostActivated = true
 		if currentBoostValue > boostDepletion * delta:
 			currentAccel = boostAccel
 			currentBoostValue -= boostDepletion * delta
 	else:
+		isBoostActivated = false
 		currentAccel = accel
-	
-	if currentBoostValue < boostTime :
-		currentBoostValue += boostRefill * delta
 		
 	if direction:
 		thruster_particles.emitting = true
@@ -108,9 +115,15 @@ func _on_damage_timer_timeout() -> void:
 # Rotate the rocket
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("turn_left"):
-		angular_velocity = -rotSpeed
+		if isBoostActivated:
+			angular_velocity = -boostRotSpeed
+		else:
+			angular_velocity = -rotSpeed
 	if event.is_action_pressed("turn_right"):
-		angular_velocity = rotSpeed
+		if isBoostActivated:
+			angular_velocity = boostRotSpeed
+		else:
+			angular_velocity = rotSpeed
 		
 	if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
 		angular_velocity = 0
