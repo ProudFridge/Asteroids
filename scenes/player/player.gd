@@ -2,11 +2,18 @@ extends RigidBody2D
 class_name Player
 
 const accel: float = 200.0
+var currentAccel: float = accel
 var maxSpeed: float = 400
 var rotSpeed: float = 5 # rad/s
 var bounceDamp: float = 0.5
 # TODO: change to health later, faster asteroids deal more damage
 var lives: float = 3
+
+var boostAccel: float = 1500
+var boostTime: float = 4
+var currentBoostValue: float = boostTime
+var boostDepletion: float = 2
+var boostRefill: float = 1
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
@@ -61,9 +68,19 @@ func _physics_process(delta: float) -> void:
 	var direction : float = Input.get_axis("backwards", "forwards")
 	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
+	if direction && Input.is_action_pressed("shift"):
+		if currentBoostValue > 0:
+			currentAccel = boostAccel
+			currentBoostValue -= boostDepletion * delta
+	else:
+		currentAccel = accel
+	
+	if currentBoostValue < boostTime:
+		currentBoostValue += boostRefill * delta
+		
 	if direction:
 		thruster_particles.emitting = true
-		apply_central_force(direction * Vector2.from_angle(rotation) * accel)
+		apply_central_force(direction * Vector2.from_angle(rotation) * currentAccel)
 	else:
 		thruster_particles.emitting = false
 

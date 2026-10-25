@@ -2,8 +2,8 @@ extends Node
 class_name BulletManager
 
 @export var shooter: Player
-var bulletAmount: int = 5
-var spread: float = 180 # in degrees,
+var bulletAmount: int = 4
+var spread: float = 20 # in degrees,
 var cooldown: float = 0.1
 var isCooldownDone: bool = true
 var bulletSpeed: float = 500

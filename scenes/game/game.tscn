@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cee4rwhwt2xod" path="res://scenes/game/ui/game_won_container.gd" id="11_5jirj"]
 [ext_resource type="Script" uid="uid://dctwnixmnew4n" path="res://scenes/game/ui/game_over_container.gd" id="11_kp23o"]
 [ext_resource type="Script" uid="uid://cqsmjxsidqn44" path="res://scenes/game/border.gd" id="12_5jirj"]
+[ext_resource type="Script" uid="uid://8ghuwm0g5m83" path="res://scenes/game/ui/boost_bar.gd" id="12_5v6r0"]
 [ext_resource type="Script" uid="uid://bfj3kk4w0o7o6" path="res://scenes/game/ui/game_start_label.gd" id="12_otnwt"]
 [ext_resource type="Script" uid="uid://b6ls8uptisac" path="res://scenes/game/ui/pause_menu/pause_menu.gd" id="12_vaxfo"]
 [ext_resource type="Script" uid="uid://bdp8a8gne6npq" path="res://scenes/game/ui/pause_menu/restart_button.gd" id="13_3xj4h"]
@@ -66,17 +67,8 @@ player = NodePath("../../Player")
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=137853518]
 layer = -1
 
-[node name="UI" type="Control" parent="UILayer" unique_id=311688332]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="UILayer/UI" unique_id=2144515775]
+[node name="ColorRect" type="ColorRect" parent="UILayer" unique_id=2144515775]
 z_index = -10
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -84,26 +76,89 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/UI" unique_id=213812162]
-custom_minimum_size = Vector2(320, 0)
-layout_mode = 1
-anchors_preset = 5
+[node name="GameOverContainer" type="VBoxContainer" parent="UILayer" unique_id=118280416 node_paths=PackedStringArray("gameManager")]
+visible = false
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -25.0
-offset_right = 25.0
-offset_bottom = 50.0
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -37.0
+offset_right = 46.0
+offset_bottom = 23.0
 grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_kp23o")
+gameManager = NodePath("../../Managers/GameManager")
+
+[node name="GameOverLabel" type="Label" parent="UILayer/GameOverContainer" unique_id=469862239]
+layout_mode = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_0sr1o")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UILayer/GameOverContainer" unique_id=955558674]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="GameWonContainer" type="VBoxContainer" parent="UILayer" unique_id=1417264360 node_paths=PackedStringArray("gameManager")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -40.0
+offset_right = 46.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_5jirj")
+gameManager = NodePath("../../Managers/GameManager")
+
+[node name="YouWonLabel" type="Label" parent="UILayer/GameWonContainer" unique_id=37234498]
+layout_mode = 2
+text = "You won!"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UILayer/GameWonContainer" unique_id=563091775]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="Header" type="CanvasLayer" parent="." unique_id=894882872]
+
+[node name="Header" type="VBoxContainer" parent="Header" unique_id=353015790]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 41.0
+grow_horizontal = 2
+
+[node name="BoostBar" type="ProgressBar" parent="Header/Header" unique_id=1686969542 node_paths=PackedStringArray("player")]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+show_percentage = false
+script = ExtResource("12_5v6r0")
+player = NodePath("../../../Player")
+
+[node name="GameStats" type="MarginContainer" parent="Header/Header" unique_id=213812162]
+custom_minimum_size = Vector2(320, 0)
+custom_maximum_size = Vector2(320, -1)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/margin_top = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/MarginContainer" unique_id=1303447050]
+[node name="HBoxContainer" type="HBoxContainer" parent="Header/Header/GameStats" unique_id=1303447050]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="UILayer/UI/MarginContainer/HBoxContainer" unique_id=507421942]
+[node name="Panel" type="Panel" parent="Header/Header/GameStats/HBoxContainer" unique_id=507421942]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LivesLabel" type="Label" parent="UILayer/UI/MarginContainer/HBoxContainer/Panel" unique_id=474743535 node_paths=PackedStringArray("player")]
+[node name="LivesLabel" type="Label" parent="Header/Header/GameStats/HBoxContainer/Panel" unique_id=474743535 node_paths=PackedStringArray("player")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -119,11 +174,11 @@ grow_vertical = 2
 script = ExtResource("6_5i0tg")
 player = NodePath("../../../../../../Player")
 
-[node name="Panel2" type="Panel" parent="UILayer/UI/MarginContainer/HBoxContainer" unique_id=1979931798]
+[node name="Panel2" type="Panel" parent="Header/Header/GameStats/HBoxContainer" unique_id=1979931798]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AsteroidCountLabel" type="Label" parent="UILayer/UI/MarginContainer/HBoxContainer/Panel2" unique_id=1230718935 node_paths=PackedStringArray("asteroidManager")]
+[node name="AsteroidCountLabel" type="Label" parent="Header/Header/GameStats/HBoxContainer/Panel2" unique_id=1230718935 node_paths=PackedStringArray("asteroidManager")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -139,11 +194,11 @@ grow_vertical = 2
 script = ExtResource("7_bdhmt")
 asteroidManager = NodePath("../../../../../../Managers/AsteroidManager")
 
-[node name="Panel3" type="Panel" parent="UILayer/UI/MarginContainer/HBoxContainer" unique_id=2049838663]
+[node name="Panel3" type="Panel" parent="Header/Header/GameStats/HBoxContainer" unique_id=2049838663]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScoreLabel" type="Label" parent="UILayer/UI/MarginContainer/HBoxContainer/Panel3" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
+[node name="ScoreLabel" type="Label" parent="Header/Header/GameStats/HBoxContainer/Panel3" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,60 +214,8 @@ grow_vertical = 2
 script = ExtResource("8_87uf6")
 asteroidManager = NodePath("../../../../../../Managers/AsteroidManager")
 
-[node name="GameOverContainer" type="VBoxContainer" parent="UILayer/UI" unique_id=118280416 node_paths=PackedStringArray("gameManager")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -37.0
-offset_right = 46.0
-offset_bottom = 23.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_kp23o")
-gameManager = NodePath("../../../Managers/GameManager")
-
-[node name="GameOverLabel" type="Label" parent="UILayer/UI/GameOverContainer" unique_id=469862239]
+[node name="PanelContainer" type="PanelContainer" parent="Header/Header/GameStats/HBoxContainer" unique_id=6768299]
 layout_mode = 2
-text = "Game Over!"
-label_settings = SubResource("LabelSettings_0sr1o")
-horizontal_alignment = 1
-
-[node name="RestartButton" type="Button" parent="UILayer/UI/GameOverContainer" unique_id=955558674]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Restart"
-
-[node name="GameWonContainer" type="VBoxContainer" parent="UILayer/UI" unique_id=1417264360 node_paths=PackedStringArray("gameManager")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -40.0
-offset_right = 46.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_5jirj")
-gameManager = NodePath("../../../Managers/GameManager")
-
-[node name="YouWonLabel" type="Label" parent="UILayer/UI/GameWonContainer" unique_id=37234498]
-layout_mode = 2
-text = "You won!"
-horizontal_alignment = 1
-
-[node name="RestartButton" type="Button" parent="UILayer/UI/GameWonContainer" unique_id=563091775]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Restart"
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=366481481]
 
