@@ -5,6 +5,7 @@ class_name AsteroidManager
 # Called when the node enters the scene tree for the first time.
 const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 
+@export var areaSize: Vector2 = Global.windowSize 
 var asteroidInstances: Array[Asteroid] = []
 
 signal asteroid_added
@@ -12,7 +13,8 @@ signal asteroid_removed(asteroid: Asteroid)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	instantiate_asteroid_in_area(100, Global.windowSize, 500)
+	areaSize = Global.windowSize
+	instantiate_asteroid_in_area(100, areaSize, 500)
 
 
 ## Instantiates asteroids in a specified area
@@ -29,7 +31,7 @@ func instantiate_asteroid_in_area(asteroidNum: int, area: Vector2, exclusionZone
 		
 		asteroid.position = position
 		asteroid.angular_velocity = randf_range(-1, 1)
-		asteroid.linear_velocity = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 300)
+		asteroid.linear_velocity = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
 		
 		add_child(asteroid)
 		asteroid_added.emit()

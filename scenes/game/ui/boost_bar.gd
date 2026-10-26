@@ -1,18 +1,17 @@
-extends ProgressBar
+extends PanelContainer
 
 @export var player: Player
-@export var gameManager: GameManager
+
+@onready var progressBar: ProgressBar = $MarginContainer/VBoxContainer/ProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	max_value = player.boostTime
-	value = player.currentBoostValue
-	#gameManager.boostIncreased.connect(_on_game_manager_boost_increased)
+	progressBar.max_value = 2
+	player.impulse_refilled.connect(_on_player_impulse_refilled)
+	player.impulse_depleated.connect(_on_player_impulse_depleated)
 
-#func _on_game_manager_boost_increased(newBoostValue: float) -> void:
-	#if player:
-		#value = newBoostValue
+func _on_player_impulse_depleated() -> void:
+	progressBar.value -= 1
 
-func _physics_process(delta: float) -> void:
-	if player:
-		value = player.currentBoostValue
+func _on_player_impulse_refilled() -> void:
+	progressBar.value += 1

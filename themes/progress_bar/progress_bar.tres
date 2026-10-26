@@ -18,7 +18,7 @@ bg_color = Color(0.25929403, 0.25929356, 0.25929368, 1)
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anm2o"]
-bg_color = Color(0.09643205, 0.81310385, 0.90918404, 1)
+bg_color = Color(0.60784316, 0.6901961, 1, 1)
 
 [resource]
 Label/font_sizes/font_size = 24

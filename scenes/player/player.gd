@@ -38,6 +38,9 @@ var viewportSize: Vector2
 signal died()
 signal health_lost(currentHealth: float)
 
+signal impulse_depleated()
+signal impulse_refilled()
+
 func _ready() -> void:
 	# Temp
 	thruster_particles.position.y = 0
@@ -56,6 +59,8 @@ func _ready() -> void:
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
+	right_timer.timeout.connect(_on_right_timer_timeout)
+	left_timer.timeout.connect(_on_left_timer_tiemout)
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
@@ -124,6 +129,13 @@ func _on_damage_timer_timeout() -> void:
 	polygon_2d.self_modulate = Color.WHITE
 	thruster.self_modulate = Color.WHITE
 
+func _on_right_timer_timeout() -> void:
+	impulse_refilled.emit()
+	
+
+func _on_left_timer_tiemout() -> void:
+	impulse_refilled.emit()
+	
 # Rotate the rocket
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("turn_left"):
@@ -144,11 +156,13 @@ func _input(event: InputEvent) -> void:
 		apply_central_impulse(Vector2.from_angle(rotation + PI / 2) * impulseMagnitude)
 		right_thruster_particles.emitting = true
 		right_timer.start()
+		impulse_depleated.emit()
 	
 	if event.is_action_pressed("q") && left_timer.is_stopped():
 		apply_central_impulse(Vector2.from_angle(rotation - PI / 2) * impulseMagnitude)
 		left_thruster_particles.emitting = true
 		left_timer.start()
+		impulse_depleated.emit()
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center
