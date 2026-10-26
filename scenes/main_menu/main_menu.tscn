@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dh2eakv6ikta5" path="res://scenes/managers/asteroid_manager/asteroid_manager.tscn" id="1_fsom3"]
 [ext_resource type="PackedScene" uid="uid://bmaxqtsk2gwoh" path="res://scenes/managers/stars_manager/stars_manager.tscn" id="2_0ebjn"]
+[ext_resource type="Script" uid="uid://by54m5kehr3vb" path="res://scenes/main_menu/play_button.gd" id="3_ob46e"]
+[ext_resource type="Script" uid="uid://dfr1dj15yrrk3" path="res://scenes/main_menu/quit_button.gd" id="4_uqeha"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ebjn"]
 
@@ -44,7 +46,7 @@ offset_bottom = 955.0
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1087240108]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Asteroids"
+text = "Asteroids Clone"
 label_settings = SubResource("LabelSettings_2m7xh")
 horizontal_alignment = 1
 
@@ -52,6 +54,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 text = "Play"
+script = ExtResource("3_ob46e")
 
 [node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1922277038]
 layout_mode = 2
@@ -62,6 +65,7 @@ text = "Tutorial"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Quit"
+script = ExtResource("4_uqeha")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1091325646]
 position = Vector2(1546, 593)
