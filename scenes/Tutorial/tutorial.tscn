@@ -41,9 +41,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 500
-theme_override_constants/margin_top = 300
+theme_override_constants/margin_top = 150
 theme_override_constants/margin_right = 500
-theme_override_constants/margin_bottom = 300
+theme_override_constants/margin_bottom = 150
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1093419292]
 layout_mode = 2
@@ -56,9 +56,15 @@ texture = SubResource("GradientTexture2D_2m7xh")
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/TextureRect" unique_id=1857434795]
 layout_mode = 0
 offset_right = 908.0
-offset_bottom = 468.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = 768.0
+
+[node name="ControlsTitleLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1670240271]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[font_size=48]Controls[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=509420898]
 layout_mode = 2
@@ -113,6 +119,22 @@ layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 text = " [font_size=32][pulse]Right Click[/pulse]  to  [color=#ADf]zoom out[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OtherThingsTitle" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1054109069]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[font_size=48]Other Stuff[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=257256421]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32][pulse]Destroy asteroids[/pulse]  to [color=#ADf]refill the boost bar[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
