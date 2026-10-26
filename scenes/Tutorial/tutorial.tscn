@@ -1,5 +1,21 @@
 [gd_scene format=3 uid="uid://crfor0pcgfo8d"]
 
+[ext_resource type="Script" uid="uid://dmm2hs3t4q1xw" path="res://scenes/tutorial/button.gd" id="1_wle2u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojlfk"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310278, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.12934244, 0.10580031, 0.21372682, 1)
+
+[sub_resource type="Gradient" id="Gradient_ymgc8"]
+colors = PackedColorArray(0.13682577, 0.13682574, 0.13682571, 1, 0.2592937, 0.2592937, 0.2592937, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
+gradient = SubResource("Gradient_ymgc8")
+
 [node name="Tutorial" type="Control" unique_id=1483869073]
 layout_mode = 3
 anchors_preset = 15
@@ -17,20 +33,90 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1857434795]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1203188210]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -140.0
-offset_top = -20.0
-offset_right = 140.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 500
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 300
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1093419292]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ojlfk")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer" unique_id=728671725]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_2m7xh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/TextureRect" unique_id=1857434795]
+layout_mode = 0
+offset_right = 908.0
+offset_bottom = 468.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=920241999]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=509420898]
 layout_mode = 2
-text = "Press w/s to go forwards/backwards"
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[font_size=32]Press [pulse]W/S[/pulse]  to go [color=#4cf]Forwards/Backwards[/color][/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=686073777]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32]Press [pulse]A/D[/pulse]  to turn [color=#44f]Left/Right[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1675731758]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32] Press [pulse]Q/E[/pulse]  to activate an [fade][tornado radius=3.0]impulse[/tornado][/fade] to the [color=#44f]Left/Right[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=2116651148]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32] Press [pulse]Shift[/pulse]  to activate [color=#A8f]Boost[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=308568023]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32]Press [pulse]Space[/pulse]  to  [color=#ABf]Shoot[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=2109160685]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32]Press [pulse]Escape[/pulse]  to  [color=#CBf]open the pause menu[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1799604871]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " [font_size=32][pulse]Right Click[/pulse]  to  [color=#ADf]zoom out[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=525107632]
+layout_mode = 2
+text = "Return To Main Menu"
+script = ExtResource("1_wle2u")

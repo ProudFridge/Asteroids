@@ -10,7 +10,7 @@ func _ready() -> void:
 	get_tree().paused = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	modulate = Color.from_hsv(0, 0, 0.7 + 0.3 * sin(float(Time.get_ticks_msec()) / 300))
 
 

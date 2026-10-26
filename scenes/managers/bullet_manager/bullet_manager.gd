@@ -10,7 +10,7 @@ var bulletSpeed: float = 500
 
 const BULLET: Resource = preload("uid://c4bego3ny732p")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if  isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
 		AudioSingleton.playSound("res://assets/sounds/shoot/laserShoot.wav", shooter.position)
 		_instantiate_bullet()

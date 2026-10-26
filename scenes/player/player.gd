@@ -86,7 +86,6 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction : float = Input.get_axis("backwards", "forwards")
-	var rotDir : float = Input.get_axis("turn_left", "turn_right")
 	
 	if direction && Input.is_action_pressed("shift") && currentBoostValue != 0:
 		isBoostActivated = true
@@ -166,11 +165,11 @@ func _input(event: InputEvent) -> void:
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center
-func create_centered_triangle(width: float, height: float) -> PackedVector2Array:
-	var polygon: PackedVector2Array = [
+static func create_centered_triangle(width: float, height: float) -> PackedVector2Array:
+	var poly: PackedVector2Array = [
 		Vector2(-height / 2, -width / 2),
 		Vector2(height / 2, 0),
 		Vector2(-height / 2, width / 2)
 	]
 	
-	return polygon
+	return poly

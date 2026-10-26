@@ -21,7 +21,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 
-func _on_asteroid_manager_asteroid_removed(asteroid: Asteroid) -> void:
+func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:
 	# Add boost to the player whenever they destroy an asteroid
 	if player.currentBoostValue + player.boostRefill <= player.boostTime:
 		player.currentBoostValue += player.boostRefill

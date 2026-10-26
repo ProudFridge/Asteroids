@@ -1,0 +1,16 @@
+[gd_resource type="Theme" format=3 uid="uid://cde0v48sqtu7y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5seab"]
+bg_color = Color(0.51718444, 0.5171845, 0.51718444, 1)
+skew = Vector2(0.2, 0)
+expand_margin_left = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fv613"]
+bg_color = Color(0.2665752, 0.26657522, 0.26657507, 1)
+skew = Vector2(0.2, 0)
+expand_margin_left = 10.0
+
+[resource]
+Button/font_sizes/font_size = 100
+Button/styles/hover = SubResource("StyleBoxFlat_5seab")
+Button/styles/normal = SubResource("StyleBoxFlat_fv613")

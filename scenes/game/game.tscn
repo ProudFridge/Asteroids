@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 [ext_resource type="PackedScene" uid="uid://7khd4cs5u826" path="res://scenes/boost_bar/boost_bar.tscn" id="14_pg2xm"]
 [ext_resource type="Theme" uid="uid://boq1g5n2utqmh" path="res://themes/impulse_bar/impulse_bar.tres" id="15_gc57s"]
+[ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0sr1o"]
 
@@ -42,7 +43,7 @@ func _ready() -> void:
 	#if player:
 		#value = newBoostValue
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player:
 		value = player.currentBoostValue
 "
@@ -376,6 +377,7 @@ script = ExtResource("13_3xj4h")
 [node name="MainMenuButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=295130982]
 layout_mode = 2
 text = "Quit to Main Menu"
+script = ExtResource("18_gc57s")
 
 [node name="QuitButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=1580677799]
 layout_mode = 2

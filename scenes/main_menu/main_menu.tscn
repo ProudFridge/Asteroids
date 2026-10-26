@@ -2,15 +2,28 @@
 
 [ext_resource type="PackedScene" uid="uid://dh2eakv6ikta5" path="res://scenes/managers/asteroid_manager/asteroid_manager.tscn" id="1_fsom3"]
 [ext_resource type="PackedScene" uid="uid://bmaxqtsk2gwoh" path="res://scenes/managers/stars_manager/stars_manager.tscn" id="2_0ebjn"]
+[ext_resource type="Theme" uid="uid://cde0v48sqtu7y" path="res://themes/main_menu/main_menu.tres" id="3_5seab"]
 [ext_resource type="Script" uid="uid://by54m5kehr3vb" path="res://scenes/main_menu/play_button.gd" id="3_ob46e"]
+[ext_resource type="Script" uid="uid://cqbgbh5uwaaq6" path="res://scenes/main_menu/menu_buttons.gd" id="4_4xg86"]
 [ext_resource type="Script" uid="uid://dfr1dj15yrrk3" path="res://scenes/main_menu/quit_button.gd" id="4_uqeha"]
+[ext_resource type="Script" uid="uid://cavd78oj6ktub" path="res://scenes/main_menu/tutorial_button.gd" id="4_wem23"]
+[ext_resource type="Script" uid="uid://028jusxo3neh" path="res://scenes/main_menu/polygon_2d.gd" id="6_3ovsr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ebjn"]
+[sub_resource type="Curve" id="Curve_wem23"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_3ovsr"]
+offsets = PackedFloat32Array(0.009661836, 1)
+colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2m7xh"]
 font_size = 78
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ebjn"]
+
 [node name="MainMenu" type="Control" unique_id=592040849]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1154228223]
+z_index = -11
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,40 +48,77 @@ areaSize = Vector2(1929, 1080)
 
 [node name="StarsManager" parent="Managers" unique_id=210266538 instance=ExtResource("2_0ebjn")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1635340449]
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1091325646]
+z_index = 10
+position = Vector2(1546, 593)
+polygon = PackedVector2Array(-62.186646, 175.09933, -244, -236, 154.74463, -34.758087)
+uv = PackedVector2Array(-223.5, -19.5, -160.5, -79.5, -99.5, -16.5)
+script = ExtResource("6_3ovsr")
+
+[node name="ThrusterParticles" type="CPUParticles2D" parent="Polygon2D" unique_id=429347767]
 z_index = 1
-material = SubResource("ShaderMaterial_0ebjn")
+z_as_relative = false
+position = Vector2(40, 83)
+scale = Vector2(10, 10)
+emitting = false
+amount = 200
+emission_shape = 3
+emission_rect_extents = Vector2(3, 6)
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 150.0
+linear_accel_min = -72.66
+linear_accel_max = -59.38
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_wem23")
+color_initial_ramp = SubResource("Gradient_3ovsr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=258868842]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 71.0
-offset_right = 1001.0
-offset_bottom = 955.0
+offset_left = 103.0
+offset_top = 171.0
+offset_right = 809.0
+offset_bottom = 853.0
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1087240108]
 layout_mode = 2
 size_flags_vertical = 6
+offset_transform_enabled = true
+offset_transform_position = Vector2(65, 0)
 text = "Asteroids Clone"
 label_settings = SubResource("LabelSettings_2m7xh")
 horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=1956832811]
+[node name="MenuButtons" type="VBoxContainer" parent="VBoxContainer" unique_id=1635340449]
+z_index = 1
+material = SubResource("ShaderMaterial_0ebjn")
+layout_mode = 2
+theme_override_constants/separation = 40
+script = ExtResource("4_4xg86")
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1956832811]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("3_5seab")
 text = "Play"
+alignment = 0
 script = ExtResource("3_ob46e")
 
-[node name="TutorialButton" type="Button" parent="VBoxContainer" unique_id=1922277038]
+[node name="TutorialButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1922277038]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("3_5seab")
 text = "Tutorial"
+alignment = 0
+script = ExtResource("4_wem23")
 
-[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1565139126]
+[node name="QuitButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1565139126]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("3_5seab")
 text = "Quit"
+alignment = 0
 script = ExtResource("4_uqeha")
-
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1091325646]
-position = Vector2(1546, 593)
-polygon = PackedVector2Array(-104, 217, -244, -236, 187, -62)
-uv = PackedVector2Array(-223.5, -19.5, -160.5, -79.5, -99.5, -16.5)
