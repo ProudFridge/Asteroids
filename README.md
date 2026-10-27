@@ -12,4 +12,4 @@ The project makes great use of the `RigidBody2D` nodes in Godot and the `Geometr
 - Space: Shoot a bullet
 - Escape: Open pause menu
 
-<img width="1152" height="648" alt="image" src="https://github.com/user-attachments/assets/fed8f496-483d-4fcd-9872-5cdb295bd484" />
+<img width="1920" height="1080" alt="Godot_v4 7 2-stable_win64_BPRzTNmyKn" src="https://github.com/user-attachments/assets/9e2f1f7f-1ccb-4241-97ac-d5cf4f792c4b" />
