@@ -8,4 +8,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_main_menu_button_pressed() -> void:
+	get_tree().paused = false
 	SwitcherSingleton.goto_scene("res://scenes/main_menu/main_menu.tscn")

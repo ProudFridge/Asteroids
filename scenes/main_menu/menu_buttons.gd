@@ -12,7 +12,6 @@ func _ready() -> void:
 		if node is Button:
 			var originalOffset: Vector2 = node.offset_transform_position
 			var tween: Tween
-			node.offset_transform_enabled = true
 			node.mouse_entered.connect(
 				func() -> void:
 					if tween:
