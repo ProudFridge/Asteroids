@@ -6,9 +6,10 @@ The project makes great use of the `RigidBody2D` nodes in Godot and the `Geometr
   - (I recommend downloading the binaries from the releases page instead of playing the web version since it's a bit laggy.)
 
 ### Controls
-- W/S: thrust forwards/backwards
-- A/D: turn left/right
-- Space: shoot a bullet
-- Escape: quit the game
+- W/S: Thrust forwards/backwards
+- A/D: Turn left/right
+- Q/E: Apply an impulse to the left/right side of the ship
+- Space: Shoot a bullet
+- Escape: Open pause menu
 
 <img width="1152" height="648" alt="image" src="https://github.com/user-attachments/assets/fed8f496-483d-4fcd-9872-5cdb295bd484" />
