@@ -137,6 +137,26 @@ func _on_left_timer_tiemout() -> void:
 	
 # Rotate the rocket
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("forwards") || event.is_action_pressed("backwards"):
+		var tween: Tween = create_tween()
+		tween.tween_property($AudioStreamPlayer2D, "pitch_scale", 1, 0.2)
+		$AudioStreamPlayer2D.play()
+	
+	if event.is_action_released("forwards") || event.is_action_released("backwards"):
+		var tween: Tween = create_tween()
+		tween.tween_property($AudioStreamPlayer2D, "pitch_scale", 0.1, 0.2)
+		$AudioStreamPlayer2D.stop()
+		
+	if event.is_action_pressed("shift"):
+		var tween: Tween = create_tween()
+		tween.tween_property($AudioStreamPlayer2D, "pitch_scale", 1.5, 0.1)
+		#$AudioStreamPlayer2D.pitch_scale = 1.5
+	
+	if event.is_action_released("shift"):
+		var tween: Tween = create_tween()
+		tween.tween_property($AudioStreamPlayer2D, "pitch_scale", 1, 0.1)
+		#$AudioStreamPlayer2D.pitch_scale = 0.1
+	
 	if event.is_action_pressed("turn_left"):
 		if isBoostActivated:
 			angular_velocity = -boostRotSpeed

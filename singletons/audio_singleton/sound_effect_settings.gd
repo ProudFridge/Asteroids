@@ -22,6 +22,9 @@ enum SOUND_EFFECT_TYPE {
 
 var audio_count: int = 0
 
+## Current AudioStreamPlayers playing this sound
+var audio_stream_players: Array[AudioStreamPlayer2D] = []
+
 func change_audio_count(amount: int) -> void:
 	audio_count = max(0, audio_count + amount)
 	

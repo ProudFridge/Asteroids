@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://s0kngucv0cnl"]
 
 [ext_resource type="Script" uid="uid://c22t4omm5wesk" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="AudioStream" uid="uid://bbkt32sctlb2q" path="res://assets/sounds/thrusters/thruster.wav" id="2_dovo2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8afob"]
 bounce = 0.5
@@ -96,3 +97,7 @@ one_shot = true
 [node name="DamageTimer" type="Timer" parent="." unique_id=1806139019]
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1436578512]
+stream = ExtResource("2_dovo2")
+pitch_scale = 0.1

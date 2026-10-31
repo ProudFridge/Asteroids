@@ -54,3 +54,8 @@ func play_audio(sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> voi
 			audio_stream_player.play()
 	else:
 		push_error("Audio Singleton failed to find setting for type: ", sound_effect_type)
+#
+#func stop_playing_audio(sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> void:
+	#if sound_effect_dict.has(sound_effect_type):
+		#var sound_effect_setting: SoundEffectSettings = sound_effect_dict[sound_effect_type]
+		#sound_effect_setting.audio_stream_players.all(AudioStreamPlayer.stop)

@@ -21,3 +21,5 @@ metadata/_custom_type_script = "uid://2wo80rhndd4r"
 [node name="AudioSingleton" type="Node2D" unique_id=1536231365]
 script = ExtResource("1_2crdn")
 sound_effect_settings = Array[ExtResource("2_nwf4t")]([SubResource("Resource_a3qmm"), SubResource("Resource_nwf4t")])
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1443136293]
