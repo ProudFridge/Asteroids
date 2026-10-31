@@ -4,7 +4,7 @@ class_name SoundEffectSettings
 enum SOUND_EFFECT_TYPE {
 	ON_ASTEROID_COLLISION,
 	ON_SHOOT,
-	TEST
+	ON_THRUST
 }
 
 ## Amount of AudioPlayers that can be on the scene at the same time
