@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://mopyikbfficr"]
+
+[ext_resource type="Script" uid="uid://d22scvq7ajy68" path="res://singletons/audio_singleton/audio_singleton.gd" id="1_2crdn"]
+[ext_resource type="Script" uid="uid://2wo80rhndd4r" path="res://singletons/audio_singleton/sound_effect_settings.gd" id="2_nwf4t"]
+[ext_resource type="AudioStream" uid="uid://dj3j01ykwl300" path="res://assets/sounds/hurt/hitHurt.wav" id="3_a3qmm"]
+[ext_resource type="AudioStream" uid="uid://dxbvgmrf4kfg7" path="res://assets/sounds/shoot/laserShoot.wav" id="4_a3qmm"]
+
+[sub_resource type="Resource" id="Resource_a3qmm"]
+script = ExtResource("2_nwf4t")
+sound_effect = Array[AudioStreamWAV]([ExtResource("3_a3qmm")])
+metadata/_custom_type_script = "uid://2wo80rhndd4r"
+
+[sub_resource type="Resource" id="Resource_nwf4t"]
+script = ExtResource("2_nwf4t")
+limit = 10
+type = 1
+sound_effect = Array[AudioStreamWAV]([ExtResource("4_a3qmm")])
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://2wo80rhndd4r"
+
+[node name="AudioSingleton" type="Node2D" unique_id=1536231365]
+script = ExtResource("1_2crdn")
+sound_effect_settings = Array[ExtResource("2_nwf4t")]([SubResource("Resource_a3qmm"), SubResource("Resource_nwf4t")])

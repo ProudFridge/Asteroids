@@ -113,7 +113,7 @@ func die() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
 		lives -= 1
-		AudioSingleton.playSound("res://assets/sounds/hurt/hitHurt.wav", position)
+		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)
 		health_lost.emit(lives)
 		if lives <= 0:
 			died.emit()

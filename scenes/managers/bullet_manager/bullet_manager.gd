@@ -12,7 +12,7 @@ const BULLET: Resource = preload("uid://c4bego3ny732p")
 
 func _physics_process(_delta: float) -> void:
 	if  isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
-		AudioSingleton.playSound("res://assets/sounds/shoot/laserShoot.wav", shooter.position)
+		AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
 		_instantiate_bullet()
 		isCooldownDone = false
 		get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)

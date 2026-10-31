@@ -28,7 +28,6 @@ func _ready() -> void:
 	center = get_center()
 	collision_polygon.polygon = polygon
 	polygon_2d.polygon = polygon
-	
 	var area: float = compute_area(polygon)
 	mass = area * density
 	health = area / 100
