@@ -24,6 +24,7 @@ script = ExtResource("2_nwf4t")
 limit = 1
 type = 2
 sound_effect = Array[AudioStreamWAV]([ExtResource("5_c4ri1")])
+volume = -10.0
 metadata/_custom_type_script = "uid://2wo80rhndd4r"
 
 [node name="AudioSingleton" type="Node2D" unique_id=1536231365]

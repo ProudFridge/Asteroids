@@ -42,6 +42,7 @@ signal impulse_depleated()
 signal impulse_refilled()
 
 func _ready() -> void:
+	AudioSingleton.reset_audio_count(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 	# Temp
 	thruster_particles.position.y = 0
 	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
@@ -146,8 +147,8 @@ func _input(event: InputEvent) -> void:
 			thruster_sound = AudioSingleton.play_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 		else:
 			thruster_sound.play()
-		var tween: Tween = create_tween()
-		tween.tween_property(thruster_sound, "pitch_scale", 1, 0.2)
+			var tween: Tween = create_tween()
+			tween.tween_property(thruster_sound, "pitch_scale", 1, 0.2)
 	
 	if event.is_action_released("forwards") || event.is_action_released("backwards"):
 		if thruster_sound != null:
@@ -158,8 +159,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shift"):
 		if thruster_sound:
 			thruster_sound.pitch_scale = 1.5
-		var tween: Tween = create_tween()
-		tween.tween_property(thruster_sound, "pitch_scale", 1.5, 0.1)
+			var tween: Tween = create_tween()
+			tween.tween_property(thruster_sound, "pitch_scale", 1.5, 0.1)
 	
 	
 	if event.is_action_released("shift"):

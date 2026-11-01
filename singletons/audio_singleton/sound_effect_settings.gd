@@ -4,7 +4,13 @@ class_name SoundEffectSettings
 enum SOUND_EFFECT_TYPE {
 	ON_ASTEROID_COLLISION,
 	ON_SHOOT,
-	ON_THRUST
+	ON_THRUST,
+	# Not added yet
+	UI_HOVER,
+	UI_PRESSED,
+	UI_RELEASE,
+	BACKGROUND_1,
+	ASTEROID_SHATTER
 }
 
 ## Amount of AudioPlayers that can be on the scene at the same time
@@ -25,11 +31,14 @@ var audio_count: int = 0
 ## Current AudioStreamPlayers playing this sound
 var audio_stream_players: Array[AudioStreamPlayer2D] = []
 
+## Updates the counter for the current amount of instanted AudioStreamPlayer nodes
 func change_audio_count(amount: int) -> void:
 	audio_count = max(0, audio_count + amount)
-	
+
+## Returns true if the sound type has hit its instantiation limit, otherwise false
 func has_open_limit() -> bool:
 	return audio_count < limit
-	
+
+## Should be called when an AudioPlayer2D has finished playing
 func on_audio_finished() -> void:
 	change_audio_count(-1)

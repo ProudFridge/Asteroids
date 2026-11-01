@@ -5,10 +5,13 @@ extends Node
 @export var sound_effect_settings: Array[SoundEffectSettings]
 
 var sound_effect_dict: Dictionary[SoundEffectSettings.SOUND_EFFECT_TYPE, SoundEffectSettings] = {}
+var current_audio_players: Dictionary[SoundEffectSettings.SOUND_EFFECT_TYPE, Array]
 
 func _ready() -> void:
 	for sound_effect_setting: SoundEffectSettings in sound_effect_settings:
 		sound_effect_dict[sound_effect_setting.type] = sound_effect_setting
+		current_audio_players[sound_effect_setting.type] = []
+		
 
 ## Returns the created AudioStreamPlayer2D, or null if the sound type has reached its limit
 func play_2d_audio_at_location(position: Vector2, sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStreamPlayer2D:
@@ -28,12 +31,13 @@ func play_2d_audio_at_location(position: Vector2, sound_effect_type: SoundEffect
 			audio_stream_player_2d.pitch_scale = sound_effect_setting.pitch_scale
 			audio_stream_player_2d.pitch_scale += randf_range(-sound_effect_setting.pitch_randomness, sound_effect_setting.pitch_randomness)
 			
-			if !sound_effect_setting.loop:
-				audio_stream_player_2d.finished.connect(sound_effect_setting.on_audio_finished)
-				audio_stream_player_2d.finished.connect(audio_stream_player_2d.queue_free)
-			else:
-				var stream: AudioStreamWAV = audio_stream_player_2d.stream
-				stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+			audio_stream_player_2d.finished.connect(sound_effect_setting.on_audio_finished)
+			audio_stream_player_2d.finished.connect(audio_stream_player_2d.queue_free)
+			
+			#if !sound_effect_setting.loop:
+			#else:
+				#var stream: AudioStreamWAV = audio_stream_player_2d.stream
+				#stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 			
 			add_child(audio_stream_player_2d)
 			audio_stream_player_2d.play()
@@ -70,3 +74,8 @@ func play_audio(sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> Aud
 	else:
 		push_error("Audio Singleton failed to find setting for type: ", sound_effect_type)
 		return null
+		
+func reset_audio_count(sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> void:
+	if sound_effect_dict.has(sound_effect_type):
+		var sound_effect_setting: SoundEffectSettings = sound_effect_dict[sound_effect_type]
+		sound_effect_setting.audio_count = 0
