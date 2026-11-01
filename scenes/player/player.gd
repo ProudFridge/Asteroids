@@ -114,6 +114,7 @@ func die() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
 		lives -= 1
+		$Camera2D.add_trauma(0.5)
 		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)
 		health_lost.emit(lives)
 		if lives <= 0:
@@ -160,6 +161,7 @@ func _input(event: InputEvent) -> void:
 			thruster_sound.pitch_scale = 1.5
 			var tween: Tween = create_tween()
 			tween.tween_property(thruster_sound, "pitch_scale", 1.5, 0.1)
+		$Camera2D.add_trauma(0.5)
 	
 	# Handle rotation	
 	if event.is_action_pressed("turn_left"):
