@@ -143,7 +143,6 @@ var thruster_sound: AudioStreamPlayer
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("forwards") || event.is_action_pressed("backwards"):
 		if thruster_sound == null:
-			print("gf")
 			thruster_sound = AudioSingleton.play_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 		else:
 			thruster_sound.play()
@@ -156,17 +155,13 @@ func _input(event: InputEvent) -> void:
 			var tween: Tween = create_tween()
 			tween.tween_property(thruster_sound, "pitch_scale", 0.1, 0.2)
 		
-	if event.is_action_pressed("shift"):
+	if event.is_action_pressed("shift") && currentBoostValue > 0:
 		if thruster_sound:
 			thruster_sound.pitch_scale = 1.5
 			var tween: Tween = create_tween()
 			tween.tween_property(thruster_sound, "pitch_scale", 1.5, 0.1)
 	
-	
-	if event.is_action_released("shift"):
-		var tween: Tween = create_tween()
-		tween.tween_property(thruster_sound, "pitch_scale", 1, 0.1)
-	
+	# Handle rotation	
 	if event.is_action_pressed("turn_left"):
 		if isBoostActivated:
 			angular_velocity = -boostRotSpeed

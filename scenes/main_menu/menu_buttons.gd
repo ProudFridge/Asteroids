@@ -1,5 +1,8 @@
 extends VBoxContainer
 
+var transition_time: float = 0.1
+var position_offset: Vector2 = Vector2(20, 0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i: int in get_children().size():
@@ -17,7 +20,7 @@ func _ready() -> void:
 					if tween:
 						tween.kill()
 					tween = get_tree().create_tween()
-					tween.tween_property(node, "offset_transform_position", originalOffset + Vector2(10, 0), 0.1)
+					tween.tween_property(node, "offset_transform_position", originalOffset + position_offset, transition_time)
 					tween.set_ease(Tween.EASE_OUT)
 					tween.set_trans(Tween.TRANS_EXPO)
 					)
@@ -26,8 +29,12 @@ func _ready() -> void:
 					if tween:
 						tween.kill()
 					tween = get_tree().create_tween()
-					tween.tween_property(node, "offset_transform_position", originalOffset, 0.1)
+					tween.tween_property(node, "offset_transform_position", originalOffset, transition_time)
 					tween.set_ease(Tween.EASE_OUT)
 					tween.set_trans(Tween.TRANS_EXPO)
 					)
+			node.pressed.connect(
+				func() -> void:
+					AudioSingleton.play_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_PRESSED)
+			)
 		

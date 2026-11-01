@@ -34,11 +34,6 @@ func play_2d_audio_at_location(position: Vector2, sound_effect_type: SoundEffect
 			audio_stream_player_2d.finished.connect(sound_effect_setting.on_audio_finished)
 			audio_stream_player_2d.finished.connect(audio_stream_player_2d.queue_free)
 			
-			#if !sound_effect_setting.loop:
-			#else:
-				#var stream: AudioStreamWAV = audio_stream_player_2d.stream
-				#stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-			
 			add_child(audio_stream_player_2d)
 			audio_stream_player_2d.play()
 			return audio_stream_player_2d
@@ -74,7 +69,9 @@ func play_audio(sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> Aud
 	else:
 		push_error("Audio Singleton failed to find setting for type: ", sound_effect_type)
 		return null
-		
+
+## Resets the current audio count of the selected sound effect type
+## TODO: replace this with an array in SoundEffectSettings that contains references to instantiated AudioStreamPlayers
 func reset_audio_count(sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> void:
 	if sound_effect_dict.has(sound_effect_type):
 		var sound_effect_setting: SoundEffectSettings = sound_effect_dict[sound_effect_type]

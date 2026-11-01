@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://cde0v48sqtu7y" path="res://themes/main_menu/main_menu.tres" id="3_5seab"]
 [ext_resource type="Script" uid="uid://by54m5kehr3vb" path="res://scenes/main_menu/play_button.gd" id="3_ob46e"]
 [ext_resource type="Script" uid="uid://cqbgbh5uwaaq6" path="res://scenes/main_menu/menu_buttons.gd" id="4_4xg86"]
+[ext_resource type="FontFile" uid="uid://deb4jjy854wbw" path="res://assets/fonts/arcade_ya/ARCADE_I.TTF" id="4_thkx5"]
 [ext_resource type="Script" uid="uid://dfr1dj15yrrk3" path="res://scenes/main_menu/quit_button.gd" id="4_uqeha"]
 [ext_resource type="Script" uid="uid://cavd78oj6ktub" path="res://scenes/main_menu/tutorial_button.gd" id="4_wem23"]
 [ext_resource type="Script" uid="uid://028jusxo3neh" path="res://scenes/main_menu/polygon_2d.gd" id="6_3ovsr"]
@@ -84,11 +85,15 @@ offset_right = 809.0
 offset_bottom = 853.0
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1087240108]
+z_index = 10
 layout_mode = 2
 size_flags_vertical = 6
 offset_transform_enabled = true
-offset_transform_position = Vector2(65, 0)
-text = "Asteroids Clone"
+offset_transform_position = Vector2(200, 0)
+offset_transform_scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("4_thkx5")
+theme_override_font_sizes/font_size = 27
+text = "Asteroids"
 label_settings = SubResource("LabelSettings_2m7xh")
 horizontal_alignment = 1
 
@@ -96,7 +101,7 @@ horizontal_alignment = 1
 z_index = 1
 material = SubResource("ShaderMaterial_0ebjn")
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 70
 script = ExtResource("4_4xg86")
 
 [node name="PlayButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1956832811]
