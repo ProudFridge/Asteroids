@@ -1,0 +1,32 @@
+[gd_resource type="Theme" format=3 uid="uid://bwdjhl35ffx4q"]
+
+[ext_resource type="FontFile" uid="uid://deb4jjy854wbw" path="res://assets/fonts/arcade_ya/ARCADE_I.TTF" id="1_8p5ap"]
+[ext_resource type="FontFile" uid="uid://d2aid6ypmqlnv" path="res://assets/fonts/arcade_ya/ARCADE_N.TTF" id="2_80n3l"]
+[ext_resource type="StyleBox" uid="uid://ci37n2imak8fo" path="res://themes/normal/new_style_box_flat.tres" id="3_80n3l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tmx8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b66f"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[resource]
+Button/fonts/font = ExtResource("1_8p5ap")
+Button/styles/normal = SubResource("StyleBoxFlat_2tmx8")
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("2_80n3l")
+Label/styles/normal = SubResource("StyleBoxFlat_8b66f")
+PanelContainer/styles/panel = ExtResource("3_80n3l")
+VBoxContainer/constants/separation = 10

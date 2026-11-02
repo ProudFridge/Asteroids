@@ -14,7 +14,7 @@ signal asteroid_removed(asteroid: Asteroid)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	areaSize = Global.windowSize
-	instantiate_asteroid_in_area(100, areaSize, 500)
+	instantiate_asteroid_in_area(10, areaSize, 500)
 
 
 ## Instantiates asteroids in a specified area

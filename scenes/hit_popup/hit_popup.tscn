@@ -10,8 +10,8 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="HitPopup" type="Label" unique_id=1888073530]
 z_index = 30
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 16.0
+offset_bottom = 17.0
 text = "1"
 label_settings = SubResource("LabelSettings_8hd5g")
 script = ExtResource("1_8hd5g")
