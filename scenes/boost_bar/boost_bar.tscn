@@ -35,14 +35,23 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1573227091]
+custom_maximum_size = Vector2(22, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer2" unique_id=1868320845]
-custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme = ExtResource("1_1wslx")
 bbcode_enabled = true
-text = "[wave freq=2]OverDrive"
+text = "O
+v
+e
+r
+D
+r
+i
+v
+e
+"
 fit_content = true

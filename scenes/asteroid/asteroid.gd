@@ -202,13 +202,13 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 	return points
 
 ## Computes the area of a polygon with the coordinates of its vertices
-func compute_area(polygon: PackedVector2Array) -> float:
+func compute_area(poly: PackedVector2Array) -> float:
 	var totalSum: float = 0
-	for i: int in polygon.size():
-		if i != polygon.size() - 1:
-			totalSum += polygon[i].x * polygon[i + 1].y - polygon[i].y * polygon[i + 1].x
+	for i: int in poly.size():
+		if i != poly.size() - 1:
+			totalSum += poly[i].x * poly[i + 1].y - poly[i].y * poly[i + 1].x
 		else:
-			totalSum += polygon[i].x * polygon[0].y - polygon[i].y * polygon[0].x
+			totalSum += poly[i].x * poly[0].y - poly[i].y * poly[0].x
 	
 	return abs(totalSum / 2)
 
@@ -219,8 +219,8 @@ func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	return false
 
 
-func rotate_polygon(polygon: PackedVector2Array) -> PackedVector2Array:
+func rotate_polygon(poly: PackedVector2Array) -> PackedVector2Array:
 	var rotatedPoints: PackedVector2Array = []
-	for v: Vector2 in rotatedPoints:
+	for v: Vector2 in poly:
 		rotatedPoints.append(v.rotated(rotation)) 
 	return rotatedPoints

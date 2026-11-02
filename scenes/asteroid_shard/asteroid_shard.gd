@@ -20,11 +20,11 @@ func _process(_delta: float) -> void:
 	polygon_2d.color.a = remap(lifetime_timer.time_left,0, lifetime_timer.wait_time, 0,1)
 
 
-func scale_points(scale: float) -> PackedVector2Array:
+func scale_points(scale_vector: float) -> PackedVector2Array:
 	var scaledPolygon: PackedVector2Array = []
 	
 	for i: int in range(polygon.size()):
-		scaledPolygon.append(polygon[i] * scale)
+		scaledPolygon.append(polygon[i] * scale * scale_vector)
 		
 	return scaledPolygon
 

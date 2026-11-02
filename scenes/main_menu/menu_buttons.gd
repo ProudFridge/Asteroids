@@ -21,7 +21,6 @@ func _ready() -> void:
 	for node: Node in get_children():
 		if node is Button:
 			var originalOffset: Vector2 = node.offset_transform_position
-			var tween: Tween
 			node.mouse_entered.connect(_on_mouse_or_focus_entered.bind(node))
 			node.focus_entered.connect(_on_mouse_or_focus_entered.bind(node))
 			
@@ -65,6 +64,10 @@ func _on_mouse_or_focus_entered(button: Button) -> void:
 	tween.tween_property(button, "offset_transform_position", originalOffset + position_offset, transition_time)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("escape"):
+		get_viewport().gui_release_focus()
 
 #func _on_mouse_or_focus_exited(button: Button) -> void:
 	#if tween:

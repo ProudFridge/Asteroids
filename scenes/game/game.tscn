@@ -9,17 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://bhaj7fphtnb7u" path="res://scenes/managers/bounds_manager/bounds_manager.tscn" id="7_3xj4h"]
 [ext_resource type="Script" uid="uid://bq0jrxq4w8tr7" path="res://scenes/game/ui/asteroid_count_label.gd" id="7_bdhmt"]
 [ext_resource type="PackedScene" uid="uid://bmaxqtsk2gwoh" path="res://scenes/managers/stars_manager/stars_manager.tscn" id="7_ftsea"]
+[ext_resource type="Theme" uid="uid://bnu5snvmi1gco" path="res://themes/header/header_theme.tres" id="8_3jaai"]
 [ext_resource type="Theme" uid="uid://bwdjhl35ffx4q" path="res://themes/normal/normal_theme.tres" id="8_8b66f"]
 [ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
+[ext_resource type="Script" uid="uid://ccbwmrqqmhgrj" path="res://scenes/game/ui/health_bar.gd" id="11_3jaai"]
 [ext_resource type="Script" uid="uid://dctwnixmnew4n" path="res://scenes/game/ui/game_over_container.gd" id="11_kp23o"]
 [ext_resource type="Script" uid="uid://cqsmjxsidqn44" path="res://scenes/game/border.gd" id="12_5jirj"]
-[ext_resource type="Script" uid="uid://bgp0gvprdbyxr" path="res://scenes/game/ui/boost_bar.gd" id="12_5v6r0"]
 [ext_resource type="Script" uid="uid://bfj3kk4w0o7o6" path="res://scenes/game/ui/game_start_label.gd" id="12_otnwt"]
 [ext_resource type="Script" uid="uid://b6ls8uptisac" path="res://scenes/game/ui/pause_menu/pause_menu.gd" id="12_vaxfo"]
 [ext_resource type="Script" uid="uid://bdp8a8gne6npq" path="res://scenes/game/ui/pause_menu/restart_button.gd" id="13_3xj4h"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 [ext_resource type="PackedScene" uid="uid://7khd4cs5u826" path="res://scenes/boost_bar/boost_bar.tscn" id="14_pg2xm"]
-[ext_resource type="Theme" uid="uid://boq1g5n2utqmh" path="res://themes/impulse_bar/impulse_bar.tres" id="15_gc57s"]
+[ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gc57s"]
@@ -30,57 +31,6 @@ colors = PackedColorArray(0, 0, 0, 1, 0.09411765, 0.09411765, 0.09411765, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
 gradient = SubResource("Gradient_8b66f")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mikig"]
-bg_color = Color(0.23166987, 0.68188, 0.78311294, 1)
-
-[sub_resource type="GDScript" id="GDScript_10c2w"]
-script/source = "extends ProgressBar
-
-@export var player: Player
-@export var gameManager: GameManager
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	max_value = player.boostTime
-	value = player.currentBoostValue
-	#gameManager.boostIncreased.connect(_on_game_manager_boost_increased)
-
-#func _on_game_manager_boost_increased(newBoostValue: float) -> void:
-	#if player:
-		#value = newBoostValue
-
-func _physics_process(_delta: float) -> void:
-	if player:
-		value = player.currentBoostValue
-"
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg2xm"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vamm"]
-bg_color = Color(0.25929403, 0.25929356, 0.25929368, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrxbg"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anm2o"]
-bg_color = Color(0.09643205, 0.81310385, 0.90918404, 1)
-
-[sub_resource type="Theme" id="Theme_2tmx8"]
-Label/font_sizes/font_size = 24
-Label/styles/normal = SubResource("StyleBoxFlat_pg2xm")
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_1vamm")
-ProgressBar/styles/background = SubResource("StyleBoxFlat_yrxbg")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_anm2o")
 
 [sub_resource type="Theme" id="Theme_5jirj"]
 
@@ -187,99 +137,52 @@ text = "Restart"
 [node name="Header" type="VBoxContainer" parent="Header" unique_id=353015790]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 41.0
+offset_bottom = 46.0
 grow_horizontal = 2
+theme = ExtResource("8_3jaai")
+theme_override_constants/separation = 20
 
-[node name="BoostBar" type="ProgressBar" parent="Header/Header" unique_id=1686969542 node_paths=PackedStringArray("player", "gameManager")]
-visible = false
-custom_minimum_size = Vector2(0, 8)
+[node name="HealthBar" type="ProgressBar" parent="Header/Header" unique_id=1299958292 node_paths=PackedStringArray("player")]
 layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_mikig")
-value = 50.0
+size_flags_vertical = 3
+theme = ExtResource("8_3jaai")
+value = 10.0
 show_percentage = false
-script = SubResource("GDScript_10c2w")
+script = ExtResource("11_3jaai")
 player = NodePath("../../../Player")
-gameManager = NodePath("../../../Managers/GameManager")
 
-[node name="GameStats" type="MarginContainer" parent="Header/Header" unique_id=213812162]
-custom_minimum_size = Vector2(320, 0)
-custom_maximum_size = Vector2(320, -1)
+[node name="HBoxContainer" type="HBoxContainer" parent="Header/Header" unique_id=1303447050]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/margin_top = 10
+size_flags_vertical = 3
+theme_override_constants/separation = 28
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Header/Header/GameStats" unique_id=1303447050]
+[node name="LivesLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=474743535 node_paths=PackedStringArray("player")]
 layout_mode = 2
-
-[node name="Panel" type="Panel" parent="Header/Header/GameStats/HBoxContainer" unique_id=507421942]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="LivesLabel" type="Label" parent="Header/Header/GameStats/HBoxContainer/Panel" unique_id=474743535 node_paths=PackedStringArray("player")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -11.5
-offset_right = 0.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+text = "Lives:"
 script = ExtResource("6_5i0tg")
-player = NodePath("../../../../../../Player")
+player = NodePath("../../../../Player")
 
-[node name="Panel2" type="Panel" parent="Header/Header/GameStats/HBoxContainer" unique_id=1979931798]
+[node name="AsteroidCountLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1230718935 node_paths=PackedStringArray("asteroidManager")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="AsteroidCountLabel" type="Label" parent="Header/Header/GameStats/HBoxContainer/Panel2" unique_id=1230718935 node_paths=PackedStringArray("asteroidManager")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+text = "Asteroids:"
 script = ExtResource("7_bdhmt")
-asteroidManager = NodePath("../../../../../../Managers/AsteroidManager")
+asteroidManager = NodePath("../../../../Managers/AsteroidManager")
 
-[node name="Panel3" type="Panel" parent="Header/Header/GameStats/HBoxContainer" unique_id=2049838663]
+[node name="ScoreLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ScoreLabel" type="Label" parent="Header/Header/GameStats/HBoxContainer/Panel3" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+text = "Score:"
 script = ExtResource("8_87uf6")
-asteroidManager = NodePath("../../../../../../Managers/AsteroidManager")
-
-[node name="PanelContainer" type="PanelContainer" parent="Header/Header/GameStats/HBoxContainer" unique_id=6768299]
-layout_mode = 2
+asteroidManager = NodePath("../../../../Managers/AsteroidManager")
 
 [node name="InfoContainer" type="MarginContainer" parent="Header" unique_id=933994829]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -576.0
-offset_right = 328.0
+offset_right = 112.0
 grow_vertical = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
@@ -288,6 +191,7 @@ theme_override_constants/margin_bottom = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Header/InfoContainer" unique_id=1076925939]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="BoostBar" parent="Header/InfoContainer/HBoxContainer" unique_id=117183947 node_paths=PackedStringArray("player", "gameManager") instance=ExtResource("14_pg2xm")]
 layout_mode = 2
@@ -295,42 +199,10 @@ size_flags_horizontal = 3
 player = NodePath("../../../../Player")
 gameManager = NodePath("../../../../Managers/GameManager")
 
-[node name="MarginContainer" type="MarginContainer" parent="Header/InfoContainer/HBoxContainer" unique_id=626268727]
+[node name="ImpulseBar" parent="Header/InfoContainer/HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("player") instance=ExtResource("16_8b66f")]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_top = 250
-
-[node name="ImpulseBar" type="PanelContainer" parent="Header/InfoContainer/HBoxContainer/MarginContainer" unique_id=1560178020 node_paths=PackedStringArray("player")]
-custom_maximum_size = Vector2(30, -1)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_gc57s")
-script = ExtResource("12_5v6r0")
-player = NodePath("../../../../../Player")
-
-[node name="MarginContainer" type="MarginContainer" parent="Header/InfoContainer/HBoxContainer/MarginContainer/ImpulseBar" unique_id=579007382]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Header/InfoContainer/HBoxContainer/MarginContainer/ImpulseBar/MarginContainer" unique_id=220490245]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="ProgressBar" type="ProgressBar" parent="Header/InfoContainer/HBoxContainer/MarginContainer/ImpulseBar/MarginContainer/VBoxContainer" unique_id=1252292356]
-layout_mode = 2
-size_flags_vertical = 3
-value = 50.0
-fill_mode = 3
-show_percentage = false
-
-[node name="Label" type="Label" parent="Header/InfoContainer/HBoxContainer/MarginContainer/ImpulseBar/MarginContainer/VBoxContainer" unique_id=1162285643]
-layout_mode = 2
-theme = SubResource("Theme_2tmx8")
-text = "I"
-horizontal_alignment = 1
+player = NodePath("../../../../Player")
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=366481481]
 

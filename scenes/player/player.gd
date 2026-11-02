@@ -163,7 +163,7 @@ func _input(event: InputEvent) -> void:
 			tween.tween_property(thruster_sound, "pitch_scale", 1.5, 0.1)
 		$Camera2D.add_trauma(0.5)
 	
-	# Handle rotation	
+	# Handle rotation
 	if event.is_action_pressed("turn_left"):
 		if isBoostActivated:
 			angular_velocity = -boostRotSpeed
