@@ -63,3 +63,11 @@ func _on_mouse_or_focus_entered(button: Button) -> void:
 	tween.tween_property(button, "offset_transform_position", originalOffset + position_offset, transition_time)
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
+
+#func _on_mouse_or_focus_exited(button: Button) -> void:
+	#if tween:
+		#tween.kill()
+	#tween = get_tree().create_tween()
+	#tween.tween_property(button, "offset_transform_position", originalOffset, transition_time)
+	#tween.set_ease(Tween.EASE_OUT)
+	#tween.set_trans(Tween.TRANS_EXPO)

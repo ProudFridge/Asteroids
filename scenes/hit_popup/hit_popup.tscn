@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bhd64dff6sk8k"]
 
 [ext_resource type="Script" uid="uid://b4w6nvli4pnhb" path="res://scenes/hit_popup/hit_popup.gd" id="1_8hd5g"]
+[ext_resource type="FontFile" uid="uid://d2aid6ypmqlnv" path="res://assets/fonts/arcade_ya/ARCADE_N.TTF" id="1_qvef3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8hd5g"]
-font_size = 24
+font = ExtResource("1_qvef3")
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 

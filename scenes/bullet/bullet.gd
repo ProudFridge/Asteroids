@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 			
 			var popupValue: float = damage
 			if (body as Asteroid).health < damage:
-				popupValue = damage - (body as Asteroid).health
+				popupValue = (body as Asteroid).health
 			
 			HitPopup.instantiagePopup(collision.get_position(), get_tree().root, str(int(popupValue)))
 			

@@ -2,7 +2,10 @@ extends RigidBody2D
 class_name Asteroid
 
 const SPEED: float = 300.0
-var health: float = 100
+var health: float = 100:
+	set(new_health):
+		health = max(new_health, 0)
+		
 var maxHealth: float = health
 var density: float = 0.001
 @export var rotationSpeed: float = 1
@@ -24,6 +27,7 @@ func _ready() -> void:
 		multiplier = 3
 	elif rand >= 0.2 && rand < 0.3 :
 		multiplier = 6
+	
 	polygon = generate_convex_polygon(randi_range(5, 8), boundingBox * multiplier)
 	center = get_center()
 	collision_polygon.polygon = polygon
