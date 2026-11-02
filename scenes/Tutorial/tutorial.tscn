@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://crfor0pcgfo8d"]
 
+[ext_resource type="Theme" uid="uid://brmlrh227gcaa" path="res://themes/tutorial/tutorial_theme.tres" id="1_jaenq"]
 [ext_resource type="Script" uid="uid://dmm2hs3t4q1xw" path="res://scenes/tutorial/button.gd" id="1_wle2u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojlfk"]
@@ -23,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_jaenq")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1476089197]
 layout_mode = 1
@@ -70,7 +72,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[font_size=32]Press [pulse]W/S[/pulse]  to go [color=#4cf]Forwards/Backwards[/color][/font_size]"
+text = "Press [pulse]W/S[/pulse] to go [color=#4cf]Forwards/Backwards[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -78,7 +80,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32]Press [pulse]A/D[/pulse]  to turn [color=#44f]Left/Right[/color]"
+text = "Press [pulse]A/D[/pulse] to turn [color=#44f]Left/Right[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -86,7 +88,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32] Press [pulse]Q/E[/pulse]  to activate an [fade][tornado radius=3.0]impulse[/tornado][/fade] to the [color=#44f]Left/Right[/color]"
+text = "Press [pulse]Q/E[/pulse] to activate an [fade][tornado radius=3.0]impulse[/tornado][/fade] to the [color=#44f]Left/Right[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -94,7 +96,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32] Press [pulse]Shift[/pulse]  to go into [color=#A8f]Overdrive[/color]"
+text = "Press [pulse]Shift[/pulse] to go into [color=#A8f]Overdrive[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -102,7 +104,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32]Press [pulse]Space[/pulse]  to  [color=#ABf]Shoot[/color]"
+text = "Press [pulse]Space[/pulse] to [color=#ABf]Shoot[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -110,7 +112,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32]Press [pulse]Escape[/pulse]  to  [color=#CBf]open the pause menu[/color]"
+text = " Press [pulse]Escape[/pulse] to [color=#CBf]open the pause menu[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -118,7 +120,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32][pulse]Right Click[/pulse]  to  [color=#ADf]zoom out[/color]"
+text = "[pulse]Right Click[/pulse] to [color=#ADf]zoom out[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -134,7 +136,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32][pulse]Destroy asteroids[/pulse]  to [color=#ADf]refill the boost bar[/color]"
+text = "[pulse]Destroy asteroids[/pulse] to [color=#ADf]refill the boost bar[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 

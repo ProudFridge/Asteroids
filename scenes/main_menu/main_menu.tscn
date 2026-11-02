@@ -107,6 +107,8 @@ script = ExtResource("4_4xg86")
 [node name="PlayButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1956832811]
 layout_mode = 2
 size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(105, 0)
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../TutorialButton")
 focus_next = NodePath("../TutorialButton")
@@ -119,6 +121,8 @@ script = ExtResource("3_ob46e")
 [node name="TutorialButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1922277038]
 layout_mode = 2
 size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(70, 0)
 focus_neighbor_top = NodePath("../PlayButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 focus_next = NodePath("../QuitButton")
@@ -131,6 +135,8 @@ script = ExtResource("4_wem23")
 [node name="QuitButton" type="Button" parent="VBoxContainer/MenuButtons" unique_id=1565139126]
 layout_mode = 2
 size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(35, 0)
 focus_neighbor_top = NodePath("../TutorialButton")
 focus_neighbor_bottom = NodePath("../PlayButton")
 focus_next = NodePath("../PlayButton")

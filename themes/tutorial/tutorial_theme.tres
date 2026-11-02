@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://brmlrh227gcaa"]
+
+[ext_resource type="FontFile" uid="uid://d2aid6ypmqlnv" path="res://assets/fonts/arcade_ya/ARCADE_N.TTF" id="1_wqtm7"]
+
+[resource]
+Button/fonts/font = ExtResource("1_wqtm7")
+RichTextLabel/constants/line_separation = 10
+RichTextLabel/font_sizes/normal_font_size = 20
+RichTextLabel/fonts/normal_font = ExtResource("1_wqtm7")
