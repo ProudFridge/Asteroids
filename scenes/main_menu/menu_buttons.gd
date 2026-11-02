@@ -2,7 +2,13 @@ extends VBoxContainer
 
 var transition_time: float = 0.1
 var position_offset: Vector2 = Vector2(20, 0)
-var tween: Tween
+
+var entered_tween: Tween
+var exited_tween: Tween
+
+# Store the original offsets of each button before tweening them
+var original_offsets: Dictionary[Button, Vector2] = {}
+
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
@@ -12,35 +18,20 @@ func _ready() -> void:
 		if node is Button:
 			node.offset_transform_enabled = true
 			node.offset_transform_position += (get_children().size() - i) * Vector2(35, 0)
+			original_offsets[(node as Button)] = node.offset_transform_position
 	
-	tween = get_tree().create_tween()
+	print(original_offsets)
 	
 	for node: Node in get_children():
 		if node is Button:
-			var originalOffset: Vector2 = node.offset_transform_position
-			node.mouse_entered.connect(_on_mouse_or_focus_entered.bind(node))
-			node.focus_entered.connect(_on_mouse_or_focus_entered.bind(node))
+			var button: Button = node as Button
+			#original_offsets.append(node, node.offset_transform_position)
 			
-			# Temporary fix, should also find a way to contain these inside a method like above
-			node.mouse_exited.connect(
-				func() -> void:
-					if tween:
-						tween.kill()
-					tween = get_tree().create_tween()
-					tween.tween_property(node, "offset_transform_position", originalOffset, transition_time)
-					tween.set_ease(Tween.EASE_OUT)
-					tween.set_trans(Tween.TRANS_EXPO)
-					)
-					
-			node.focus_exited.connect(
-				func() -> void:
-					if tween:
-						tween.kill()
-					tween = get_tree().create_tween()
-					tween.tween_property(node, "offset_transform_position", originalOffset, transition_time)
-					tween.set_ease(Tween.EASE_OUT)
-					tween.set_trans(Tween.TRANS_EXPO)
-					)
+			node.focus_entered.connect(_on_mouse_or_focus_entered.bind(button))
+			node.mouse_entered.connect(_on_mouse_or_focus_entered.bind(button))
+			
+			node.focus_exited.connect(_on_mouse_or_focus_exited.bind(button))
+			node.mouse_exited.connect(_on_mouse_or_focus_exited.bind(button))
 			
 			node.pressed.connect(
 				func() -> void:
@@ -54,22 +45,25 @@ func _ready() -> void:
 func _on_mouse_or_focus_entered(button: Button) -> void:
 	button.grab_focus.call_deferred()
 	
-	var originalOffset: Vector2 = button.offset_transform_position
-	if tween:
-		tween.kill()
-	tween = get_tree().create_tween()
-	tween.tween_property(button, "offset_transform_position", originalOffset + position_offset, transition_time)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_EXPO)
+	if entered_tween:
+		entered_tween.kill()
+	entered_tween = get_tree().create_tween()
+	entered_tween.tween_property(button, "offset_transform_position", original_offsets[button] + position_offset, transition_time)
+	entered_tween.set_ease(Tween.EASE_OUT)
+	entered_tween.set_trans(Tween.TRANS_EXPO)
+
+
+func _on_mouse_or_focus_exited(button: Button) -> void:
+	print(button.text)
+	if exited_tween:
+		exited_tween.kill()
+	exited_tween = get_tree().create_tween()
+	offset_transform_position = original_offsets[button]
+	exited_tween.tween_property(button, "offset_transform_position", original_offsets[button], transition_time)
+	exited_tween.set_ease(Tween.EASE_OUT)
+	exited_tween.set_trans(Tween.TRANS_EXPO)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
 		get_viewport().gui_release_focus()
-
-#func _on_mouse_or_focus_exited(button: Button) -> void:
-	#if tween:
-		#tween.kill()
-	#tween = get_tree().create_tween()
-	#tween.tween_property(button, "offset_transform_position", originalOffset, transition_time)
-	#tween.set_ease(Tween.EASE_OUT)
-	#tween.set_trans(Tween.TRANS_EXPO)
