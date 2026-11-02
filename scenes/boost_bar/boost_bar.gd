@@ -1,8 +1,8 @@
-extends PanelContainer
+extends HBoxContainer
 
 @export var player: Player
 @export var gameManager: GameManager
-@onready var progressBar: ProgressBar = $MarginContainer/VBoxContainer/ProgressBar
+@export var progressBar: ProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

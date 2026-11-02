@@ -94,7 +94,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = " [font_size=32] Press [pulse]Shift[/pulse]  to activate [color=#A8f]Boost[/color]"
+text = " [font_size=32] Press [pulse]Shift[/pulse]  to go into [color=#A8f]Overdrive[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 

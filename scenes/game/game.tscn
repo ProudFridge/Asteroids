@@ -290,8 +290,8 @@ layout_mode = 2
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -573.0
-offset_right = 66.0
+offset_top = -576.0
+offset_right = 328.0
 grow_vertical = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
@@ -303,6 +303,7 @@ layout_mode = 2
 
 [node name="BoostBar" parent="Header/InfoContainer/HBoxContainer" unique_id=117183947 node_paths=PackedStringArray("player", "gameManager") instance=ExtResource("14_pg2xm")]
 layout_mode = 2
+size_flags_horizontal = 3
 player = NodePath("../../../../Player")
 gameManager = NodePath("../../../../Managers/GameManager")
 
@@ -312,6 +313,7 @@ size_flags_horizontal = 3
 theme_override_constants/margin_top = 250
 
 [node name="ImpulseBar" type="PanelContainer" parent="Header/InfoContainer/HBoxContainer/MarginContainer" unique_id=1560178020 node_paths=PackedStringArray("player")]
+custom_maximum_size = Vector2(30, -1)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("15_gc57s")

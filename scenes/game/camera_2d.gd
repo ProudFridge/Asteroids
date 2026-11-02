@@ -14,7 +14,7 @@ var noise_x: float = 0
 @export_node_path("Node") var target: NodePath
 
 var trauma: float = 0.0
-var trauma_power: int = 2
+var trauma_power: int = 3
 
 func _ready() -> void:
 	randomize()
@@ -37,12 +37,12 @@ func _process(delta: float) -> void:
 		_shake()
 
 func _shake() -> void:
-	noise_y += 1
+	noise_y += 0.1
 	noise_x += 0.1
 	var amount: float = pow(trauma, trauma_power)
 	
-	print(max_roll * amount * noise.get_noise_2d(noise.seed, noise_y))
-	print(noise.get_noise_2d(noise.seed, noise_y))
+	#print(max_roll * amount * noise.get_noise_2d(noise.seed, noise_y))
+	#print(noise.get_noise_2d(noise.seed, noise_y))
 	
 	#rotation = max_roll * amount * noise.get_noise_2d(noise.seed, noise_y)
 	#offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed * 2, noise_y)
