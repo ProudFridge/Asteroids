@@ -2,6 +2,15 @@ extends Node
 class_name StarsManager
 # TODO: add variable for the amount of parallax and maybe all of this into a shader
 
+@export var is_background: bool = false
+@export var auto_scroll_speed: float = 100
+var auto_scroll: Array[Vector2] = [
+	Vector2(10, -15), # smallStars
+	Vector2(0.15, 0.15), # mediumStars
+	Vector2(-15, 10) # largeStars
+]
+
+
 var starAmount: int = 60 # star amount in a container with the size of repeat_size
 var repeatSize: Vector2 = Vector2(1024, 1024)
 var repeatTimes: int = 3
@@ -27,6 +36,10 @@ var starColors: Array[Color] = [
 	#Color("ffcc6f")]
 
 func _ready() -> void:
+	var random_direction: Vector2 = Vector2.ZERO
+	if is_background:
+		random_direction = Vector2.from_angle(randf_range(-2 * PI, 2 * PI))
+	
 	for i: int in layers:
 		var layer: Parallax2D = Parallax2D.new()
 		
@@ -34,6 +47,10 @@ func _ready() -> void:
 		layer.repeat_size = repeatSize
 		layer.repeat_times = repeatTimes
 		layer.z_index = -10
+		
+		if is_background:
+			#layer.autoscroll = auto_scroll_speed * scrollScales[i].x * random_direction
+			layer.autoscroll = auto_scroll[i]
 		
 		add_child(layer)
 		

@@ -1,4 +1,3 @@
-@tool
 extends VBoxContainer
 
 var transition_time: float = 0.1
@@ -7,14 +6,12 @@ var tween: Tween
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
-	# Makes the offsets visible in the editor
-	if Engine.is_editor_hint():
-		# Enable offset transform and offset each button slightly depending on how low they are
-		for i: int in get_children().size():
-			var node: Node = get_children()[i]
-			if node is Button:
-				node.offset_transform_enabled = true
-				node.offset_transform_position += (get_children().size() - i) * Vector2(35, 0)
+	# Enable offset transform and offset each button slightly depending on how low they are
+	for i: int in get_children().size():
+		var node: Node = get_children()[i]
+		if node is Button:
+			node.offset_transform_enabled = true
+			node.offset_transform_position += (get_children().size() - i) * Vector2(35, 0)
 	
 	tween = get_tree().create_tween()
 	
