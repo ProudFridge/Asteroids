@@ -10,7 +10,6 @@ var auto_scroll: Array[Vector2] = [
 	Vector2(-15, 10) # largeStars
 ]
 
-
 var starAmount: int = 60 # star amount in a container with the size of repeat_size
 var repeatSize: Vector2 = Vector2(1024, 1024)
 var repeatTimes: int = 3

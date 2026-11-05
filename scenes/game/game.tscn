@@ -23,9 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gc57s"]
-metadata/_preview_in_3d_space_ = true
-
 [sub_resource type="Gradient" id="Gradient_8b66f"]
 colors = PackedColorArray(0, 0, 0, 1, 0.09411765, 0.09411765, 0.09411765, 1)
 
@@ -62,8 +59,6 @@ zoom = Vector2(0.6, 0.6)
 limit_enabled = false
 script = ExtResource("2_uyinl")
 cameraZoom = Vector2(1, 1)
-no = SubResource("FastNoiseLite_gc57s")
-target = NodePath("..")
 
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 

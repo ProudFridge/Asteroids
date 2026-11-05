@@ -9,7 +9,6 @@ var exited_tween: Tween
 # Store the original offsets of each button before tweening them
 var original_offsets: Dictionary[Button, Vector2] = {}
 
-
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
 	# Enable offset transform and offset each button slightly depending on how low they are
@@ -20,7 +19,6 @@ func _ready() -> void:
 			node.offset_transform_position += (get_children().size() - i) * Vector2(35, 0)
 			original_offsets[(node as Button)] = node.offset_transform_position
 	
-	print(original_offsets)
 	
 	for node: Node in get_children():
 		if node is Button:
@@ -54,7 +52,6 @@ func _on_mouse_or_focus_entered(button: Button) -> void:
 
 
 func _on_mouse_or_focus_exited(button: Button) -> void:
-	print(button.text)
 	if exited_tween:
 		exited_tween.kill()
 	exited_tween = get_tree().create_tween()
