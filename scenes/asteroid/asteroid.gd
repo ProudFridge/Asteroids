@@ -14,7 +14,7 @@ var density: float = 0.001
 @onready var polygon_2d: Polygon2D = $Polygon2D
 
 var polygon: PackedVector2Array = []
-var boundingBox: Vector2 = Vector2(60,60)
+var boundingBox: Vector2 = Vector2(60, 60)
 var center: Vector2 = Vector2.ZERO
 var hasShattered: bool = false
 
@@ -42,9 +42,10 @@ func _ready() -> void:
 	for t: Polygon2D in triangles:
 		add_child(t)
 	
-#func _draw() -> void:
-	# TODO: come back, polygon is supposed to fit inside the bounding box
+func _draw() -> void:
+	 #TODO: come back, polygon is supposed to fit inside the bounding box
 	#draw_rect(Rect2(Vector2.ZERO, boundingBox), Color.WHITE, false, 5)
+	draw_rect(Rect2(-boundingBox / 2, boundingBox), Color.WHITE, false, 5)
 
 
 # TODO: maybe replace with a component and create a die() function
@@ -63,11 +64,11 @@ func die() -> void:
 		queue_free()
 
 func get_center() -> Vector2:
-	var pCenter: Vector2 = Vector2.ZERO
+	var p_center: Vector2 = Vector2.ZERO
 	for v: Vector2 in polygon:
-		pCenter += v
-	pCenter /= polygon.size()
-	return pCenter
+		p_center += v
+	p_center /= polygon.size()
+	return p_center
 
 #func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	#var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
@@ -119,87 +120,97 @@ func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVector2Array
 	self.boundingBox = boundingBox
 	
 	# Generate two lists of n random integers
-	var xCoords: Array[float] = []
-	var yCoords: Array[float] = []
+	var x_coords: Array[float] = []
+	var y_coords: Array[float] = []
 	
 	for i: int in n:
-		xCoords.append(randf_range(0, boundingBox.x))
-		yCoords.append(randf_range(0, boundingBox.y))
+		x_coords.append(randf_range(0, boundingBox.x))
+		y_coords.append(randf_range(0, boundingBox.y))
 	
-	# Sort the two lists and store their maximum and minium element
-	xCoords.sort()
-	yCoords.sort()
+	# Sort the two lists
+	x_coords.sort()
+	y_coords.sort()
 	
-	var maxX: float = xCoords[0]
-	var minX: float = xCoords[xCoords.size() - 1]
-	var maxY: float = yCoords[0]
-	var minY: float = yCoords[yCoords.size() - 1]
+	# Isolate the extreme points
+	var min_x: float = x_coords[0]
+	var max_x: float = x_coords[n - 1]
+	var min_y: float = y_coords[0]
+	var max_y: float = y_coords[n - 1]
 	
-	var x1: Array[float] = []
-	var x2: Array[float] = []
-	var y1: Array[float] = []
-	var y2: Array[float] = []
+	# Divide the interior points into two chains & Extract the vector components
+	var x_vec: Array[float] = []
+	var y_vec: Array[float] = []
 	
-	x1.append(minX)
-	x2.append(minX)
-	y1.append(minY)
-	y2.append(minY)
+	var last_top: float = min_x
+	var last_bot: float = min_x
 	
-	for i: int in range(1, xCoords.size()):
-		var numX: float = xCoords[i]
-		var numY: float = yCoords[i]
+	for i: int in range(1, n - 1):
+		var x: float = x_coords[i]
 		
-		if i % 2 == 0:
-			x1.append(numX)
+		if randi() % 2 == 0:
+			x_vec.append(x - last_top)
+			last_top = x
 		else:
-			x2.append(numX) 
+			x_vec.append(last_bot - x)
+			last_bot = x
 		
-		if i % 2 == 0:
-			y1.append(numY)
+	x_vec.append(max_x - last_top)
+	x_vec.append(last_bot - max_x)
+	
+	var last_left: float = min_y
+	var last_right: float = min_y
+	
+	for i: int in range(1, n - 1):
+		var y: float = y_coords[i]
+		
+		if randi() % 2 == 0:
+			y_vec.append(y - last_left)
+			last_left = y
 		else:
-			y2.append(numY)
+			y_vec.append(last_right - y)
+			last_right = y
 	
-	x1.append(maxX)
-	x2.append(maxX)
-	y1.append(maxY)
-	y2.append(maxY)
-	
-	var XVec: Array[float] = []
-	var YVec: Array[float] = []
-	
-	for i: int in range(0, x1.size() - 1):
-		XVec.append(x1[i + 1] - x1[i])
-		YVec.append(y1[i + 1] - y1[i])
-	
-	for i: int in range(0, x2.size() - 1):
-		XVec.append(x2[i] - x2[i + 1])
-		YVec.append(y2[i] - y2[i + 1])
-	
-	var vectors: Array[Vector2] = []
-	YVec.shuffle()
-	XVec.shuffle()
+	y_vec.append(max_y - last_left)
+	y_vec.append(last_right - max_y)
 
-	for i: int in range(XVec.size()):
-		vectors.append(Vector2(XVec[i], YVec[i]))	
+	# Randomly pair up the x and y components
+	y_vec.shuffle()
 	
-	vectors.sort_custom(sort_by_angle)
+	var vec: Array[Vector2] = []
 	
-	var nextPoint: Vector2 = vectors[0]
+	for i: int in n:
+		vec.append(Vector2(x_vec[i], y_vec[i]))
+		
+	vec.sort_custom(sort_by_angle)
+	
+	# Lay the points end to end and move the polygon to its original min and max coordinates
+	var vec_pointer: Vector2 = Vector2.ZERO 
+	var min_polygon: Vector2 = Vector2.ZERO
 	var points: PackedVector2Array = []
-	for i: int  in range(1, vectors.size()):
-		points.append(nextPoint)
-		nextPoint += vectors[i]
+	for i: int in n:
+		points.append(vec_pointer)
+		vec_pointer += Vector2(vec[i])
+		min_polygon.x = min(min_polygon.x, vec_pointer.x)
+		min_polygon.y = min(min_polygon.y, vec_pointer.y)
 	
-	# Center the polygon around (0,0)
+	var shift_x: float = min_x - min_polygon.x
+	var shift_y: float = min_y - min_polygon.y
+	
+	for i: int in n:
+		var p: Vector2 = points[i]
+		points[i] = Vector2(p.x + shift_x, p.y + shift_y)
+	
+	## Center the polygon around (0,0)
 	var c: Vector2 = Vector2.ZERO
 	for v: Vector2 in points:
 		c += v
 	c = c / points.size()
 	
-	for i: int in range(points.size()):
+	for i: int in n:
 		points[i] -= c
 		
 	return points
+
 
 ## Computes the area of a polygon with the coordinates of its vertices
 func compute_area(poly: PackedVector2Array) -> float:
