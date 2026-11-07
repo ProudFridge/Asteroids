@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b42d6x5eevt21"]
+
+[sub_resource type="Gradient" id="Gradient_wqm5q"]
+offsets = PackedFloat32Array(0.005235602, 1)
+colors = PackedColorArray(0.2231029, 0.2231029, 0.22310287, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ohdgn"]
+gradient = SubResource("Gradient_wqm5q")
+
+[sub_resource type="Gradient" id="Gradient_sxfvk"]
+offsets = PackedFloat32Array(0, 0.5026178, 1)
+colors = PackedColorArray(1, 0.9882353, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_anm2o"]
+gradient = SubResource("Gradient_sxfvk")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2m7xh"]
+diffuse_texture = SubResource("GradientTexture2D_ohdgn")
+normal_texture = SubResource("GradientTexture2D_anm2o")
+
+[sub_resource type="Gradient" id="Gradient_ltcx1"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
+gradient = SubResource("Gradient_ltcx1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Environment" id="Environment_2m7xh"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 1.0
+
+[node name="Sprite2D" type="Sprite2D" unique_id=856492200]
+modulate = Color(1.4954206, 1.4954206, 1.4954206, 1)
+position = Vector2(71, 45)
+texture = SubResource("CanvasTexture_2m7xh")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=659782718]
+position = Vector2(38, -16)
+color = Color(1, 0.120000005, 0.120000005, 1)
+texture = SubResource("GradientTexture2D_2m7xh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1356728711]
+environment = SubResource("Environment_2m7xh")

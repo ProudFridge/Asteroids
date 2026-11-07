@@ -30,7 +30,6 @@ var viewportSize: Vector2
 @onready var left_thruster_particles: CPUParticles2D = $LeftThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $Polygon2D
-@onready var thruster: Polygon2D = $Thruster
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var right_timer: Timer = $RightThrusterParticles/RightTimer
 @onready var left_timer: Timer = $LeftThrusterParticles/LeftTimer
@@ -52,11 +51,9 @@ func _ready() -> void:
 	
 	position = Global.windowSize / 2
 	viewportSize = get_viewport_rect().size
-	polygon = create_centered_triangle(playerSize.x, playerSize.y)
-	polygon_2d.polygon = polygon
-	collision_polygon_2d.polygon = polygon
-	thruster.rotate(PI / 2)
-	thruster.position = Vector2(-6 - playerSize.y / 2, 0)
+	#polygon = create_centered_triangle(playerSize.x, playerSize.y)
+	#polygon_2d.polygon = polygon
+	#collision_polygon_2d.polygon = polygon
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
@@ -123,12 +120,10 @@ func _on_body_entered(body: Node) -> void:
 		damage_timer.start()
 		
 		polygon_2d.self_modulate = Color.DARK_RED
-		thruster.self_modulate = Color.DARK_RED
 
 # Change the color of the player to indicate invincibility period
 func _on_damage_timer_timeout() -> void:
 	polygon_2d.self_modulate = Color.WHITE
-	thruster.self_modulate = Color.WHITE
 
 func _on_right_timer_timeout() -> void:
 	impulse_refilled.emit()

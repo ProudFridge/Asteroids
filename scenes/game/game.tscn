@@ -58,7 +58,7 @@ process_mode = 3
 zoom = Vector2(0.6, 0.6)
 limit_enabled = false
 script = ExtResource("2_uyinl")
-cameraZoom = Vector2(2, 2)
+cameraZoom = Vector2(1.5, 1.5)
 
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 

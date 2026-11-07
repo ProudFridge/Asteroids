@@ -42,9 +42,9 @@ func _ready() -> void:
 	for t: Polygon2D in triangles:
 		add_child(t)
 	
-#func _draw() -> void:
-	 ##TODO: come back, polygon is supposed to fit inside the bounding box
-	#draw_rect(Rect2(-boundingBox / 2, boundingBox), Color.WHITE, false, 5)
+func _draw() -> void:	
+	# Draw the bounds
+	draw_rect(Rect2(-boundingBox / 2, boundingBox), Color.WHITE, false)
 
 
 # TODO: maybe replace with a component and create a die() function

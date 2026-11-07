@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6kpaxi6vlg2m" path="res://scenes/asteroid/asteroid.gd" id="1_phgi8"]
 [ext_resource type="AudioStream" uid="uid://dxbvgmrf4kfg7" path="res://assets/sounds/shoot/laserShoot.wav" id="2_j1t37"]
+[ext_resource type="Script" uid="uid://3xukf5vja0yx" path="res://scenes/asteroid/center.gd" id="3_8t7q7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3xj4h"]
 bounce = 0.2
@@ -25,3 +26,7 @@ color = Color(0.1785, 0.179025, 0.21, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=281265299]
 stream = ExtResource("2_j1t37")
+
+[node name="Center" type="Node2D" parent="." unique_id=1030004060]
+z_index = 1
+script = ExtResource("3_8t7q7")
