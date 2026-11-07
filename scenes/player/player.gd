@@ -24,6 +24,7 @@ var sideThrusterCooldown: float = 1
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
 
+@export var bullet_manager: BulletManager
 @onready var damage_timer: Timer = $DamageTimer
 @onready var thruster_particles: CPUParticles2D = $ThrusterParticles
 @onready var right_thruster_particles: CPUParticles2D = $RightThrusterParticles

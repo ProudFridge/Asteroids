@@ -123,6 +123,10 @@ rotation = 1.5707964
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_p47bc")
 
-[node name="Weapon" parent="." unique_id=674514901 node_paths=PackedStringArray("player") instance=ExtResource("6_75vfm")]
+[node name="WeaponHolder" type="Node2D" parent="." unique_id=246120154]
+
+[node name="Weapon" parent="WeaponHolder" unique_id=674514901 node_paths=PackedStringArray("shooter", "player") instance=ExtResource("6_75vfm")]
 z_index = 1
-player = NodePath("..")
+position = Vector2(0, -12)
+shooter = NodePath("../..")
+player = NodePath("../..")
