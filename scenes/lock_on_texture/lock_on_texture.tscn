@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://vn17ge5tjuwo"]
+
+[ext_resource type="Texture2D" uid="uid://be4vh7hpncg5x" path="res://assets/sprites/ship/lock_on.png" id="1_vfogt"]
+[ext_resource type="Script" uid="uid://dh2j4i4x81681" path="res://scenes/lock_on_texture/lock_on_texture.gd" id="2_vsemx"]
+
+[node name="LockOnTexture" type="Sprite2D" unique_id=288812228]
+top_level = true
+z_index = 5
+z_as_relative = false
+texture = ExtResource("1_vfogt")
+script = ExtResource("2_vsemx")

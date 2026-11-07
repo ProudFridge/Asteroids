@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cju3pee43b3e8"]
 
 [ext_resource type="Script" uid="uid://tcksrhqcsnlk" path="res://scenes/weapon/weapon.gd" id="1_jej8l"]
-[ext_resource type="Texture2D" uid="uid://be4vh7hpncg5x" path="res://assets/sprites/ship/lock_on.png" id="2_lopa8"]
 [ext_resource type="Texture2D" uid="uid://6wlb2bgmeswc" path="res://assets/sprites/ship/gun.png" id="3_iyg5g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lopa8"]
@@ -10,7 +9,6 @@ radius = 414.05917
 [node name="Weapon" type="Node2D" unique_id=674514901]
 top_level = true
 script = ExtResource("1_jej8l")
-lock_on_texture = ExtResource("2_lopa8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1114199210]
 texture = ExtResource("3_iyg5g")

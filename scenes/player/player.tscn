@@ -124,9 +124,8 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_p47bc")
 
 [node name="WeaponHolder" type="Node2D" parent="." unique_id=246120154]
+position = Vector2(0, -8)
 
-[node name="Weapon" parent="WeaponHolder" unique_id=674514901 node_paths=PackedStringArray("shooter", "player") instance=ExtResource("6_75vfm")]
-z_index = 1
-position = Vector2(0, -12)
+[node name="Weapon" parent="WeaponHolder" unique_id=674514901 node_paths=PackedStringArray("shooter") instance=ExtResource("6_75vfm")]
+top_level = false
 shooter = NodePath("../..")
-player = NodePath("../..")

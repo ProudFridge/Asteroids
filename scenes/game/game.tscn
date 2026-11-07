@@ -29,8 +29,6 @@ colors = PackedColorArray(0, 0, 0, 1, 0.09411765, 0.09411765, 0.09411765, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
 gradient = SubResource("Gradient_8b66f")
 
-[sub_resource type="Theme" id="Theme_5jirj"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vaxfo"]
 bg_color = Color(0.32172796, 0.32172796, 0.32172793, 1)
 border_width_left = 2
@@ -218,7 +216,7 @@ offset_right = 77.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_5jirj")
+theme = ExtResource("8_8b66f")
 theme_override_styles/panel = SubResource("StyleBoxFlat_vaxfo")
 script = ExtResource("12_vaxfo")
 gameManager = NodePath("../../Managers/GameManager")
