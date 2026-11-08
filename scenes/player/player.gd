@@ -34,6 +34,7 @@ var viewportSize: Vector2
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var right_timer: Timer = $RightThrusterParticles/RightTimer
 @onready var left_timer: Timer = $LeftThrusterParticles/LeftTimer
+@onready var ship: Node2D = $Ship
 
 signal died()
 signal health_lost(currentHealth: float)
@@ -120,11 +121,11 @@ func _on_body_entered(body: Node) -> void:
 			die()
 		damage_timer.start()
 		
-		polygon_2d.self_modulate = Color.DARK_RED
+		ship.modulate = Color.RED
 
 # Change the color of the player to indicate invincibility period
 func _on_damage_timer_timeout() -> void:
-	polygon_2d.self_modulate = Color.WHITE
+	ship.modulate = Color.WHITE
 
 func _on_right_timer_timeout() -> void:
 	impulse_refilled.emit()

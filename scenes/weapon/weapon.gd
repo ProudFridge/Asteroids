@@ -8,6 +8,9 @@ var cooldown: float = 0.1
 var isCooldownDone: bool = true
 
 var auto_aim_radius: float = 500
+var rotation_speed: float = 0.1 # deg/s
+var rot_tween: Tween
+
 var closest_asteroid: Asteroid = null
 var bullet_manager: BulletManager
 var lock_on_texture: LockOnTexture
@@ -64,7 +67,7 @@ func _process(delta: float) -> void:
 		closest_asteroid = null
 			
 	if closest_asteroid:
-		sprite_2d.rotation = (closest_asteroid.global_position - global_position).angle() - shooter.rotation
+		sprite_2d.global_rotation = (closest_asteroid.global_position - global_position).angle()
 		lock_on_texture.global_position = closest_asteroid.global_position
 		lock_on_texture.visible = true
 	else:
@@ -76,14 +79,9 @@ func _process(delta: float) -> void:
 	
 	# Spawn a bullet
 	if isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
-		var rot: float = shooter.rotation
-	
-		if closest_asteroid:
-			rot = (closest_asteroid.global_position - global_position).angle()
-		#var spreadInterval: float = deg_to_rad(spread) / bulletAmount
-		
+		var rot: float = sprite_2d.global_rotation
+	#
 		AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
 		bullet_manager.instantiate_bullet(muzzle.global_position, rot)
 		isCooldownDone = false
 		get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
-	
