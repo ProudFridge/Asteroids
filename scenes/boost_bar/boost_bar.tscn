@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://b4p0c3cc33cdp" path="res://themes/progress_bar/progress_bar.tres" id="1_1wslx"]
 [ext_resource type="Script" uid="uid://cke4hg22xeqs0" path="res://scenes/boost_bar/boost_bar.gd" id="2_wb7jx"]
 
-[node name="BoostBar" type="HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("progressBar")]
+[node name="FuelBar" type="HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("progressBar")]
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 166.0
@@ -44,14 +44,9 @@ size_flags_vertical = 8
 layout_mode = 2
 theme = ExtResource("1_1wslx")
 bbcode_enabled = true
-text = "O
-v
-e
-r
-D
-r
-i
-v
-e
+text = "F
+U
+E
+L
 "
 fit_content = true

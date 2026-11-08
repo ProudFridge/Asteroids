@@ -6,14 +6,10 @@ extends HBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	progressBar.max_value = player.boostTime
-	progressBar.value = player.currentBoostValue
-	#gameManager.boostIncreased.connect(_on_game_manager_boost_increased)
+	progressBar.max_value = player.max_fuel
+	progressBar.value = player.current_fuel
 
-#func _on_game_manager_boost_increased(newBoostValue: float) -> void:
-	#if player:
-		#value = newBoostValue
 
 func _physics_process(_delta: float) -> void:
 	if player:
-		progressBar.value = player.currentBoostValue
+		progressBar.value = player.current_fuel

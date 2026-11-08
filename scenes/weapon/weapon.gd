@@ -7,6 +7,7 @@ const LOCK_ON_TEXTURE: Resource = preload("uid://vn17ge5tjuwo")
 var cooldown: float = 0.1
 var isCooldownDone: bool = true
 
+var is_auto_aiming: bool = false
 var auto_aim_radius: float = 500
 var rotation_speed: float = 0.1 # deg/s
 var rot_tween: Tween
@@ -41,38 +42,42 @@ func _process(delta: float) -> void:
 	#position = player.position
 	var min: float = INF
 	
-	if area_2d.has_overlapping_bodies():
-		#print("Has overlapping bodies: ", area_2d.get_overlapping_bodies().size())
-		for node: Node2D in area_2d.get_overlapping_bodies():
-			if node is Asteroid:
-				var asteroid: Asteroid = node as Asteroid
-				
-				# Manually lock onto asteroids that are closest to the mouse
-				if Input.is_action_pressed("right_click"):
-					var distance: Vector2 = asteroid.global_position - get_global_mouse_position()
+	if is_auto_aiming:
+		if area_2d.has_overlapping_bodies():
+			#print("Has overlapping bodies: ", area_2d.get_overlapping_bodies().size())
+			for node: Node2D in area_2d.get_overlapping_bodies():
+				if node is Asteroid:
+					var asteroid: Asteroid = node as Asteroid
 					
-					if (asteroid.global_position - global_position).length() < auto_aim_radius:
-						if distance.length() < min:
-							min = distance.length()
-							closest_asteroid = asteroid
-				# Lock onto the closest asteroids
-				else:
-					var distance: Vector2 = asteroid.global_position - global_position
-				
-					if distance.length() < auto_aim_radius:
-						if distance.length() < min:
-							min = distance.length()
-							closest_asteroid = asteroid
-	else:
-		closest_asteroid = null
+					# Manually lock onto asteroids that are closest to the mouse
+					if Input.is_action_pressed("right_click"):
+						var distance: Vector2 = asteroid.global_position - get_global_mouse_position()
+						
+						if (asteroid.global_position - global_position).length() < auto_aim_radius:
+							if distance.length() < min:
+								min = distance.length()
+								closest_asteroid = asteroid
+					# Lock onto the closest asteroids
+					else:
+						var distance: Vector2 = asteroid.global_position - global_position
+					
+						if distance.length() < auto_aim_radius:
+							if distance.length() < min:
+								min = distance.length()
+								closest_asteroid = asteroid
+		else:
+			closest_asteroid = null
 			
-	if closest_asteroid:
-		sprite_2d.global_rotation = (closest_asteroid.global_position - global_position).angle()
-		lock_on_texture.global_position = closest_asteroid.global_position
-		lock_on_texture.visible = true
+		if closest_asteroid:
+			sprite_2d.global_rotation = (closest_asteroid.global_position - global_position).angle()
+			lock_on_texture.global_position = closest_asteroid.global_position
+			lock_on_texture.visible = true
+		else:
+			sprite_2d.rotation = 0
+			lock_on_texture.hide()	
 	else:
 		sprite_2d.rotation = 0
-		lock_on_texture.hide()
+		lock_on_texture.hide()	
 		
 	# Redraw the lock on sprite
 	queue_redraw()
@@ -85,3 +90,7 @@ func _process(delta: float) -> void:
 		bullet_manager.instantiate_bullet(muzzle.global_position, rot)
 		isCooldownDone = false
 		get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ctrl"):
+		is_auto_aiming = !is_auto_aiming

@@ -7,6 +7,9 @@ var cornerRatio: float = 0.5 # Value between 0 and 1
 var starVertices: int = 6
 
 func _ready() -> void:
+	var shader_material: ShaderMaterial = ShaderMaterial.new()
+	shader_material.shader = load("res://shaders/pixelate.gdshader")
+	
 	var shape: PackedVector2Array = []
 	
 	var angleDifference: float = 2 * PI / starVertices

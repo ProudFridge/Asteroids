@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ckgcjc75h84xi"]
+
+[ext_resource type="Script" uid="uid://dl8iffphckugt" path="res://scenes/player/impulse_component/impulse_component.gd" id="1_y4e6o"]
+
+[node name="ImpulseComponent" type="Node2D" unique_id=1233791286]
+script = ExtResource("1_y4e6o")

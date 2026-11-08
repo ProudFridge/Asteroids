@@ -59,12 +59,12 @@ func _ready() -> void:
 			star.cornerRatio = randf_range(0, 0.5)
 			star.position = Vector2(randf_range(0, repeatSize.x), randf_range(0, repeatSize.y))
 			star.starVertices = randi_range(4, 8)
-			star.color = generate_star_color()
+			star.color = _generate_star_color()
 			star.rotate(randf_range(0, 2 * PI))
 			layer.add_child(star)
 		
 
-func generate_star_color() -> Color:
+func _generate_star_color() -> Color:
 	var rand: int = randi_range(0, starColors.size() - 1)
 	
 	return starColors[rand]

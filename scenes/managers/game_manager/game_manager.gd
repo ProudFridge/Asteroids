@@ -24,13 +24,8 @@ func _ready() -> void:
 	
 
 func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:
-	# Add boost to the player whenever they destroy an asteroid
-	if player.currentBoostValue + player.boostRefill <= player.boostTime:
-		player.currentBoostValue += player.boostRefill
-		#boostIncreased.emit(player.currentBoostValue)
-	else:
-		player.currentBoostValue = player.boostTime
-		#boostIncreased.emit(player.currentBoostValue)
+	# Temporarily refuel the playe when an asteroid is destroyed
+	player.current_fuel += 10
 	
 	if asteroidManager.asteroidInstances.size() <= 0:
 		won.emit()

@@ -61,8 +61,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("scroll_up"):
 		_set_zoom(target_zoom * 1.2)
 		
-	if event.is_action_pressed("shake"):
-		add_trauma(300)
 
 func _set_zoom(z: Vector2) -> void:
 	target_zoom = clamp(z, min_zoom, max_zoom)

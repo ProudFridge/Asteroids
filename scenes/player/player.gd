@@ -1,25 +1,28 @@
 extends RigidBody2D
 class_name Player
 
+var max_fuel: float = 100
+var current_fuel: float = max_fuel:
+	set(new_fuel):
+		current_fuel = clamp(new_fuel, 0, max_fuel)
+var fuel_consumption: float = 20 # u/s
+
 const accel: float = 200.0
-var currentAccel: float = accel
 var maxSpeed: float = 800
-var rotSpeed: float = 5 # rad/s
+var rot_speed: float = 5 # rad/s
+var currentAccel: float = accel
+var current_rot_speed: float = rot_speed
+var current_fuel_consumption: float = fuel_consumption
+
 var bounceDamp: float = 0.5
 # TODO: change to health later, faster asteroids deal more damage
 var lives: float = 3
 var isAlive: bool = true
 
-var boostAccel: float = 1500
-var boostRotSpeed: float = 10
-var boostTime: float = 4
-var currentBoostValue: float = boostTime
-var boostDepletion: float = 3
-var boostRefill: float = 1
-var isBoostActivated: bool = false
-
 var impulseMagnitude: float = 400
 var sideThrusterCooldown: float = 1
+
+@export var boost_component: BoostComponent
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
@@ -30,7 +33,6 @@ var viewportSize: Vector2
 @onready var right_thruster_particles: CPUParticles2D = $RightThrusterParticles
 @onready var left_thruster_particles: CPUParticles2D = $LeftThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
-@onready var polygon_2d: Polygon2D = $Polygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var right_timer: Timer = $RightThrusterParticles/RightTimer
 @onready var left_timer: Timer = $LeftThrusterParticles/LeftTimer
@@ -86,21 +88,23 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction : float = Input.get_axis("backwards", "forwards")
-	
-	if direction && Input.is_action_pressed("shift") && currentBoostValue != 0:
-		isBoostActivated = true
-		if currentBoostValue > boostDepletion * delta:
-			currentAccel = boostAccel
-			currentBoostValue -= boostDepletion * delta
-		else:
-			currentBoostValue = 0
-	else:
-		isBoostActivated = false
-		currentAccel = accel
-		
-	if direction:
+	#
+	#if direction && Input.is_action_pressed("shift") && currentBoostValue != 0:
+		#isBoostActivated = true
+		#if currentBoostValue > boostDepletion * delta:
+			#currentAccel = boostAccel
+			#currentBoostValue -= boostDepletion * delta
+		#else:
+			#currentBoostValue = 0
+	#else:
+		#isBoostActivated = false
+		#currentAccel = accel
+		#
+	if direction and current_fuel > 0:
 		thruster_particles.emitting = true
 		apply_central_force(direction * Vector2.from_angle(rotation) * currentAccel)
+		current_fuel -= current_fuel_consumption * delta
+		print(current_fuel, " ", currentAccel)
 	else:
 		thruster_particles.emitting = false
 
@@ -137,9 +141,9 @@ func _on_left_timer_tiemout() -> void:
 
 var thruster_sound: AudioStreamPlayer
 
-# Rotate the rocket
+# Rotate the rocket and play thruster sound
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("forwards") || event.is_action_pressed("backwards"):
+	if (event.is_action_pressed("forwards") || event.is_action_pressed("backwards")) && current_fuel > 0:
 		if thruster_sound == null:
 			thruster_sound = AudioSingleton.play_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 		else:
@@ -153,7 +157,7 @@ func _input(event: InputEvent) -> void:
 			var tween: Tween = create_tween()
 			tween.tween_property(thruster_sound, "pitch_scale", 0.1, 0.2)
 		
-	if event.is_action_pressed("shift") && currentBoostValue > 0:
+	if event.is_action_pressed("shift") && boost_component.isBoostActivated && current_fuel > 0:
 		if thruster_sound:
 			thruster_sound.pitch_scale = 1.5
 			var tween: Tween = create_tween()
@@ -162,16 +166,10 @@ func _input(event: InputEvent) -> void:
 	
 	# Handle rotation
 	if event.is_action_pressed("turn_left"):
-		if isBoostActivated:
-			angular_velocity = -boostRotSpeed
-		else:
-			angular_velocity = -rotSpeed
+		angular_velocity = -current_rot_speed
 	if event.is_action_pressed("turn_right"):
-		if isBoostActivated:
-			angular_velocity = boostRotSpeed
-		else:
-			angular_velocity = rotSpeed
-		
+		angular_velocity = current_rot_speed
+
 	if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
 		angular_velocity = 0
 		

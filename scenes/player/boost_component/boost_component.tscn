@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bcweweg3umh4f"]
+
+[ext_resource type="Script" uid="uid://un8gwfq5iuyx" path="res://scenes/player/boost_component/boost_component.gd" id="1_iuuwr"]
+
+[node name="BoostComponent" type="Node2D" unique_id=174976777]
+script = ExtResource("1_iuuwr")
