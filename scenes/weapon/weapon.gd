@@ -16,6 +16,7 @@ var lock_on_texture: LockOnTexture
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var area_2d: Area2D = $Area2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var muzzle: Marker2D = $Sprite2D/Muzzle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -82,7 +83,7 @@ func _process(delta: float) -> void:
 		#var spreadInterval: float = deg_to_rad(spread) / bulletAmount
 		
 		AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
-		bullet_manager.instantiate_bullet(global_position, rot)
+		bullet_manager.instantiate_bullet(muzzle.global_position, rot)
 		isCooldownDone = false
 		get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
 	

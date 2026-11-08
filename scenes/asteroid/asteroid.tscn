@@ -28,5 +28,6 @@ color = Color(0.1785, 0.179025, 0.21, 1)
 stream = ExtResource("2_j1t37")
 
 [node name="Center" type="Node2D" parent="." unique_id=943328798]
+visible = false
 z_index = 19
 script = ExtResource("3_8t7q7")
