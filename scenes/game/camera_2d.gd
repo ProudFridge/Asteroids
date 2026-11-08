@@ -14,6 +14,11 @@ var trauma: float = 0
 var trauma_power: int = 3
 var noise_shake_speed: float = 10
 
+var zoom_tween: Tween
+var target_zoom: Vector2 = zoom
+@export var max_zoom: Vector2 = Vector2(10, 10)
+@export var min_zoom: Vector2 = Vector2(0.5, 0.5)
+
 func _ready() -> void:
 	randomize()
 	#noise.seed = randi()
@@ -50,6 +55,12 @@ func _shake(delta: float) -> void:
 	offset.y = max_offset.y * amount * randf_range(-1, 1)
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("scroll_down"):
+		_set_zoom(target_zoom * 0.8)
+	
+	if event.is_action_pressed("scroll_up"):
+		_set_zoom(target_zoom * 1.2)
+
 	#if event.is_action_pressed("right_click"):
 		#var tween: Tween = get_tree().create_tween()
 		#tween.tween_property(self, "zoom", cameraZoom * (1 - zoomOutPercentage), 0.1)
@@ -64,3 +75,9 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("shake"):
 		add_trauma(300)
+
+func _set_zoom(z: Vector2) -> void:
+	target_zoom = clamp(z, min_zoom, max_zoom)
+	if zoom_tween: zoom_tween.kill()
+	zoom_tween = create_tween()
+	zoom_tween.tween_property(self, "zoom", target_zoom, 0.1)
