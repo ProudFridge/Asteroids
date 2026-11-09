@@ -6,8 +6,8 @@ extends HBoxContainer
 
 func _ready() -> void:
 	progressBar.max_value = 2
-	player.impulse_refilled.connect(_on_player_impulse_refilled)
-	player.impulse_depleated.connect(_on_player_impulse_depleated)
+	player.impulse_component.impulse_refilled.connect(_on_player_impulse_refilled)
+	player.impulse_component.impulse_depleated.connect(_on_player_impulse_depleated)
 
 func _on_player_impulse_depleated() -> void:
 	progressBar.value -= 1

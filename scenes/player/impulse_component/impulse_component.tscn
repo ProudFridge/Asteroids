@@ -2,5 +2,83 @@
 
 [ext_resource type="Script" uid="uid://dl8iffphckugt" path="res://scenes/player/impulse_component/impulse_component.gd" id="1_y4e6o"]
 
+[sub_resource type="Gradient" id="Gradient_y4e6o"]
+offsets = PackedFloat32Array(0.009661836, 1)
+colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5gtgg"]
+gradient = SubResource("Gradient_y4e6o")
+
+[sub_resource type="Curve" id="Curve_ufqsu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h17s1"]
+curve = SubResource("Curve_ufqsu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j3x43"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 3, 0)
+direction = Vector3(-1, 0, 0)
+spread = 25.0
+initial_velocity_min = 120.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -72.66
+linear_accel_max = -59.38
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_h17s1")
+color_initial_ramp = SubResource("GradientTexture1D_5gtgg")
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fm80t"]
+gradient = SubResource("Gradient_y4e6o")
+
+[sub_resource type="CurveTexture" id="CurveTexture_gx1jg"]
+curve = SubResource("Curve_ufqsu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s7u2o"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 3, 0)
+direction = Vector3(-1, 0, 0)
+spread = 25.0
+initial_velocity_min = 120.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -72.66
+linear_accel_max = -59.38
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_gx1jg")
+color_initial_ramp = SubResource("GradientTexture1D_fm80t")
+
 [node name="ImpulseComponent" type="Node2D" unique_id=1233791286]
 script = ExtResource("1_y4e6o")
+
+[node name="RightThrusterParticles" type="GPUParticles2D" parent="." unique_id=1900797062]
+position = Vector2(0, 6)
+rotation = -1.5707964
+emitting = false
+amount = 100
+lifetime = 0.1
+one_shot = true
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_j3x43")
+
+[node name="LeftThrusterParticles" type="GPUParticles2D" parent="." unique_id=1762334801]
+position = Vector2(0, -6)
+rotation = 1.5707964
+emitting = false
+amount = 100
+lifetime = 0.1
+one_shot = true
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_s7u2o")
+
+[node name="RightTimer" type="Timer" parent="." unique_id=348331650]
+one_shot = true
+
+[node name="LeftTimer" type="Timer" parent="." unique_id=1857022605]
+one_shot = true

@@ -14,6 +14,8 @@ var currentAccel: float = accel
 var current_rot_speed: float = rot_speed
 var current_fuel_consumption: float = fuel_consumption
 
+var ship_width: float = 15
+
 var bounceDamp: float = 0.5
 # TODO: change to health later, faster asteroids deal more damage
 var lives: float = 3
@@ -22,37 +24,30 @@ var isAlive: bool = true
 var impulseMagnitude: float = 400
 var sideThrusterCooldown: float = 1
 
+@export_group("Components")
 @export var boost_component: BoostComponent
+@export var impulse_component: ImpulseComponent
+@export_group("")
 
 var polygon: PackedVector2Array
 var viewportSize: Vector2 
 
 @export var bullet_manager: BulletManager
 @onready var damage_timer: Timer = $DamageTimer
-@onready var thruster_particles: CPUParticles2D = $ThrusterParticles
-@onready var right_thruster_particles: CPUParticles2D = $RightThrusterParticles
-@onready var left_thruster_particles: CPUParticles2D = $LeftThrusterParticles
+@onready var thruster_particles: GPUParticles2D = $ThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
-@onready var right_timer: Timer = $RightThrusterParticles/RightTimer
-@onready var left_timer: Timer = $LeftThrusterParticles/LeftTimer
 @onready var ship: Node2D = $Ship
 
 signal died()
 signal health_lost(currentHealth: float)
 
-signal impulse_depleated()
-signal impulse_refilled()
-
 func _ready() -> void:
 	AudioSingleton.reset_audio_count(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 	# Temp
 	thruster_particles.position.y = 0
-	thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
-	
-	right_timer.wait_time = sideThrusterCooldown
-	left_timer.wait_time = sideThrusterCooldown
-	
+	#thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
+
 	position = Global.windowSize / 2
 	viewportSize = get_viewport_rect().size
 	#polygon = create_centered_triangle(playerSize.x, playerSize.y)
@@ -61,8 +56,7 @@ func _ready() -> void:
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
-	right_timer.timeout.connect(_on_right_timer_timeout)
-	left_timer.timeout.connect(_on_left_timer_tiemout)
+
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
@@ -88,23 +82,11 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction : float = Input.get_axis("backwards", "forwards")
-	#
-	#if direction && Input.is_action_pressed("shift") && currentBoostValue != 0:
-		#isBoostActivated = true
-		#if currentBoostValue > boostDepletion * delta:
-			#currentAccel = boostAccel
-			#currentBoostValue -= boostDepletion * delta
-		#else:
-			#currentBoostValue = 0
-	#else:
-		#isBoostActivated = false
-		#currentAccel = accel
-		#
+	
 	if direction and current_fuel > 0:
 		thruster_particles.emitting = true
 		apply_central_force(direction * Vector2.from_angle(rotation) * currentAccel)
 		current_fuel -= current_fuel_consumption * delta
-		print(current_fuel, " ", currentAccel)
 	else:
 		thruster_particles.emitting = false
 
@@ -130,13 +112,6 @@ func _on_body_entered(body: Node) -> void:
 # Change the color of the player to indicate invincibility period
 func _on_damage_timer_timeout() -> void:
 	ship.modulate = Color.WHITE
-
-func _on_right_timer_timeout() -> void:
-	impulse_refilled.emit()
-	
-
-func _on_left_timer_tiemout() -> void:
-	impulse_refilled.emit()
 
 
 var thruster_sound: AudioStreamPlayer
@@ -172,18 +147,6 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
 		angular_velocity = 0
-		
-	if event.is_action_pressed("e") && right_timer.is_stopped():
-		apply_central_impulse(Vector2.from_angle(rotation + PI / 2) * impulseMagnitude)
-		right_thruster_particles.emitting = true
-		right_timer.start()
-		impulse_depleated.emit()
-	
-	if event.is_action_pressed("q") && left_timer.is_stopped():
-		apply_central_impulse(Vector2.from_angle(rotation - PI / 2) * impulseMagnitude)
-		left_thruster_particles.emitting = true
-		left_timer.start()
-		impulse_depleated.emit()
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center
