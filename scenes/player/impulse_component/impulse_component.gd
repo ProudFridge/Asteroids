@@ -16,9 +16,11 @@ signal impulse_depleated()
 signal impulse_refilled()
 
 func _ready() -> void:
+	# Set the wait time
 	right_timer.wait_time = impulse_cooldown
 	left_timer.wait_time = impulse_cooldown
 	
+	# Manually set the position of the particles
 	left_thruster_particles.position.y = -6
 	right_thruster_particles.position.y = 6
 	

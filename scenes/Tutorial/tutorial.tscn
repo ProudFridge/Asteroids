@@ -117,6 +117,22 @@ text = "Press [pulse]Space[/pulse] to [color=#ABf]Shoot[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="RichTextLabel9" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=642018272]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]Ctrl[/pulse] to [color=#ABf]enable auto-aim[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=143243386]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[pulse]Left click[/pulse] to make [color=#ABf]auto-aim[/color] follow your cursor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RichTextLabel7" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=2109160685]
 layout_mode = 2
 size_flags_vertical = 3
@@ -129,7 +145,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[pulse]Right Click[/pulse] to [color=#ADf]zoom out[/color]"
+text = "[pulse]Scroll up/down[/pulse] to [color=#ADf]zoom in/out[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -145,7 +161,15 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[pulse]Destroy asteroids[/pulse] to [color=#ADf]refill the boost bar[/color]"
+text = "You can [pulse]move[/pulse] as long as you have [color=#ADC]fuel[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1759054706]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[pulse]Destroy asteroids[/pulse] to [color=#ADf]refill the ship's fuel[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
