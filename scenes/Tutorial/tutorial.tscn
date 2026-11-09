@@ -42,10 +42,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 500
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 500
-theme_override_constants/margin_bottom = 150
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 90
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1093419292]
 layout_mode = 2
@@ -55,21 +55,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ojlfk")
 layout_mode = 2
 texture = SubResource("GradientTexture2D_2m7xh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/TextureRect" unique_id=1857434795]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -454.0
-offset_top = -384.0
-offset_right = 454.0
-offset_bottom = 384.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=1857434795]
+layout_mode = 2
 
-[node name="ControlsTitleLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1670240271]
+[node name="ControlsTitleLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1670240271]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -77,7 +66,7 @@ text = "[font_size=48]Controls[/font_size]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=509420898]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=509420898]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -85,7 +74,7 @@ text = "Press [pulse]W/S[/pulse] to go [color=#4cf]Forwards/Backwards[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=686073777]
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=686073777]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -93,7 +82,7 @@ text = "Press [pulse]A/D[/pulse] to turn [color=#44f]Left/Right[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1675731758]
+[node name="RichTextLabel4" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1675731758]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -101,7 +90,7 @@ text = "Press [pulse]Q/E[/pulse] to activate an [fade][tornado radius=3.0]impuls
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=2116651148]
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=2116651148]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -109,7 +98,7 @@ text = "Press [pulse]Shift[/pulse] to go into [color=#A8f]Overdrive[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=308568023]
+[node name="RichTextLabel5" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=308568023]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -117,7 +106,7 @@ text = "Press [pulse]Space[/pulse] to [color=#ABf]Shoot[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel9" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=642018272]
+[node name="RichTextLabel9" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=642018272]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -125,7 +114,7 @@ text = "Press [pulse]Ctrl[/pulse] to [color=#ABf]enable auto-aim[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel11" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=143243386]
+[node name="RichTextLabel11" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=143243386]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -133,7 +122,7 @@ text = "[pulse]Left click[/pulse] to make [color=#ABf]auto-aim[/color] follow yo
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel7" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=2109160685]
+[node name="RichTextLabel7" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=2109160685]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -141,7 +130,7 @@ text = " Press [pulse]Escape[/pulse] to [color=#CBf]open the pause menu[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel6" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1799604871]
+[node name="RichTextLabel6" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1799604871]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -149,7 +138,7 @@ text = "[pulse]Scroll up/down[/pulse] to [color=#ADf]zoom in/out[/color]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OtherThingsTitle" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1054109069]
+[node name="OtherThingsTitle" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1054109069]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -157,7 +146,7 @@ text = "[font_size=48]Other Stuff[/font_size]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel8" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=257256421]
+[node name="RichTextLabel8" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=257256421]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -165,7 +154,7 @@ text = "You can [pulse]move[/pulse] as long as you have [color=#ADC]fuel[/color]
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RichTextLabel10" type="RichTextLabel" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=1759054706]
+[node name="RichTextLabel10" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1759054706]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -173,7 +162,7 @@ text = "[pulse]Destroy asteroids[/pulse] to [color=#ADf]refill the ship's fuel[/
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/PanelContainer/TextureRect/VBoxContainer" unique_id=525107632]
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=525107632]
 layout_mode = 2
 text = "Return To Main Menu"
 script = ExtResource("1_wle2u")
