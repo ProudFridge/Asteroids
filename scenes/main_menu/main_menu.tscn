@@ -136,11 +136,10 @@ rotation = 1.5707964
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("11_rrgl4")
 
-[node name="ThrusterParticles" type="CPUParticles2D" parent="." unique_id=429347767]
+[node name="ThrusterParticles" type="CPUParticles2D" parent="Ship" unique_id=429347767]
 z_as_relative = false
-position = Vector2(1685, 798.99994)
-rotation = -2.226174
-scale = Vector2(5, 5)
+position = Vector2(-23.788773, 0.3175125)
+scale = Vector2(0.4166667, 0.4166667)
 amount = 200
 emission_shape = 3
 emission_rect_extents = Vector2(3, 6)

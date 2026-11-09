@@ -5,6 +5,8 @@
 [ext_resource type="StyleBox" uid="uid://ci37n2imak8fo" path="res://themes/normal/new_style_box_flat.tres" id="3_80n3l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tmx8"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 1
 border_width_top = 1
@@ -12,7 +14,7 @@ border_width_right = 1
 border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b66f"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0.14406255, 0.14406255, 0.14406249, 0)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -29,4 +31,4 @@ Label/font_sizes/font_size = 30
 Label/fonts/font = ExtResource("2_80n3l")
 Label/styles/normal = SubResource("StyleBoxFlat_8b66f")
 PanelContainer/styles/panel = ExtResource("3_80n3l")
-VBoxContainer/constants/separation = 10
+VBoxContainer/constants/separation = 12

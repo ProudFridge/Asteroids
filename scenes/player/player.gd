@@ -8,8 +8,9 @@ var current_fuel: float = max_fuel:
 var fuel_consumption: float = 20 # u/s
 
 const accel: float = 200.0
-var maxSpeed: float = 800
-var rot_speed: float = 5 # rad/s
+var max_speed: float = 800
+@export var rot_speed: float = 250 # deg/s
+
 var currentAccel: float = accel
 var current_rot_speed: float = rot_speed
 var current_fuel_consumption: float = fuel_consumption
@@ -76,7 +77,14 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 		if collisionPosition.y <= 1:
 			position.y = Global.windowSize.y - (collisionPosition.y - position.y)
 		
-	linear_velocity = linear_velocity.limit_length(maxSpeed)
+	linear_velocity = linear_velocity.limit_length(max_speed)
+	
+	if Input.is_action_pressed("turn_left"):
+		angular_velocity = -deg_to_rad(current_rot_speed)
+	elif Input.is_action_pressed("turn_right"):
+		angular_velocity = deg_to_rad(current_rot_speed)
+	else:
+		angular_velocity = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -140,13 +148,13 @@ func _input(event: InputEvent) -> void:
 		$Camera2D.add_trauma(0.5)
 	
 	# Handle rotation
-	if event.is_action_pressed("turn_left"):
-		angular_velocity = -current_rot_speed
-	if event.is_action_pressed("turn_right"):
-		angular_velocity = current_rot_speed
-
-	if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
-		angular_velocity = 0
+	#if event.is_action_pressed("turn_left"):
+		#angular_velocity = -deg_to_rad(current_rot_speed)
+	#elif event.is_action_pressed("turn_right"):
+		#angular_velocity = deg_to_rad(current_rot_speed)
+#
+	#if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
+		#angular_velocity = 0
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center

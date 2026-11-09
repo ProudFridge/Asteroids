@@ -62,6 +62,7 @@ cameraZoom = Vector2(1.5, 1.5)
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 
 [node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("4_kelw5")]
+asteroid_num = 100
 
 [node name="BulletManager" parent="Managers" unique_id=1104816647 node_paths=PackedStringArray("shooter") instance=ExtResource("6_kp23o")]
 shooter = NodePath("../../Player")
@@ -202,7 +203,6 @@ player = NodePath("../../../../Player")
 
 [node name="PauseMenu" type="PanelContainer" parent="PauseMenuLayer" unique_id=1343691578 node_paths=PackedStringArray("gameManager")]
 process_mode = 3
-visible = false
 modulate = Color(1, 1, 1, 0.6313726)
 z_index = 30
 anchors_preset = 8
@@ -221,6 +221,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vaxfo")
 script = ExtResource("12_vaxfo")
 gameManager = NodePath("../../Managers/GameManager")
 
+[node name="TextureRect" type="TextureRect" parent="PauseMenuLayer/PauseMenu" unique_id=2048438943]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_2m7xh")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu" unique_id=1846872377]
 layout_mode = 2
 theme = SubResource("Theme_2m7xh")
@@ -230,17 +234,27 @@ layout_mode = 2
 text = "Game Paused"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=198654607]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=1133523927]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 19
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/VBoxContainer/MarginContainer" unique_id=358696650]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer/MarginContainer/VBoxContainer" unique_id=198654607]
 layout_mode = 2
 text = "Restart"
 script = ExtResource("13_3xj4h")
 
-[node name="MainMenuButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=295130982]
+[node name="MainMenuButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer/MarginContainer/VBoxContainer" unique_id=295130982]
 layout_mode = 2
 text = "Quit to Main Menu"
 script = ExtResource("18_gc57s")
 
-[node name="QuitButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer" unique_id=1580677799]
+[node name="QuitButton" type="Button" parent="PauseMenuLayer/PauseMenu/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1580677799]
 layout_mode = 2
 text = "Quit"
 script = ExtResource("13_ftsea")
