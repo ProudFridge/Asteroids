@@ -6,7 +6,7 @@
 bg_color = Color(0.31740734, 0.31407824, 0.30742076, 1)
 skew = Vector2(0.2, 0)
 border_width_left = 8
-border_color = Color(0.17283267, 0.1728327, 0.17283252, 1)
+border_color = Color(0.7079665, 0.7079665, 0.7079664, 1)
 expand_margin_left = 12.0
 expand_margin_top = 20.0
 expand_margin_bottom = 20.0
@@ -19,9 +19,20 @@ expand_margin_left = 12.0
 expand_margin_top = 20.0
 expand_margin_bottom = 20.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vgns"]
+bg_color = Color(0.49038726, 0.4853425, 0.47525293, 1)
+skew = Vector2(0.2, 0)
+border_width_left = 8
+border_color = Color(0.17283267, 0.1728327, 0.17283252, 1)
+expand_margin_left = 12.0
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
 [resource]
-Button/colors/font_hover_color = Color(0.15487581, 0.15487596, 0.15487641, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 70
 Button/fonts/font = ExtResource("1_hii3i")
 Button/styles/focus = SubResource("StyleBoxFlat_hii3i")
+Button/styles/hover = SubResource("StyleBoxFlat_hii3i")
 Button/styles/normal = SubResource("StyleBoxFlat_fv613")
+Button/styles/pressed = SubResource("StyleBoxFlat_5vgns")

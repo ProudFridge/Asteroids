@@ -10,3 +10,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_pressed() -> void:
 	SwitcherSingleton.goto_scene("res://scenes/main_menu/main_menu.tscn")
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("escape"):
+		SwitcherSingleton.goto_scene("res://scenes/main_menu/main_menu.tscn")
