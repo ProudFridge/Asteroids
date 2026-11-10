@@ -10,7 +10,6 @@ var bulletSpeed: float = 500
 
 const BULLET: Resource = preload("uid://c4bego3ny732p")
 
-
 func instantiate_bullet(position: Vector2, rotation: float) -> void:
 	var bulletInstance: Bullet = BULLET.instantiate()
 	bulletInstance.rotation = rotation
