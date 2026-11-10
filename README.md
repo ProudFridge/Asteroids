@@ -15,4 +15,4 @@ The project makes great use of the `RigidBody2D` nodes in Godot and the `Geometr
 - Left Click: Make the weapon auto-aim towards your mouse cursor
 - Scroll up/down: Zooms the camera in/out
 
-<img width="1920" height="1080" alt="Godot_v4 7 2-stable_win64_BPRzTNmyKn" src="https://github.com/user-attachments/assets/9e2f1f7f-1ccb-4241-97ac-d5cf4f792c4b" />
+<img width="1920" height="1080" alt="img" src="img.png" >
