@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bf7lvmej1g1g0"]
+
+[ext_resource type="Script" uid="uid://ce4rs40fb3nee" path="res://scenes/fuel_shard/fuel_shard.gd" id="1_vcxhu"]
+
+[node name="FuelShard" type="RigidBody2D" unique_id=2002881673]
+gravity_scale = 0.0
+script = ExtResource("1_vcxhu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=959604162]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1835361501]

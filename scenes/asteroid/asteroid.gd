@@ -114,6 +114,12 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			#get_tree().root.add_child(shardInstance)
 			get_parent().add_child(shardInstance)
 		
+		var fuel_shard: Resource = preload("res://scenes/fuel_shard/fuel_shard.tscn")
+		for i: int in 4:
+			var fuel_shard_instance: FuelShard = fuel_shard.instantiate()
+			fuel_shard_instance.position = position
+			get_parent().add_child(fuel_shard_instance)
+		
 	return triangles
 
 
