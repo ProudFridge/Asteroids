@@ -26,9 +26,10 @@ func _ready() -> void:
 		multiplier = 3
 	elif rand >= 0.2 && rand < 0.3 :
 		multiplier = 6
+	boundingBox *= multiplier
 	
 	
-	polygon = Geometry.generate_convex_polygon(randi_range(5, 8), boundingBox * multiplier)
+	polygon = Geometry.generate_convex_polygon(randi_range(5, 8), boundingBox)
 	center = get_center()
 	collision_polygon.polygon = polygon
 	polygon = Geometry.populate_with_random_points(polygon)
@@ -42,9 +43,9 @@ func _ready() -> void:
 	for t: Polygon2D in triangles:
 		add_child(t)
 	
-func _draw() -> void:	
-	# Draw the bounds
-	#draw_rect(Rect2(-boundingBox / 2, boundingBox), Color.WHITE, false)
+func _draw() -> void:
+	 #Draw the bounds
+	draw_rect(Rect2(-boundingBox / 2, boundingBox), Color.WHITE, false)
 	
 	for v: Vector2 in polygon:
 		draw_ellipse(v, 2, 2, Color.ALICE_BLUE)
@@ -91,7 +92,6 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			var triangle: Polygon2D = Polygon2D.new()
 			triangle.polygon = PackedVector2Array([polygon[delaunay[i]], polygon[delaunay[i + 1]], polygon[delaunay[i + 2]]])
 			triangle.color = Color.from_hsv(0, 0, randf_range(0.2, 0.4), 1)
-			triangle.hide()
 			triangles.append(triangle)
 	
 	# Instance all shards	

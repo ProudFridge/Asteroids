@@ -100,8 +100,7 @@ static func generate_convex_polygon(n: int, boundingBox: Vector2) -> PackedVecto
 ## Populates the border of a polygon with random points 
 ## Currently does not work
 static func populate_with_random_points(poly: PackedVector2Array) -> PackedVector2Array:
-	#var hull_poly: PackedVector2Array = Geometry2D.convex_hull(poly)
-	var hull_poly: PackedVector2Array = poly
+	var hull_poly: PackedVector2Array = Geometry2D.convex_hull(poly)
 	var inside: int = 2
 	var populated_polygon: PackedVector2Array = []
 	
@@ -115,9 +114,9 @@ static func populate_with_random_points(poly: PackedVector2Array) -> PackedVecto
 		
 		for r: int in inside:
 			var rand: float = randf_range(1, length)
-			populated_segment.append(unit * rand)
+			populated_segment.append(hull_poly[i] + unit * rand)
 		
-		populated_segment.sort()
+		#populated_segment.sort()
 		populated_polygon.append_array(populated_segment)
 	
 	#print(poly.size(), " ", populated_polygon.size(), " Expected:", poly.size() * (inside + 1))

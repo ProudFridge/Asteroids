@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cskxh4bavc45a"]
+
+[ext_resource type="Script" uid="uid://dfp5pxfsakbk4" path="res://scenes/player/pickup_component/pickup_component.gd" id="1_kqe0g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqe0g"]
+radius = 100.0
+
+[node name="PickupComponent" type="Node2D" unique_id=563053896]
+script = ExtResource("1_kqe0g")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1418029448]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=345948122]
+shape = SubResource("CircleShape2D_kqe0g")

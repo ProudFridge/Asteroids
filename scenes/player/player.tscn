@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bq0nigm5mmvtl" path="res://assets/sprites/ship/ship_head.png" id="3_p47bc"]
 [ext_resource type="PackedScene" uid="uid://ckgcjc75h84xi" path="res://scenes/player/impulse_component/impulse_component.tscn" id="3_qek5x"]
 [ext_resource type="Texture2D" uid="uid://cnisb87sdktyc" path="res://assets/sprites/ship/ship_hull.png" id="4_75vfm"]
+[ext_resource type="PackedScene" uid="uid://cskxh4bavc45a" path="res://scenes/player/pickup_component/pickup_component.tscn" id="4_qek5x"]
 [ext_resource type="Texture2D" uid="uid://m1i8316lq872" path="res://assets/sprites/ship/ship_thruster.png" id="5_p47bc"]
 [ext_resource type="PackedScene" uid="uid://cju3pee43b3e8" path="res://scenes/weapon/weapon.tscn" id="6_75vfm"]
 
@@ -63,6 +64,9 @@ playerSize = Vector2(20, 30)
 player = NodePath("../..")
 
 [node name="ImpulseComponent" parent="Components" unique_id=1233791286 node_paths=PackedStringArray("player") instance=ExtResource("3_qek5x")]
+player = NodePath("../..")
+
+[node name="PickupComponent" parent="Components" unique_id=563053896 node_paths=PackedStringArray("player") instance=ExtResource("4_qek5x")]
 player = NodePath("../..")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]
