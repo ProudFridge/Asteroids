@@ -24,9 +24,6 @@ func _ready() -> void:
 	
 
 func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:
-	# Temporarily refuel the playe when an asteroid is destroyed
-	player.current_fuel += 10
-	
 	if asteroidManager.asteroidInstances.size() <= 0:
 		won.emit()
 

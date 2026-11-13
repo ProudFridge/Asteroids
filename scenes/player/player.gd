@@ -51,9 +51,6 @@ func _ready() -> void:
 
 	position = Global.windowSize / 2
 	viewportSize = get_viewport_rect().size
-	#polygon = create_centered_triangle(playerSize.x, playerSize.y)
-	#polygon_2d.polygon = polygon
-	#collision_polygon_2d.polygon = polygon
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
