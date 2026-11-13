@@ -134,6 +134,15 @@ static func compute_area(poly: PackedVector2Array) -> float:
 	
 	return abs(totalSum / 2)
 
+
+## Returns the center of a polygon
+static func get_center(poly: PackedVector2Array) -> Vector2:
+	var p_center: Vector2 = Vector2.ZERO
+	for v: Vector2 in poly:
+		p_center += v
+	p_center /= poly.size()
+	return p_center
+
 ## Sorts two vectors by their angle
 static func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():

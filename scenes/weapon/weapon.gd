@@ -31,6 +31,9 @@ func _ready() -> void:
 	
 	bullet_manager = shooter.bullet_manager
 	collision_shape_2d.shape.radius = auto_aim_radius
+	
+	area_2d.body_entered.connect(_on_area_2d_body_entered)
+	area_2d.body_exited.connect(_on_area_2d_body_exited)
 
 ## Draws the lock on texture
 #func _draw() -> void:
@@ -90,6 +93,18 @@ func _process(delta: float) -> void:
 		bullet_manager.instantiate_bullet(muzzle.global_position, rot)
 		isCooldownDone = false
 		get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Asteroid:
+		(body as Asteroid).is_outline_visible = true
+		body.queue_redraw()
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body is Asteroid:
+		(body as Asteroid).is_outline_visible = false
+		body.queue_redraw()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ctrl"):

@@ -150,6 +150,7 @@ ctrl={
 2d_physics/layer_2="asteroid"
 2d_physics/layer_3="asteroid_shards"
 2d_physics/layer_4="bounds"
+2d_physics/layer_5="fuel_shard"
 
 [physics]
 

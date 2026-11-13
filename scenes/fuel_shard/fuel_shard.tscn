@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ce4rs40fb3nee" path="res://scenes/fuel_shard/fuel_shard.gd" id="1_vcxhu"]
 
 [node name="FuelShard" type="RigidBody2D" unique_id=2002881673]
+collision_layer = 16
+collision_mask = 27
 gravity_scale = 0.0
 script = ExtResource("1_vcxhu")
 
