@@ -7,7 +7,6 @@
 radius = 414.05917
 
 [node name="Weapon" type="Node2D" unique_id=674514901]
-top_level = true
 script = ExtResource("1_jej8l")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1114199210]
@@ -23,3 +22,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=219321120]
 shape = SubResource("CircleShape2D_lopa8")
+
+[node name="ToolBase" type="Marker2D" parent="." unique_id=1857006064]

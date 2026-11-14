@@ -1,5 +1,5 @@
-extends Node2D
-class_name Weapon
+extends Weapon
+class_name GunTest
 
 const LOCK_ON_TEXTURE: Resource = preload("uid://vn17ge5tjuwo")
 
@@ -22,8 +22,13 @@ var lock_on_texture: LockOnTexture
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var muzzle: Marker2D = $Sprite2D/Muzzle
 
+
+func use_weapon() -> void:
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	tool_base = $ToolBase
 	lock_on_texture = LOCK_ON_TEXTURE.instantiate()
 	lock_on_texture.hide()
 	

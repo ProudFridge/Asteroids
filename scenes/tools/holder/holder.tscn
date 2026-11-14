@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dxwoqcnyivk7s"]
+
+[ext_resource type="Texture2D" uid="uid://b55dibbr5es0i" path="res://assets/sprites/tool.png" id="1_wt8e8"]
+[ext_resource type="Script" uid="uid://d24pxylne2o1o" path="res://scenes/tools/holder/holder.gd" id="2_uydil"]
+
+[node name="Holder" type="Node2D" unique_id=2044846770]
+script = ExtResource("2_uydil")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1276139103]
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("1_wt8e8")
+
+[node name="ToolLocation" type="Marker2D" parent="." unique_id=962419715]
+position = Vector2(0, -9)

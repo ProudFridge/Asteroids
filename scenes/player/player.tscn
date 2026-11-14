@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cskxh4bavc45a" path="res://scenes/player/pickup_component/pickup_component.tscn" id="4_qek5x"]
 [ext_resource type="Texture2D" uid="uid://m1i8316lq872" path="res://assets/sprites/ship/ship_thruster.png" id="5_p47bc"]
 [ext_resource type="PackedScene" uid="uid://cju3pee43b3e8" path="res://scenes/weapon/weapon.tscn" id="6_75vfm"]
+[ext_resource type="PackedScene" uid="uid://dxwoqcnyivk7s" path="res://scenes/tools/holder/holder.tscn" id="9_5gtgg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8afob"]
 bounce = 0.5
@@ -101,9 +102,22 @@ rotation = 1.5707964
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_p47bc")
 
-[node name="WeaponHolder" type="Node2D" parent="." unique_id=246120154]
-position = Vector2(0, -8)
+[node name="Holder" parent="." unique_id=2044846770 instance=ExtResource("9_5gtgg")]
+z_index = 2
+position = Vector2(-7.9999995, -5.000001)
+scale = Vector2(0.2, 0.2)
 
-[node name="Weapon" parent="WeaponHolder" unique_id=674514901 node_paths=PackedStringArray("shooter") instance=ExtResource("6_75vfm")]
-top_level = false
+[node name="Weapon" parent="Holder" unique_id=674514901 node_paths=PackedStringArray("shooter") instance=ExtResource("6_75vfm")]
+z_index = 1
+position = Vector2(-3.8146973e-06, -14.999994)
+shooter = NodePath("../..")
+
+[node name="Holder2" parent="." unique_id=1721040265 instance=ExtResource("9_5gtgg")]
+z_index = 2
+position = Vector2(8.999998, -5)
+scale = Vector2(0.2, 0.2)
+
+[node name="Weapon" parent="Holder2" unique_id=835030388 node_paths=PackedStringArray("shooter") instance=ExtResource("6_75vfm")]
+z_index = 1
+position = Vector2(9.536743e-06, -14.999998)
 shooter = NodePath("../..")

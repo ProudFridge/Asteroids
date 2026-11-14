@@ -16,7 +16,7 @@ func _ready() -> void:
 	arc_angle = (2 * PI - arc_amount * angle_seperation) / arc_amount
 	collision_shape_2d.shape.radius = radius
 	
-	area_2d.body_entered.connect(_on_area_2d_body_entered)
+	#area_2d.body_entered.connect(_on_area_2d_body_entered)
 
 ## Draws a dotted outline
 func _draw() -> void:
@@ -30,9 +30,11 @@ func _draw() -> void:
 #func _process(delta: float) -> void:
 	#global_rotation = 0
 
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if player.current_fuel < player.max_fuel:
+func _process(delta: float) -> void:
+	var bodies: Array[Node2D] = area_2d.get_overlapping_bodies()
+	for body: Node2D in bodies:
 		if body is FuelShard:
-			player.current_fuel += (body as FuelShard).fuel_content
-			(body as FuelShard).die()
+			var fuel_shard: FuelShard = body as FuelShard
+			if player.current_fuel + fuel_shard.fuel_content < player.max_fuel || player.current_fuel == 0:
+				player.current_fuel += fuel_shard.fuel_content
+				fuel_shard.die()
