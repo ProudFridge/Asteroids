@@ -9,6 +9,5 @@ func _ready() -> void:
 
 
 func _on_player_health_lost(currentHealth: float) -> void:
-	print(currentHealth)
 	text = "Lives: " + str(int(round(currentHealth)))
 	

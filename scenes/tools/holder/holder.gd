@@ -3,13 +3,21 @@ class_name Holder
 
 @export var tool: Tool
 @onready var tool_location: Marker2D = $ToolLocation
-#const WEAPON : Resource = preload("uid://cju3pee43b3e8")
 
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#var weapon_instance: GunTest = WEAPON.instantiate()
-	##weapon_instance.position -= (weapon_instance.tool_base.position - tool_location.position)
-	#add_child(weapon_instance)
+
+# TEMPORARY
+@export var shooter: Player
+#const WEAPON : Resource = preload("uid://cju3pee43b3e8")
+var weapon: GunTest
+
+ #Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var weapon_resource: Resource = load("res://scenes/weapon/weapon.tscn")
+	weapon = weapon_resource.instantiate()
+	weapon.shooter = shooter
+	weapon.scale *= 2.5
+	add_child(weapon)
+	weapon.position -= (weapon.tool_base.position - tool_location.position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
