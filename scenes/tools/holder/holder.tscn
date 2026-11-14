@@ -23,5 +23,5 @@ texture = ExtResource("1_wt8e8")
 position = Vector2(0, -9)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1689652760]
-color = Color(0.21261752, 0.74472994, 7.70092e-07, 1)
+color = Color(0.21176471, 0.74509805, 0, 1)
 texture = SubResource("GradientTexture2D_ohdgn")

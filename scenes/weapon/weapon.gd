@@ -22,12 +22,21 @@ var lock_on_texture: LockOnTexture
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var muzzle: Marker2D = $Sprite2D/Muzzle
 
+var weapon_modifiers: Array[Callable] = []
+@export var weapon_upgrades: Array[Upgrade] = []
 
 func use_weapon() -> void:
-	pass
+	var rot: float = sprite_2d.global_rotation
+
+	AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
+	bullet_manager.instantiate_bullet(muzzle.global_position, rot)
+	isCooldownDone = false
+	get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	weapon_modifiers.append(_auto_aim)
+	
 	tool_base = $ToolBase
 	lock_on_texture = LOCK_ON_TEXTURE.instantiate()
 	lock_on_texture.hide()
@@ -48,6 +57,33 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#position = player.position
+	for callable: Callable in weapon_modifiers:
+		callable.call(delta)
+	
+	# Spawn a bullet
+	if isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
+		use_weapon()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Asteroid:
+		(body as Asteroid).is_outline_visible = true
+		body.queue_redraw()
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body is Asteroid:
+		(body as Asteroid).is_outline_visible = false
+		body.queue_redraw()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ctrl"):
+		is_auto_aiming = !is_auto_aiming
+
+#func _motion(delta: float) -> void:
+	#
+
+func _auto_aim(delta: float) -> void:
 	var min: float = INF
 	
 	if is_auto_aiming:
@@ -87,32 +123,7 @@ func _process(delta: float) -> void:
 			lock_on_texture.hide()	
 	else:
 		sprite_2d.rotation = 0
-		lock_on_texture.hide()	
-		
+		lock_on_texture.hide()
+	
 	# Redraw the lock on sprite
 	queue_redraw()
-	
-	# Spawn a bullet
-	if isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
-		var rot: float = sprite_2d.global_rotation
-	#
-		AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
-		bullet_manager.instantiate_bullet(muzzle.global_position, rot)
-		isCooldownDone = false
-		get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Asteroid:
-		(body as Asteroid).is_outline_visible = true
-		body.queue_redraw()
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body is Asteroid:
-		(body as Asteroid).is_outline_visible = false
-		body.queue_redraw()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ctrl"):
-		is_auto_aiming = !is_auto_aiming
