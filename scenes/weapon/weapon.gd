@@ -77,11 +77,13 @@ func _process(delta: float) -> void:
 			closest_asteroid = null
 			
 		if closest_asteroid:
-			sprite_2d.global_rotation = (closest_asteroid.global_position - global_position).angle()
+			#sprite_2d.global_rotation = (closest_asteroid.global_position - global_position).angle()
+			sprite_2d.global_rotation = lerp_angle(sprite_2d.global_rotation, (closest_asteroid.global_position - global_position).angle(), 0.2)
 			lock_on_texture.global_position = closest_asteroid.global_position
 			lock_on_texture.visible = true
 		else:
-			sprite_2d.rotation = 0
+			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, 0, 0.2)
+			#sprite_2d.rotation = 0
 			lock_on_texture.hide()	
 	else:
 		sprite_2d.rotation = 0

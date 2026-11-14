@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dxwoqcnyivk7s" path="res://scenes/tools/holder/holder.tscn" id="9_5gtgg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8afob"]
-bounce = 0.5
+bounce = 0.2
 
 [sub_resource type="Gradient" id="Gradient_lvxji"]
 offsets = PackedFloat32Array(0.009661836, 1)
