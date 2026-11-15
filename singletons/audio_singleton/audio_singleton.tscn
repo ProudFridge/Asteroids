@@ -17,6 +17,7 @@ script = ExtResource("2_nwf4t")
 limit = 10
 type = 1
 sound_effect = Array[AudioStreamWAV]([ExtResource("4_a3qmm")])
+volume = -10.0
 pitch_randomness = 0.2
 metadata/_custom_type_script = "uid://2wo80rhndd4r"
 

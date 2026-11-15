@@ -23,7 +23,6 @@ var lock_on_texture: LockOnTexture
 @onready var muzzle: Marker2D = $Sprite2D/Muzzle
 
 var weapon_modifiers: Array[Callable] = []
-@export var weapon_upgrades: Array[Upgrade] = []
 
 func use_weapon() -> void:
 	var rot: float = sprite_2d.global_rotation
@@ -50,7 +49,7 @@ func _ready() -> void:
 	area_2d.body_exited.connect(_on_area_2d_body_exited)
 
 ## Draws the lock on texture
-#func _draw() -> void:
+#func _draw() -> void: o
 	#if closest_asteroid:
 		#draw_texture(lock_on_texture, closest_asteroid.global_position - global_position - lock_on_texture.get_size() / 2)
 

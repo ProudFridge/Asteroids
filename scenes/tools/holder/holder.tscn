@@ -1,27 +1,37 @@
 [gd_scene format=3 uid="uid://dxwoqcnyivk7s"]
 
-[ext_resource type="Texture2D" uid="uid://b55dibbr5es0i" path="res://assets/sprites/tool.png" id="1_wt8e8"]
 [ext_resource type="Script" uid="uid://d24pxylne2o1o" path="res://scenes/tools/holder/holder.gd" id="2_uydil"]
 
-[sub_resource type="Gradient" id="Gradient_wt8e8"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="QuadMesh" id="QuadMesh_2m7xh"]
+size = Vector2(10, 2)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ohdgn"]
+[sub_resource type="Gradient" id="Gradient_sug1n"]
+colors = PackedColorArray(0.27022192, 0.27022192, 0.2702219, 1, 0.27058825, 0.27058825, 0.27058825, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2tmx8"]
+gradient = SubResource("Gradient_sug1n")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sug1n"]
+size = Vector2(4, 1)
+
+[sub_resource type="Gradient" id="Gradient_wt8e8"]
+offsets = PackedFloat32Array(0.0047393367, 1)
+colors = PackedColorArray(0.49803922, 0.49803922, 0.49803922, 1, 0.49803922, 0.49803922, 0.49803922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yrxbg"]
 gradient = SubResource("Gradient_wt8e8")
-height = 32
-fill = 2
-fill_from = Vector2(0.5, 0.5)
 
 [node name="Holder" type="Node2D" unique_id=2044846770]
 script = ExtResource("2_uydil")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=1276139103]
-scale = Vector2(2.4, 2.4)
-texture = ExtResource("1_wt8e8")
-
 [node name="ToolLocation" type="Marker2D" parent="." unique_id=962419715]
-position = Vector2(0, -9)
+position = Vector2(0, -1)
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1689652760]
-color = Color(0.21176471, 0.74509805, 0, 1)
-texture = SubResource("GradientTexture2D_ohdgn")
+[node name="Rectangle" type="MeshInstance2D" parent="." unique_id=1100507258]
+mesh = SubResource("QuadMesh_2m7xh")
+texture = SubResource("GradientTexture2D_2tmx8")
+
+[node name="Notch" type="MeshInstance2D" parent="." unique_id=1828601400]
+position = Vector2(0, 3)
+mesh = SubResource("QuadMesh_sug1n")
+texture = SubResource("GradientTexture2D_yrxbg")
