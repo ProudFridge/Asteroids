@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cskxh4bavc45a" path="res://scenes/player/pickup_component/pickup_component.tscn" id="4_qek5x"]
 [ext_resource type="Texture2D" uid="uid://m1i8316lq872" path="res://assets/sprites/ship/ship_thruster.png" id="5_p47bc"]
 [ext_resource type="PackedScene" uid="uid://dxwoqcnyivk7s" path="res://scenes/tools/holder/holder.tscn" id="9_5gtgg"]
+[ext_resource type="Script" uid="uid://ct3bs8e63pq6d" path="res://scenes/player/ship_custom.gd" id="9_h17s1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8afob"]
 bounce = 0.2
@@ -44,6 +45,15 @@ linear_accel_max = -59.38
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_5gtgg")
 color_initial_ramp = SubResource("GradientTexture1D_qek5x")
+
+[sub_resource type="Gradient" id="Gradient_je7p5"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.26293245, 0.26293245, 0.26293245, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
+gradient = SubResource("Gradient_je7p5")
+width = 32
+height = 16
 
 [node name="Player" type="RigidBody2D" unique_id=752532407 node_paths=PackedStringArray("boost_component", "impulse_component")]
 z_index = 1
@@ -112,3 +122,9 @@ visible = false
 z_index = 2
 position = Vector2(8.999998, -7)
 shooter = NodePath("..")
+
+[node name="ShipCustom" type="Node2D" parent="." unique_id=1393272360]
+script = ExtResource("9_h17s1")
+
+[node name="Hull" type="Sprite2D" parent="ShipCustom" unique_id=2017723287]
+texture = SubResource("GradientTexture2D_2m7xh")

@@ -16,7 +16,6 @@ signal asteroid_removed(asteroid: Asteroid)
 func _ready() -> void:
 	instantiate_asteroids_in_area(asteroid_num, areaSize, 500)
 
-
 ## Instantiates asteroids in a specified area
 func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZoneRadius: float) -> void:
 	for i: int in asteroidNum:
@@ -29,7 +28,7 @@ func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZon
 			position.x = randf_range(0, area.x)
 			position.y = randf_range(0, area.y)
 		
-		asteroid.position = position
+		asteroid.global_position = position
 		asteroid.angular_velocity = randf_range(-1, 1)
 		asteroid.linear_velocity = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
 		
@@ -38,6 +37,15 @@ func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZon
 		asteroidInstances.append(asteroid)
 		# Remove asteroid from the instance array
 		asteroid.died.connect(_on_asteroid_death.bind(asteroid))
+
+func instantiate_asteroid(position: Vector2) -> Asteroid:
+	var asteroid_instance: Asteroid = ASTEROID.instantiate()
+	asteroid_instance.position = position
+	asteroid_added.emit()
+	asteroidInstances.append(asteroid_instance)
+	add_child(asteroid_instance)
+	
+	return asteroid_instance
 
 
 func _on_asteroid_death(asteroid: Asteroid) -> void:

@@ -69,8 +69,8 @@ shooter = NodePath("../../Player")
 
 [node name="StarsManager" parent="Managers" unique_id=210266538 instance=ExtResource("7_ftsea")]
 
-[node name="GameManager" parent="Managers" unique_id=1113349235 node_paths=PackedStringArray("asteroidManager", "player") instance=ExtResource("5_lfrn8")]
-asteroidManager = NodePath("../AsteroidManager")
+[node name="GameManager" parent="Managers" unique_id=1113349235 node_paths=PackedStringArray("asteroid_manager", "player") instance=ExtResource("5_lfrn8")]
+asteroid_manager = NodePath("../AsteroidManager")
 player = NodePath("../../Player")
 
 [node name="BoundsManager" parent="Managers" unique_id=2007542974 instance=ExtResource("7_3xj4h")]
@@ -166,11 +166,11 @@ text = "Lives:"
 script = ExtResource("6_5i0tg")
 player = NodePath("../../../../Player")
 
-[node name="AsteroidCountLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1230718935 node_paths=PackedStringArray("asteroidManager")]
+[node name="AsteroidCountLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1230718935 node_paths=PackedStringArray("asteroid_manager")]
 layout_mode = 2
 text = "Asteroids:"
 script = ExtResource("7_bdhmt")
-asteroidManager = NodePath("../../../../Managers/AsteroidManager")
+asteroid_manager = NodePath("../../../../Managers/AsteroidManager")
 
 [node name="ScoreLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
 layout_mode = 2
