@@ -11,6 +11,8 @@ var rectangle_size: Vector2 = Vector2(10, 3)
 var notch_size: Vector2 = Vector2(4, 1)
 var indicator_size: Vector2 =  Vector2(4, 1)
 
+var is_flipped: bool = false
+
 @onready var rectangle: MeshInstance2D = $Rectangle
 @onready var notch: MeshInstance2D = $Notch
 @onready var indicator: MeshInstance2D = $Indicator
@@ -19,9 +21,14 @@ var indicator_size: Vector2 =  Vector2(4, 1)
 #const WEAPON : Resource = preload("uid://cju3pee43b3e8")
 var weapon: GunTest
 
-static func instantiate(node: Node, pos: Vector2) -> void:
+static func instantiate(node: Node, pos: Vector2, flipped: bool = false) -> void:
 	var holder_instance: Holder = HOLDER.instantiate()
 	holder_instance.position = pos
+	
+	if flipped:
+		holder_instance.is_flipped = true
+		holder_instance.rotate(PI)
+	
 	node.add_child(holder_instance)
 
  #Called when the node enters the scene tree for the first time.
@@ -44,10 +51,15 @@ func _ready() -> void:
 	
 	# Instantiate the weapon
 	var weapon_resource: Resource = load("res://scenes/weapon/weapon.tscn")
+	
 	weapon = weapon_resource.instantiate()
 	weapon.shooter = shooter
 	weapon.z_index = 1
 	weapon.scale *= 0.5
+	
+	if is_flipped:
+		weapon.rotate(PI)
+	
 	add_child(weapon)
 	weapon.position -= (weapon.tool_base.position - tool_location.position)
 	

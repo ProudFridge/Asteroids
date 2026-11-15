@@ -56,7 +56,7 @@ func _ready() -> void:
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
 	
 	# Instantiate holders
-	var holder_amount: int = 9
+	var holder_amount: int = 4
 	var holder_per_side: int = ceil(float(holder_amount) / 2)
 	
 	var holder_amount_left: int = holder_per_side
@@ -70,7 +70,7 @@ func _ready() -> void:
 		
 	for i: int in holder_amount_right:
 		var holder_position: Vector2 = Vector2(hull_size.x / holder_per_side / 2 + holder_seperation * i - 16, hull_size.y)
-		Holder.instantiate(self, holder_position)
+		Holder.instantiate(self, holder_position, true)
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
