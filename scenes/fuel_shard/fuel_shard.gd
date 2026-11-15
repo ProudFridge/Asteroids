@@ -11,7 +11,9 @@ var polygon: PackedVector2Array = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	polygon = Geometry.generate_convex_polygon(5, Vector2(20, 20))
-	fuel_content = Geometry.compute_area(polygon) * fuel_content_multiplier
+	var area: float = Geometry.compute_area(polygon) 
+	fuel_content = area * fuel_content_multiplier
+	mass = area
 	polygon_2d.polygon = polygon
 	collision_polygon_2d.polygon = polygon
 	polygon_2d.color = Color.from_hsv(randf_range(0.5, 0.6), 1, 1)

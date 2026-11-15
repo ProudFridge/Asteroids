@@ -102,11 +102,13 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_p47bc")
 
 [node name="Holder" parent="." unique_id=2044846770 node_paths=PackedStringArray("shooter") instance=ExtResource("9_5gtgg")]
+visible = false
 z_index = 2
 position = Vector2(-7.9999995, -7.000001)
 shooter = NodePath("..")
 
 [node name="Holder2" parent="." unique_id=1721040265 node_paths=PackedStringArray("shooter") instance=ExtResource("9_5gtgg")]
+visible = false
 z_index = 2
 position = Vector2(8.999998, -7)
 shooter = NodePath("..")

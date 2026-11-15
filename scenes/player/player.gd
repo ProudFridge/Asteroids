@@ -15,8 +15,6 @@ var currentAccel: float = accel
 var current_rot_speed: float = rot_speed
 var current_fuel_consumption: float = fuel_consumption
 
-var ship_width: float = 15
-
 var bounceDamp: float = 0.5
 # TODO: change to health later, faster asteroids deal more damage
 var lives: float = 3
@@ -40,6 +38,8 @@ var viewportSize: Vector2
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var ship: Node2D = $Ship
 
+var hull_size: Vector2 = Vector2(32, 8) # x: pixels long, y: pixels wide
+
 signal died()
 signal health_lost(currentHealth: float)
 
@@ -54,6 +54,23 @@ func _ready() -> void:
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
+	
+	# Instantiate holders
+	var holder_amount: int = 9
+	var holder_per_side: int = ceil(float(holder_amount) / 2)
+	
+	var holder_amount_left: int = holder_per_side
+	var holder_amount_right: int = floor(float(holder_amount) / 2)
+	
+	var holder_seperation: float = hull_size.x / holder_per_side
+	
+	for i: int in holder_amount_left:
+		var holder_position: Vector2 = Vector2(hull_size.x / holder_per_side / 2 + holder_seperation * i - 16, -hull_size.y)
+		Holder.instantiate(self, holder_position)
+		
+	for i: int in holder_amount_right:
+		var holder_position: Vector2 = Vector2(hull_size.x / holder_per_side / 2 + holder_seperation * i - 16, hull_size.y)
+		Holder.instantiate(self, holder_position)
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:

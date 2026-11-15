@@ -94,11 +94,17 @@ color = Color(0, 0, 0, 1)
 [node name="GameWonOver" type="CanvasLayer" parent="." unique_id=425752364]
 
 [node name="GameOverContainer" type="PanelContainer" parent="GameWonOver" unique_id=521271794 node_paths=PackedStringArray("gameManager")]
-visible = false
-offset_left = 789.0
-offset_top = 364.0
-offset_right = 1131.0
-offset_bottom = 600.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -118.0
+offset_right = 171.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("8_8b66f")
 script = ExtResource("11_kp23o")
 gameManager = NodePath("../../Managers/GameManager")
@@ -203,6 +209,7 @@ player = NodePath("../../../../Player")
 
 [node name="PauseMenu" type="PanelContainer" parent="PauseMenuLayer" unique_id=1343691578 node_paths=PackedStringArray("gameManager")]
 process_mode = 3
+visible = false
 modulate = Color(1, 1, 1, 0.6313726)
 z_index = 30
 anchors_preset = 8
@@ -210,10 +217,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -64.0
-offset_right = 77.0
-offset_bottom = 64.0
+offset_left = -164.5
+offset_top = -91.5
+offset_right = 164.5
+offset_bottom = 91.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("8_8b66f")

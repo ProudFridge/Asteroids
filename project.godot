@@ -21,6 +21,7 @@ Dev="*uid://cuk45t5ihah8"
 Global="*uid://b4b6j7xrtqeib"
 SwitcherSingleton="*uid://bkahmpa3ax8nu"
 AudioSingleton="*uid://mopyikbfficr"
+References="*uid://bxxglec10upoi"
 
 [debug]
 
