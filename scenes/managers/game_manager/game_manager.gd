@@ -7,6 +7,11 @@ class_name GameManager
 @export var player: Player # To detect when we lost
 
 var isGameRunning: bool = false
+## The amount of time the player has to destroyu the necessary amount of asteroids
+var game_time: float = 10 # minutes
+var necessary_asteroids: float = 10
+var destroyed_asteroids: int = 0
+@onready var game_timer: Timer = $GameTimer
 
 signal won
 signal lost
@@ -21,6 +26,10 @@ func _ready() -> void:
 	
 	# Pause game when it loads
 	get_tree().paused = true
+	
+	game_timer.wait_time = game_time * 60
+	game_timer.start()
+	game_timer.timeout.connect(_on_game_timer_timeout)
 
 # Detect the closest asteorids and add more if necessary
 func _process(delta: float) -> void:
@@ -40,9 +49,15 @@ func _process(delta: float) -> void:
 		
 
 func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:
-	if asteroid_manager.asteroidInstances.size() <= 0:
+	destroyed_asteroids += 1
+	
+	if destroyed_asteroids >= necessary_asteroids:
 		won.emit()
+	#if asteroid_manager.asteroidInstances.size() <= 0:
+		#won.emit()
 
+func _on_game_timer_timeout() -> void:
+	lost.emit()
 
 func _on_player_died() -> void:
 	lost.emit()

@@ -4,3 +4,5 @@
 
 [node name="GameManager" type="Node" unique_id=1113349235]
 script = ExtResource("1_4tpuv")
+
+[node name="GameTimer" type="Timer" parent="." unique_id=1160393850]

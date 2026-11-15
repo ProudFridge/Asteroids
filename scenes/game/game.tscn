@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bdp8a8gne6npq" path="res://scenes/game/ui/pause_menu/restart_button.gd" id="13_3xj4h"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 [ext_resource type="PackedScene" uid="uid://7khd4cs5u826" path="res://scenes/boost_bar/boost_bar.tscn" id="14_pg2xm"]
+[ext_resource type="Script" uid="uid://dk40yvggw2cqm" path="res://scenes/game/time_label.gd" id="15_3jaai"]
 [ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 
@@ -166,17 +167,24 @@ text = "Lives:"
 script = ExtResource("6_5i0tg")
 player = NodePath("../../../../Player")
 
-[node name="AsteroidCountLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1230718935 node_paths=PackedStringArray("asteroid_manager")]
+[node name="AsteroidCountLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1230718935 node_paths=PackedStringArray("asteroid_manager", "game_manager")]
 layout_mode = 2
 text = "Asteroids:"
 script = ExtResource("7_bdhmt")
 asteroid_manager = NodePath("../../../../Managers/AsteroidManager")
+game_manager = NodePath("../../../../Managers/GameManager")
 
 [node name="ScoreLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
 layout_mode = 2
 text = "Score:"
 script = ExtResource("8_87uf6")
 asteroidManager = NodePath("../../../../Managers/AsteroidManager")
+
+[node name="TimeLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=857768619 node_paths=PackedStringArray("game_manager")]
+layout_mode = 2
+text = "Time Left:"
+script = ExtResource("15_3jaai")
+game_manager = NodePath("../../../../Managers/GameManager")
 
 [node name="InfoContainer" type="MarginContainer" parent="Header" unique_id=933994829]
 anchors_preset = 2
@@ -289,4 +297,5 @@ script = ExtResource("12_otnwt")
 gameManager = NodePath("../../Managers/GameManager")
 
 [node name="Border" type="Node2D" parent="." unique_id=1272152262]
+visible = false
 script = ExtResource("12_5jirj")

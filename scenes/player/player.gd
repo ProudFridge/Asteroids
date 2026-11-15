@@ -74,23 +74,6 @@ func _ready() -> void:
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
-	#var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
-	#if collision:
-		#var collisionPosition : Vector2 = collision.get_position()
-		#
-		#if collisionPosition.x >= Global.windowSize.x:
-			#position.x = collisionPosition.x - position.x
-	#
-		#if collisionPosition.x <= 0:
-			#position.x = Global.windowSize.x - (collisionPosition.x - position.x)
-		#
-		#if collisionPosition.y >= Global.windowSize.y:
-			#position.y = collisionPosition.y - position.y
-			#
-		## Won't work without the 1
-		#if collisionPosition.y <= 1:
-			#position.y = Global.windowSize.y - (collisionPosition.y - position.y)
-		
 	linear_velocity = linear_velocity.limit_length(max_speed)
 	
 	if Input.is_action_pressed("turn_left"):
@@ -99,9 +82,9 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 		angular_velocity = deg_to_rad(current_rot_speed)
 	else:
 		angular_velocity = 0
-
-func _draw() -> void:
-	draw_ellipse(Vector2.ZERO, 1000, 1000, Color.WHEAT, false)
+#
+#func _draw() -> void:
+	#draw_ellipse(Vector2.ZERO, 1000, 1000, Color.WHEAT, false)
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
