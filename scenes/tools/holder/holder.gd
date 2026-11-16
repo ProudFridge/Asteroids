@@ -16,6 +16,10 @@ var is_flipped: bool = false
 @onready var rectangle: MeshInstance2D = $Rectangle
 @onready var notch: MeshInstance2D = $Notch
 @onready var indicator: MeshInstance2D = $Indicator
+@onready var indicator_light: PointLight2D = $IndicatorLight
+
+var color_tween: Tween
+var light_tween: Tween
 
 @export var shooter: Player
 #const WEAPON : Resource = preload("uid://cju3pee43b3e8")
@@ -67,7 +71,18 @@ func _ready() -> void:
 	weapon.cooldown_started.connect(_on_weapon_cooldown_started)
 	
 func _on_weapon_cooldown_done() -> void:
-	indicator.modulate = Color.GREEN
+	if color_tween: color_tween.kill()
+	color_tween = get_tree().create_tween()
+	color_tween.tween_property(indicator, "modulate", Color.GREEN, weapon.cooldown / 2)
+	color_tween.parallel().tween_property(indicator_light, "color", Color.GREEN, weapon.cooldown / 2)
+	color_tween.set_ease(Tween.EASE_OUT)
+	color_tween.set_trans(Tween.TRANS_EXPO)
+	
 
 func _on_weapon_cooldown_started() -> void:
-	indicator.modulate = Color.RED
+	if color_tween: color_tween.kill()
+	color_tween = get_tree().create_tween()
+	color_tween.tween_property(indicator, "modulate", Color.RED, weapon.cooldown / 2)
+	color_tween.parallel().tween_property(indicator_light, "color", Color.RED, weapon.cooldown / 2)
+	color_tween.set_ease(Tween.EASE_OUT)
+	color_tween.set_trans(Tween.TRANS_EXPO)

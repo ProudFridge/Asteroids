@@ -31,6 +31,16 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xl1nj"]
 gradient = SubResource("Gradient_uydil")
 
+[sub_resource type="Gradient" id="Gradient_xl1nj"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vr8fx"]
+gradient = SubResource("Gradient_xl1nj")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Holder" type="Node2D" unique_id=2044846770]
 script = ExtResource("2_uydil")
 
@@ -49,3 +59,6 @@ texture = SubResource("GradientTexture2D_yrxbg")
 [node name="Indicator" type="MeshInstance2D" parent="." unique_id=873582206]
 mesh = SubResource("QuadMesh_wt8e8")
 texture = SubResource("GradientTexture2D_xl1nj")
+
+[node name="IndicatorLight" type="PointLight2D" parent="." unique_id=1656739938]
+texture = SubResource("GradientTexture2D_vr8fx")
