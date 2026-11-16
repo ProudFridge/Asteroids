@@ -36,4 +36,5 @@ func _process(delta: float) -> void:
 			var fuel_shard: FuelShard = body as FuelShard
 			if player.current_fuel + fuel_shard.fuel_content < player.max_fuel || player.current_fuel == 0:
 				player.current_fuel += fuel_shard.fuel_content
+				fuel_shard
 				fuel_shard.die()

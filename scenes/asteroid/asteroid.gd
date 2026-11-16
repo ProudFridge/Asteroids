@@ -56,6 +56,7 @@ func _ready() -> void:
 	for t: Polygon2D in triangles:
 		add_child(t)
 	
+	
 func _draw() -> void:
 	if is_outline_visible:
 		draw_polyline(Geometry2D.convex_hull(generated_polygon), Color.WHITE, 5)
@@ -67,7 +68,6 @@ func _draw() -> void:
 	if is_polygon_points_visible:
 		for v: Vector2 in populated_polygon:
 			draw_ellipse(v, 2, 2, Color.ALICE_BLUE)
-
 
 # TODO: maybe replace with a component and create a die() function
 func take_damage(damage: float) -> void:
@@ -126,14 +126,18 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			#get_tree().root.add_child(shardInstance)
 			get_parent().add_child(shardInstance)
 		
+		
+		# Add fuel shards when the asteroid is destroyed
+		# TODO: Put all of this in a component
 		var fuel_shard: Resource = preload("res://scenes/fuel_shard/fuel_shard.tscn")
 		
-		fuel_shard_amount = int(round(area / 500))
+		#fuel_shard_amount = int(round(area / 500))
+		fuel_shard_amount = int(round(sqrt(area / 10)))
 		for i: int in fuel_shard_amount:
 			var fuel_shard_instance: FuelShard = fuel_shard.instantiate()
 			var vec_length: float = randf_range(5, 15)
 			var rand_angle: float = randfn(-PI, PI)
-			var speed_multiplier: float = randf_range(0.5, 2)
+			var speed_multiplier: float = randf_range(0.5, 1.5)
 			
 			fuel_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
 			fuel_shard_instance.linear_velocity = (fuel_shard_instance.position - position) * 5

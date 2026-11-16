@@ -127,4 +127,5 @@ shooter = NodePath("..")
 script = ExtResource("9_h17s1")
 
 [node name="Hull" type="Sprite2D" parent="ShipCustom" unique_id=2017723287]
+visible = false
 texture = SubResource("GradientTexture2D_2m7xh")
