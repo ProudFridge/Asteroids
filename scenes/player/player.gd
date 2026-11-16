@@ -9,7 +9,7 @@ var fuel_consumption: float = 20 # u/s
 
 const accel: float = 200.0
 var max_speed: float = 800
-@export var rot_speed: float = 250 # deg/s
+@export var rot_speed: float = 200 # deg/s
 
 var currentAccel: float = accel
 var current_rot_speed: float = rot_speed

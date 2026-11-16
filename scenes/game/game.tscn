@@ -176,6 +176,7 @@ asteroid_manager = NodePath("../../../../Managers/AsteroidManager")
 game_manager = NodePath("../../../../Managers/GameManager")
 
 [node name="ScoreLabel" type="Label" parent="Header/Header/HBoxContainer" unique_id=1073056985 node_paths=PackedStringArray("asteroidManager")]
+visible = false
 layout_mode = 2
 text = "Score:"
 script = ExtResource("8_87uf6")
