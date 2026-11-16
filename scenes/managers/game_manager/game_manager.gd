@@ -7,15 +7,14 @@ class_name GameManager
 @export var player: Player # To detect when we lost
 
 var isGameRunning: bool = false
-## The amount of time the player has to destroyu the necessary amount of asteroids
+## The amount of time the player has to destroy the necessary amount of asteroids
 var game_time: float = 10 # minutes
-var necessary_asteroids: float = 10
-var destroyed_asteroids: int = 0
+var necessary_asteroids: float = 25 # Require asteroids to be destroyed to beat the game
+var destroyed_asteroids: int = 0 
 @onready var game_timer: Timer = $GameTimer
 
 signal won
 signal lost
-#signal boostIncreased(newBoostValue: float)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

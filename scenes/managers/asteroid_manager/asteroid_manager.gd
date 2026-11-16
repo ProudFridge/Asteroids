@@ -38,10 +38,12 @@ func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZon
 		# Remove asteroid from the instance array
 		asteroid.died.connect(_on_asteroid_death.bind(asteroid))
 
+
 func instantiate_asteroid(position: Vector2) -> Asteroid:
 	var asteroid_instance: Asteroid = ASTEROID.instantiate()
 	asteroid_instance.position = position
 	asteroid_added.emit()
+	asteroid_instance.died.connect(_on_asteroid_death.bind(asteroid_instance))
 	asteroidInstances.append(asteroid_instance)
 	add_child(asteroid_instance)
 	

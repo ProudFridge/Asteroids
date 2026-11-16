@@ -8,6 +8,7 @@ var health: float = 100:
 		
 var maxHealth: float = health
 var density: float = 0.001
+var area: float
 @export var rotationSpeed: float = 1
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
@@ -18,7 +19,8 @@ var populated_polygon: PackedVector2Array = []
 
 var boundingBox: Vector2 = Vector2(60, 60)
 var center: Vector2 = Vector2.ZERO
-var hasShattered: bool = false
+var has_shattered: bool = false
+var fuel_shard_amount: int = 5
 
 @export_group("Debug Options")
 @export var is_outline_visible: bool = false
@@ -44,7 +46,7 @@ func _ready() -> void:
 	populated_polygon = Geometry.populate_with_random_points(generated_polygon)
 	center = Geometry.get_center(generated_polygon)
 	collision_polygon.polygon = generated_polygon
-	var area: float = Geometry.compute_area(generated_polygon)
+	area = Geometry.compute_area(generated_polygon)
 	mass = area * density
 	health = area / 100
 	maxHealth = health
@@ -76,9 +78,9 @@ func take_damage(damage: float) -> void:
 
 
 func die() -> void: 
-	if !hasShattered:
+	if !has_shattered:
 		shatter(true)
-		hasShattered = true
+		has_shattered = true
 		died.emit()
 		queue_free()
 
@@ -125,9 +127,16 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			get_parent().add_child(shardInstance)
 		
 		var fuel_shard: Resource = preload("res://scenes/fuel_shard/fuel_shard.tscn")
-		for i: int in 4:
+		
+		fuel_shard_amount = int(round(area / 500))
+		for i: int in fuel_shard_amount:
 			var fuel_shard_instance: FuelShard = fuel_shard.instantiate()
-			fuel_shard_instance.position = position
+			var vec_length: float = randf_range(5, 15)
+			var rand_angle: float = randfn(-PI, PI)
+			var speed_multiplier: float = randf_range(0.5, 2)
+			
+			fuel_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
+			fuel_shard_instance.linear_velocity = (fuel_shard_instance.position - position) * 5
 			get_parent().add_child(fuel_shard_instance)
 		
 	return triangles
