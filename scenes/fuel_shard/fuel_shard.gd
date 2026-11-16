@@ -27,8 +27,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_absorbed:
-		position = Tween.interpolate_value(initial_position, player.position - initial_position, absorption_time - absorption_timer.time_left, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)
-	
+		var elapsed_time: float = absorption_time - absorption_timer.time_left
+		position = Tween.interpolate_value(initial_position, player.position - initial_position, elapsed_time, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		polygon_2d.scale = Tween.interpolate_value(Vector2.ONE, -Vector2(0.5, 0.5), elapsed_time, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	
 func absorb_by_player(play: Player) -> void:
 	initial_position = position

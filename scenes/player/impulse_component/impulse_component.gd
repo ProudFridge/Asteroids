@@ -40,7 +40,7 @@ func _input(event: InputEvent) -> void:
 		left_thruster_particles.emitting = true
 		left_timer.start()
 		impulse_depleated.emit()
-		
+
 
 func _on_right_timer_timeout() -> void:
 	impulse_refilled.emit()
