@@ -7,9 +7,9 @@ var current_fuel: float = max_fuel:
 		current_fuel = clamp(new_fuel, 0, max_fuel)
 var fuel_consumption: float = 20 # u/s
 
-const accel: float = 200.0
-var max_speed: float = 800
-@export var rot_speed: float = 200 # deg/s
+const accel: float = 100.0
+var max_speed: float = 8000
+@export var rot_speed: float = 100 # deg/s
 
 var currentAccel: float = accel
 var current_rot_speed: float = rot_speed

@@ -2,5 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bd1wl0yjlhw1" path="res://scenes/managers/asteroid_manager/asteroid_manager.gd" id="1_27iif"]
 
+[sub_resource type="Gradient" id="Gradient_3wpdt"]
+offsets = PackedFloat32Array(0, 0.27038628, 0.66523606, 1)
+colors = PackedColorArray(0.32156864, 0.32156864, 0.32156864, 1, 0.40784314, 0.22352941, 0.2901961, 1, 0.21568628, 0.28235295, 0.2901961, 1, 0.22745098, 0.23921569, 0.38039216, 1)
+
 [node name="AsteroidManager" type="Node" unique_id=1515685420]
 script = ExtResource("1_27iif")
+color_gradient = SubResource("Gradient_3wpdt")

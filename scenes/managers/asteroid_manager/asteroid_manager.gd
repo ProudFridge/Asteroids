@@ -5,6 +5,9 @@ class_name AsteroidManager
 # Called when the node enters the scene tree for the first time.
 const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 
+## Used to get the colors of the asteroid 
+#@export var color_gradient: GradientTexture2D
+@export var color_gradient: Gradient
 @export var areaSize: Vector2 = Global.windowSize 
 @export var asteroid_num: int = 10
 var asteroidInstances: Array[Asteroid] = []
@@ -41,7 +44,10 @@ func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZon
 
 func instantiate_asteroid(position: Vector2) -> Asteroid:
 	var asteroid_instance: Asteroid = ASTEROID.instantiate()
+	
+	asteroid_instance.modulate = color_gradient.sample(position.length() / 100000)
 	asteroid_instance.position = position
+	#asteroid.angular_velocity = randf_range(-1, 1)
 	asteroid_added.emit()
 	asteroid_instance.died.connect(_on_asteroid_death.bind(asteroid_instance))
 	asteroidInstances.append(asteroid_instance)
