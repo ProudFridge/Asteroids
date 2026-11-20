@@ -26,10 +26,10 @@ func _draw() -> void:
 		start_angle = end_angle + arc_seperation
 		end_angle = start_angle + arc_angle
 	
-#func _process(delta: float) -> void:
-	#global_rotation = 0
-
 func _process(delta: float) -> void:
+	global_position = player.global_position
+	rotation += 0.5 * delta
+	
 	var bodies: Array[Node2D] = area_2d.get_overlapping_bodies()
 	for body: Node2D in bodies:
 		if body is FuelShard:

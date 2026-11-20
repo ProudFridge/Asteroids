@@ -9,7 +9,7 @@ var fuel_consumption: float = 20 # u/s
 
 const accel: float = 100.0
 var max_speed: float = 8000
-@export var rot_speed: float = 100 # deg/s
+@export var rot_speed: float = 400 # deg/s
 
 var currentAccel: float = accel
 var current_rot_speed: float = rot_speed
@@ -82,12 +82,6 @@ func _ready() -> void:
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	linear_velocity = linear_velocity.limit_length(max_speed)
 	
-	if Input.is_action_pressed("turn_left"):
-		angular_velocity = -deg_to_rad(current_rot_speed)
-	elif Input.is_action_pressed("turn_right"):
-		angular_velocity = deg_to_rad(current_rot_speed)
-	else:
-		angular_velocity = 0
 #
 #func _draw() -> void:
 	#draw_ellipse(Vector2.ZERO, 1000, 1000, Color.WHEAT, false)
@@ -102,6 +96,15 @@ func _physics_process(delta: float) -> void:
 		current_fuel -= current_fuel_consumption * delta
 	else:
 		thruster_particles.emitting = false
+		
+	if Input.is_action_pressed("turn_left"):
+		apply_torque(-current_rot_speed)
+		#angular_velocity = -deg_to_rad(current_rot_speed)
+	elif Input.is_action_pressed("turn_right"):
+		apply_torque(current_rot_speed)
+		#angular_velocity = deg_to_rad(current_rot_speed)
+	#else:
+		#angular_velocity = 0
 
 
 func die() -> void:
@@ -112,7 +115,7 @@ func die() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
 		#lives -= 1
-		health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
+		#health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
 		print(health)
 		$Camera2D.add_trauma(0.5)
 		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)

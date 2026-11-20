@@ -22,35 +22,41 @@ func _ready() -> void:
 ## Instantiates asteroids in a specified area
 func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZoneRadius: float) -> void:
 	for i: int in asteroidNum:
-		var asteroid: Asteroid = ASTEROID.instantiate()
+		#var asteroid: Asteroid = ASTEROID.instantiate()
 		
 		# Todo: replace with actual scren size, maybe use a singleton to store the screen size
 		var position: Vector2 = Vector2(randf_range(0, area.x), randf_range(0, area.y))
+		var velocity: Vector2 = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
 		
 		while position.distance_to(area / 2) < exclusionZoneRadius:
 			position.x = randf_range(0, area.x)
 			position.y = randf_range(0, area.y)
 		
-		asteroid.global_position = position
-		asteroid.angular_velocity = randf_range(-1, 1)
-		asteroid.linear_velocity = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
-		
-		add_child(asteroid)
-		asteroid_added.emit()
-		asteroidInstances.append(asteroid)
-		# Remove asteroid from the instance array
-		asteroid.died.connect(_on_asteroid_death.bind(asteroid))
+		instantiate_asteroid(position, velocity)
 
 
-func instantiate_asteroid(position: Vector2) -> Asteroid:
+func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -> Asteroid:
+	var size_modifier: float = 1
+	var random_num: float = randf_range(0, 1)
+	
+	if random_num > 0.8:
+		size_modifier = 0.3
+	elif random_num < 0.95 && random_num >= 0.8:
+		size_modifier = 1
+	else:
+		size_modifier = 2
+	
 	var asteroid_instance: Asteroid = ASTEROID.instantiate()
 	
-	asteroid_instance.modulate = color_gradient.sample(position.length() / 100000)
+	asteroid_instance.boundingBox = asteroid_instance.boundingBox * 0.0001 * position.length() * size_modifier
+	asteroid_instance.modulate = color_gradient.sample(position.length() / 50000)
 	asteroid_instance.position = position
-	#asteroid.angular_velocity = randf_range(-1, 1)
-	asteroid_added.emit()
+	asteroid_instance.linear_velocity = velocity
+	asteroid_instance.angular_velocity = randf_range(-1, 1)
 	asteroid_instance.died.connect(_on_asteroid_death.bind(asteroid_instance))
 	asteroidInstances.append(asteroid_instance)
+	
+	asteroid_added.emit()
 	add_child(asteroid_instance)
 	
 	return asteroid_instance

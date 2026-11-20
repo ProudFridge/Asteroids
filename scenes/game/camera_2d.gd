@@ -16,7 +16,7 @@ var noise_shake_speed: float = 10
 
 var zoom_tween: Tween
 var target_zoom: Vector2 = zoom
-@export var max_zoom: Vector2 = Vector2(10, 10)
+@export var max_zoom: Vector2 = Vector2(5, 5)
 @export var min_zoom: Vector2 = Vector2(0.1, 0.1)
 
 func _ready() -> void:

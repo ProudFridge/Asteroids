@@ -13,6 +13,10 @@ var necessary_asteroids: float = 25 # Require asteroids to be destroyed to beat 
 var destroyed_asteroids: int = 0 
 @onready var game_timer: Timer = $GameTimer
 
+## Variables for asteroid generation
+var detection_radius: float = Global.windowSize.x
+var threshold_amount: int = 500
+
 signal won
 signal lost
 
@@ -32,8 +36,6 @@ func _ready() -> void:
 
 # Detect the closest asteorids and add more if necessary
 func _process(delta: float) -> void:
-	var detection_radius: float = Global.windowSize.x
-	var threshold_amount: int = 100
 	var asteroid_count: int = 0
 	for asteroid: Asteroid in asteroid_manager.asteroidInstances:
 		if asteroid != null:
@@ -41,7 +43,7 @@ func _process(delta: float) -> void:
 				asteroid_count += 1
 			
 	while asteroid_count < threshold_amount:
-		var length: float = randf_range(1000, Global.windowSize.x)
+		var length: float = randf_range(2000, Global.windowSize.x)
 		var angle: float = randf_range(-PI, PI)
 		asteroid_manager.instantiate_asteroid(Vector2(cos(angle) * length, sin(angle) * length) + player.position)
 		asteroid_count += 1
@@ -52,8 +54,6 @@ func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:
 	
 	if destroyed_asteroids >= necessary_asteroids:
 		won.emit()
-	#if asteroid_manager.asteroidInstances.size() <= 0:
-		#won.emit()
 
 func _on_game_timer_timeout() -> void:
 	lost.emit()

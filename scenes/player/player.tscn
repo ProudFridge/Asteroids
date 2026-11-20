@@ -63,6 +63,7 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 3
 angular_damp_mode = 1
+angular_damp = 1.0
 script = ExtResource("1_8afob")
 boost_component = NodePath("Components/BoostComponent")
 impulse_component = NodePath("Components/ImpulseComponent")
@@ -77,6 +78,7 @@ player = NodePath("../..")
 player = NodePath("../..")
 
 [node name="PickupComponent" parent="Components" unique_id=563053896 node_paths=PackedStringArray("player") instance=ExtResource("4_qek5x")]
+top_level = true
 player = NodePath("../..")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]
@@ -129,3 +131,5 @@ script = ExtResource("9_h17s1")
 [node name="Hull" type="Sprite2D" parent="ShipCustom" unique_id=2017723287]
 visible = false
 texture = SubResource("GradientTexture2D_2m7xh")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=421827208]
