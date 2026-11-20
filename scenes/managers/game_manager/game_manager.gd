@@ -32,19 +32,19 @@ func _ready() -> void:
 
 # Detect the closest asteorids and add more if necessary
 func _process(delta: float) -> void:
-	var rad: float = Global.windowSize.x
-	var amount: int = 100
-	var count: int = 0
+	var detection_radius: float = Global.windowSize.x
+	var threshold_amount: int = 100
+	var asteroid_count: int = 0
 	for asteroid: Asteroid in asteroid_manager.asteroidInstances:
 		if asteroid != null:
-			if (asteroid.global_position - player.global_position).length() < rad:
-				count += 1
+			if (asteroid.global_position - player.global_position).length() < detection_radius:
+				asteroid_count += 1
 			
-	while count < amount:
+	while asteroid_count < threshold_amount:
 		var length: float = randf_range(1000, Global.windowSize.x)
 		var angle: float = randf_range(-PI, PI)
 		asteroid_manager.instantiate_asteroid(Vector2(cos(angle) * length, sin(angle) * length) + player.position)
-		count += 1
+		asteroid_count += 1
 		
 
 func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:

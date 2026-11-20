@@ -4,7 +4,7 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	text = "Lives: " + str(int(round(player.lives)))
+	text = "Lives: " + str(int(round(player.health)))
 	player.health_lost.connect(_on_player_health_lost)
 
 

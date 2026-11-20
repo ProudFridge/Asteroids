@@ -5,19 +5,19 @@ class_name FuelShard
 @onready var polygon_2d: Polygon2D = $Polygon2D
 
 var fuel_content: float = 0
-var fuel_content_multiplier: float = 0.1
+var fuel_content_multiplier: float = 0.05
 var polygon: PackedVector2Array = []
 
 var is_absorbed: bool = false
 var absorption_timer: SceneTreeTimer
-var absorption_time: float = 0.5
+var absorption_time: float = 1
 var initial_position: Vector2
 var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	polygon = Geometry.generate_convex_polygon(5, Vector2(randf_range(10, 30), randf_range(10, 30)))
-	var area: float = Geometry.compute_area(polygon) 
+	var area: float = Geometry.compute_area(polygon)
 	fuel_content = area * fuel_content_multiplier
 	mass = area
 	polygon_2d.polygon = polygon
@@ -33,6 +33,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func absorb_by_player(play: Player) -> void:
+	collision_polygon_2d.disabled = true
 	initial_position = position
 	player = play
 	is_absorbed = true

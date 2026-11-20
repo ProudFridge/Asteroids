@@ -16,8 +16,14 @@ var current_rot_speed: float = rot_speed
 var current_fuel_consumption: float = fuel_consumption
 
 var bounceDamp: float = 0.5
-# TODO: change to health later, faster asteroids deal more damage
-var lives: float = 3
+var health: float = 100:
+	set(newHealth):
+		if newHealth > 0:
+			health = newHealth
+		else:
+			health = 0
+			die()
+		
 var isAlive: bool = true
 
 var impulseMagnitude: float = 400
@@ -105,13 +111,16 @@ func die() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
-		lives -= 1
+		#lives -= 1
+		health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
+		print(health)
 		$Camera2D.add_trauma(0.5)
 		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)
-		health_lost.emit(lives)
-		if lives <= 0:
-			died.emit()
-			die()
+		#health_lost.emit(lives)
+		health_lost.emit(health)
+		#if lives <= 0:
+			#died.emit()
+			#die()
 		damage_timer.start()
 		
 		ship.modulate = Color.RED
@@ -145,15 +154,6 @@ func _input(event: InputEvent) -> void:
 			var tween: Tween = create_tween()
 			tween.tween_property(thruster_sound, "pitch_scale", 1.5, 0.1)
 		$Camera2D.add_trauma(0.5)
-	
-	# Handle rotation
-	#if event.is_action_pressed("turn_left"):
-		#angular_velocity = -deg_to_rad(current_rot_speed)
-	#elif event.is_action_pressed("turn_right"):
-		#angular_velocity = deg_to_rad(current_rot_speed)
-#
-	#if event.is_action_released("turn_left") || event.is_action_released("turn_right"):
-		#angular_velocity = 0
 
 
 ## Creates a PackedVector2Array that contains the points for a triangle with its pivot at the center

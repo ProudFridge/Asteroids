@@ -61,4 +61,5 @@ mesh = SubResource("QuadMesh_wt8e8")
 texture = SubResource("GradientTexture2D_xl1nj")
 
 [node name="IndicatorLight" type="PointLight2D" parent="." unique_id=1656739938]
+energy = 0.5
 texture = SubResource("GradientTexture2D_vr8fx")
