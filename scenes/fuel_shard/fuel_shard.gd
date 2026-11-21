@@ -14,6 +14,7 @@ var absorption_time: float = 1
 var initial_position: Vector2
 var player: Player
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	polygon = Geometry.generate_convex_polygon(5, Vector2(randf_range(10, 30), randf_range(10, 30)))
@@ -23,7 +24,12 @@ func _ready() -> void:
 	polygon_2d.polygon = polygon
 	collision_polygon_2d.polygon = polygon
 	polygon_2d.color = Color.from_hsv(randf_range(0.5, 0.6), 1, 1)
-
+	
+	var triangles: Array[Polygon2D] = shatter()
+	
+	for t: Polygon2D in triangles:
+		add_child(t)
+	
 	
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if is_absorbed:
@@ -47,3 +53,17 @@ func die() -> void:
 	# TODO: change played sound
 	#AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)
 	queue_free.call_deferred()
+
+## Shatters the polygon into multiple triangles
+func shatter() -> Array[Polygon2D]:
+	var delaunay: PackedInt32Array = Geometry2D.triangulate_delaunay(polygon)
+	var triangles: Array[Polygon2D] = []
+	
+	if !delaunay.is_empty():
+		for i: int in range(0, delaunay.size(), 3):
+			var triangle: Polygon2D = Polygon2D.new()
+			triangle.polygon = PackedVector2Array([polygon[delaunay[i]], polygon[delaunay[i + 1]], polygon[delaunay[i + 2]]])
+			triangle.color = Color.from_hsv(randf_range(0.5, 0.6), 1.0, 1.0, 1.0)
+			triangles.append(triangle)
+			
+	return triangles

@@ -9,6 +9,7 @@ var arc_amount: int = 15
 var arc_seperation: float = PI / 24
 var arc_angle: float = 0.5
 var arc_width: float = 1
+var rotation_speed: float = 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +29,7 @@ func _draw() -> void:
 	
 func _process(delta: float) -> void:
 	global_position = player.global_position
-	rotation += 0.5 * delta
+	rotation += rotation_speed * delta
 	
 	var bodies: Array[Node2D] = area_2d.get_overlapping_bodies()
 	for body: Node2D in bodies:

@@ -37,7 +37,7 @@ func _ready() -> void:
 # Detect the closest asteorids and add more if necessary
 func _process(delta: float) -> void:
 	var asteroid_count: int = 0
-	for asteroid: Asteroid in asteroid_manager.asteroidInstances:
+	for asteroid: Asteroid in asteroid_manager.asteroid_instances:
 		if asteroid != null:
 			if (asteroid.global_position - player.global_position).length() < detection_radius:
 				asteroid_count += 1

@@ -12,6 +12,7 @@ var area: float
 @export var rotationSpeed: float = 1
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
+@onready var light_occluder_2d: LightOccluder2D = $LightOccluder2D
 
 var generated_polygon: PackedVector2Array = []
 var closed_polygon: PackedVector2Array = []
@@ -31,8 +32,6 @@ var fuel_shard_amount: int = 5
 signal died
 
 func _ready() -> void:
-	closed_polygon = Geometry2D.convex_hull(generated_polygon)
-	
 	var multiplier: float = 1
 	var rand: float = randf_range(0, 1)
 	if rand < 0.2:
@@ -41,8 +40,8 @@ func _ready() -> void:
 		multiplier = 6
 	boundingBox *= multiplier
 	
-	
 	generated_polygon = Geometry.generate_convex_polygon(randi_range(5, 8), boundingBox)
+	closed_polygon = Geometry2D.convex_hull(generated_polygon)
 	populated_polygon = Geometry.populate_with_random_points(generated_polygon)
 	center = Geometry.get_center(generated_polygon)
 	collision_polygon.polygon = generated_polygon
@@ -51,12 +50,15 @@ func _ready() -> void:
 	health = area / 100
 	maxHealth = health
 	
+	light_occluder_2d.occluder = OccluderPolygon2D.new()
+	light_occluder_2d.occluder.polygon = generated_polygon
+	
 	var triangles: Array[Polygon2D] = shatter(false)
 	
 	for t: Polygon2D in triangles:
 		add_child(t)
-	
-	
+
+
 func _draw() -> void:
 	if is_outline_visible:
 		draw_polyline(Geometry2D.convex_hull(generated_polygon), Color.WHITE, 5)

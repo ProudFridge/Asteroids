@@ -22,8 +22,9 @@ var color_tween: Tween
 var light_tween: Tween
 
 @export var shooter: Player
-#const WEAPON : Resource = preload("uid://cju3pee43b3e8")
-var weapon: GunTest
+var weapon: Weapon
+
+# TODO: variable for max rotation angle and default rotation angle
 
 static func instantiate(node: Node, pos: Vector2, flipped: bool = false) -> void:
 	var holder_instance: Holder = HOLDER.instantiate()
@@ -54,22 +55,34 @@ func _ready() -> void:
 	notch.position = Vector2(0, rectangle_size.y / 2 + notch_size.y / 2)
 	
 	# Instantiate the weapon
-	var weapon_resource: Resource = load("res://scenes/weapon/weapon.tscn")
+	const weapon_resource: Resource = preload("uid://cju3pee43b3e8")
+	const rocket_launcher_resource: Resource = preload("uid://duh4bbm5nu0jt")
 	
-	weapon = weapon_resource.instantiate()
+	if randi() % 2 == 0:
+		weapon = weapon_resource.instantiate()
+	else:
+		weapon = rocket_launcher_resource.instantiate()
+		
 	weapon.shooter = shooter
 	weapon.z_index = 1
 	weapon.scale *= 0.5
 	
-	if is_flipped:
-		weapon.rotate(PI)
+	#if is_flipped:
+		#print("hlelo")
+		#weapon.rotate(PI)
 	
 	add_child(weapon)
 	weapon.position -= (weapon.tool_base.position - tool_location.position)
 	
-	weapon.cooldown_done.connect(_on_weapon_cooldown_done)
-	weapon.cooldown_started.connect(_on_weapon_cooldown_started)
-	
+	weapon.weapon_cooldown_done.connect(_on_weapon_cooldown_done)
+	weapon.weapon_cooldown_started.connect(_on_weapon_cooldown_started)
+
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("space") && weapon.is_cooldown_done:
+		weapon.use_weapon()
+		AudioSingleton.play_2d_audio_at_location(weapon.global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
+
+
 func _on_weapon_cooldown_done() -> void:
 	if color_tween: color_tween.kill()
 	color_tween = get_tree().create_tween()

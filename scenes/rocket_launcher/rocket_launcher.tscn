@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://duh4bbm5nu0jt"]
+
+[ext_resource type="Script" uid="uid://bpujcfjips262" path="res://scenes/rocket_launcher/rocket_launcher.gd" id="1_s425u"]
+[ext_resource type="Texture2D" uid="uid://boq2ub6vffhug" path="res://assets/sprites/tool/rocket_launcher.png" id="2_oi3jr"]
+
+[node name="RocketLauncher" type="Node2D" unique_id=63802493]
+script = ExtResource("1_s425u")
+
+[node name="ToolBase" type="Marker2D" parent="." unique_id=1620711086]
+position = Vector2(0, 7.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1067314973]
+texture = ExtResource("2_oi3jr")

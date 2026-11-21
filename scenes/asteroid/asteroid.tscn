@@ -7,6 +7,8 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3xj4h"]
 bounce = 0.2
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2m7xh"]
+
 [node name="Asteroid" type="RigidBody2D" unique_id=2077462969]
 scale = Vector2(0.99985087, 0.99985087)
 collision_layer = 2
@@ -26,3 +28,6 @@ stream = ExtResource("2_j1t37")
 visible = false
 z_index = 19
 script = ExtResource("3_8t7q7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2006919776]
+occluder = SubResource("OccluderPolygon2D_2m7xh")

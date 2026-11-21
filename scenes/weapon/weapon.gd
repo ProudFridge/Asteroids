@@ -4,8 +4,8 @@ class_name GunTest
 const LOCK_ON_TEXTURE: Resource = preload("uid://vn17ge5tjuwo")
 
 @export var shooter: Player
-var cooldown: float = 0.5
-var isCooldownDone: bool = true
+#var cooldown: float = 0.5
+#var is_cooldown_done: bool = true
 
 var is_auto_aiming: bool = false
 var auto_aim_radius: float = 500
@@ -24,17 +24,14 @@ var lock_on_texture: LockOnTexture
 
 var weapon_modifiers: Array[Callable] = []
 
-signal cooldown_done
-signal cooldown_started
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	weapon_modifiers.append(_auto_aim)
 	
 	tool_base = $ToolBase
 	lock_on_texture = LOCK_ON_TEXTURE.instantiate()
 	lock_on_texture.hide()
-	
 	add_child(lock_on_texture)
 	
 	#bullet_manager = References.bullet_manager
@@ -47,13 +44,8 @@ func _ready() -> void:
 func use_weapon() -> void:
 	var rot: float = sprite_2d.global_rotation
 
-	AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
 	References.bullet_manager.instantiate_bullet(muzzle.global_position, rot)
-	isCooldownDone = false
-	cooldown_started.emit()
-	get_tree().create_timer(cooldown).timeout.connect(func() -> void:
-		isCooldownDone = true
-		cooldown_done.emit())
+	weapon_cooldown_started.emit()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,8 +55,8 @@ func _process(delta: float) -> void:
 		callable.call(delta)
 	
 	# Spawn a bullet
-	if isCooldownDone && Input.is_action_pressed("space") && shooter.isAlive:
-		use_weapon()
+	#if is_cooldown_done && Input.is_action_pressed("space") && shooter.isAlive:
+		#use_weapon()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -82,8 +74,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ctrl"):
 		is_auto_aiming = !is_auto_aiming
 
-#func _motion(delta: float) -> void:
-	#
 
 func _auto_aim(delta: float) -> void:
 	var min: float = INF

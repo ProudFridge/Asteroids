@@ -7,9 +7,9 @@ var current_fuel: float = max_fuel:
 		current_fuel = clamp(new_fuel, 0, max_fuel)
 var fuel_consumption: float = 20 # u/s
 
-const accel: float = 100.0
+const accel: float = 200.0
 var max_speed: float = 8000
-@export var rot_speed: float = 400 # deg/s
+@export var rot_speed: float = 500 # deg/s
 
 var currentAccel: float = accel
 var current_rot_speed: float = rot_speed
@@ -40,6 +40,8 @@ var viewportSize: Vector2
 @export var bullet_manager: BulletManager
 @onready var damage_timer: Timer = $DamageTimer
 @onready var thruster_particles: GPUParticles2D = $ThrusterParticles
+@onready var left_thruster_particles: GPUParticles2D = $LeftThrusterParticles
+@onready var right_thruster_particles: GPUParticles2D = $RightThrusterParticles
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var ship: Node2D = $Ship
@@ -96,15 +98,19 @@ func _physics_process(delta: float) -> void:
 		current_fuel -= current_fuel_consumption * delta
 	else:
 		thruster_particles.emitting = false
-		
+	
+	# Apply torque to spin the ship
 	if Input.is_action_pressed("turn_left"):
+		right_thruster_particles.emitting = true
 		apply_torque(-current_rot_speed)
-		#angular_velocity = -deg_to_rad(current_rot_speed)
-	elif Input.is_action_pressed("turn_right"):
+	else:
+		right_thruster_particles.emitting = false
+		
+	if Input.is_action_pressed("turn_right"):
 		apply_torque(current_rot_speed)
-		#angular_velocity = deg_to_rad(current_rot_speed)
-	#else:
-		#angular_velocity = 0
+		left_thruster_particles.emitting = true
+	else:
+		left_thruster_particles.emitting = false
 
 
 func die() -> void:

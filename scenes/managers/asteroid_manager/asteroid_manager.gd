@@ -10,7 +10,7 @@ const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 @export var color_gradient: Gradient
 @export var areaSize: Vector2 = Global.windowSize 
 @export var asteroid_num: int = 10
-var asteroidInstances: Array[Asteroid] = []
+var asteroid_instances: Array[Asteroid] = []
 
 signal asteroid_added
 signal asteroid_removed(asteroid: Asteroid)
@@ -54,7 +54,7 @@ func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -
 	asteroid_instance.linear_velocity = velocity
 	asteroid_instance.angular_velocity = randf_range(-1, 1)
 	asteroid_instance.died.connect(_on_asteroid_death.bind(asteroid_instance))
-	asteroidInstances.append(asteroid_instance)
+	asteroid_instances.append(asteroid_instance)
 	
 	asteroid_added.emit()
 	add_child(asteroid_instance)
@@ -63,5 +63,5 @@ func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -
 
 
 func _on_asteroid_death(asteroid: Asteroid) -> void:
-	asteroidInstances.erase(asteroid)
+	asteroid_instances.erase(asteroid)
 	asteroid_removed.emit(asteroid)
