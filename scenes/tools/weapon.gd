@@ -23,7 +23,6 @@ func _on_weapon_cooldown_done() -> void:
 	
 func _on_weapon_cooldown_started() -> void:
 	is_cooldown_done = false
-	print("test")
 	get_tree().create_timer(cooldown).timeout.connect(func() -> void:
 		weapon_cooldown_done.emit())
 

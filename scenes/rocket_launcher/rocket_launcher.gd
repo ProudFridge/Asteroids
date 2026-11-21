@@ -9,7 +9,7 @@ func _ready() -> void:
 	tool_base = $ToolBase
 
 func use_weapon() -> void:
-	References.bullet_manager.instantiate_bullet(global_position, global_rotation - PI / 2)
+	References.bullet_manager.instantiate_bullet(global_position, global_rotation - PI / 2, BulletManager.BULLET_TYPE.ROCKET)
 	weapon_cooldown_started.emit()
 	
 

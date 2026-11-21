@@ -4,9 +4,12 @@ class_name BulletManager
 @export var shooter: Player
 var bulletSpeed: float = 500
 
-var bullet_instances: Array[Bullet] = []
+var bullet_instances: Array[Projectile] = []
 
 const BULLET: Resource = preload("uid://c4bego3ny732p")
+const ROCKET: Resource = preload("uid://ci132hknrggin")
+
+var selected_bullet: Resource
 
 func _ready() -> void:
 	if References.bullet_manager == null:
@@ -14,8 +17,9 @@ func _ready() -> void:
 	else:
 		push_error("Trying to add a reference to a second bullet manager node in the References singleton")
 
-func instantiate_bullet(position: Vector2, rotation: float) -> void:
-	var bullet_instance: Bullet = BULLET.instantiate()
+func instantiate_bullet(position: Vector2, rotation: float, bullet_type: BULLET_TYPE) -> void:
+	_select_bullet_type(bullet_type)
+	var bullet_instance: Projectile = selected_bullet.instantiate()
 	
 	bullet_instances.append(bullet_instance)
 	bullet_instance.rotation = rotation
@@ -24,4 +28,16 @@ func instantiate_bullet(position: Vector2, rotation: float) -> void:
 	# Make the bullets velocity realistic: makes it relative
 	bullet_instance.velocity = bullet_instance.speed * Vector2.from_angle(rotation).normalized() + shooter.linear_velocity
 	add_child(bullet_instance)
-	
+
+enum BULLET_TYPE {
+	BULLET,
+	ROCKET
+}
+
+
+func _select_bullet_type(bullet_type: BULLET_TYPE) -> void:
+	match bullet_type:
+		BULLET_TYPE.BULLET:
+			selected_bullet = BULLET
+		BULLET_TYPE.ROCKET:
+			selected_bullet = ROCKET

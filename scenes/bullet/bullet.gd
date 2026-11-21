@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Projectile
 class_name Bullet
 
 var speed: float = 500
@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	#total += delta
 	#velocity = velocity.rotated(0.2 * cos(total * 20))
 	#rotation = velocity.angle()
-	
+		
 	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
 	
 	if collision:
@@ -52,5 +52,5 @@ func _physics_process(delta: float) -> void:
 func _on_lifetime_timer_timeout() -> void:
 	disappear()
 
-func disappear() -> void:
-	queue_free()
+#func disappear() -> void:
+	#queue_free.call_deferred()

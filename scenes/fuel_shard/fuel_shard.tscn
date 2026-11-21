@@ -9,3 +9,4 @@ gravity_scale = 0.0
 script = ExtResource("1_vcxhu")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=959604162]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
