@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cnisb87sdktyc" path="res://assets/sprites/ship/ship_hull.png" id="4_75vfm"]
 [ext_resource type="PackedScene" uid="uid://cskxh4bavc45a" path="res://scenes/player/pickup_component/pickup_component.tscn" id="4_qek5x"]
 [ext_resource type="Texture2D" uid="uid://m1i8316lq872" path="res://assets/sprites/ship/ship_thruster.png" id="5_p47bc"]
-[ext_resource type="PackedScene" uid="uid://dxwoqcnyivk7s" path="res://scenes/tools/holder/holder.tscn" id="9_5gtgg"]
 [ext_resource type="Script" uid="uid://ct3bs8e63pq6d" path="res://scenes/player/ship_custom.gd" id="9_h17s1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8afob"]
@@ -174,18 +173,6 @@ position = Vector2(-16, 0)
 rotation = 1.5707964
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_p47bc")
-
-[node name="Holder" parent="." unique_id=2044846770 node_paths=PackedStringArray("shooter") instance=ExtResource("9_5gtgg")]
-visible = false
-z_index = 2
-position = Vector2(-7.9999995, -7.000001)
-shooter = NodePath("..")
-
-[node name="Holder2" parent="." unique_id=1721040265 node_paths=PackedStringArray("shooter") instance=ExtResource("9_5gtgg")]
-visible = false
-z_index = 2
-position = Vector2(8.999998, -7)
-shooter = NodePath("..")
 
 [node name="ShipCustom" type="Node2D" parent="." unique_id=1393272360]
 script = ExtResource("9_h17s1")

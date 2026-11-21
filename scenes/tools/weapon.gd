@@ -16,6 +16,14 @@ var is_cooldown_done: bool = true
 func _ready() -> void:
 	weapon_cooldown_done.connect(_on_weapon_cooldown_done)
 	weapon_cooldown_started.connect(_on_weapon_cooldown_started)
+	
+	# Automatically detect the toolbase
+	for node: Node in get_children():
+		if node is Marker2D:
+			tool_base = (node as Marker2D)
+	
+	if tool_base:
+		push_warning("No Marker2D node found for the tool base in the weapon node")
 
 # Handle the weapon cooldown
 func _on_weapon_cooldown_done() -> void:

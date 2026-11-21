@@ -29,7 +29,6 @@ func _ready() -> void:
 	super._ready()
 	weapon_modifiers.append(_auto_aim)
 	
-	tool_base = $ToolBase
 	lock_on_texture = LOCK_ON_TEXTURE.instantiate()
 	lock_on_texture.hide()
 	add_child(lock_on_texture)
