@@ -9,11 +9,12 @@ var target: Asteroid
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	thruster_particles.emitting = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if target == null:
 		var m: float = INF
 		
@@ -28,12 +29,11 @@ func _process(delta: float) -> void:
 	if target:
 		var target_angle: float = (target.global_position - global_position).angle()
 		var lerped_angle: float = lerp_angle(global_rotation, target_angle, 0.5 * delta)
-		velocity = Vector2.from_angle(lerped_angle) * velocity.length()
+		linear_velocity = Vector2.from_angle(lerped_angle) * linear_velocity.length()
 	
-	rotation = velocity.angle()
+	rotation = linear_velocity.angle()
 	
-	#velocity = velocity.normalized() * speed
-	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
+	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
 	
 	if collision:
 		var body: Node2D = collision.get_collider()
@@ -42,6 +42,3 @@ func _process(delta: float) -> void:
 			asteroid.take_damage(100)
 			disappear()
 		
-	
-#func disappear() -> void:
-	#queue_free.call_deferred()

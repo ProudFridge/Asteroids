@@ -57,8 +57,10 @@ func _ready() -> void:
 	# Instantiate the weapon
 	const weapon_resource: Resource = preload("uid://cju3pee43b3e8")
 	const rocket_launcher_resource: Resource = preload("uid://duh4bbm5nu0jt")
+	
 	weapon = weapon_resource.instantiate()
 	weapon = rocket_launcher_resource.instantiate()
+	
 	if randi() % 2 == 0:
 		weapon = weapon_resource.instantiate()
 	else:

@@ -1,10 +1,10 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Projectile
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	gravity_scale = 0
+	linear_damp_mode = RigidBody2D.DAMP_MODE_REPLACE
 
 
 func disappear() -> void:

@@ -26,7 +26,7 @@ func instantiate_bullet(position: Vector2, rotation: float, bullet_type: BULLET_
 	bullet_instance.position = position
 	bullet_instance.speed = bulletSpeed
 	# Make the bullets velocity realistic: makes it relative
-	bullet_instance.velocity = bullet_instance.speed * Vector2.from_angle(rotation).normalized() + shooter.linear_velocity
+	bullet_instance.linear_velocity = bullet_instance.speed * Vector2.from_angle(rotation).normalized() + shooter.linear_velocity
 	add_child(bullet_instance)
 
 enum BULLET_TYPE {

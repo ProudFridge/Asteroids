@@ -7,6 +7,7 @@ var speed: float = 500
 const HIT_POPUP: Resource = preload("uid://bhd64dff6sk8k")
 
 func _ready() -> void:
+	super._ready()
 	#velocity = speed * Vector2.from_angle(rotation) 
 	lifetime_timer.timeout.connect(_on_lifetime_timer_timeout)
 
@@ -16,12 +17,12 @@ func _physics_process(delta: float) -> void:
 	#velocity = velocity.rotated(0.2 * cos(total * 20))
 	#rotation = velocity.angle()
 		
-	var collision: KinematicCollision2D = move_and_collide(velocity * delta)
+	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
 	
 	if collision:
 		var body: Node = collision.get_collider()
 		if body is Asteroid:
-			var damage: float = (0.05 * (body.linear_velocity - velocity)).length()
+			var damage: float = (0.05 * (body.linear_velocity - linear_velocity)).length()
 			
 			var popupValue: float = damage
 			if (body as Asteroid).health < (body as Asteroid).health - damage:
@@ -32,22 +33,6 @@ func _physics_process(delta: float) -> void:
 			body.take_damage(damage)
 			
 			disappear()
-			
-		var collisionPosition: Vector2 = collision.get_position()
-		
-		if collisionPosition.x >= Global.windowSize.x:
-			disappear()
-		
-		if collisionPosition.x <= 0:
-			disappear()
-			
-		if collisionPosition.y >= Global.windowSize.y:
-			disappear()
-			
-		# Won't work without the 1
-		if collisionPosition.y <= 1:
-			disappear()
-
 
 func _on_lifetime_timer_timeout() -> void:
 	disappear()
