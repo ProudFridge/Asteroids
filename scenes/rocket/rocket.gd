@@ -15,19 +15,20 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if target == null:
-		var min: float = INF
+		var m: float = INF
 		
 		for body: Node in area_2d.get_overlapping_bodies():
 			if body is Asteroid:
 				var asteroid: Asteroid = body as Asteroid
 				var length: float = (asteroid.global_position - global_position).length()
-				if length < min:
-					min = length
+				if length < m:
+					m = length
 					target = asteroid
 	
 	if target:
-		#velocity = velocity.rotated((target.global_position - global_position).angle() - global_rotation)
-		velocity = lerp(velocity.normalized(), (target.global_position - global_position).normalized(), 0.5) * speed
+		var target_angle: float = (target.global_position - global_position).angle()
+		var lerped_angle: float = lerp_angle(global_rotation, target_angle, 0.5 * delta)
+		velocity = Vector2.from_angle(lerped_angle) * velocity.length()
 	
 	rotation = velocity.angle()
 	

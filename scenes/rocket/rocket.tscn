@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://ci132hknrggin"]
 
 [ext_resource type="Script" uid="uid://b4ki0m274e672" path="res://scenes/rocket/rocket.gd" id="1_s723n"]
+[ext_resource type="Texture2D" uid="uid://djxrgeyfwblyu" path="res://assets/sprites/rocket.png" id="2_0wp70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2m7xh"]
-size = Vector2(20, 4)
-
-[sub_resource type="QuadMesh" id="QuadMesh_ohdgn"]
 size = Vector2(20, 4)
 
 [sub_resource type="Gradient" id="Gradient_3341w"]
@@ -52,9 +50,6 @@ script = ExtResource("1_s723n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1745036080]
 shape = SubResource("RectangleShape2D_2m7xh")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1122549381]
-mesh = SubResource("QuadMesh_ohdgn")
-
 [node name="ThrusterParticles" type="GPUParticles2D" parent="." unique_id=1240978265]
 position = Vector2(-10, 0)
 rotation = 0.00092196884
@@ -67,3 +62,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1697204837]
 shape = SubResource("CircleShape2D_2m7xh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1617354675]
+position = Vector2(5, 0)
+rotation = 1.5707964
+texture = ExtResource("2_0wp70")

@@ -35,7 +35,7 @@ func _ready() -> void:
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 # Detect the closest asteorids and add more if necessary
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var asteroid_count: int = 0
 	for asteroid: Asteroid in asteroid_manager.asteroid_instances:
 		if asteroid != null:

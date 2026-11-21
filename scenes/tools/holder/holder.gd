@@ -57,7 +57,8 @@ func _ready() -> void:
 	# Instantiate the weapon
 	const weapon_resource: Resource = preload("uid://cju3pee43b3e8")
 	const rocket_launcher_resource: Resource = preload("uid://duh4bbm5nu0jt")
-	
+	weapon = weapon_resource.instantiate()
+	weapon = rocket_launcher_resource.instantiate()
 	if randi() % 2 == 0:
 		weapon = weapon_resource.instantiate()
 	else:
@@ -73,11 +74,12 @@ func _ready() -> void:
 	
 	add_child(weapon)
 	weapon.position -= (weapon.tool_base.position - tool_location.position)
-	
+	#print(weapon.position)
+	print(weapon.tool_base.position)
 	weapon.weapon_cooldown_done.connect(_on_weapon_cooldown_done)
 	weapon.weapon_cooldown_started.connect(_on_weapon_cooldown_started)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("space") && weapon.is_cooldown_done:
 		weapon.use_weapon()
 		AudioSingleton.play_2d_audio_at_location(weapon.global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)

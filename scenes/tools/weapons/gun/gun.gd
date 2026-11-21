@@ -3,7 +3,6 @@ class_name Gun extends Weapon
 const LOCK_ON_TEXTURE: Resource = preload("uid://vn17ge5tjuwo")
 
 @export var shooter: Player
-var cooldown: float = 0.1
 var isCooldownDone: bool = true
 
 var is_auto_aiming: bool = false
@@ -17,7 +16,7 @@ var bullet_manager: BulletManager
 
 func use_weapon() -> void:
 	AudioSingleton.play_2d_audio_at_location(shooter.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
-	bullet_manager.instantiate_bullet(muzzle.global_position, 0)
+	#bullet_manager.instantiate_bullet(muzzle.global_position, 0)
 	isCooldownDone = false
 	get_tree().create_timer(cooldown).timeout.connect(func() -> void: isCooldownDone = true)
 	
@@ -35,11 +34,6 @@ func use_weapon() -> void:
 #func _draw() -> void:
 	#if closest_asteroid:
 		#draw_texture(lock_on_texture, closest_asteroid.global_position - global_position - lock_on_texture.get_size() / 2)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

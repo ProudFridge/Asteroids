@@ -35,9 +35,9 @@ var starColors: Array[Color] = [
 	#Color("ffcc6f")]
 
 func _ready() -> void:
-	var random_direction: Vector2 = Vector2.ZERO
-	if is_background:
-		random_direction = Vector2.from_angle(randf_range(-2 * PI, 2 * PI))
+	#var random_direction: Vector2 = Vector2.ZERO
+	#if is_background:
+		#random_direction = Vector2.from_angle(randf_range(-2 * PI, 2 * PI))
 	
 	for i: int in layers:
 		var layer: Parallax2D = Parallax2D.new()

@@ -142,7 +142,7 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			var speed_multiplier: float = randf_range(0.5, 1.5)
 			
 			fuel_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
-			fuel_shard_instance.linear_velocity = (fuel_shard_instance.position - position) * 5
+			fuel_shard_instance.linear_velocity = (fuel_shard_instance.position - position) * 5 * speed_multiplier
 			get_parent().add_child(fuel_shard_instance)
 		
 	return triangles

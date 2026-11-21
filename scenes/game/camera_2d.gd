@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 		trauma = max(trauma - decay * delta, 0)
 		_shake(delta)
 
-func _shake(delta: float) -> void:
+func _shake(_delta: float) -> void:
 	#noise_y += noise_shake_speed * delta
 	var amount: float = pow(trauma, trauma_power)
 	
