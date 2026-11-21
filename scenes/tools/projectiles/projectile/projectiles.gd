@@ -1,6 +1,9 @@
 extends RigidBody2D
 class_name Projectile
 
+var is_bouncy: bool = true
+var bounces_left: int = 3
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	gravity_scale = 0

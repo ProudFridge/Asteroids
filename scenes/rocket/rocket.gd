@@ -40,5 +40,12 @@ func _physics_process(delta: float) -> void:
 		if body is Asteroid:
 			var asteroid: Asteroid = body as Asteroid
 			asteroid.take_damage(100)
-			disappear()
+			
+			if is_bouncy:
+				if bounces_left > 0:
+					bounces_left -= 1
+				else:
+					disappear()
+					
+			
 		

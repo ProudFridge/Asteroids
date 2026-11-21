@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		var body: Node = collision.get_collider()
 		if body is Asteroid:
-			var damage: float = (0.05 * (body.linear_velocity - linear_velocity)).length()
+			var damage: float = (0.005 * (body.linear_velocity - linear_velocity)).length()
 			
 			var popupValue: float = damage
 			if (body as Asteroid).health < (body as Asteroid).health - damage:
@@ -32,10 +32,13 @@ func _physics_process(delta: float) -> void:
 			
 			body.take_damage(damage)
 			
-			disappear()
-
+			if is_bouncy:
+				if bounces_left > 0:
+					bounces_left -= 1
+					linear_velocity = linear_velocity.bounce(collision.get_normal())
+					rotation = linear_velocity.angle()
+				else:
+					disappear()
+	
 func _on_lifetime_timer_timeout() -> void:
 	disappear()
-
-#func disappear() -> void:
-	#queue_free.call_deferred()
