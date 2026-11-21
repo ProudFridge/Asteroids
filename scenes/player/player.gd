@@ -59,7 +59,6 @@ func _ready() -> void:
 	# Temp
 	#thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
 
-	position = Global.windowSize / 2
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)

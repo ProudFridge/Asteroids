@@ -15,7 +15,7 @@ var destroyed_asteroids: int = 0
 
 ## Variables for asteroid generation
 var detection_radius: float = Global.windowSize.x
-var threshold_amount: int = 500
+var threshold_amount: int = 10
 
 signal won
 signal lost

@@ -42,6 +42,27 @@ color_initial_ramp = SubResource("GradientTexture1D_dkv7l")
 [sub_resource type="CircleShape2D" id="CircleShape2D_2m7xh"]
 radius = 500.0
 
+[sub_resource type="Gradient" id="Gradient_qek5x"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.35000002, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0wp70"]
+gradient = SubResource("Gradient_qek5x")
+width = 4
+height = 6
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_gx1jg"]
+offsets = PackedFloat32Array(0.061611373, 1)
+colors = PackedColorArray(1, 0.66400003, 0.44, 1, 1, 0.66400003, 0.44, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7lajs"]
+gradient = SubResource("Gradient_gx1jg")
+width = 12
+height = 12
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
 [node name="Rocket" type="RigidBody2D" unique_id=466759757]
 collision_layer = 0
 collision_mask = 2
@@ -67,3 +88,19 @@ shape = SubResource("CircleShape2D_2m7xh")
 position = Vector2(5, 0)
 rotation = 1.5707964
 texture = ExtResource("2_0wp70")
+
+[node name="LeftThrusterSprite" type="Sprite2D" parent="." unique_id=1130158421]
+position = Vector2(-13, 0)
+rotation = -1.5707964
+texture = SubResource("GradientTexture2D_0wp70")
+
+[node name="LeftThrusterLight" type="PointLight2D" parent="LeftThrusterSprite" unique_id=1182277152]
+visible = false
+position = Vector2(0, 2)
+rotation = 6.2831855
+texture = SubResource("GradientTexture2D_7lajs")
+
+[node name="LeftThrusterLight2" type="PointLight2D" parent="LeftThrusterSprite" unique_id=1135139118]
+position = Vector2(0, 2)
+rotation = 6.2831855
+texture = SubResource("GradientTexture2D_7lajs")
