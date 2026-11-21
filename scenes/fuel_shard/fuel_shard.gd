@@ -2,7 +2,6 @@ extends RigidBody2D
 class_name FuelShard
 
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
-@onready var polygon_2d: Polygon2D = $Polygon2D
 
 var fuel_content: float = 0
 var fuel_content_multiplier: float = 0.05
@@ -21,9 +20,7 @@ func _ready() -> void:
 	var area: float = Geometry.compute_area(polygon)
 	fuel_content = area * fuel_content_multiplier
 	mass = area
-	polygon_2d.polygon = polygon
 	collision_polygon_2d.polygon = polygon
-	polygon_2d.color = Color.from_hsv(randf_range(0.5, 0.6), 1, 1)
 	
 	var triangles: Array[Polygon2D] = shatter()
 	
@@ -35,7 +32,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if is_absorbed:
 		var elapsed_time: float = absorption_time - absorption_timer.time_left
 		position = Tween.interpolate_value(initial_position, player.position - initial_position, elapsed_time, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)
-		polygon_2d.scale = Tween.interpolate_value(Vector2.ONE, -Vector2(0.5, 0.5), elapsed_time, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)
+		scale = Tween.interpolate_value(Vector2.ONE, -Vector2(0.5, 0.5), elapsed_time, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)
 
 
 func absorb_by_player(play: Player) -> void:
