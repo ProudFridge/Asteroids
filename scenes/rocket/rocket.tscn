@@ -95,13 +95,7 @@ position = Vector2(-13, 0)
 rotation = -1.5707964
 texture = SubResource("GradientTexture2D_0wp70")
 
-[node name="LeftThrusterLight" type="PointLight2D" parent="LeftThrusterSprite" unique_id=1182277152]
-visible = false
-position = Vector2(0, 2)
-rotation = 6.2831855
-texture = SubResource("GradientTexture2D_7lajs")
-
-[node name="LeftThrusterLight2" type="PointLight2D" parent="LeftThrusterSprite" unique_id=1135139118]
+[node name="LeftThrusterLight" type="PointLight2D" parent="LeftThrusterSprite" unique_id=1135139118]
 position = Vector2(0, 2)
 rotation = 6.2831855
 texture = SubResource("GradientTexture2D_7lajs")

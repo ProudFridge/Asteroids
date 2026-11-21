@@ -62,8 +62,8 @@ cameraZoom = Vector2(1.5, 1.5)
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 
 [node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("4_kelw5")]
-areaSize = Vector2(5000, 5000)
-asteroid_num = 100
+areaSize = Vector2(5000, 100000)
+asteroid_num = 1000
 
 [node name="BulletManager" parent="Managers" unique_id=1104816647 node_paths=PackedStringArray("shooter") instance=ExtResource("6_kp23o")]
 shooter = NodePath("../../Player")

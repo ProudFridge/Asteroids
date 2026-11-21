@@ -23,6 +23,8 @@ var center: Vector2 = Vector2.ZERO
 var has_shattered: bool = false
 var fuel_shard_amount: int = 5
 
+var original_color: Color
+
 @export_group("Debug Options")
 @export var is_outline_visible: bool = false
 @export var is_bounding_box_visible: bool = false
@@ -49,6 +51,7 @@ func _ready() -> void:
 	mass = area * density
 	health = area / 100
 	maxHealth = health
+	original_color = modulate
 	
 	light_occluder_2d.occluder = OccluderPolygon2D.new()
 	light_occluder_2d.occluder.polygon = generated_polygon
@@ -76,7 +79,8 @@ func take_damage(damage: float) -> void:
 	health = health - damage
 	if health <= 0:
 		die()
-	modulate = Color.from_hsv(0, 0, lerpf(0.2, 1, health / maxHealth))
+		print(original_color.v)
+	modulate = Color.from_hsv(original_color.h, original_color.s, lerpf(original_color.v, 0, 1 - health / maxHealth))
 
 
 func die() -> void: 
@@ -146,3 +150,11 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			get_parent().add_child(fuel_shard_instance)
 		
 	return triangles
+
+func disable(is_disabled: bool) -> void:
+	if is_disabled:
+		process_mode = Node.PROCESS_MODE_DISABLED
+		modulate = Color.DARK_RED
+	else:
+		process_mode =Node.PROCESS_MODE_INHERIT
+		modulate = original_color

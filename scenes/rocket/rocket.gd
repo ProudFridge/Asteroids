@@ -2,7 +2,7 @@ extends Projectile
 class_name Rocket
 
 var target: Asteroid
-var steering_force: float = 50
+var steering_force: float = 10
 var homing_acceleration: Vector2 = Vector2.ZERO
 
 @onready var area_2d: Area2D = $Area2D
@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	# Handle the projectile homing
 	homing_acceleration += _seek()
 	linear_velocity += homing_acceleration * delta
-	linear_velocity = linear_velocity.limit_length(speed)
+	linear_velocity = linear_velocity.limit_length(500)
 
 	rotation = linear_velocity.angle()
 	
