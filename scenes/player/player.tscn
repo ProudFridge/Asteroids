@@ -41,12 +41,32 @@ width = 6
 height = 6
 fill_to = Vector2(0, 1)
 
+[sub_resource type="Gradient" id="Gradient_gx1jg"]
+offsets = PackedFloat32Array(0, 0.4170616, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.66400003, 0.44, 1, 1, 0.66400003, 0.44, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ugbui"]
+gradient = SubResource("Gradient_gx1jg")
+width = 6
+height = 12
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
 [sub_resource type="Gradient" id="Gradient_fm80t"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 0.66400003, 0.44, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_anm2o"]
 gradient = SubResource("Gradient_fm80t")
 width = 16
+height = 12
+
+[sub_resource type="Gradient" id="Gradient_5gtgg"]
+offsets = PackedFloat32Array(0, 0.4170616, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.6627451, 0.4392157, 1, 1, 0.66400003, 0.44, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h17s1"]
+gradient = SubResource("Gradient_5gtgg")
+width = 20
 height = 12
 
 [node name="Player" type="RigidBody2D" unique_id=752532407 node_paths=PackedStringArray("boost_component", "impulse_component")]
@@ -117,12 +137,26 @@ visible = false
 position = Vector2(15, -11)
 texture = SubResource("GradientTexture2D_yrxbg")
 
+[node name="LeftThrusterLight" type="PointLight2D" parent="ThrusterSprites/LeftThrusterSprite" unique_id=2100242606]
+position = Vector2(0, 2)
+rotation = 6.2831855
+texture = SubResource("GradientTexture2D_ugbui")
+
 [node name="RightThrusterSprite" type="Sprite2D" parent="ThrusterSprites" unique_id=1452213698]
 visible = false
 position = Vector2(15, 11)
 rotation = 3.1415925
 texture = SubResource("GradientTexture2D_yrxbg")
 
+[node name="RightThrusterLight" type="PointLight2D" parent="ThrusterSprites/RightThrusterSprite" unique_id=1844091151]
+position = Vector2(-1.7484555e-07, 2)
+texture = SubResource("GradientTexture2D_ugbui")
+
 [node name="MainThrusterSprite" type="Sprite2D" parent="ThrusterSprites" unique_id=1439113800]
+visible = false
 position = Vector2(-35, 0)
 texture = SubResource("GradientTexture2D_anm2o")
+
+[node name="ThrusterLight" type="PointLight2D" parent="ThrusterSprites/MainThrusterSprite" unique_id=684081120]
+position = Vector2(9, 0)
+texture = SubResource("GradientTexture2D_h17s1")
