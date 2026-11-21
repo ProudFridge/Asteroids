@@ -11,12 +11,7 @@ func _ready() -> void:
 	#velocity = speed * Vector2.from_angle(rotation) 
 	lifetime_timer.timeout.connect(_on_lifetime_timer_timeout)
 
-#var total: float = 0
-func _physics_process(delta: float) -> void:
-	#total += delta
-	#velocity = velocity.rotated(0.2 * cos(total * 20))
-	#rotation = velocity.angle()
-		
+func _physics_process(_delta: float) -> void:
 	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
 	
 	if collision:
@@ -39,6 +34,8 @@ func _physics_process(delta: float) -> void:
 					rotation = linear_velocity.angle()
 				else:
 					disappear()
+			else:
+				disappear()
 	
 func _on_lifetime_timer_timeout() -> void:
 	disappear()

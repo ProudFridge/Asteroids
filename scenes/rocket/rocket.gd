@@ -10,10 +10,13 @@ var target: Asteroid
 func _ready() -> void:
 	super._ready()
 	thruster_particles.emitting = true
+	is_bouncy = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	apply_central_force(linear_velocity.normalized() * 5)
+	
 	if target == null:
 		var m: float = INF
 		
@@ -45,6 +48,8 @@ func _physics_process(delta: float) -> void:
 					bounces_left -= 1
 				else:
 					disappear()
+			else:
+				disappear()
 					
 			
 		

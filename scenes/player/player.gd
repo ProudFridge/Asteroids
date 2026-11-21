@@ -36,14 +36,14 @@ var sideThrusterCooldown: float = 1
 @export var impulse_component: ImpulseComponent
 @export_group("")
 
-var polygon: PackedVector2Array
-var viewportSize: Vector2 
-
 @export var bullet_manager: BulletManager
 @onready var damage_timer: Timer = $DamageTimer
-@onready var thruster_particles: GPUParticles2D = $ThrusterParticles
-@onready var left_thruster_particles: GPUParticles2D = $LeftThrusterParticles
-@onready var right_thruster_particles: GPUParticles2D = $RightThrusterParticles
+
+# Sprites used for the thruster plumes
+@onready var left_thruster_sprite: Sprite2D = $ThrusterSprites/LeftThrusterSprite
+@onready var right_thruster_sprite: Sprite2D = $ThrusterSprites/RightThrusterSprite
+@onready var main_thruster_sprite: Sprite2D = $ThrusterSprites/MainThrusterSprite
+
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var ship: Node2D = $Ship
@@ -56,11 +56,9 @@ signal health_lost(currentHealth: float)
 func _ready() -> void:
 	AudioSingleton.reset_audio_count(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 	# Temp
-	thruster_particles.position.y = 0
 	#thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
 
 	position = Global.windowSize / 2
-	viewportSize = get_viewport_rect().size
 	
 	self.body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
@@ -95,26 +93,32 @@ func _physics_process(delta: float) -> void:
 	var direction : float = Input.get_axis("backwards", "forwards")
 	
 	if direction and current_fuel > 0:
-		thruster_particles.emitting = true
+		main_thruster_sprite.visible = true
+		#thruster_particles.emitting = true
 		apply_central_force(direction * Vector2.from_angle(rotation) * currentAccel)
 		current_fuel -= current_fuel_consumption * delta
 	else:
-		thruster_particles.emitting = false
+		main_thruster_sprite.visible = false
+		#thruster_particles.emitting = false
 	
 	# Apply torque to spin the ship
 	if Input.is_action_pressed("turn_left"):
-		right_thruster_particles.emitting = true
+		right_thruster_sprite.visible = true
+		#right_thruster_particles.emitting = true
 		apply_torque(-current_rot_speed)
 		current_fuel -= rot_fuel_consumption * delta
 	else:
-		right_thruster_particles.emitting = false
+		right_thruster_sprite.hide()
+		#right_thruster_particles.emitting = false
 		
 	if Input.is_action_pressed("turn_right"):
+		left_thruster_sprite.visible = true
 		apply_torque(current_rot_speed)
-		left_thruster_particles.emitting = true
+		#left_thruster_particles.emitting = true
 		current_fuel -= rot_fuel_consumption * delta
 	else:
-		left_thruster_particles.emitting = false
+		left_thruster_sprite.hide()
+		#left_thruster_particles.emitting = false
 
 
 func die() -> void:
@@ -124,16 +128,11 @@ func die() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
-		#lives -= 1
 		#health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
 		print(health)
 		$Camera2D.add_trauma(0.5)
 		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)
-		#health_lost.emit(lives)
 		health_lost.emit(health)
-		#if lives <= 0:
-			#died.emit()
-			#die()
 		damage_timer.start()
 		
 		ship.modulate = Color.RED

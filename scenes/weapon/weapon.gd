@@ -75,7 +75,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _auto_aim(delta: float) -> void:
-	var min: float = INF
+	var m: float = INF
 	
 	if is_auto_aiming:
 		if area_2d.has_overlapping_bodies():
@@ -89,16 +89,16 @@ func _auto_aim(delta: float) -> void:
 						var distance: Vector2 = asteroid.global_position - get_global_mouse_position()
 						
 						if (asteroid.global_position - global_position).length() < auto_aim_radius:
-							if distance.length() < min:
-								min = distance.length()
+							if distance.length() < m:
+								m = distance.length()
 								closest_asteroid = asteroid
 					# Lock onto the closest asteroids
 					else:
 						var distance: Vector2 = asteroid.global_position - global_position
 					
 						if distance.length() < auto_aim_radius:
-							if distance.length() < min:
-								min = distance.length()
+							if distance.length() < m:
+								m = distance.length()
 								closest_asteroid = asteroid
 		else:
 			closest_asteroid = null

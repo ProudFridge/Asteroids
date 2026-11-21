@@ -22,8 +22,7 @@ func _ready() -> void:
 		if node is Marker2D:
 			tool_base = (node as Marker2D)
 	
-	if tool_base:
-		push_warning("No Marker2D node found for the tool base in the weapon node")
+	assert(tool_base, "No Marker2D node found for the tool base in the weapon node")
 
 # Handle the weapon cooldown
 func _on_weapon_cooldown_done() -> void:
