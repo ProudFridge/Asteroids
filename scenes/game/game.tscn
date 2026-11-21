@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://dk40yvggw2cqm" path="res://scenes/game/time_label.gd" id="15_3jaai"]
 [ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
+[ext_resource type="Script" uid="uid://7wp4ves1xmpv" path="res://scenes/game/info_panel.gd" id="22_8b66f"]
 
 [sub_resource type="Gradient" id="Gradient_8b66f"]
 colors = PackedColorArray(0, 0, 0, 1, 0.09411765, 0.09411765, 0.09411765, 1)
@@ -293,3 +294,76 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("12_otnwt")
 gameManager = NodePath("../../Managers/GameManager")
+
+[node name="InfoPanel" type="CanvasLayer" parent="." unique_id=1446127989]
+
+[node name="InfoPanel" type="PanelContainer" parent="InfoPanel" unique_id=803322977 node_paths=PackedStringArray("player")]
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 48.0
+script = ExtResource("22_8b66f")
+player = NodePath("../../Player")
+
+[node name="GridContainer" type="GridContainer" parent="InfoPanel/InfoPanel" unique_id=124141708]
+layout_mode = 2
+columns = 2
+
+[node name="Position" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=465016105]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Position:"
+
+[node name="PositionValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1499003674]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="DistanceFromCenter" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=596782354]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Distance From Center:"
+
+[node name="DistanceFromCenterValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=783057391]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="Velocity" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=384018554]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Velocity:"
+
+[node name="VelocityValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=832201357]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="Speed" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=60735915]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Velocity:"
+
+[node name="SpeedValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=708478619]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="AngularVelocity" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1056280374]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Angular Velocity:"
+
+[node name="AngularVelocityValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1825301832]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="Fuel" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=794100741]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fuel:"
+
+[node name="FuelValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=575111130]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
