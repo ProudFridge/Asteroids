@@ -2,9 +2,11 @@ extends Projectile
 class_name Rocket
 
 var target: Asteroid
+var steering_force: float = 50
+var homing_acceleration: Vector2 = Vector2.ZERO
+
 @onready var area_2d: Area2D = $Area2D
 @onready var thruster_particles: GPUParticles2D = $ThrusterParticles
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	
 	if target == null:
 		var m: float = INF
-		
+			
 		for body: Node in area_2d.get_overlapping_bodies():
 			if body is Asteroid:
 				var asteroid: Asteroid = body as Asteroid
@@ -28,11 +30,11 @@ func _physics_process(delta: float) -> void:
 					m = length
 					target = asteroid
 	
-	if target:
-		var target_angle: float = (target.global_position - global_position).angle()
-		var lerped_angle: float = lerp_angle(global_rotation, target_angle, 0.5 * delta)
-		linear_velocity = Vector2.from_angle(lerped_angle) * linear_velocity.length()
-	
+	# Handle the projectile homing
+	homing_acceleration += _seek()
+	linear_velocity += homing_acceleration * delta
+	linear_velocity = linear_velocity.limit_length(speed)
+
 	rotation = linear_velocity.angle()
 	
 	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
@@ -50,6 +52,12 @@ func _physics_process(delta: float) -> void:
 					disappear()
 			else:
 				disappear()
-					
-			
+
+## Computes the steering force of the rocket
+func _seek() -> Vector2:
+	var steer: Vector2 = Vector2.ZERO
+	if target:
+		var desired: Vector2 = (target.global_position - global_position).normalized() * speed
+		steer = (desired - linear_velocity).normalized() * steering_force
+	return steer
 		

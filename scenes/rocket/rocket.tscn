@@ -72,6 +72,7 @@ script = ExtResource("1_s723n")
 shape = SubResource("RectangleShape2D_2m7xh")
 
 [node name="ThrusterParticles" type="GPUParticles2D" parent="." unique_id=1240978265]
+visible = false
 position = Vector2(-10, 0)
 rotation = 0.00092196884
 amount = 50
