@@ -27,6 +27,8 @@ func _ready() -> void:
 	#noise.fractal_lacunarity = 1
 	#noise.fractal_octaves = 2
 	#noise.frequency = 0.01
+	if OS.is_debug_build():
+		min_zoom = Vector2.ZERO
 	
 	zoom = cameraZoom
 

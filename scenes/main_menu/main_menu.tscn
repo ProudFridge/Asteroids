@@ -47,7 +47,8 @@ color = Color(0, 0, 0, 1)
 [node name="Managers" type="Node" parent="." unique_id=833144713]
 
 [node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("1_fsom3")]
-areaSize = Vector2(1929, 1080)
+areaSize = Vector2(1920, 1080)
+instantiation_location = Vector2(960, 540)
 
 [node name="StarsManager" parent="Managers" unique_id=210266538 instance=ExtResource("2_0ebjn")]
 is_background = true

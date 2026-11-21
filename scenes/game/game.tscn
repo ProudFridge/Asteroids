@@ -62,6 +62,7 @@ cameraZoom = Vector2(1.5, 1.5)
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 
 [node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("4_kelw5")]
+areaSize = Vector2(5000, 5000)
 asteroid_num = 100
 
 [node name="BulletManager" parent="Managers" unique_id=1104816647 node_paths=PackedStringArray("shooter") instance=ExtResource("6_kp23o")]
@@ -297,12 +298,13 @@ gameManager = NodePath("../../Managers/GameManager")
 
 [node name="InfoPanel" type="CanvasLayer" parent="." unique_id=1446127989]
 
-[node name="InfoPanel" type="PanelContainer" parent="InfoPanel" unique_id=803322977 node_paths=PackedStringArray("player")]
+[node name="InfoPanel" type="PanelContainer" parent="InfoPanel" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager")]
 offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 48.0
 script = ExtResource("22_8b66f")
 player = NodePath("../../Player")
+asteroid_manager = NodePath("../../Managers/AsteroidManager")
 
 [node name="GridContainer" type="GridContainer" parent="InfoPanel/InfoPanel" unique_id=124141708]
 layout_mode = 2
@@ -364,6 +366,16 @@ size_flags_horizontal = 3
 text = "Fuel:"
 
 [node name="FuelValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=575111130]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00"
+
+[node name="Asteroids" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1016418506]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Asteroids:"
+
+[node name="AsteroidsValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=148822602]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "00"

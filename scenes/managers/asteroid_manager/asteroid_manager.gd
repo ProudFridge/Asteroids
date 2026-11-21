@@ -9,6 +9,7 @@ const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 #@export var color_gradient: GradientTexture2D
 @export var color_gradient: Gradient
 @export var areaSize: Vector2 = Global.windowSize 
+@export var instantiation_location: Vector2 = Vector2.ZERO
 @export var asteroid_num: int = 10
 var asteroid_instances: Array[Asteroid] = []
 
@@ -17,20 +18,20 @@ signal asteroid_removed(asteroid: Asteroid)
 
 
 func _ready() -> void:
-	instantiate_asteroids_in_area(asteroid_num, areaSize, 500)
+	instantiate_asteroids_in_area(asteroid_num, areaSize,instantiation_location, 100)
 
 ## Instantiates asteroids in a specified area
-func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, exclusionZoneRadius: float) -> void:
+func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, location: Vector2, exclusionZoneRadius: float) -> void:
 	for i: int in asteroidNum:
 		#var asteroid: Asteroid = ASTEROID.instantiate()
 		
 		# Todo: replace with actual scren size, maybe use a singleton to store the screen size
-		var position: Vector2 = Vector2(randf_range(0, area.x), randf_range(0, area.y))
+		var position: Vector2 = Vector2(randf_range(location.x - area.x / 2, location.x + area.x / 2), randf_range(location.y - area.y / 2, location.y + area.y / 2))
 		var velocity: Vector2 = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
 		
 		while position.distance_to(area / 2) < exclusionZoneRadius:
-			position.x = randf_range(0, area.x)
-			position.y = randf_range(0, area.y)
+			position.x = randf_range(location.x - area.x / 2, location.x + area.x / 2)
+			position.y = randf_range(location.y - area.y / 2, location.y + area.y / 2)
 		
 		instantiate_asteroid(position, velocity)
 
