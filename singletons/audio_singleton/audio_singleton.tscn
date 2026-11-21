@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dxbvgmrf4kfg7" path="res://assets/sounds/shoot/laserShoot.wav" id="4_a3qmm"]
 [ext_resource type="AudioStream" uid="uid://bbkt32sctlb2q" path="res://assets/sounds/thrusters/thruster.wav" id="5_c4ri1"]
 [ext_resource type="AudioStream" uid="uid://cr0sho4flfsf1" path="res://assets/sounds/press/press.wav" id="6_xmf2b"]
+[ext_resource type="AudioStream" uid="uid://cwtyitm5rjkmx" path="res://assets/sounds/thrusters/impulse_error.wav" id="7_t5a7j"]
 
 [sub_resource type="Resource" id="Resource_a3qmm"]
 script = ExtResource("2_nwf4t")
@@ -35,6 +36,20 @@ type = 4
 sound_effect = Array[AudioStreamWAV]([ExtResource("6_xmf2b")])
 metadata/_custom_type_script = "uid://2wo80rhndd4r"
 
+[sub_resource type="Resource" id="Resource_qek5x"]
+script = ExtResource("2_nwf4t")
+limit = 2
+type = 4
+sound_effect = Array[AudioStreamWAV]([ExtResource("7_t5a7j")])
+volume = -1.0
+metadata/_custom_type_script = "uid://2wo80rhndd4r"
+
+[sub_resource type="Resource" id="Resource_t5a7j"]
+script = ExtResource("2_nwf4t")
+type = 5
+sound_effect = Array[AudioStreamWAV]([ExtResource("6_xmf2b")])
+metadata/_custom_type_script = "uid://2wo80rhndd4r"
+
 [node name="AudioSingleton" type="Node2D" unique_id=1536231365]
 script = ExtResource("1_2crdn")
-sound_effect_settings = Array[ExtResource("2_nwf4t")]([SubResource("Resource_a3qmm"), SubResource("Resource_nwf4t"), SubResource("Resource_dovo2"), SubResource("Resource_thkx5")])
+sound_effect_settings = Array[ExtResource("2_nwf4t")]([SubResource("Resource_a3qmm"), SubResource("Resource_nwf4t"), SubResource("Resource_dovo2"), SubResource("Resource_thkx5"), SubResource("Resource_qek5x"), SubResource("Resource_t5a7j")])

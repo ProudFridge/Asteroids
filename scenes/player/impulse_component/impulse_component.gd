@@ -6,6 +6,8 @@ class_name ImpulseComponent
 var impulse_magnitude: float = 400
 var impulse_cooldown: float = 1
 
+var impulse_fuel_consumption: float = 25
+
 @onready var right_timer: Timer = $RightTimer
 @onready var left_timer: Timer = $LeftTimer
 
@@ -29,17 +31,25 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("q") && right_timer.is_stopped():
-		player.apply_central_impulse(Vector2.from_angle(player.rotation - PI / 2) * impulse_magnitude)
-		right_thruster_particles.emitting = true
-		right_timer.start()
-		impulse_depleated.emit()
+	if event.is_action_pressed("q"):
+		if player.current_fuel >= impulse_fuel_consumption && right_timer.is_stopped():
+			player.current_fuel -= impulse_fuel_consumption
+			player.apply_central_impulse(Vector2.from_angle(player.rotation - PI / 2) * impulse_magnitude)
+			right_thruster_particles.emitting = true
+			right_timer.start()
+			impulse_depleated.emit()
+		else:
+			AudioSingleton.play_2d_audio_at_location(player.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_IMPULSE_ERROR)
 		
-	if event.is_action_pressed("e") && left_timer.is_stopped():
-		player.apply_central_impulse(Vector2.from_angle(player.rotation + PI / 2) * impulse_magnitude)
-		left_thruster_particles.emitting = true
-		left_timer.start()
-		impulse_depleated.emit()
+	if event.is_action_pressed("e"):
+		if player.current_fuel >= impulse_fuel_consumption && left_timer.is_stopped():
+			player.current_fuel -= impulse_fuel_consumption
+			player.apply_central_impulse(Vector2.from_angle(player.rotation + PI / 2) * impulse_magnitude)
+			left_thruster_particles.emitting = true
+			left_timer.start()
+			impulse_depleated.emit()
+		else:
+			AudioSingleton.play_2d_audio_at_location(player.position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_IMPULSE_ERROR)
 
 
 func _on_right_timer_timeout() -> void:

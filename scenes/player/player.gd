@@ -6,6 +6,7 @@ var current_fuel: float = max_fuel:
 	set(new_fuel):
 		current_fuel = clamp(new_fuel, 0, max_fuel)
 var fuel_consumption: float = 20 # u/s
+var rot_fuel_consumption: float = 5
 
 const accel: float = 200.0
 var max_speed: float = 8000
@@ -14,6 +15,7 @@ var max_speed: float = 8000
 var currentAccel: float = accel
 var current_rot_speed: float = rot_speed
 var current_fuel_consumption: float = fuel_consumption
+var current_rot_fuel_consumption: float = rot_fuel_consumption
 
 var bounceDamp: float = 0.5
 var health: float = 100:
@@ -103,12 +105,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("turn_left"):
 		right_thruster_particles.emitting = true
 		apply_torque(-current_rot_speed)
+		current_fuel -= rot_fuel_consumption * delta
 	else:
 		right_thruster_particles.emitting = false
 		
 	if Input.is_action_pressed("turn_right"):
 		apply_torque(current_rot_speed)
 		left_thruster_particles.emitting = true
+		current_fuel -= rot_fuel_consumption * delta
 	else:
 		left_thruster_particles.emitting = false
 

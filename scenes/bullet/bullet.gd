@@ -1,7 +1,7 @@
 extends Projectile
 class_name Bullet
 
-var speed: float = 500
+var damage_multiplier: float = 0.05
 
 @onready var lifetime_timer: Timer = $LifetimeTimer
 const HIT_POPUP: Resource = preload("uid://bhd64dff6sk8k")
@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		var body: Node = collision.get_collider()
 		if body is Asteroid:
-			var damage: float = (0.005 * (body.linear_velocity - linear_velocity)).length()
+			var damage: float = (damage_multiplier * (body.linear_velocity - linear_velocity)).length()
 			
 			var popupValue: float = damage
 			if (body as Asteroid).health < (body as Asteroid).health - damage:

@@ -77,7 +77,6 @@ func _ready() -> void:
 	add_child(weapon)
 	weapon.position -= (weapon.tool_base.position - tool_location.position)
 	#print(weapon.position)
-	print(weapon.tool_base.position)
 	weapon.weapon_cooldown_done.connect(_on_weapon_cooldown_done)
 	weapon.weapon_cooldown_started.connect(_on_weapon_cooldown_started)
 

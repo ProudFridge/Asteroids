@@ -1,7 +1,6 @@
 extends Projectile
 class_name Rocket
 
-var speed: float = 500
 var target: Asteroid
 @onready var area_2d: Area2D = $Area2D
 @onready var thruster_particles: GPUParticles2D = $ThrusterParticles

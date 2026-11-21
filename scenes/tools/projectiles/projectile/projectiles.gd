@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Projectile
 
+var speed: float = 500
+
 var is_bouncy: bool = true
 var bounces_left: int = 3
 
