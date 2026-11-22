@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
 [ext_resource type="PackedScene" uid="uid://7khd4cs5u826" path="res://scenes/boost_bar/boost_bar.tscn" id="14_pg2xm"]
 [ext_resource type="Script" uid="uid://dk40yvggw2cqm" path="res://scenes/game/time_label.gd" id="15_3jaai"]
+[ext_resource type="PackedScene" uid="uid://bc4cog54piwiv" path="res://scenes/matter_bar/matter_bar.tscn" id="16_3jaai"]
 [ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 [ext_resource type="Script" uid="uid://7wp4ves1xmpv" path="res://scenes/game/info_panel.gd" id="22_8b66f"]
@@ -206,7 +207,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -576.0
-offset_right = 112.0
+offset_right = 172.0
 grow_vertical = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
@@ -223,7 +224,12 @@ size_flags_horizontal = 3
 player = NodePath("../../../../Player")
 gameManager = NodePath("../../../../Managers/GameManager")
 
-[node name="ImpulseBar" parent="Header/InfoContainer/HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("player") instance=ExtResource("16_8b66f")]
+[node name="Matter Bar" parent="Header/InfoContainer/HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("player") instance=ExtResource("16_3jaai")]
+layout_mode = 2
+size_flags_horizontal = 3
+player = NodePath("../../../../Player")
+
+[node name="ImpulseBar" parent="Header/InfoContainer/HBoxContainer" unique_id=981514187 node_paths=PackedStringArray("player") instance=ExtResource("16_8b66f")]
 layout_mode = 2
 size_flags_horizontal = 3
 player = NodePath("../../../../Player")

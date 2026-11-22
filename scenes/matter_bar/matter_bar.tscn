@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://bc4cog54piwiv"]
+
+[ext_resource type="Theme" uid="uid://bdhhawm2rngda" path="res://scenes/matter_bar/matter_bar.tres" id="1_qshvm"]
+[ext_resource type="Theme" uid="uid://b4p0c3cc33cdp" path="res://themes/progress_bar/progress_bar.tres" id="2_mtsl3"]
+[ext_resource type="Script" uid="uid://bn4lmdgdeh8cu" path="res://scenes/matter_bar/matter_bar.gd" id="2_spgy4"]
+[ext_resource type="FontFile" uid="uid://deb4jjy854wbw" path="res://assets/fonts/arcade_ya/ARCADE_I.TTF" id="3_spgy4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg2xm"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vamm"]
+bg_color = Color(0.25929403, 0.25929356, 0.25929368, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrxbg"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anm2o"]
+bg_color = Color(0.43, 0.43, 0.43, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m7xh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="Theme" id="Theme_q0d00"]
+Label/font_sizes/font_size = 24
+Label/styles/normal = SubResource("StyleBoxFlat_pg2xm")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_1vamm")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_yrxbg")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_anm2o")
+RichTextLabel/constants/line_separation = -7
+RichTextLabel/font_sizes/bold_font_size = 24
+RichTextLabel/font_sizes/bold_italics_font_size = 24
+RichTextLabel/font_sizes/italics_font_size = 24
+RichTextLabel/font_sizes/mono_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/fonts/normal_font = ExtResource("3_spgy4")
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_2m7xh")
+
+[node name="Matter Bar" type="HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("progressBar")]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 166.0
+offset_bottom = 217.0
+theme = ExtResource("1_qshvm")
+theme_override_constants/separation = 0
+script = ExtResource("2_spgy4")
+progressBar = NodePath("PanelContainer/ProgressBar")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1040120803]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer" unique_id=2002492614]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_q0d00")
+value = 5.0
+fill_mode = 3
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=813750382]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1573227091]
+custom_maximum_size = Vector2(22, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer2" unique_id=1868320845]
+layout_mode = 2
+theme = ExtResource("2_mtsl3")
+bbcode_enabled = true
+text = "M
+A
+T
+T
+E
+R
+"
+fit_content = true
