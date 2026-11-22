@@ -70,6 +70,35 @@ gradient = SubResource("Gradient_5gtgg")
 width = 20
 height = 12
 
+[sub_resource type="Gradient" id="Gradient_ugbui"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.5333242, 1.0949746e-06, 2.8878452e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ohdgn"]
+gradient = SubResource("Gradient_ugbui")
+width = 5
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_fcs02"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_myrg7"]
+gradient = SubResource("Gradient_fcs02")
+width = 8
+height = 5
+fill = 2
+fill_from = Vector2(0.46581197, 0.517094)
+
+[sub_resource type="Gradient" id="Gradient_myrg7"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uf5tr"]
+gradient = SubResource("Gradient_myrg7")
+width = 8
+height = 5
+fill = 2
+fill_from = Vector2(0.46581197, 0.517094)
+
 [node name="Player" type="RigidBody2D" unique_id=752532407 node_paths=PackedStringArray("boost_component", "impulse_component", "matter_component")]
 z_index = 1
 collision_mask = 11
@@ -166,3 +195,26 @@ texture = SubResource("GradientTexture2D_anm2o")
 [node name="ThrusterLight" type="PointLight2D" parent="ThrusterSprites/MainThrusterSprite" unique_id=684081120]
 position = Vector2(9, 0)
 texture = SubResource("GradientTexture2D_h17s1")
+
+[node name="ImpulseSprites" type="Node2D" parent="." unique_id=1977616272]
+visible = false
+
+[node name="LeftImpulse" type="Sprite2D" parent="ImpulseSprites" unique_id=1051529369]
+position = Vector2(12, -2)
+texture = SubResource("GradientTexture2D_ohdgn")
+
+[node name="LeftImpulseIndicator" type="PointLight2D" parent="ImpulseSprites" unique_id=2090016236]
+position = Vector2(12, -2)
+color = Color(1, 0, 0, 1)
+energy = 1.62
+texture = SubResource("GradientTexture2D_myrg7")
+
+[node name="RightImpulse" type="Sprite2D" parent="ImpulseSprites" unique_id=1996081091]
+position = Vector2(12, 2)
+texture = SubResource("GradientTexture2D_ohdgn")
+
+[node name="RightImpulseIndicator" type="PointLight2D" parent="ImpulseSprites" unique_id=473942298]
+position = Vector2(12, 2)
+color = Color(1, 0, 0, 1)
+energy = 1.62
+texture = SubResource("GradientTexture2D_uf5tr")

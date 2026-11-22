@@ -79,7 +79,6 @@ func take_damage(damage: float) -> void:
 	health = health - damage
 	if health <= 0:
 		die()
-		print(original_color.v)
 	modulate = Color.from_hsv(original_color.h, original_color.s, lerpf(original_color.v, 0, 1 - health / maxHealth))
 
 

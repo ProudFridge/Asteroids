@@ -46,6 +46,13 @@ var sideThrusterCooldown: float = 1
 @onready var right_thruster_sprite: Sprite2D = $ThrusterSprites/RightThrusterSprite
 @onready var main_thruster_sprite: Sprite2D = $ThrusterSprites/MainThrusterSprite
 
+# Sprites and lights used for the impulses
+@onready var left_impulse: Sprite2D = $ImpulseSprites/LeftImpulse
+@onready var right_impulse: Sprite2D = $ImpulseSprites/RightImpulse
+@onready var left_impulse_indicator: PointLight2D = $ImpulseSprites/LeftImpulseIndicator
+@onready var right_impulse_indicator: PointLight2D = $ImpulseSprites/RightImpulseIndicator
+
+
 @onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @export var playerSize: Vector2 = Vector2(15, 30)
 @onready var ship: Node2D = $Ship

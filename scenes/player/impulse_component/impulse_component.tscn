@@ -52,6 +52,35 @@ scale_max = 3.0
 scale_curve = SubResource("CurveTexture_gx1jg")
 color_initial_ramp = SubResource("GradientTexture1D_fm80t")
 
+[sub_resource type="Gradient" id="Gradient_ugbui"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y4e6o"]
+gradient = SubResource("Gradient_ugbui")
+width = 5
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_fcs02"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ufqsu"]
+gradient = SubResource("Gradient_fcs02")
+width = 8
+height = 5
+fill = 2
+fill_from = Vector2(0.46581197, 0.517094)
+
+[sub_resource type="Gradient" id="Gradient_kvlxm"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j3x43"]
+gradient = SubResource("Gradient_kvlxm")
+width = 8
+height = 5
+fill = 2
+fill_from = Vector2(0.46581197, 0.517094)
+
 [node name="ImpulseComponent" type="Node2D" unique_id=1233791286]
 script = ExtResource("1_y4e6o")
 
@@ -82,3 +111,24 @@ one_shot = true
 
 [node name="LeftTimer" type="Timer" parent="." unique_id=1857022605]
 one_shot = true
+
+[node name="ImpulseSprites" type="Node2D" parent="." unique_id=856155810]
+z_index = 1
+
+[node name="LeftImpulseSprite" type="Sprite2D" parent="ImpulseSprites" unique_id=254246122]
+position = Vector2(12, -2)
+texture = SubResource("GradientTexture2D_y4e6o")
+
+[node name="LeftImpulseLight" type="PointLight2D" parent="ImpulseSprites" unique_id=1869246743]
+position = Vector2(12, -2)
+texture = SubResource("GradientTexture2D_ufqsu")
+
+[node name="RightImpulseSprite" type="Sprite2D" parent="ImpulseSprites" unique_id=1527918988]
+position = Vector2(12, 2)
+texture = SubResource("GradientTexture2D_y4e6o")
+
+[node name="RightImpulseLight" type="PointLight2D" parent="ImpulseSprites" unique_id=1543359599]
+position = Vector2(12, 2)
+color = Color(1, 0, 0, 1)
+energy = 1.62
+texture = SubResource("GradientTexture2D_j3x43")
