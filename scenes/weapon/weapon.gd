@@ -27,7 +27,6 @@ var weapon_modifiers: Array[Callable] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
-	cooldown = 0.1
 	weapon_modifiers.append(_auto_aim)
 	
 	lock_on_texture = LOCK_ON_TEXTURE.instantiate()
@@ -53,10 +52,6 @@ func _process(delta: float) -> void:
 	#position = player.position
 	for callable: Callable in weapon_modifiers:
 		callable.call(delta)
-	
-	# Spawn a bullet
-	#if is_cooldown_done && Input.is_action_pressed("space") && shooter.isAlive:
-		#use_weapon()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

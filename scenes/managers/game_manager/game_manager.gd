@@ -14,7 +14,7 @@ var destroyed_asteroids: int = 0
 @onready var game_timer: Timer = $GameTimer
 
 ## Variables for asteroid generation
-var detection_radius: float = 2500
+var detection_radius: float = 5000 # Used to disable asteroid
 var disable_radius: float = detection_radius * 2
 var threshold_amount: int = 10
 
@@ -52,9 +52,9 @@ func _process(_delta: float) -> void:
 				
 			
 	while asteroid_count < threshold_amount:
-		var length: float = randf_range(2000, Global.windowSize.x)
+		var length: float = randf_range(3000, detection_radius)
 		var angle: float = randf_range(-PI, PI)
-		asteroid_manager.instantiate_asteroid(Vector2(cos(angle) * length, sin(angle) * length) + player.position)
+		asteroid_manager.instantiate_asteroid(Vector2.from_angle(angle) * length + player.position)
 		asteroid_count += 1
 		
 
