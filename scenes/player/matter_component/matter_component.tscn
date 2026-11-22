@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cck50ip5pq0ff"]
+
+[ext_resource type="Script" uid="uid://bj78specybpus" path="res://scenes/player/matter_component/matter_component.gd" id="1_cm3ca"]
+
+[node name="MatterComponent" type="Node2D" unique_id=1951968012]
+script = ExtResource("1_cm3ca")

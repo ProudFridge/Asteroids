@@ -13,6 +13,9 @@ var timer: SceneTreeTimer
 var cooldown: float = 0.5
 var is_cooldown_done: bool = true
 
+var matter_consumption: float = 1
+var fuel_consumption: float = 0
+
 func _ready() -> void:
 	weapon_cooldown_done.connect(_on_weapon_cooldown_done)
 	weapon_cooldown_started.connect(_on_weapon_cooldown_started)

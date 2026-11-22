@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ckgcjc75h84xi" path="res://scenes/player/impulse_component/impulse_component.tscn" id="3_qek5x"]
 [ext_resource type="Texture2D" uid="uid://cnisb87sdktyc" path="res://assets/sprites/ship/ship_hull.png" id="4_75vfm"]
 [ext_resource type="PackedScene" uid="uid://cskxh4bavc45a" path="res://scenes/player/pickup_component/pickup_component.tscn" id="4_qek5x"]
+[ext_resource type="PackedScene" uid="uid://cck50ip5pq0ff" path="res://scenes/player/matter_component/matter_component.tscn" id="5_5gtgg"]
 [ext_resource type="Texture2D" uid="uid://m1i8316lq872" path="res://assets/sprites/ship/ship_thruster.png" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://ct3bs8e63pq6d" path="res://scenes/player/ship_custom.gd" id="9_h17s1"]
 
@@ -69,7 +70,7 @@ gradient = SubResource("Gradient_5gtgg")
 width = 20
 height = 12
 
-[node name="Player" type="RigidBody2D" unique_id=752532407 node_paths=PackedStringArray("boost_component", "impulse_component")]
+[node name="Player" type="RigidBody2D" unique_id=752532407 node_paths=PackedStringArray("boost_component", "impulse_component", "matter_component")]
 z_index = 1
 collision_mask = 11
 physics_material_override = SubResource("PhysicsMaterial_8afob")
@@ -82,6 +83,7 @@ angular_damp = 1.0
 script = ExtResource("1_8afob")
 boost_component = NodePath("Components/BoostComponent")
 impulse_component = NodePath("Components/ImpulseComponent")
+matter_component = NodePath("Components/MatterComponent")
 playerSize = Vector2(20, 30)
 
 [node name="Components" type="Node2D" parent="." unique_id=1003206880]
@@ -94,6 +96,9 @@ player = NodePath("../..")
 
 [node name="PickupComponent" parent="Components" unique_id=563053896 node_paths=PackedStringArray("player") instance=ExtResource("4_qek5x")]
 top_level = true
+player = NodePath("../..")
+
+[node name="MatterComponent" parent="Components" unique_id=1951968012 node_paths=PackedStringArray("player") instance=ExtResource("5_5gtgg")]
 player = NodePath("../..")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=945804275]

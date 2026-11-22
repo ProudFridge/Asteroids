@@ -35,6 +35,7 @@ var sideThrusterCooldown: float = 1
 @export_group("Components")
 @export var boost_component: BoostComponent
 @export var impulse_component: ImpulseComponent
+@export var matter_component: MatterComponent
 @export_group("")
 
 @export var bullet_manager: BulletManager
@@ -55,6 +56,10 @@ signal died()
 signal health_lost(currentHealth: float)
 
 func _ready() -> void:
+	left_thruster_sprite.hide()
+	right_thruster_sprite.hide()
+	main_thruster_sprite.hide()
+	
 	AudioSingleton.reset_audio_count(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
 	
 	body_entered.connect(_on_body_entered)
@@ -104,11 +109,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("turn_right"):
 		left_thruster_sprite.visible = true
 		apply_torque(current_rot_speed)
-		#left_thruster_particles.emitting = true
 		current_fuel -= rot_fuel_consumption * delta
 	else:
 		left_thruster_sprite.hide()
-		#left_thruster_particles.emitting = false
 
 
 func die() -> void:

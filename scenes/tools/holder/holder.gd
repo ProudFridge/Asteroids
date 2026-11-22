@@ -82,8 +82,10 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("space") && weapon.is_cooldown_done:
-		weapon.use_weapon()
-		AudioSingleton.play_2d_audio_at_location(weapon.global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
+		if shooter.matter_component.current_matter > weapon.matter_consumption:
+			weapon.use_weapon()
+			shooter.matter_component.current_matter -= weapon.matter_consumption
+			AudioSingleton.play_2d_audio_at_location(weapon.global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SHOOT)
 
 
 func _on_weapon_cooldown_done() -> void:
