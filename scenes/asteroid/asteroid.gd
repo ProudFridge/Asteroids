@@ -12,7 +12,6 @@ var area: float
 @export var rotationSpeed: float = 1
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
-@onready var light_occluder_2d: LightOccluder2D = $LightOccluder2D
 
 var generated_polygon: PackedVector2Array = []
 var closed_polygon: PackedVector2Array = []
@@ -52,9 +51,6 @@ func _ready() -> void:
 	health = area / 100
 	maxHealth = health
 	original_color = modulate
-	
-	light_occluder_2d.occluder = OccluderPolygon2D.new()
-	light_occluder_2d.occluder.polygon = generated_polygon
 	
 	var triangles: Array[Polygon2D] = shatter(false)
 	

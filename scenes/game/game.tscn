@@ -319,7 +319,7 @@ offset_bottom = 185.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 
-[node name="InfoPanel" type="PanelContainer" parent="InfoPanel/MarginContainer" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager", "position_value", "distance_from_center_value", "velocity_value", "speed_value", "angular_velocity_value", "fuel_value", "asteroids_value")]
+[node name="InfoPanel" type="PanelContainer" parent="InfoPanel/MarginContainer" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager", "position_value", "distance_from_center_value", "velocity_value", "speed_value", "angular_velocity_value", "fuel_value", "matter_value", "asteroids_value")]
 layout_mode = 2
 theme = SubResource("Theme_ohdgn")
 script = ExtResource("22_8b66f")
@@ -331,6 +331,7 @@ velocity_value = NodePath("VBoxContainer/GridContainer/VelocityValue")
 speed_value = NodePath("VBoxContainer/GridContainer/SpeedValue")
 angular_velocity_value = NodePath("VBoxContainer/GridContainer/AngularVelocityValue")
 fuel_value = NodePath("VBoxContainer/GridContainer/FuelValue")
+matter_value = NodePath("VBoxContainer/GridContainer/MatterValue")
 asteroids_value = NodePath("VBoxContainer/GridContainer/AsteroidsValue")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/MarginContainer/InfoPanel" unique_id=246395046]
@@ -406,6 +407,16 @@ size_flags_horizontal = 3
 text = "Fuel:"
 
 [node name="FuelValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=575111130]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Matter" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=139728115]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Matter:"
+
+[node name="MatterValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=222922954]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
