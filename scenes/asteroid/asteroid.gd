@@ -136,7 +136,7 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 		# Add fuel shards when the asteroid is destroyed
 		# TODO: Put all of this in a component
 		var fuel_shard: Resource = preload("res://scenes/fuel_shard/fuel_shard.tscn")
-		
+
 		#fuel_shard_amount = int(round(area / 500))
 		fuel_shard_amount = int(round(sqrt(area / 10)))
 		for i: int in fuel_shard_amount:

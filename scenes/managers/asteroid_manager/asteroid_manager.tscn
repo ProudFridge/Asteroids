@@ -2,7 +2,18 @@
 
 [ext_resource type="Script" uid="uid://bd1wl0yjlhw1" path="res://scenes/managers/asteroid_manager/asteroid_manager.gd" id="1_27iif"]
 [ext_resource type="Gradient" uid="uid://jpxmtvmflblg" path="res://scenes/managers/asteroid_manager/asteroid_color_gradient.tres" id="2_s6o42"]
+[ext_resource type="Script" uid="uid://dvy347qnq3llh" path="res://scenes/managers/asteroid_manager/noise_drawer.gd" id="3_qdrw2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y4e6o"]
+noise_type = 3
+frequency = 0.0127
+fractal_type = 3
+fractal_weighted_strength = 1.0
 
 [node name="AsteroidManager" type="Node" unique_id=1515685420]
 script = ExtResource("1_27iif")
 color_gradient = ExtResource("2_s6o42")
+world_noise_map = SubResource("FastNoiseLite_y4e6o")
+
+[node name="NoiseDrawer" type="Node2D" parent="." unique_id=181113945]
+script = ExtResource("3_qdrw2")

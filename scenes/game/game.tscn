@@ -47,6 +47,21 @@ expand_margin_bottom = 5.0
 
 [sub_resource type="Theme" id="Theme_2m7xh"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tmx8"]
+bg_color = Color(0.029506553, 0.029506562, 0.029506536, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="Theme" id="Theme_ohdgn"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2tmx8")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2m7xh"]
+font_size = 24
+
 [node name="Game" type="Node" unique_id=324886737]
 
 [node name="Player" parent="." unique_id=2088811554 node_paths=PackedStringArray("bullet_manager") instance=ExtResource("1_sul5r")]
@@ -298,84 +313,109 @@ gameManager = NodePath("../../Managers/GameManager")
 
 [node name="InfoPanel" type="CanvasLayer" parent="." unique_id=1446127989]
 
-[node name="InfoPanel" type="PanelContainer" parent="InfoPanel" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager")]
-offset_top = 8.0
-offset_right = 40.0
-offset_bottom = 48.0
-script = ExtResource("22_8b66f")
-player = NodePath("../../Player")
-asteroid_manager = NodePath("../../Managers/AsteroidManager")
+[node name="MarginContainer" type="MarginContainer" parent="InfoPanel" unique_id=314083816]
+offset_right = 198.0
+offset_bottom = 185.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
 
-[node name="GridContainer" type="GridContainer" parent="InfoPanel/InfoPanel" unique_id=124141708]
+[node name="InfoPanel" type="PanelContainer" parent="InfoPanel/MarginContainer" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager", "position_value", "distance_from_center_value", "velocity_value", "speed_value", "angular_velocity_value", "fuel_value", "asteroids_value")]
 layout_mode = 2
+theme = SubResource("Theme_ohdgn")
+script = ExtResource("22_8b66f")
+player = NodePath("../../../Player")
+asteroid_manager = NodePath("../../../Managers/AsteroidManager")
+position_value = NodePath("VBoxContainer/GridContainer/PositionValue")
+distance_from_center_value = NodePath("VBoxContainer/GridContainer/DistanceFromCenterValue")
+velocity_value = NodePath("VBoxContainer/GridContainer/VelocityValue")
+speed_value = NodePath("VBoxContainer/GridContainer/SpeedValue")
+angular_velocity_value = NodePath("VBoxContainer/GridContainer/AngularVelocityValue")
+fuel_value = NodePath("VBoxContainer/GridContainer/FuelValue")
+asteroids_value = NodePath("VBoxContainer/GridContainer/AsteroidsValue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/MarginContainer/InfoPanel" unique_id=246395046]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=623835901]
+layout_mode = 2
+text = "Info Panel"
+label_settings = SubResource("LabelSettings_2m7xh")
+
+[node name="HSeparator" type="HSeparator" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=1867897044]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GridContainer" type="GridContainer" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=124141708]
+layout_mode = 2
+theme_override_constants/h_separation = 15
 columns = 2
 
-[node name="Position" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=465016105]
+[node name="Position" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=465016105]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Position:"
 
-[node name="PositionValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1499003674]
+[node name="PositionValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1499003674]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "00"
+text = "0"
 
-[node name="DistanceFromCenter" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=596782354]
+[node name="DistanceFromCenter" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=596782354]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Distance From Center:"
 
-[node name="DistanceFromCenterValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=783057391]
+[node name="DistanceFromCenterValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=783057391]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "00"
+text = "0"
 
-[node name="Velocity" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=384018554]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Velocity:"
-
-[node name="VelocityValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=832201357]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "00"
-
-[node name="Speed" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=60735915]
+[node name="Velocity" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=384018554]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Velocity:"
 
-[node name="SpeedValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=708478619]
+[node name="VelocityValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=832201357]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "00"
+text = "0"
 
-[node name="AngularVelocity" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1056280374]
+[node name="Speed" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=60735915]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Velocity:"
+
+[node name="SpeedValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=708478619]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="AngularVelocity" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1056280374]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angular Velocity:"
 
-[node name="AngularVelocityValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1825301832]
+[node name="AngularVelocityValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1825301832]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "00"
+text = "0"
 
-[node name="Fuel" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=794100741]
+[node name="Fuel" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=794100741]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fuel:"
 
-[node name="FuelValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=575111130]
+[node name="FuelValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=575111130]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "00"
+text = "0"
 
-[node name="Asteroids" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=1016418506]
+[node name="Asteroids" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1016418506]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Asteroids:"
 
-[node name="AsteroidsValue" type="Label" parent="InfoPanel/InfoPanel/GridContainer" unique_id=148822602]
+[node name="AsteroidsValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=148822602]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "00"
+text = "0"

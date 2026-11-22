@@ -11,7 +11,11 @@ const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 @export var areaSize: Vector2 = Global.windowSize 
 @export var instantiation_location: Vector2 = Vector2.ZERO
 @export var asteroid_num: int = 10
+
+@export var world_noise_map: FastNoiseLite
+
 var asteroid_instances: Array[Asteroid] = []
+
 
 signal asteroid_added
 signal asteroid_removed(asteroid: Asteroid)
@@ -19,6 +23,7 @@ signal asteroid_removed(asteroid: Asteroid)
 
 func _ready() -> void:
 	instantiate_asteroids_in_area(asteroid_num, areaSize,instantiation_location, 100)
+	
 
 ## Instantiates asteroids in a specified area
 func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, location: Vector2, exclusionZoneRadius: float) -> void:

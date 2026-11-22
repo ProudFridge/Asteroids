@@ -1,11 +1,11 @@
 extends RigidBody2D
 class_name Player
 
-var max_fuel: float = 100
+var max_fuel: float = 1000
 var current_fuel: float = max_fuel:
 	set(new_fuel):
-		#current_fuel = clamp(new_fuel, 0, max_fuel)
-		current_fuel = 1
+		current_fuel = clamp(new_fuel, 0, max_fuel)
+		#current_fuel = 1
 var fuel_consumption: float = 20 # u/s
 var rot_fuel_consumption: float = 5
 
@@ -56,11 +56,8 @@ signal health_lost(currentHealth: float)
 
 func _ready() -> void:
 	AudioSingleton.reset_audio_count(SoundEffectSettings.SOUND_EFFECT_TYPE.ON_THRUST)
-	# Temp
-	#thruster_particles.position.x = -playerSize.y / 2 - thruster_particles.emission_rect_extents.y / 2 - 6
-
 	
-	self.body_entered.connect(_on_body_entered)
+	body_entered.connect(_on_body_entered)
 	damage_timer.timeout.connect(_on_damage_timer_timeout)
 	
 	# Instantiate holders
@@ -83,10 +80,7 @@ func _ready() -> void:
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	linear_velocity = linear_velocity.limit_length(max_speed)
-	
-#
-#func _draw() -> void:
-	#draw_ellipse(Vector2.ZERO, 1000, 1000, Color.WHEAT, false)
+
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -94,22 +88,18 @@ func _physics_process(delta: float) -> void:
 	
 	if direction and current_fuel > 0:
 		main_thruster_sprite.visible = true
-		#thruster_particles.emitting = true
 		apply_central_force(direction * Vector2.from_angle(rotation) * currentAccel)
 		current_fuel -= current_fuel_consumption * delta
 	else:
 		main_thruster_sprite.visible = false
-		#thruster_particles.emitting = false
 	
 	# Apply torque to spin the ship
 	if Input.is_action_pressed("turn_left"):
 		right_thruster_sprite.visible = true
-		#right_thruster_particles.emitting = true
 		apply_torque(-current_rot_speed)
 		current_fuel -= rot_fuel_consumption * delta
 	else:
 		right_thruster_sprite.hide()
-		#right_thruster_particles.emitting = false
 		
 	if Input.is_action_pressed("turn_right"):
 		left_thruster_sprite.visible = true
@@ -128,7 +118,7 @@ func die() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
-		#health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
+		health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
 		print(health)
 		$Camera2D.add_trauma(0.5)
 		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)

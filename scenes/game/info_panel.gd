@@ -3,13 +3,13 @@ extends PanelContainer
 @export var player: Player
 @export var asteroid_manager: AsteroidManager
 
-@onready var position_value: Label = $GridContainer/PositionValue
-@onready var distance_from_center_value: Label = $GridContainer/DistanceFromCenterValue
-@onready var velocity_value: Label = $GridContainer/VelocityValue
-@onready var speed_value: Label = $GridContainer/SpeedValue
-@onready var angular_velocity_value: Label = $GridContainer/AngularVelocityValue
-@onready var fuel_value: Label = $GridContainer/FuelValue
-@onready var asteroids_value: Label = $GridContainer/AsteroidsValue
+@export var position_value: Label
+@export var distance_from_center_value: Label
+@export var velocity_value: Label
+@export var speed_value: Label
+@export var angular_velocity_value: Label
+@export var fuel_value: Label
+@export var asteroids_value: Label
 
 func _ready() -> void:
 	_set_label_values()
@@ -26,3 +26,7 @@ func _set_label_values() -> void:
 	angular_velocity_value.text = str(snappedf(player.angular_velocity, 0.01))
 	fuel_value.text = str(snappedf(player.current_fuel, 0.01))
 	asteroids_value.text = str(asteroid_manager.asteroid_instances.size())
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("tab"):
+		visible = !visible
