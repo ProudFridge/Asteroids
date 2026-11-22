@@ -3,7 +3,7 @@ class_name Projectile
 
 var speed: float = 500
 
-var is_bouncy: bool = true
+var is_bouncy: bool = false
 var bounces_left: int = 3
 
 # Called when the node enters the scene tree for the first time.

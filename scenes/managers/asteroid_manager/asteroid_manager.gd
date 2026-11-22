@@ -8,7 +8,7 @@ const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 ## Used to get the colors of the asteroid 
 #@export var color_gradient: GradientTexture2D
 @export var color_gradient: Gradient
-@export var areaSize: Vector2 = Global.windowSize 
+@export var area_radius: float = Global.windowSize.x
 @export var instantiation_location: Vector2 = Vector2.ZERO
 @export var asteroid_num: int = 10
 
@@ -16,27 +16,21 @@ const ASTEROID: Resource = preload("res://scenes/asteroid/asteroid.tscn")
 
 var asteroid_instances: Array[Asteroid] = []
 
-
 signal asteroid_added
 signal asteroid_removed(asteroid: Asteroid)
 
-
 func _ready() -> void:
-	instantiate_asteroids_in_area(asteroid_num, areaSize,instantiation_location, 100)
+	instantiate_asteroids_in_area(asteroid_num, area_radius, instantiation_location, 500)
 	
 
 ## Instantiates asteroids in a specified area
-func instantiate_asteroids_in_area(asteroidNum: int, area: Vector2, location: Vector2, exclusionZoneRadius: float) -> void:
+func instantiate_asteroids_in_area(asteroidNum: int, area_radius: float, location: Vector2, exclusion_zone_radius: float) -> void:
 	for i: int in asteroidNum:
-		#var asteroid: Asteroid = ASTEROID.instantiate()
+		var random_length: float = randf_range(exclusion_zone_radius, area_radius)
+		var random_angle: float = randf_range(-PI, PI)
+		var position: Vector2 = Vector2.from_angle(random_angle) * random_length + location
 		
-		# Todo: replace with actual scren size, maybe use a singleton to store the screen size
-		var position: Vector2 = Vector2(randf_range(location.x - area.x / 2, location.x + area.x / 2), randf_range(location.y - area.y / 2, location.y + area.y / 2))
-		var velocity: Vector2 = (Vector2(Global.windowSize / 2) - position).normalized() * randf_range(10, 30)
-		
-		while position.distance_to(area / 2) < exclusionZoneRadius:
-			position.x = randf_range(location.x - area.x / 2, location.x + area.x / 2)
-			position.y = randf_range(location.y - area.y / 2, location.y + area.y / 2)
+		var velocity: Vector2 = Vector2.from_angle(randf_range(-PI, PI)) * randf_range(10, 30)
 		
 		instantiate_asteroid(position, velocity)
 
@@ -52,9 +46,15 @@ func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -
 	else:
 		size_modifier = 2
 	
+	#var noise_value: float = world_noise_map.get_noise_2d(position.x, position.y)
+	#var size_multiplier: float = 1
+	#if abs(noise_value) < 0.2:
+		#size_multiplier = 100
+	
 	var asteroid_instance: Asteroid = ASTEROID.instantiate()
 	
 	asteroid_instance.boundingBox = asteroid_instance.boundingBox * 0.0001 * position.length() * size_modifier
+	#asteroid_instance.boundingBox = asteroid_instance.boundingBox * 0.1 * size_modifier * size_multiplier
 	asteroid_instance.modulate = color_gradient.sample(position.length() / 50000)
 	asteroid_instance.position = position
 	asteroid_instance.linear_velocity = velocity

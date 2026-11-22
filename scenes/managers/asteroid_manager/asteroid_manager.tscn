@@ -5,10 +5,8 @@
 [ext_resource type="Script" uid="uid://dvy347qnq3llh" path="res://scenes/managers/asteroid_manager/noise_drawer.gd" id="3_qdrw2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y4e6o"]
-noise_type = 3
 frequency = 0.0127
-fractal_type = 3
-fractal_weighted_strength = 1.0
+fractal_type = 2
 
 [node name="AsteroidManager" type="Node" unique_id=1515685420]
 script = ExtResource("1_27iif")
