@@ -119,7 +119,7 @@ func die() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Asteroid && damage_timer.is_stopped() && isAlive:
 		health -= ((body as Asteroid).linear_velocity - linear_velocity).length() * 0.1
-		print(health)
+		
 		$Camera2D.add_trauma(0.5)
 		AudioSingleton.play_2d_audio_at_location(position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ASTEROID_COLLISION)
 		health_lost.emit(health)

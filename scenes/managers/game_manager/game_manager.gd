@@ -15,6 +15,7 @@ var destroyed_asteroids: int = 0
 
 ## Variables for asteroid generation
 var detection_radius: float = 2500
+var disable_radius: float = detection_radius * 2
 var threshold_amount: int = 10
 
 signal won
@@ -39,11 +40,16 @@ func _process(_delta: float) -> void:
 	var asteroid_count: int = 0
 	for asteroid: Asteroid in asteroid_manager.asteroid_instances:
 		if asteroid != null:
-			if (asteroid.global_position - player.global_position).length() < detection_radius:
+			var distance: Vector2 = asteroid.global_position - player.global_position
+			if distance.length() <= detection_radius:
 				asteroid_count += 1
+			
+			# Disabe the asteroid if it's too far	
+			if distance.length() < disable_radius:
 				asteroid.disable(false)
 			else:
 				asteroid.disable(true)
+				
 			
 	while asteroid_count < threshold_amount:
 		var length: float = randf_range(2000, Global.windowSize.x)
