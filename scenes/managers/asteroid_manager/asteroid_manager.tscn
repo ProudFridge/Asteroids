@@ -2,16 +2,55 @@
 
 [ext_resource type="Script" uid="uid://bd1wl0yjlhw1" path="res://scenes/managers/asteroid_manager/asteroid_manager.gd" id="1_27iif"]
 [ext_resource type="Gradient" uid="uid://jpxmtvmflblg" path="res://scenes/managers/asteroid_manager/asteroid_color_gradient.tres" id="2_s6o42"]
+[ext_resource type="Shader" uid="uid://upexfxdrv004" path="res://scenes/managers/asteroid_manager/noise_drawer.gdshader" id="3_3wpdt"]
 [ext_resource type="Script" uid="uid://dvy347qnq3llh" path="res://scenes/managers/asteroid_manager/noise_drawer.gd" id="3_qdrw2"]
 
+[sub_resource type="Gradient" id="Gradient_h8g5c"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3507109, 0.7109005)
+colors = PackedColorArray(0, 0, 0, 1, 0.3553136, 0.35531354, 0.35531357, 1, 1, 1, 1, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y4e6o"]
-frequency = 0.0127
-fractal_type = 2
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8vd2d"]
+noise = SubResource("FastNoiseLite_y4e6o")
+color_ramp = SubResource("Gradient_h8g5c")
+
+[sub_resource type="Gradient" id="Gradient_bs21t"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3519553, 0.7206704)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0, 0.4045111, 0.40451115, 0.4045111, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jrmb3"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2tmx8"]
+width = 1920
+height = 1080
+noise = SubResource("FastNoiseLite_jrmb3")
+color_ramp = SubResource("Gradient_bs21t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ohdgn"]
+shader = ExtResource("3_3wpdt")
+shader_parameter/noise = SubResource("NoiseTexture2D_2tmx8")
+
+[sub_resource type="Gradient" id="Gradient_3wpdt"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
+gradient = SubResource("Gradient_3wpdt")
+width = 1920
+height = 1080
 
 [node name="AsteroidManager" type="Node" unique_id=1515685420]
 script = ExtResource("1_27iif")
 color_gradient = ExtResource("2_s6o42")
-world_noise_map = SubResource("FastNoiseLite_y4e6o")
+noise_map = SubResource("NoiseTexture2D_8vd2d")
 
 [node name="NoiseDrawer" type="Node2D" parent="." unique_id=181113945]
 script = ExtResource("3_qdrw2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=778558483]
+visible = false
+material = SubResource("ShaderMaterial_ohdgn")
+texture = SubResource("GradientTexture2D_2m7xh")

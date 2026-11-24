@@ -33,13 +33,13 @@ var original_color: Color
 signal died
 
 func _ready() -> void:
-	var multiplier: float = 1
-	var rand: float = randf_range(0, 1)
-	if rand < 0.2:
-		multiplier = 3
-	elif rand >= 0.2 && rand < 0.3 :
-		multiplier = 6
-	boundingBox *= multiplier
+	#var multiplier: float = 1
+	#var rand: float = randf_range(0, 1)
+	#if rand < 0.2:
+		#multiplier = 3
+	#elif rand >= 0.2 && rand < 0.3 :
+		#multiplier = 6
+	#boundingBox *= multiplier
 	
 	generated_polygon = Geometry.generate_convex_polygon(randi_range(5, 8), boundingBox)
 	closed_polygon = Geometry2D.convex_hull(generated_polygon)
