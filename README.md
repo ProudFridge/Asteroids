@@ -2,8 +2,8 @@ This is an asteroid clone made in Godot for the Terra event. It has all the basi
 The project makes great use of the `RigidBody2D` nodes in Godot and the `Geometry2D` class in order to interact with and shatter the asteroids.
 
 ### How to run
-- You can play the game on its [itch page](https://proudfridge.itch.io/asteroids) or download the executable from the releases tab
-  - (I recommend downloading the binaries from the releases page instead of playing the web version since it's a bit laggy.)
+- You can play the game on its [itch page](https://proudfridge.itch.io/asteroids) or download the executable from there.
+  - (I recommend downloading the binaries from instead of playing the web version since it's a bit laggy.)
 
 ### Controls
 - W/S: Thrust forwards/backwards
