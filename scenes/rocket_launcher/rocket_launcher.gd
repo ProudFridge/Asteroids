@@ -4,8 +4,9 @@ class_name RocketLauncher
 @export var shooter: Player
 
 # Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#super._ready()
+func _ready() -> void:
+	super._ready()
+	matter_consumption = 5
 
 func use_weapon() -> void:
 	References.bullet_manager.instantiate_bullet(global_position, global_rotation - PI / 2, BulletManager.BULLET_TYPE.ROCKET)
