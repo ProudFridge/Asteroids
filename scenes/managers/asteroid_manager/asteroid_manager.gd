@@ -20,8 +20,8 @@ signal asteroid_added
 signal asteroid_removed(asteroid: Asteroid)
 
 func _ready() -> void:
-	#instantiate_asteroids_in_area(asteroid_num, area_radius, instantiation_location, 500)
-	instantiate_asteroids_in_grid(Vector2(20, 20), Vector2(256, 256), instantiation_location)
+	instantiate_asteroids_in_area(asteroid_num, area_radius, instantiation_location, 500)
+	#instantiate_asteroids_in_grid(Vector2(30, 30), Vector2(256, 256), instantiation_location)
 
 ## Instantiates asteroids in a specified area
 func instantiate_asteroids_in_area(asteroid_amount: int, area_radius: float, location: Vector2, exclusion_zone_radius: float) -> void:
@@ -44,24 +44,15 @@ func instantiate_asteroids_in_grid(grid_size: Vector2, spacing: Vector2, locatio
 
 func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -> Asteroid:
 	var size_modifier: float = 1
-	size_modifier = max(abs(noise_map.noise.get_noise_2d(position.x, position.y)), 0.2) * 5
-	#var random_num: float = randf_range(0, 1)
-	#
-	#if random_num > 0.8:
-		#size_modifier = 0.3
-	#elif random_num < 0.95 && random_num >= 0.8:
-		#size_modifier = 1
-	#else:
-		#size_modifier = 2
-	
-	#var noise_value: float = world_noise_map.get_noise_2d(position.x, position.y)
-	#var size_multiplier: float = 1
-	#if abs(noise_value) < 0.2:
-		#size_multiplier = 100
+	# Modify the size of the astroid based off of the noise map
+	size_modifier *= max(abs(noise_map.noise.get_noise_2d(position.x, position.y)), 0.2) * 5
+	# Modify the size of the asteroid based off of it's distance from the player
+	size_modifier *= 0.0001 * position.length()
+	# Cap the modifer value
+	size_modifier = max(size_modifier, 0.2)
 	
 	var asteroid_instance: Asteroid = ASTEROID.instantiate()
 	
-	#asteroid_instance.boundingBox = asteroid_instance.boundingBox * 0.0001 * position.length() * size_modifier
 	asteroid_instance.boundingBox = asteroid_instance.boundingBox * size_modifier
 	#asteroid_instance.boundingBox = asteroid_instance.boundingBox * 0.1 * size_modifier * size_multiplier
 	asteroid_instance.modulate = color_gradient.sample(position.length() / 50000)

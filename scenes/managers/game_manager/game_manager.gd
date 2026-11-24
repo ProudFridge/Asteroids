@@ -16,7 +16,8 @@ var destroyed_asteroids: int = 0
 ## Variables for asteroid generation
 var detection_radius: float = 5000 # Used to disable asteroid
 var disable_radius: float = detection_radius * 2
-var threshold_amount: int = 10
+var deletion_radius: float = 7000
+var threshold_amount: int = 50
 
 signal won
 signal lost
@@ -49,7 +50,10 @@ func _process(_delta: float) -> void:
 				asteroid.disable(false)
 			else:
 				asteroid.disable(true)
-				
+			
+			# Delete the asteroid if it exceeds the deletion radius
+			if distance.length() > deletion_radius:
+				asteroid.delete()
 			
 	while asteroid_count < threshold_amount:
 		var length: float = randf_range(3000, detection_radius)
