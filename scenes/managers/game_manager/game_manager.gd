@@ -24,6 +24,8 @@ signal lost
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player.position = Geometry.generate_random_vector(6000)
+	
 	asteroid_manager.asteroid_removed.connect(_on_asteroid_manager_asteroid_removed)
 	player.died.connect(_on_player_died)
 	

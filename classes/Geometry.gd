@@ -148,3 +148,8 @@ static func sort_by_angle(a: Vector2, b: Vector2) -> bool:
 	if a.angle() < b.angle():
 		return true
 	return false
+
+## Returns a vector with a random angle with a magnitude of [param length] and offseted by [param position_offset]
+static func generate_random_vector(length: float = 1, position_offset: Vector2 = Vector2.ZERO) -> Vector2:
+	var vec: Vector2 = Vector2.from_angle(randf_range(-PI, PI))
+	return vec * length + position_offset

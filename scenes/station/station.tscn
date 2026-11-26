@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cm2j3t3e208xc"]
+
+[ext_resource type="Texture2D" uid="uid://b3c7731dxcyl0" path="res://assets/sprites/station.png" id="1_fwkoa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2m7xh"]
+radius = 5000.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_2m7xh"]
+radius = 5000.0
+height = 10000.0
+
+[node name="Station" type="RigidBody2D" unique_id=900675082]
+mass = 1000000.0
+gravity_scale = 0.0
+angular_velocity = 0.87266463
+angular_damp_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1761533872]
+shape = SubResource("CircleShape2D_2m7xh")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=551227023]
+visible = false
+mesh = SubResource("SphereMesh_2m7xh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=258063892]
+scale = Vector2(52.796875, 52.796875)
+texture = ExtResource("1_fwkoa")

@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 [ext_resource type="Script" uid="uid://7wp4ves1xmpv" path="res://scenes/game/info_panel.gd" id="22_8b66f"]
+[ext_resource type="PackedScene" uid="uid://cm2j3t3e208xc" path="res://scenes/station/station.tscn" id="24_1iff4"]
 
 [sub_resource type="Gradient" id="Gradient_8b66f"]
 colors = PackedColorArray(0, 0, 0, 1, 0.09411765, 0.09411765, 0.09411765, 1)
@@ -435,3 +436,5 @@ text = "Asteroids:"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+
+[node name="Station" parent="." unique_id=900675082 instance=ExtResource("24_1iff4")]

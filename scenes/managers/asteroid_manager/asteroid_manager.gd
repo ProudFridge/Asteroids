@@ -22,15 +22,14 @@ signal asteroid_added
 signal asteroid_removed(asteroid: Asteroid)
 
 func _ready() -> void:
-	instantiate_asteroids_in_area(asteroid_num, area_radius, instantiation_location, 500)
+	instantiate_asteroids_in_area(asteroid_num, area_radius, instantiation_location, 10000)
 	#instantiate_asteroids_in_grid(Vector2(30, 30), Vector2(256, 256), instantiation_location)
 
 ## Instantiates asteroids in a specified area
 func instantiate_asteroids_in_area(asteroid_amount: int, area_radius: float, location: Vector2, exclusion_zone_radius: float) -> void:
 	for i: int in asteroid_amount:
 		var random_length: float = randf_range(exclusion_zone_radius, area_radius)
-		var random_angle: float = randf_range(-PI, PI)
-		var position: Vector2 = Vector2.from_angle(random_angle) * random_length + location
+		var position: Vector2 = Geometry.generate_random_vector(random_length)
 		
 		var velocity: Vector2 = Vector2.from_angle(randf_range(-PI, PI)) * randf_range(10, 30)
 		
@@ -81,10 +80,10 @@ func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -
 func instantiate_fuel_shard(position: Vector2) -> void:
 	var fuel_shard_instance: FuelShard = FUEL_SHARD.instantiate()
 	var vec_length: float = randf_range(5, 15)
-	var rand_angle: float = randfn(-PI, PI)
 	var speed_multiplier: float = randf_range(0.5, 1.5)
 	
-	fuel_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
+	fuel_shard_instance.position = Geometry.generate_random_vector(vec_length, position)
+	#fuel_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
 	fuel_shard_instance.linear_velocity = (fuel_shard_instance.position - position) * 5 * speed_multiplier
 	get_parent().add_child(fuel_shard_instance)
 
@@ -92,10 +91,10 @@ func instantiate_fuel_shard(position: Vector2) -> void:
 func instantiate_matter_shard(position: Vector2) -> void:
 	var matter_shard_instance: MatterShard = MATTER_SHARD.instantiate()
 	var vec_length: float = randf_range(5, 15)
-	var rand_angle: float = randfn(-PI, PI)
 	var speed_multiplier: float = randf_range(0.5, 1.5)
 	
-	matter_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
+	matter_shard_instance.position = Geometry.generate_random_vector(vec_length, position)
+	#matter_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
 	matter_shard_instance.linear_velocity = (matter_shard_instance.position - position) * 5 * speed_multiplier
 	get_parent().add_child(matter_shard_instance)
 
