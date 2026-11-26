@@ -30,6 +30,10 @@ func _ready() -> void:
 	
 	
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
+	var collision: KinematicCollision2D = move_and_collide(Vector2.ZERO)
+	if collision:
+		AudioSingleton.play_2d_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_FUEL_SHARD_COLLISION)
+	
 	if is_absorbed:
 		var elapsed_time: float = absorption_time - absorption_timer.time_left
 		position = Tween.interpolate_value(initial_position, player.position - initial_position, elapsed_time, absorption_time, Tween.TRANS_EXPO, Tween.EASE_OUT)

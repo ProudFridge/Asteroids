@@ -27,6 +27,7 @@ var weapon_modifiers: Array[Callable] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
+	cooldown = 0.1
 	weapon_modifiers.append(_auto_aim)
 	
 	lock_on_texture = LOCK_ON_TEXTURE.instantiate()

@@ -5,15 +5,15 @@ var max_fuel: float = 1000
 var current_fuel: float = max_fuel:
 	set(new_fuel):
 		#current_fuel = clamp(new_fuel, 0, max_fuel)
-		current_fuel = 1
+		current_fuel = max_fuel
 var fuel_consumption: float = 20 # u/s
 var rot_fuel_consumption: float = 5
 
-const accel: float = 200.0
+const accel: float = 50.0
 var max_speed: float = 8000
 @export var rot_speed: float = 500 # deg/s
 
-var currentAccel: float = accel
+var current_accel: float = accel
 var current_rot_speed: float = rot_speed
 var current_fuel_consumption: float = fuel_consumption
 var current_rot_fuel_consumption: float = rot_fuel_consumption
@@ -101,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	
 	if direction and current_fuel > 0:
 		main_thruster_sprite.visible = true
-		apply_central_force(direction * Vector2.from_angle(rotation) * currentAccel)
+		apply_central_force(direction * Vector2.from_angle(rotation) * current_accel)
 		current_fuel -= current_fuel_consumption * delta
 	else:
 		main_thruster_sprite.visible = false
