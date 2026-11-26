@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bq0nigm5mmvtl" path="res://assets/sprites/ship/ship_head.png" id="9_lqpn7"]
 [ext_resource type="Texture2D" uid="uid://cnisb87sdktyc" path="res://assets/sprites/ship/ship_hull.png" id="10_qel0l"]
 [ext_resource type="Texture2D" uid="uid://m1i8316lq872" path="res://assets/sprites/ship/ship_thruster.png" id="11_rrgl4"]
+[ext_resource type="Script" uid="uid://dmm2hs3t4q1xw" path="res://scenes/tutorial/button.gd" id="12_qel0l"]
+[ext_resource type="Theme" uid="uid://brmlrh227gcaa" path="res://themes/tutorial/tutorial_theme.tres" id="12_rrgl4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2m7xh"]
 font_size = 78
@@ -24,6 +26,20 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_3ovsr"]
 offsets = PackedFloat32Array(0.009661836, 1)
 colors = PackedColorArray(1, 0.71500003, 0.43, 1, 1, 0.33349997, 0.06999999, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrgl4"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310278, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.12934244, 0.10580031, 0.21372682, 1)
+
+[sub_resource type="Gradient" id="Gradient_ymgc8"]
+colors = PackedColorArray(0.13682577, 0.13682574, 0.13682571, 1, 0.2592937, 0.2592937, 0.2592937, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dn3lk"]
+gradient = SubResource("Gradient_ymgc8")
 
 [node name="MainMenu" type="Control" unique_id=592040849]
 process_mode = 3
@@ -47,7 +63,6 @@ color = Color(0, 0, 0, 1)
 [node name="Managers" type="Node" parent="." unique_id=833144713]
 
 [node name="AsteroidManager" parent="Managers" unique_id=1515685420 instance=ExtResource("1_fsom3")]
-areaSize = Vector2(1920, 1080)
 instantiation_location = Vector2(960, 540)
 
 [node name="StarsManager" parent="Managers" unique_id=210266538 instance=ExtResource("2_0ebjn")]
@@ -159,3 +174,156 @@ scale_amount_min = 10.0
 scale_amount_max = 15.0
 scale_amount_curve = SubResource("Curve_wem23")
 color_initial_ramp = SubResource("Gradient_3ovsr")
+
+[node name="TutorialLayer" type="CanvasLayer" parent="." unique_id=688669744]
+visible = false
+
+[node name="Tutorial" type="Control" parent="TutorialLayer" unique_id=317082334]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("12_rrgl4")
+
+[node name="ColorRect" type="ColorRect" parent="TutorialLayer/Tutorial" unique_id=783183833]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="TutorialLayer/Tutorial" unique_id=371896185]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 90
+
+[node name="PanelContainer" type="PanelContainer" parent="TutorialLayer/Tutorial/MarginContainer" unique_id=1462926866]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rrgl4")
+
+[node name="TextureRect" type="TextureRect" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer" unique_id=654240350]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_dn3lk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer" unique_id=602173090]
+layout_mode = 2
+
+[node name="ControlsTitleLabel" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=71092992]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[font_size=48]Controls[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1479183682]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]W/S[/pulse] to go [color=#4cf]Forwards/Backwards[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1816991579]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]A/D[/pulse] to turn [color=#44f]Left/Right[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1198956437]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]Q/E[/pulse] to activate an [fade][tornado radius=3.0]impulse[/tornado][/fade] to the [color=#44f]Left/Right[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1394231310]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]Shift[/pulse] to go into [color=#A8f]Overdrive[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1236379274]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]Space[/pulse] to [color=#ABf]Shoot[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1286118029]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Press [pulse]Ctrl[/pulse] to [color=#ABf]enable auto-aim[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=224387000]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[pulse]Left click[/pulse] to make [color=#ABf]auto-aim[/color] follow your cursor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1858876719]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = " Press [pulse]Escape[/pulse] to [color=#CBf]open the pause menu[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1372493715]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[pulse]Scroll up/down[/pulse] to [color=#ADf]zoom in/out[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OtherThingsTitle" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=734010601]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[font_size=48]Other Stuff[/font_size]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=2010192083]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "You can [pulse]move[/pulse] as long as you have [color=#ADC]fuel[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1040298232]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[pulse]Destroy asteroids[/pulse] to [color=#ADf]refill the ship's fuel[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="TutorialLayer/Tutorial/MarginContainer/PanelContainer/VBoxContainer" unique_id=1349034167]
+layout_mode = 2
+text = "Return To Main Menu"
+script = ExtResource("12_qel0l")
