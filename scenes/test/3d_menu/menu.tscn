@@ -1,26 +1,31 @@
 [gd_scene format=3 uid="uid://dqlh4cibglicw"]
 
+[ext_resource type="Script" uid="uid://bvktkwidcbyvr" path="res://scenes/test/3d_menu/menu.gd" id="1_5kkuh"]
 [ext_resource type="Script" uid="uid://cpwrusmecjdm" path="res://scenes/test/3d_menu/omni_light_3d.gd" id="1_a2kwy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2m7xh"]
-size = Vector3(2, 3.55542, 6.9171753)
+size = Vector3(3.3896484, 3.55542, 6.9171753)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vhbcm"]
 size = Vector2(20, 8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vhbcm"]
-size = Vector3(2, 3.55542, 7.883484)
+size = Vector3(2, 3.55542, 18.959442)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a2kwy"]
 size = Vector2(20, 6)
 
 [sub_resource type="Environment" id="Environment_2m7xh"]
-background_energy_multiplier = 0.0
+ambient_light_color = Color(0.6542321, 0.6542321, 0.654232, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ohdgn"]
+size = Vector3(1, 0.27929688, 0.33984375)
 
 [node name="Menu" type="Node3D" unique_id=140952199]
+script = ExtResource("1_5kkuh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1888972837]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, -2.7274475)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19482422, 2, -2.7274475)
 mesh = SubResource("BoxMesh_2m7xh")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=676139723]
@@ -28,7 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4392571, 3.6592917, -1.7066
 mesh = SubResource("PlaneMesh_vhbcm")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=845931745]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.4616685, 1.9778514, -4.360809)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.999647, 1.9778514, -4.3608093)
 mesh = SubResource("BoxMesh_vhbcm")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1938294013]
@@ -36,7 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8785143, 0.14270258, -1.213
 mesh = SubResource("PlaneMesh_a2kwy")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1611778800]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7991135, 2.023942, 3.0773973)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7991135, 1.914901, 3.0773973)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1267115999]
 environment = SubResource("Environment_2m7xh")
@@ -48,8 +53,8 @@ omni_attenuation = 0.231
 script = ExtResource("1_a2kwy")
 
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=2054766477]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49930346, 2, 1)
-light_energy = 2.0
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 3.156129, 3.5351534, -1.3811448)
+light_energy = 20.78
 area_range = 3.867
 area_size = Vector2(2, 2)
 
@@ -57,23 +62,40 @@ area_size = Vector2(2, 2)
 transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 2.4392571, 3.6592917, -1.7066009)
 mesh = SubResource("PlaneMesh_vhbcm")
 
-[node name="Label" type="Label" parent="." unique_id=1229089697]
-offset_left = 179.0
-offset_top = 157.0
-offset_right = 232.0
-offset_bottom = 180.0
-text = "fdsfdsf"
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1937006226]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+offset_left = 110.0
+offset_top = 163.0
+offset_right = 180.0
+offset_bottom = 264.0
 
-[node name="Label2" type="Label" parent="." unique_id=314501030]
-offset_left = 188.0
-offset_top = 262.0
-offset_right = 241.0
-offset_bottom = 285.0
-text = "fdsfdsf"
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=938544092]
+layout_mode = 2
+text = "Launch"
 
-[node name="Label3" type="Label" parent="." unique_id=1397239780]
-offset_left = 189.0
-offset_top = 203.0
-offset_right = 242.0
-offset_bottom = 226.0
-text = "fdsfdsf"
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1702121694]
+layout_mode = 2
+text = "Settings"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1653011088]
+layout_mode = 2
+text = "Quit"
+
+[node name="Button4" type="Button" parent="VBoxContainer" unique_id=1513489079]
+layout_mode = 2
+text = "Quit"
+
+[node name="Button" type="MeshInstance3D" parent="." unique_id=744493166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44414306, 2.3816261, 0.6699219)
+mesh = SubResource("BoxMesh_ohdgn")
+
+[node name="Button2" type="MeshInstance3D" parent="." unique_id=2030497311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44414306, 2.8704221, 0.6699219)
+mesh = SubResource("BoxMesh_ohdgn")
+
+[node name="Button3" type="MeshInstance3D" parent="." unique_id=1310257041]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44414306, 1.8995082, 0.6699219)
+mesh = SubResource("BoxMesh_ohdgn")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1588682887]

@@ -4,8 +4,8 @@ class_name Player
 var max_fuel: float = 1000
 var current_fuel: float = max_fuel:
 	set(new_fuel):
-		current_fuel = clamp(new_fuel, 0, max_fuel)
-		#current_fuel = 1
+		#current_fuel = clamp(new_fuel, 0, max_fuel)
+		current_fuel = 1
 var fuel_consumption: float = 20 # u/s
 var rot_fuel_consumption: float = 5
 
@@ -21,11 +21,12 @@ var current_rot_fuel_consumption: float = rot_fuel_consumption
 var bounceDamp: float = 0.5
 var health: float = 100:
 	set(newHealth):
-		if newHealth > 0:
-			health = newHealth
-		else:
-			health = 0
-			die()
+		health = 100
+		#if newHealth > 0:
+			#health = newHealth
+		#else:
+			#health = 0
+			#die()
 		
 var isAlive: bool = true
 

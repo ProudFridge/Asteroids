@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1nqdkbt0ygnc"]
 
-[ext_resource type="Script" uid="uid://cyxx1ng4fcbxf" path="res://scenes/asteroid_shard/asteroid_shard.gd" id="1_e80xw"]
+[ext_resource type="Script" uid="uid://cyxx1ng4fcbxf" path="res://scenes/shards/asteroid_shard/asteroid_shard.gd" id="1_e80xw"]
 
 [node name="AsteroidShard" type="RigidBody2D" unique_id=1299285981]
 collision_layer = 4

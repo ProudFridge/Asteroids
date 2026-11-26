@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bf7lvmej1g1g0"]
 
-[ext_resource type="Script" uid="uid://ce4rs40fb3nee" path="res://scenes/fuel_shard/fuel_shard.gd" id="1_vcxhu"]
+[ext_resource type="Script" uid="uid://ce4rs40fb3nee" path="res://scenes/shards/fuel_shard/fuel_shard.gd" id="1_vcxhu"]
 
 [node name="FuelShard" type="RigidBody2D" unique_id=2002881673]
 collision_layer = 16

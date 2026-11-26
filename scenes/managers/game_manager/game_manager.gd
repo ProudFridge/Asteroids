@@ -52,8 +52,8 @@ func _process(_delta: float) -> void:
 				asteroid.disable(true)
 			
 			# Delete the asteroid if it exceeds the deletion radius
-			if distance.length() > deletion_radius:
-				asteroid.delete()
+			#if distance.length() > deletion_radius:
+				#asteroid.delete()
 			
 	while asteroid_count < threshold_amount:
 		var length: float = randf_range(3000, detection_radius)

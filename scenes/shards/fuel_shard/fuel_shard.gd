@@ -38,7 +38,6 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 
 func absorb_by_player(play: Player) -> void:
 	play.current_fuel += fuel_content
-	play.matter_component.current_matter += matter_content
 	
 	collision_polygon_2d.disabled = true
 	initial_position = position

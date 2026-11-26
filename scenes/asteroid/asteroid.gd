@@ -105,7 +105,7 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 	
 	# Instance all shards	
 	if instanceShards:
-		var asteroidShard: Resource = preload("res://scenes/asteroid_shard/asteroid_shard.tscn")
+		var asteroidShard: Resource = preload("uid://c1nqdkbt0ygnc")
 		for t: Polygon2D in triangles:
 			var shardInstance: AsteroidShard = asteroidShard.instantiate()
 			#shardInstance.set_polygon(rotate_polygon(t.polygon))
@@ -124,21 +124,16 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			get_parent().add_child(shardInstance)
 		
 		
-		# Add fuel shards when the asteroid is destroyed
-		# TODO: Put all of this in a component
-		var fuel_shard: Resource = preload("res://scenes/fuel_shard/fuel_shard.tscn")
-
 		#fuel_shard_amount = int(round(area / 500))
 		fuel_shard_amount = int(round(sqrt(area / 10)))
 		for i: int in fuel_shard_amount:
-			var fuel_shard_instance: FuelShard = fuel_shard.instantiate()
-			var vec_length: float = randf_range(5, 15)
-			var rand_angle: float = randfn(-PI, PI)
-			var speed_multiplier: float = randf_range(0.5, 1.5)
+			(get_parent() as AsteroidManager).instantiate_fuel_shard(global_position)
 			
-			fuel_shard_instance.position = position + Vector2(cos(rand_angle) * vec_length, sin(rand_angle) * vec_length)
-			fuel_shard_instance.linear_velocity = (fuel_shard_instance.position - position) * 5 * speed_multiplier
-			get_parent().add_child(fuel_shard_instance)
+		
+		var matter_shard_amount: int = 4
+		for i: int in matter_shard_amount:
+			(get_parent() as AsteroidManager).instantiate_matter_shard(global_position)
+		
 		
 	return triangles
 

@@ -36,5 +36,9 @@ func _process(delta: float) -> void:
 		if body is FuelShard:
 			var fuel_shard: FuelShard = body as FuelShard
 			if player.current_fuel + fuel_shard.fuel_content < player.max_fuel || player.current_fuel == 0:
-				
 				fuel_shard.absorb_by_player(player)
+				
+		if body is MatterShard:
+			var matter_shard: MatterShard = body as MatterShard
+			if player.matter_component.current_matter + matter_shard.matter_content < player.matter_component.max_matter:
+				matter_shard.absorb_by_player(player)

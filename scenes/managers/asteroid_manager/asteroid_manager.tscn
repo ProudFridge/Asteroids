@@ -48,6 +48,7 @@ color_gradient = ExtResource("2_s6o42")
 noise_map = SubResource("NoiseTexture2D_8vd2d")
 
 [node name="NoiseDrawer" type="Node2D" parent="." unique_id=181113945]
+visible = false
 script = ExtResource("3_qdrw2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=778558483]
