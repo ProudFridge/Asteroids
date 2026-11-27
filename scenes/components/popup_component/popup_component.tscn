@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bil3brcp8vp56"]
+
+[ext_resource type="Script" uid="uid://8qqu0xtwufi8" path="res://scenes/components/popup_component/popup_component.gd" id="1_8ohxr"]
+
+[node name="PopupComponent" type="Node2D" unique_id=914264342]
+script = ExtResource("1_8ohxr")
+text = "Hello"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=819686324]
+top_level = true
+offset_left = 56.0
+offset_top = -59.0
+offset_right = 152.0
+offset_bottom = -19.0
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1073611675]
+layout_mode = 2
+text = "This is a test"
+
+[node name="MouseDetectionArea" type="Area2D" parent="." unique_id=1545303392]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouseDetectionArea" unique_id=71665788]
+polygon = PackedVector2Array(100, 0, 0, 80, 0, 0)

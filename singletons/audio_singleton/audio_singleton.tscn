@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://clf5l5ipcl8th" path="res://assets/sounds/collision/fuel_shard/impactMining_002.wav" id="9_cajrv"]
 [ext_resource type="AudioStream" uid="uid://hu254wl6e7q8" path="res://assets/sounds/collision/fuel_shard/impactMining_003.wav" id="10_wvipq"]
 [ext_resource type="AudioStream" uid="uid://dqr7eli7j5oqo" path="res://assets/sounds/collision/fuel_shard/impactMining_004.wav" id="11_adt6c"]
+[ext_resource type="AudioStream" uid="uid://b4sca7s5ohgb2" path="res://assets/sounds/info_tablet/muffled_radio.wav" id="12_cajrv"]
 
 [sub_resource type="Resource" id="Resource_a3qmm"]
 script = ExtResource("2_nwf4t")
@@ -64,10 +65,17 @@ metadata/_custom_type_script = "uid://2wo80rhndd4r"
 
 [sub_resource type="Resource" id="Resource_ptusf"]
 script = ExtResource("2_nwf4t")
-type = 6
+type = 7
 sound_effect = Array[AudioStreamWAV]([ExtResource("6_xmf2b")])
+metadata/_custom_type_script = "uid://2wo80rhndd4r"
+
+[sub_resource type="Resource" id="Resource_6vj18"]
+script = ExtResource("2_nwf4t")
+type = 6
+sound_effect = Array[AudioStreamWAV]([ExtResource("12_cajrv")])
+volume = -5.0
 metadata/_custom_type_script = "uid://2wo80rhndd4r"
 
 [node name="AudioSingleton" type="Node2D" unique_id=1536231365]
 script = ExtResource("1_2crdn")
-sound_effect_settings = Array[ExtResource("2_nwf4t")]([SubResource("Resource_a3qmm"), SubResource("Resource_nwf4t"), SubResource("Resource_dovo2"), SubResource("Resource_thkx5"), SubResource("Resource_qek5x"), SubResource("Resource_t5a7j"), SubResource("Resource_cm3ca"), SubResource("Resource_ptusf")])
+sound_effect_settings = Array[ExtResource("2_nwf4t")]([SubResource("Resource_a3qmm"), SubResource("Resource_nwf4t"), SubResource("Resource_dovo2"), SubResource("Resource_thkx5"), SubResource("Resource_qek5x"), SubResource("Resource_t5a7j"), SubResource("Resource_cm3ca"), SubResource("Resource_ptusf"), SubResource("Resource_6vj18")])

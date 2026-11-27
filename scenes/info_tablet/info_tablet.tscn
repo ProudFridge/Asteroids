@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bsxxl1pr436g0"]
+
+[ext_resource type="Script" uid="uid://cxuxaqvx42sm1" path="res://scenes/info_tablet/info_tablet.gd" id="1_6vj18"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m7xh"]
+size = Vector2(20, 30)
+
+[sub_resource type="QuadMesh" id="QuadMesh_6vj18"]
+size = Vector2(20, 30)
+
+[sub_resource type="Gradient" id="Gradient_xjv65"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.2592937, 0.2592937, 0.25929365, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l53ip"]
+gradient = SubResource("Gradient_xjv65")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ohdgn"]
+size = Vector2(18, 28)
+
+[sub_resource type="Gradient" id="Gradient_1y12j"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.09998604, 0.099985994, 0.09998598, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2m7xh"]
+gradient = SubResource("Gradient_1y12j")
+
+[node name="InfoTablet" type="RigidBody2D" unique_id=795191454 node_paths=PackedStringArray("label")]
+gravity_scale = 0.0
+angular_velocity = 0.87266463
+script = ExtResource("1_6vj18")
+label = NodePath("Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1898796401]
+shape = SubResource("RectangleShape2D_2m7xh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1572370780]
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="." unique_id=764449333]
+mesh = SubResource("QuadMesh_6vj18")
+texture = SubResource("GradientTexture2D_l53ip")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1746047522]
+mesh = SubResource("QuadMesh_ohdgn")
+texture = SubResource("GradientTexture2D_2m7xh")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1960928928]
+top_level = true
+offset_left = -47.0
+offset_top = -64.0
+offset_right = 153.0
+offset_bottom = -48.0
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0.26179996, 0.7107099, 0.77, 1)
+theme_override_font_sizes/normal_font_size = 11
+text = "This is a test"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1135409258]
+visible = false
+top_level = true
+offset_left = -47.0
+offset_top = -64.0
+offset_right = 49.0
+offset_bottom = -24.0
