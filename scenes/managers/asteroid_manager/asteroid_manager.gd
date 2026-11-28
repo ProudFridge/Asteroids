@@ -19,7 +19,10 @@ const MATTER_SHARD: Resource = preload("uid://crjxi3170t00j")
 var asteroid_instances: Array[Asteroid] = []
 
 signal asteroid_added
+## Emitted when an asteroid is removed from the game
 signal asteroid_removed(asteroid: Asteroid)
+## Emited when an asteroid is destroyed by the player
+signal asteroid_destroyed(asteroid: Asteroid)
 
 func _ready() -> void:
 	instantiate_asteroids_in_area(asteroid_num, area_radius, instantiation_location, 10000)
@@ -35,6 +38,7 @@ func instantiate_asteroids_in_area(asteroid_amount: int, area_radius: float, loc
 		
 		instantiate_asteroid(position, velocity)
 
+
 func instantiate_asteroids_in_grid(grid_size: Vector2, spacing: Vector2, location: Vector2) -> void:
 	for i: int in grid_size.x:
 		for j: int in grid_size.y:
@@ -42,6 +46,7 @@ func instantiate_asteroids_in_grid(grid_size: Vector2, spacing: Vector2, locatio
 			var pos_y: float = j * spacing.y
 		
 			instantiate_asteroid(Vector2(pos_x, pos_y) + spacing / 2, Vector2.ZERO)
+
 
 func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -> Asteroid:
 	#var multiplier: float = 1
@@ -68,7 +73,8 @@ func instantiate_asteroid(position: Vector2, velocity: Vector2 = Vector2.ZERO) -
 	asteroid_instance.position = position
 	asteroid_instance.linear_velocity = velocity
 	asteroid_instance.angular_velocity = randf_range(-1, 1)
-	asteroid_instance.died.connect(_on_asteroid_death.bind(asteroid_instance))
+	asteroid_instance.removed.connect(_on_asteroid_removed.bind(asteroid_instance))
+	asteroid_instance.died.connect(_on_asteroid_died.bind(asteroid_instance))
 	asteroid_instances.append(asteroid_instance)
 	
 	asteroid_added.emit()
@@ -99,6 +105,11 @@ func instantiate_matter_shard(position: Vector2) -> void:
 	get_parent().add_child(matter_shard_instance)
 
 
-func _on_asteroid_death(asteroid: Asteroid) -> void:
+func _on_asteroid_removed(asteroid: Asteroid) -> void:
 	asteroid_instances.erase(asteroid)
 	asteroid_removed.emit(asteroid)
+
+
+func _on_asteroid_died(asteroid: Asteroid) -> void:
+	asteroid_instances.erase(asteroid)
+	asteroid_destroyed.emit(asteroid)

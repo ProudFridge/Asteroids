@@ -15,4 +15,4 @@ func _input(event: InputEvent) -> void:
 		get_tree().paused = false
 		hide()
 		isDisabled = true
-		gameManager.isGameRunning = true
+		gameManager.is_game_running = true

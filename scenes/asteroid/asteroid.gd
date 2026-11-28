@@ -31,6 +31,7 @@ var original_color: Color
 @export_group("")
 
 signal died
+signal removed
 
 func _ready() -> void:
 	generated_polygon = Geometry.generate_convex_polygon(randi_range(5, 8), boundingBox)
@@ -75,10 +76,11 @@ func die() -> void:
 		shatter(true)
 		has_shattered = true
 		died.emit()
-		queue_free()
+		delete()
 
 func delete() -> void:
-	died.emit()
+	#died.emit()
+	removed.emit()
 	queue_free.call_deferred()
 
 

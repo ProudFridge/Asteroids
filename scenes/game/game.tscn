@@ -124,7 +124,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="GameWonOver" type="CanvasLayer" parent="." unique_id=425752364]
 
-[node name="GameOverContainer" type="PanelContainer" parent="GameWonOver" unique_id=521271794 node_paths=PackedStringArray("gameManager")]
+[node name="GameOverContainer" type="PanelContainer" parent="GameWonOver" unique_id=521271794 node_paths=PackedStringArray("game_manager")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -139,7 +139,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("8_8b66f")
 script = ExtResource("11_kp23o")
-gameManager = NodePath("../../Managers/GameManager")
+game_manager = NodePath("../../Managers/GameManager")
 
 [node name="TextureRect" type="TextureRect" parent="GameWonOver/GameOverContainer" unique_id=480015575]
 layout_mode = 2

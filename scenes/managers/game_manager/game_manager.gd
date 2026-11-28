@@ -6,10 +6,10 @@ class_name GameManager
 @export var asteroid_manager: AsteroidManager # To detect when we won
 @export var player: Player # To detect when we lost
 
-var isGameRunning: bool = false
+var is_game_running: bool = false
 ## The amount of time the player has to destroy the necessary amount of asteroids
 var game_time: float = 10 # minutes
-var necessary_asteroids: float = 25 # Require asteroids to be destroyed to beat the game
+var necessary_asteroids: int = 25 # Require asteroids to be destroyed to beat the game
 var destroyed_asteroids: int = 0 
 @onready var game_timer: Timer = $GameTimer
 
@@ -27,7 +27,7 @@ func _ready() -> void:
 	player.position = Vector2(-6000, 0)
 	#player.position = Geometry.generate_random_vector(6000)
 	
-	asteroid_manager.asteroid_removed.connect(_on_asteroid_manager_asteroid_removed)
+	asteroid_manager.asteroid_destroyed.connect(_on_asteroid_manager_asteroid_destroyed)
 	player.died.connect(_on_player_died)
 	
 	player.rotate(randf_range(-PI, PI))
@@ -64,7 +64,7 @@ func _process(_delta: float) -> void:
 		asteroid_count += 1
 		
 
-func _on_asteroid_manager_asteroid_removed(_asteroid: Asteroid) -> void:
+func _on_asteroid_manager_asteroid_destroyed(_asteroid: Asteroid) -> void:
 	destroyed_asteroids += 1
 	
 	if destroyed_asteroids >= necessary_asteroids:

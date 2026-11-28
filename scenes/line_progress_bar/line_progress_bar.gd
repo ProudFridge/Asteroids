@@ -40,8 +40,8 @@ func _ready() -> void:
 	resized.connect(_on_resized)
 
 func _draw() -> void:
+	var remapped_value: float = remap(value, min_value, max_value, 0, sections)
 	for i: int in sections:
-		var remapped_value: float = remap(value, min_value, max_value, 0, sections)
 		var line_opacity: float = remapped_value - int(remapped_value)
 		
 		# Draw the last line with a different opacity than the rest
@@ -49,7 +49,7 @@ func _draw() -> void:
 			draw_line(Vector2(i * seperation, 0), Vector2(i * seperation, size.y), Color(line_color, line_opacity), line_width)
 		elif i < remapped_value:
 			draw_line(Vector2(i * seperation, 0), Vector2(i * seperation, size.y), line_color, line_width)
-	
+			
 	#draw_rect(Rect2(Vector2.ZERO, size), Color.WHITE, false)
 
 func _on_resized() -> void:
