@@ -130,7 +130,7 @@ func shatter(instanceShards: bool = true, shatterVelocityMultiplier: Vector2 = V
 			(get_parent() as AsteroidManager).instantiate_fuel_shard(global_position)
 			
 		
-		var matter_shard_amount: int = 4
+		var matter_shard_amount: int = int(round(sqrt(area / 50)))
 		for i: int in matter_shard_amount:
 			(get_parent() as AsteroidManager).instantiate_matter_shard(global_position)
 		

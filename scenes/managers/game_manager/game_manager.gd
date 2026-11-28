@@ -55,13 +55,12 @@ func _process(_delta: float) -> void:
 				asteroid.disable(true)
 			
 			# Delete the asteroid if it exceeds the deletion radius
-			#if distance.length() > deletion_radius:
-				#asteroid.delete()
+			if distance.length() > deletion_radius:
+				asteroid.delete()
 			
 	while asteroid_count < threshold_amount:
 		var length: float = randf_range(3000, detection_radius)
-		var angle: float = randf_range(-PI, PI)
-		asteroid_manager.instantiate_asteroid(Vector2.from_angle(angle) * length + player.position)
+		asteroid_manager.instantiate_asteroid(Geometry.generate_random_vector(length, player.position))
 		asteroid_count += 1
 		
 
