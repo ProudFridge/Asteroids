@@ -19,6 +19,7 @@ var player: Player
 func _ready() -> void:
 	generated_polygon = _generate_square(20 * randf_range(0.5, 1.2))
 	polygon_2d.polygon = generated_polygon
+	polygon_2d.color = Color.from_hsv(0, 0, randf_range(0.5, 0.7))
 	matter_content = Geometry.compute_area(generated_polygon) * matter_content_multiplier
 	collision_polygon_2d.polygon = generated_polygon
 
