@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bmv82yw5f65ti"]
+
+[ext_resource type="Script" uid="uid://dkx8nts67ee47" path="res://scenes/line_progress_bar/line_progress_bar.gd" id="1_1jfa5"]
+
+[node name="LinedProgressBar" type="Control" unique_id=121989251]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 581.0
+offset_top = 182.0
+offset_right = -1220.0
+offset_bottom = -836.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1jfa5")
+sections = 14
+line_width = 5.0
+value = 60.0
+max_value = 80.0

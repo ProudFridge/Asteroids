@@ -24,7 +24,10 @@
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 [ext_resource type="Script" uid="uid://7wp4ves1xmpv" path="res://scenes/game/info_panel.gd" id="22_8b66f"]
 [ext_resource type="PackedScene" uid="uid://cm2j3t3e208xc" path="res://scenes/station/station.tscn" id="24_1iff4"]
+[ext_resource type="Script" uid="uid://03j7jlyhrhqa" path="res://scenes/game/ui/info_panel/info_panel.gd" id="24_h48ew"]
+[ext_resource type="PackedScene" uid="uid://bmv82yw5f65ti" path="res://scenes/line_progress_bar/line_progress_bar.tscn" id="24_wdnak"]
 [ext_resource type="PackedScene" uid="uid://bsxxl1pr436g0" path="res://scenes/info_tablet/info_tablet.tscn" id="25_4vuph"]
+[ext_resource type="FontFile" uid="uid://d2aid6ypmqlnv" path="res://assets/fonts/arcade_ya/ARCADE_N.TTF" id="25_fty5b"]
 
 [sub_resource type="Gradient" id="Gradient_8b66f"]
 colors = PackedColorArray(0, 0, 0, 1, 0.09411765, 0.09411765, 0.09411765, 1)
@@ -64,6 +67,27 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_2tmx8")
 
 [sub_resource type="LabelSettings" id="LabelSettings_2m7xh"]
 font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvbxf"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="Theme" id="Theme_h48ew"]
+HBoxContainer/constants/separation = 30
+Label/font_sizes/font_size = 18
+Label/fonts/font = ExtResource("25_fty5b")
+Label/styles/focus = null
+MarginContainer/constants/margin_bottom = 14
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 14
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_xvbxf")
+VBoxContainer/constants/separation = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fty5b"]
 
 [node name="Game" type="Node" unique_id=324886737]
 
@@ -110,6 +134,7 @@ color = Color(0, 0, 0, 1)
 [node name="GameWonOver" type="CanvasLayer" parent="." unique_id=425752364]
 
 [node name="GameOverContainer" type="PanelContainer" parent="GameWonOver" unique_id=521271794 node_paths=PackedStringArray("gameManager")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -161,6 +186,7 @@ theme = ExtResource("8_3jaai")
 theme_override_constants/separation = 20
 
 [node name="HealthBar" type="ProgressBar" parent="Header/Header" unique_id=1299958292 node_paths=PackedStringArray("player")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("8_3jaai")
@@ -204,6 +230,7 @@ script = ExtResource("15_3jaai")
 game_manager = NodePath("../../../../Managers/GameManager")
 
 [node name="InfoContainer" type="MarginContainer" parent="Header" unique_id=933994829]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -216,6 +243,7 @@ theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Header/InfoContainer" unique_id=1076925939]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -300,6 +328,7 @@ script = ExtResource("13_ftsea")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="InstructionLayer" unique_id=1753504382 node_paths=PackedStringArray("gameManager")]
 process_mode = 2
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -318,15 +347,15 @@ vertical_alignment = 1
 script = ExtResource("12_otnwt")
 gameManager = NodePath("../../Managers/GameManager")
 
-[node name="InfoPanel" type="CanvasLayer" parent="." unique_id=1446127989]
+[node name="DebugPanel" type="CanvasLayer" parent="." unique_id=1446127989]
 
-[node name="MarginContainer" type="MarginContainer" parent="InfoPanel" unique_id=314083816]
-offset_right = 198.0
-offset_bottom = 185.0
+[node name="MarginContainer" type="MarginContainer" parent="DebugPanel" unique_id=314083816]
+offset_right = 212.0
+offset_bottom = 268.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 
-[node name="InfoPanel" type="PanelContainer" parent="InfoPanel/MarginContainer" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager", "position_value", "distance_from_center_value", "velocity_value", "speed_value", "angular_velocity_value", "fuel_value", "matter_value", "asteroids_value")]
+[node name="InfoPanel" type="PanelContainer" parent="DebugPanel/MarginContainer" unique_id=803322977 node_paths=PackedStringArray("player", "asteroid_manager", "position_value", "distance_from_center_value", "velocity_value", "speed_value", "angular_velocity_value", "fuel_value", "matter_value", "asteroids_value")]
 layout_mode = 2
 theme = SubResource("Theme_ohdgn")
 script = ExtResource("22_8b66f")
@@ -341,104 +370,221 @@ fuel_value = NodePath("VBoxContainer/GridContainer/FuelValue")
 matter_value = NodePath("VBoxContainer/GridContainer/MatterValue")
 asteroids_value = NodePath("VBoxContainer/GridContainer/AsteroidsValue")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/MarginContainer/InfoPanel" unique_id=246395046]
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/MarginContainer/InfoPanel" unique_id=246395046]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=623835901]
+[node name="Label" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=623835901]
 layout_mode = 2
 text = "Info Panel"
 label_settings = SubResource("LabelSettings_2m7xh")
 
-[node name="HSeparator" type="HSeparator" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=1867897044]
+[node name="HSeparator" type="HSeparator" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=1867897044]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="GridContainer" type="GridContainer" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=124141708]
+[node name="GridContainer" type="GridContainer" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=124141708]
 layout_mode = 2
 theme_override_constants/h_separation = 15
 columns = 2
 
-[node name="Position" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=465016105]
+[node name="Position" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=465016105]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Position:"
 
-[node name="PositionValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1499003674]
+[node name="PositionValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1499003674]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="DistanceFromCenter" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=596782354]
+[node name="DistanceFromCenter" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=596782354]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Distance From Center:"
 
-[node name="DistanceFromCenterValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=783057391]
+[node name="DistanceFromCenterValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=783057391]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Velocity" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=384018554]
+[node name="Velocity" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=384018554]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Velocity:"
 
-[node name="VelocityValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=832201357]
+[node name="VelocityValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=832201357]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Speed" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=60735915]
+[node name="Speed" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=60735915]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Velocity:"
 
-[node name="SpeedValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=708478619]
+[node name="SpeedValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=708478619]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="AngularVelocity" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1056280374]
+[node name="AngularVelocity" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1056280374]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angular Velocity:"
 
-[node name="AngularVelocityValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1825301832]
+[node name="AngularVelocityValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1825301832]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Fuel" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=794100741]
+[node name="Fuel" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=794100741]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fuel:"
 
-[node name="FuelValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=575111130]
+[node name="FuelValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=575111130]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Matter" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=139728115]
+[node name="Matter" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=139728115]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Matter:"
 
-[node name="MatterValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=222922954]
+[node name="MatterValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=222922954]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
-[node name="Asteroids" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1016418506]
+[node name="Asteroids" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=1016418506]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Asteroids:"
 
-[node name="AsteroidsValue" type="Label" parent="InfoPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=148822602]
+[node name="AsteroidsValue" type="Label" parent="DebugPanel/MarginContainer/InfoPanel/VBoxContainer/GridContainer" unique_id=148822602]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
 
+[node name="InfoPanel" type="CanvasLayer" parent="." unique_id=965628501]
+
+[node name="InfoPanel" type="Control" parent="InfoPanel" unique_id=77045099 node_paths=PackedStringArray("health_bar", "fuel_bar", "matter_bar", "integrity", "fuel", "matter")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("24_h48ew")
+health_bar = NodePath("MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LineBarContainer/HealthBar")
+fuel_bar = NodePath("MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LineBarContainer/FuelBar")
+matter_bar = NodePath("MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LineBarContainer/MatterBar")
+integrity = NodePath("MarginContainer/InfoPanel/MarginContainer/HBoxContainer/MinMaxContainer/Integrity")
+fuel = NodePath("MarginContainer/InfoPanel/MarginContainer/HBoxContainer/MinMaxContainer/Fuel")
+matter = NodePath("MarginContainer/InfoPanel/MarginContainer/HBoxContainer/MinMaxContainer/Matter")
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoPanel/InfoPanel" unique_id=1376886117]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -190.0
+offset_right = 643.0
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="InfoPanel" type="PanelContainer" parent="InfoPanel/InfoPanel/MarginContainer" unique_id=1693800304]
+layout_mode = 2
+theme = SubResource("Theme_h48ew")
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel" unique_id=987844713]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer" unique_id=1807352032]
+layout_mode = 2
+
+[node name="LabelContainer" type="VBoxContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer" unique_id=394934268]
+layout_mode = 2
+
+[node name="IntegrityLabel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LabelContainer" unique_id=2041858865]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Integrity"
+
+[node name="FuelLabel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LabelContainer" unique_id=1392095599]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Fuel"
+
+[node name="MatterLabel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LabelContainer" unique_id=214537391]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Matter"
+
+[node name="MinMaxContainer" type="VBoxContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer" unique_id=1324159669]
+layout_mode = 2
+
+[node name="Integrity" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/MinMaxContainer" unique_id=711485310]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.47843137, 1, 0.34901962, 1)
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Fuel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/MinMaxContainer" unique_id=38400309]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.3019608, 0.627451, 1, 1)
+text = "200"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Matter" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/MinMaxContainer" unique_id=1150490826]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+text = "400"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer" unique_id=611765884]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxEmpty_fty5b")
+
+[node name="LineBarContainer" type="VBoxContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer" unique_id=2023936658]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HealthBar" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LineBarContainer" unique_id=121989251 instance=ExtResource("24_wdnak")]
+layout_mode = 2
+size_flags_vertical = 3
+sections = 15
+line_width = 7.0
+line_color = Color(0.47999996, 1, 0.35000002, 1)
+
+[node name="FuelBar" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LineBarContainer" unique_id=690731503 instance=ExtResource("24_wdnak")]
+layout_mode = 2
+size_flags_vertical = 3
+sections = 15
+line_width = 7.0
+line_color = Color(0.3, 0.62666667, 1, 1)
+
+[node name="MatterBar" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LineBarContainer" unique_id=800181296 instance=ExtResource("24_wdnak")]
+layout_mode = 2
+size_flags_vertical = 3
+sections = 15
+line_width = 7.0
+line_color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+
 [node name="Station" parent="." unique_id=900675082 instance=ExtResource("24_1iff4")]
+visible = false
 
 [node name="InfoTablet" parent="." unique_id=795191454 instance=ExtResource("25_4vuph")]
 position = Vector2(-6252, -14)

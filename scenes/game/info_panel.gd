@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 @export var player: Player
 @export var asteroid_manager: AsteroidManager

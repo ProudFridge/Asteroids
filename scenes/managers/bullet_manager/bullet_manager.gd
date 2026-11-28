@@ -34,7 +34,6 @@ enum BULLET_TYPE {
 	ROCKET
 }
 
-
 func _select_bullet_type(bullet_type: BULLET_TYPE) -> void:
 	match bullet_type:
 		BULLET_TYPE.BULLET:
