@@ -70,6 +70,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
 
 [sub_resource type="Theme" id="Theme_h48ew"]
 HBoxContainer/constants/separation = 30
@@ -82,6 +83,12 @@ MarginContainer/constants/margin_right = 16
 MarginContainer/constants/margin_top = 14
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_xvbxf")
 VBoxContainer/constants/separation = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m7xh"]
+bg_color = Color(8.1822276e-07, 0.71983206, 0.3368483, 0.40392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohdgn"]
+bg_color = Color(0, 0.14950003, 0.69, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fty5b"]
 
@@ -449,6 +456,24 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 theme = SubResource("Theme_h48ew")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel" unique_id=6366772]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="IntegrityOverlay" type="Panel" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=2105610760]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2m7xh")
+
+[node name="FuelOverlay" type="Panel" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=182655212]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ohdgn")
+
+[node name="MatterOverlay" type="Panel" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/VBoxContainer" unique_id=379065831]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="MarginContainer" type="MarginContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel" unique_id=987844713]
 layout_mode = 2
 
@@ -461,16 +486,19 @@ layout_mode = 2
 [node name="IntegrityLabel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LabelContainer" unique_id=2041858865]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.47843137, 1, 0.34901962, 1)
 text = "Integrity"
 
 [node name="FuelLabel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LabelContainer" unique_id=1392095599]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.3019608, 0.627451, 1, 1)
 text = "Fuel"
 
 [node name="MatterLabel" type="Label" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer/LabelContainer" unique_id=214537391]
 layout_mode = 2
 size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
 text = "Matter"
 
 [node name="MinMaxContainer" type="VBoxContainer" parent="InfoPanel/InfoPanel/MarginContainer/InfoPanel/MarginContainer/HBoxContainer" unique_id=1324159669]

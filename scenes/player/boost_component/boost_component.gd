@@ -4,7 +4,7 @@ class_name BoostComponent
 
 @export var player: Player
 
-var boost_accel: float = 1500
+var boost_accel: float = 100
 var boost_rot_speed: float = 800
 @export var boost_fuel_consumption: float = 50
 
