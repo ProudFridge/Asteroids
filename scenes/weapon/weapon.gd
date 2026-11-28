@@ -44,7 +44,7 @@ func _ready() -> void:
 func use_weapon() -> void:
 	var rot: float = sprite_2d.global_rotation
 
-	References.bullet_manager.instantiate_bullet(muzzle.global_position, rot, BulletManager.BULLET_TYPE.BULLET)
+	References.bullet_manager.instantiate_bullet(muzzle.global_position, rot, shooter.linear_velocity, BulletManager.BULLET_TYPE.BULLET)
 	weapon_cooldown_started.emit()
 
 

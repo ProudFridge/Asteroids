@@ -9,7 +9,7 @@ func _ready() -> void:
 	matter_consumption = 5
 
 func use_weapon() -> void:
-	References.bullet_manager.instantiate_bullet(global_position, global_rotation - PI / 2, BulletManager.BULLET_TYPE.ROCKET)
+	References.bullet_manager.instantiate_bullet(global_position, global_rotation - PI / 2, shooter.linear_velocity, BulletManager.BULLET_TYPE.ROCKET)
 	weapon_cooldown_started.emit()
 	
 

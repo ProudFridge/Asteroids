@@ -17,7 +17,7 @@ func _ready() -> void:
 	else:
 		push_error("Trying to add a reference to a second bullet manager node in the References singleton")
 
-func instantiate_bullet(position: Vector2, rotation: float, bullet_type: BULLET_TYPE) -> void:
+func instantiate_bullet(position: Vector2, rotation: float, initial_velocity: Vector2, bullet_type: BULLET_TYPE) -> void:
 	_select_bullet_type(bullet_type)
 	var bullet_instance: Projectile = selected_bullet.instantiate()
 	
@@ -26,7 +26,7 @@ func instantiate_bullet(position: Vector2, rotation: float, bullet_type: BULLET_
 	bullet_instance.position = position
 	bullet_instance.speed = bulletSpeed
 	# Make the bullets velocity realistic: makes it relative
-	bullet_instance.linear_velocity = bullet_instance.speed * Vector2.from_angle(rotation).normalized() + shooter.linear_velocity
+	bullet_instance.linear_velocity = bullet_instance.speed * Vector2.from_angle(rotation).normalized() + initial_velocity
 	add_child(bullet_instance)
 
 enum BULLET_TYPE {

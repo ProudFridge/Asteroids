@@ -11,16 +11,12 @@
 [ext_resource type="Theme" uid="uid://bnu5snvmi1gco" path="res://themes/header/header_theme.tres" id="8_3jaai"]
 [ext_resource type="Theme" uid="uid://bwdjhl35ffx4q" path="res://themes/normal/normal_theme.tres" id="8_8b66f"]
 [ext_resource type="Script" uid="uid://d0q2jesqvby2b" path="res://scenes/game/ui/score_label.gd" id="8_87uf6"]
-[ext_resource type="Script" uid="uid://ccbwmrqqmhgrj" path="res://scenes/game/ui/health_bar.gd" id="11_3jaai"]
 [ext_resource type="Script" uid="uid://dctwnixmnew4n" path="res://scenes/game/ui/game_over_container.gd" id="11_kp23o"]
 [ext_resource type="Script" uid="uid://bfj3kk4w0o7o6" path="res://scenes/game/ui/game_start_label.gd" id="12_otnwt"]
 [ext_resource type="Script" uid="uid://b6ls8uptisac" path="res://scenes/game/ui/pause_menu/pause_menu.gd" id="12_vaxfo"]
 [ext_resource type="Script" uid="uid://bdp8a8gne6npq" path="res://scenes/game/ui/pause_menu/restart_button.gd" id="13_3xj4h"]
 [ext_resource type="Script" uid="uid://br8owlchcm7kq" path="res://scenes/game/ui/pause_menu/quit_button.gd" id="13_ftsea"]
-[ext_resource type="PackedScene" uid="uid://7khd4cs5u826" path="res://scenes/boost_bar/boost_bar.tscn" id="14_pg2xm"]
 [ext_resource type="Script" uid="uid://dk40yvggw2cqm" path="res://scenes/game/time_label.gd" id="15_3jaai"]
-[ext_resource type="PackedScene" uid="uid://bc4cog54piwiv" path="res://scenes/matter_bar/matter_bar.tscn" id="16_3jaai"]
-[ext_resource type="PackedScene" uid="uid://sjshwoe3fmja" path="res://scenes/impulse_bar/impulse_bar.tscn" id="16_8b66f"]
 [ext_resource type="Script" uid="uid://n0oxsl1xi5c4" path="res://scenes/game/main_menu_button.gd" id="18_gc57s"]
 [ext_resource type="Script" uid="uid://7wp4ves1xmpv" path="res://scenes/game/info_panel.gd" id="22_8b66f"]
 [ext_resource type="PackedScene" uid="uid://cm2j3t3e208xc" path="res://scenes/station/station.tscn" id="24_1iff4"]
@@ -91,15 +87,10 @@ VBoxContainer/constants/separation = 16
 
 [node name="Game" type="Node" unique_id=324886737]
 
-[node name="Player" parent="." unique_id=2088811554 node_paths=PackedStringArray("bullet_manager") instance=ExtResource("1_sul5r")]
-bullet_manager = NodePath("../Managers/BulletManager")
+[node name="Player" parent="." unique_id=752532407 instance=ExtResource("1_sul5r")]
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=863287189]
-process_mode = 3
-zoom = Vector2(0.6, 0.6)
-limit_enabled = false
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=129448435]
 script = ExtResource("2_uyinl")
-cameraZoom = Vector2(1.5, 1.5)
 
 [node name="Managers" type="Node" parent="." unique_id=1491249176]
 
@@ -185,16 +176,6 @@ grow_horizontal = 2
 theme = ExtResource("8_3jaai")
 theme_override_constants/separation = 20
 
-[node name="HealthBar" type="ProgressBar" parent="Header/Header" unique_id=1299958292 node_paths=PackedStringArray("player")]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("8_3jaai")
-value = 10.0
-show_percentage = false
-script = ExtResource("11_3jaai")
-player = NodePath("../../../Player")
-
 [node name="HBoxContainer" type="HBoxContainer" parent="Header/Header" unique_id=1303447050]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
@@ -228,40 +209,6 @@ layout_mode = 2
 text = "Time Left:"
 script = ExtResource("15_3jaai")
 game_manager = NodePath("../../../../Managers/GameManager")
-
-[node name="InfoContainer" type="MarginContainer" parent="Header" unique_id=933994829]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -576.0
-offset_right = 172.0
-grow_vertical = 0
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Header/InfoContainer" unique_id=1076925939]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="FuelBar" parent="Header/InfoContainer/HBoxContainer" unique_id=117183947 node_paths=PackedStringArray("player", "gameManager") instance=ExtResource("14_pg2xm")]
-layout_mode = 2
-size_flags_horizontal = 3
-player = NodePath("../../../../Player")
-gameManager = NodePath("../../../../Managers/GameManager")
-
-[node name="Matter Bar" parent="Header/InfoContainer/HBoxContainer" unique_id=60376164 node_paths=PackedStringArray("player") instance=ExtResource("16_3jaai")]
-layout_mode = 2
-size_flags_horizontal = 3
-player = NodePath("../../../../Player")
-
-[node name="ImpulseBar" parent="Header/InfoContainer/HBoxContainer" unique_id=981514187 node_paths=PackedStringArray("player") instance=ExtResource("16_8b66f")]
-layout_mode = 2
-size_flags_horizontal = 3
-player = NodePath("../../../../Player")
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="." unique_id=366481481]
 
@@ -490,8 +437,8 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -190.0
-offset_right = 643.0
+offset_top = -189.0
+offset_right = 578.0
 grow_vertical = 0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -584,7 +531,6 @@ line_width = 7.0
 line_color = Color(0.4045111, 0.40451115, 0.4045111, 1)
 
 [node name="Station" parent="." unique_id=900675082 instance=ExtResource("24_1iff4")]
-visible = false
 
 [node name="InfoTablet" parent="." unique_id=795191454 instance=ExtResource("25_4vuph")]
 position = Vector2(-6252, -14)
